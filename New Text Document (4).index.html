@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<div class="note">© <span id="year"></span> Rebirth of Reason. All rights reserved.</div>
+</div>
+<div>
+<div class="note">Follow</div>
+<div class="socials">
+<a href="#" aria-label="TikTok" title="TikTok">&#9835;</a>
+<a href="#" aria-label="Instagram" title="Instagram">&#9733;</a>
+<a href="#" aria-label="Reddit" title="Reddit">&#128172;</a>
+<a href="#" aria-label="YouTube" title="YouTube">▶</a>
+</div>
+</div>
+<div>
+<div class="note">Contact</div>
+<p class="note">rebirthofreason@gmail.com</p>
+</div>
+</div>
+</footer>
+
+
+<audio id="bgAudio" preload="none" loop>
+<!-- Replace the src below with your own hosted classical loop (royalty‑free) -->
+<source src="" type="audio/mpeg" />
+</audio>
+
+
+<script>
+// Smooth scroll for in‑page anchors
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+a.addEventListener('click', e => {
+const id = a.getAttribute('href');
+if (id.length > 1) {
+e.preventDefault();
+document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+});
+});
+
+
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+
+// Optional background audio controller (respects user gesture policies)
+const audio = document.getElementById('bgAudio');
+const playBtn = document.getElementById('playPause');
+const vol = document.getElementById('audioVol');
+let playing = false;
+
+
+const updateBtn = () => playBtn.textContent = playing ? 'Pause' : 'Play';
+vol.addEventListener('input', () => { audio.volume = Number(vol.value || 0.25); });
+playBtn.addEventListener('click', async () => {
+if (!audio.src) {
+// If you forgot to add a file, fall back to a tiny silent data URI to avoid errors
+audio.src = audio.dataset.fallback || '';
+}
+try {
+if (!playing) { await audio.play(); playing = true; } else { audio.pause(); playing = false; }
+} catch (err) { console.warn('Audio play blocked or missing source:', err); }
+updateBtn();
+});
+updateBtn();
+
+
+// Mailto helper: open a prefilled email rather than submit an empty POST (works broadly on static hosting)
+const form = document.getElementById('submitForm');
+form.addEventListener('submit', (e) => {
+e.preventDefault();
+const data = new FormData(form);
+const to = (form.getAttribute('action') || '').replace('mailto:', '') || 'editor@rebirthofreason.example';
+const subject = encodeURIComponent('Submission: ' + (data.get('title') || 'Untitled'));
+const body = encodeURIComponent(
+`Name: ${data.get('name') || ''}\n` +
+`Email: ${data.get('email') || ''}\n` +
+`Category: ${data.get('category') || ''}\n` +
+`Title: ${data.get('title') || ''}\n` +
+`Abstract:\n${data.get('abstract') || ''}\n\n` +
+`Link: ${data.get('link') || ''}\n`
+);
+window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+});
+</script>
+</body>
+</html>
