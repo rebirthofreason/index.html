@@ -1,85 +1,659 @@
 <!DOCTYPE html>
-<div class="note">© <span id="year"></span> Rebirth of Reason. All rights reserved.</div>
-</div>
-<div>
-<div class="note">Follow</div>
-<div class="socials">
-<a href="#" aria-label="TikTok" title="TikTok">&#9835;</a>
-<a href="#" aria-label="Instagram" title="Instagram">&#9733;</a>
-<a href="#" aria-label="Reddit" title="Reddit">&#128172;</a>
-<a href="#" aria-label="YouTube" title="YouTube">▶</a>
-</div>
-</div>
-<div>
-<div class="note">Contact</div>
-<p class="note">rebirthofreason@gmail.com</p>
-</div>
-</div>
-</footer>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rebirth of Reason – Philosophy Journal</title>
 
+  <!-- Simple, clean font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<audio id="bgAudio" preload="none" loop>
-<!-- Replace the src below with your own hosted classical loop (royalty‑free) -->
-<source src="" type="audio/mpeg" />
-</audio>
+  <style>
+    :root {
+      --bg: #06070a;
+      --bg-alt: #0e1016;
+      --accent: #f5c24f;
+      --accent-soft: rgba(245, 194, 79, 0.15);
+      --text: #f5f5f5;
+      --muted: #a3a7b8;
+      --border: #222532;
+      --max-width: 1100px;
+      --radius-lg: 18px;
+      --radius-sm: 10px;
+      --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<script>
-// Smooth scroll for in‑page anchors
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-a.addEventListener('click', e => {
-const id = a.getAttribute('href');
-if (id.length > 1) {
-e.preventDefault();
-document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-});
-});
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #151827 0, #050509 45%, #020306 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-// Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 4rem;
+    }
 
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(3, 5, 12, 0.96), rgba(3, 5, 12, 0.75));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
 
-// Optional background audio controller (respects user gesture policies)
-const audio = document.getElementById('bgAudio');
-const playBtn = document.getElementById('playPause');
-const vol = document.getElementById('audioVol');
-let playing = false;
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
 
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
 
-const updateBtn = () => playBtn.textContent = playing ? 'Pause' : 'Play';
-vol.addEventListener('input', () => { audio.volume = Number(vol.value || 0.25); });
-playBtn.addEventListener('click', async () => {
-if (!audio.src) {
-// If you forgot to add a file, fall back to a tiny silent data URI to avoid errors
-audio.src = audio.dataset.fallback || '';
-}
-try {
-if (!playing) { await audio.play(); playing = true; } else { audio.pause(); playing = false; }
-} catch (err) { console.warn('Audio play blocked or missing source:', err); }
-updateBtn();
-});
-updateBtn();
+    .brand-title {
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
 
+    .brand-tagline {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
 
-// Mailto helper: open a prefilled email rather than submit an empty POST (works broadly on static hosting)
-const form = document.getElementById('submitForm');
-form.addEventListener('submit', (e) => {
-e.preventDefault();
-const data = new FormData(form);
-const to = (form.getAttribute('action') || '').replace('mailto:', '') || 'editor@rebirthofreason.example';
-const subject = encodeURIComponent('Submission: ' + (data.get('title') || 'Untitled'));
-const body = encodeURIComponent(
-`Name: ${data.get('name') || ''}\n` +
-`Email: ${data.get('email') || ''}\n` +
-`Category: ${data.get('category') || ''}\n` +
-`Title: ${data.get('title') || ''}\n` +
-`Abstract:\n${data.get('abstract') || ''}\n\n` +
-`Link: ${data.get('link') || ''}\n`
-);
-window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-});
-</script>
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      padding-bottom: 0.15rem;
+      border-bottom: 1px solid transparent;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      border-color: var(--accent-soft);
+    }
+
+    /* HERO */
+    .hero {
+      padding-top: 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-highlight {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 32rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      background: none;
+      color: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f5c24f, #f38b2a);
+      color: #1b1205;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-ghost {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(15, 18, 28, 0.9);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent-soft);
+      background: rgba(21, 25, 37, 0.95);
+    }
+
+    .hero-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hero-meta span {
+      border-radius: 999px;
+      padding: 0.25rem 0.65rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-right: 0.35rem;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top left, #272946, var(--bg-alt));
+      border-radius: 24px;
+      padding: 1.5rem 1.4rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(245, 194, 79, 0.14), transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.45rem;
+    }
+
+    .hero-card-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card-body {
+      font-size: 0.85rem;
+      color: #d5d7e6;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-card-list {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-card-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.72rem;
+      background: rgba(6, 7, 12, 0.75);
+      backdrop-filter: blur(10px);
+      margin-right: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    /* SECTIONS */
+    section {
+      margin-top: 4rem;
+    }
+
+    section h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    section p.section-intro {
+      color: var(--muted);
+      font-size: 0.93rem;
+      max-width: 38rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: rgba(9, 12, 20, 0.9);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.15rem 1.05rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card .meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.55rem;
+    }
+
+    .card p {
+      font-size: 0.87rem;
+      color: #dfe2f2;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-right: 0.4rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: #d8d9e4;
+    }
+
+    .list li {
+      margin-bottom: 0.45rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .callout {
+      background: rgba(10, 13, 22, 0.98);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.15rem;
+      border: 1px solid var(--accent-soft);
+      font-size: 0.85rem;
+      color: #e3e4f4;
+    }
+
+    .callout strong {
+      color: var(--accent);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 3rem;
+      padding-top: 1.4rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    .top-link {
+      display: inline-block;
+      margin-bottom: 0.3rem;
+      font-size: 0.8rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-card {
+        order: -1;
+      }
+      header {
+        position: static;
+      }
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav ul {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding-inline: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="brand">
+        <div>
+          <div class="brand-title">Rebirth of Reason</div>
+          <div class="brand-tagline">Independent Journal of Young Philosophy</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#essays">Essays</a></li>
+          <li><a href="#submit">Submit</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-text">
+        <h1>
+          A journal for minds in
+          <span class="hero-highlight">rebellion</span>
+          against lazy thinking.
+        </h1>
+        <p class="hero-subtitle">
+          <strong>Rebirth of Reason</strong> publishes sharp, unapologetic philosophy
+          from young writers who refuse clichés. We welcome essays that question common sense,
+          dismantle illusions, and rebuild arguments from first principles.
+        </p>
+
+        <div class="hero-actions">
+          <!-- TODO: replace # with your actual PDF / site section later -->
+          <a class="btn btn-primary" href="#essays">
+            Read featured essays →
+          </a>
+          <a class="btn btn-ghost" href="#submit">
+            Submit your work
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <span>Issue 01 – Drafting Reality</span>
+          Open for submissions · 2025
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-card-inner">
+          <div class="hero-card-label">Current theme</div>
+          <div class="hero-card-title">Perception, memory, and the illusion of freedom</div>
+          <p class="hero-card-body">
+            How reliable is what we call “experience”? Are we free agents, or
+            elegantly wired bio-machines following hidden code? This issue
+            explores the fracture line between objective reality and the stories
+            we tell ourselves about it.
+          </p>
+          <ul class="hero-card-list">
+            <li>🧠 Consciousness, perception, and selfhood</li>
+            <li>⚡ Memory as pattern, signal, or “lightning”</li>
+            <li>🧩 Free will, agency, and mental algorithms</li>
+          </ul>
+          <div style="margin-top:0.7rem;">
+            <span class="pill">1500–3000 word essays</span>
+            <span class="pill">Young writers (≈14–22)</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About the journal</h2>
+      <p class="section-intro">
+        <strong>Rebirth of Reason</strong> is an online, student-driven philosophy journal.
+        Our aim is simple: to create a space where young thinkers can test serious ideas
+        without dumbing them down for algorithms, trends, or school rubrics.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <h3>What we publish</h3>
+          <p>
+            We are interested in argumentative essays, short theses, thought experiments,
+            and conceptual “manifestos”. Your work can be speculative, but it must be
+            intellectually honest and clearly argued.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Who we are for</h3>
+          <p>
+            High-school and undergraduate students, or anyone early in their philosophical
+            journey who takes ideas seriously. You do not need formal credentials; you do
+            need discipline and clarity.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>How we read</h3>
+          <p>
+            Submissions are evaluated on clarity, originality, and argumentative strength.
+            You won’t be rejected for not sounding like a textbook — but you will be pushed
+            to justify every step of your reasoning.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ESSAYS -->
+    <section id="essays">
+      <h2>Featured essays (sample placeholders)</h2>
+      <p class="section-intro">
+        Replace these with your own essays as you publish them. You can link each
+        card to a full PDF, a Google Doc, or another page later.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <span class="badge">Essay · 2500 words</span>
+          <h3>Lightning Is Memory: On Electrons, Experience, and the Shape of Thought</h3>
+          <div class="meta">by <em>Your Name</em> · Issue 01</div>
+          <p>
+            If memory is only electricity flowing between neurons, then in theory an exact
+            electrical storm could recreate a life. This essay asks whether that picture
+            trivialises us — or finally takes us seriously.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="badge">Essay · 1800 words</span>
+          <h3>The Human Bio-Machine and the Myth of Free Will</h3>
+          <div class="meta">by <em>Your Name</em> · Issue 01</div>
+          <p>
+            Hunger, fear, status, habit: if every decision traces back to predictable
+            mental algorithms, what exactly is left for “will” to do? A look at determinism
+            from inside the machine.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="badge">Essay · 2100 words</span>
+          <h3>Perspective Reality vs Objective Reality</h3>
+          <div class="meta">by <em>Your Name</em> · Issue 01</div>
+          <p>
+            Between the world as it is and the world as we perceive it lies a delay,
+            a filter, and a story. This piece maps that gap — and asks whether philosophy
+            should live inside it.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SUBMIT -->
+    <section id="submit">
+      <h2>Submission guidelines</h2>
+      <p class="section-intro">
+        These are starter rules. Edit them freely so they match how you actually want
+        the journal to work.
+      </p>
+
+      <div class="two-column">
+        <div>
+          <ul class="list">
+            <li><strong>Length:</strong> Aim for 1500–3000 words. Shorter pieces are fine if the idea is tight.</li>
+            <li><strong>Format:</strong> PDF or Google Docs link. Use a readable font, 1.15–1.5 line spacing.</li>
+            <li><strong>Audience:</strong> Assume an intelligent student who has basic familiarity with philosophy,
+              but not necessarily with your specific topic.</li>
+            <li><strong>Referencing:</strong> Any consistent citation style is fine (APA, MLA, Chicago, etc.).
+              Just be coherent and give sources for key claims.</li>
+            <li><strong>Originality:</strong> Your work must be your own. AI tools may help with grammar,
+              but <em>the thinking must be yours</em>.</li>
+            <li><strong>Topics:</strong> Philosophy of mind, ethics, metaphysics, political philosophy,
+              logic, philosophy of science, or anything that seriously questions how we live and think.</li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <p style="margin-bottom:0.6rem;">
+            <strong>How to submit</strong>
+          </p>
+          <p style="margin-bottom:0.4rem;">
+            Send your essay as an attachment or share link to:
+          </p>
+          <p style="margin-bottom:0.4rem;">
+            <strong>Email:</strong> <em>your-email-here@example.com</em><br />
+            <!-- TODO: replace with your real email -->
+          </p>
+          <p>
+            Include in the email:
+          </p>
+          <ul class="list" style="margin-top:0.4rem;">
+            <li>Your full name (or pseudonym if you prefer to publish under one).</li>
+            <li>Age, country, and current level of study (e.g. high school, first year university).</li>
+            <li>Title of the essay and 2–3 sentences summarising your main claim.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact & future plans</h2>
+      <p class="section-intro">
+        This journal is still evolving. Over time you can add issues, host PDFs, run contests,
+        or invite guest editors. For now, this is your hub.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Contact</h3>
+          <p>
+            For submissions, questions, or collaboration ideas, write to:
+            <br /><br />
+            <strong>Email:</strong> <em>your-email-here@example.com</em><br />
+            <!-- TODO: replace with your email in both places -->
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Future features</h3>
+          <p>
+            Later you can add:
+          </p>
+          <ul class="list" style="margin-top:0.5rem;">
+            <li>Separate pages for each issue.</li>
+            <li>A PDF archive of all published essays.</li>
+            <li>Announcements for talks, debates, or reading groups.</li>
+            <li>A section for translations or responses to classic texts.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <a class="top-link" href="#top">↑ Back to top</a>
+      <div>Rebirth of Reason &middot; An independent philosophy journal for young thinkers.</div>
+      <div>Hosted with GitHub Pages · Designed by you.</div>
+    </footer>
+  </main>
 </body>
 </html>
+
+
