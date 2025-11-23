@@ -65,15 +65,8 @@ body {
     radial-gradient(circle at 60% 80%, rgba(255,255,255,0.05), transparent 55%);
   opacity: 0.30;
   mix-blend-mode: screen;
-  animation: fogmove 120s linear infinite;
-  z-index: -9;
   filter: blur(16px);
-}
-
-@keyframes fogmove {
-  0%   { transform: translate3d(0, 0, 0) scale(1); }
-  50%  { transform: translate3d(-20px, 18px, 0) scale(1.03); }
-  100% { transform: translate3d(0, 0, 0) scale(1); }
+  z-index: -9;
 }
 
 .fog-front {
@@ -87,15 +80,8 @@ body {
     radial-gradient(circle at 75% 40%, rgba(255,255,255,0.08), transparent 60%);
   opacity: 0.35;
   mix-blend-mode: screen;
-  animation: fogmove2 90s linear infinite;
-  z-index: -8;
   filter: blur(22px);
-}
-
-@keyframes fogmove2 {
-  0%   { transform: translate3d(0, 0, 0) scale(1.02); }
-  50%  { transform: translate3d(25px, -16px, 0) scale(1.06); }
-  100% { transform: translate3d(0, 0, 0) scale(1.02); }
+  z-index: -8;
 }
 
 /* ------------------------- */
@@ -115,27 +101,15 @@ body {
   height: 6px;
   background: radial-gradient(circle, #fff8b3 0%, rgba(255,255,200,0.3) 70%, transparent 100%);
   border-radius: 50%;
-  animation: drift 12s ease-in-out infinite, flicker 3s ease-in-out infinite;
 }
 
-@keyframes drift {
-  0% { transform: translate(0,0); }
-  50% { transform: translate(-20px, 40px); }
-  100% { transform: translate(0,0); }
-}
-
-@keyframes flicker {
-  0%,100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-.firefly:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
-.firefly:nth-child(2) { top: 40%; left: 80%; animation-delay: 1s; }
-.firefly:nth-child(3) { top: 65%; left: 50%; animation-delay: 2s; }
-.firefly:nth-child(4) { top: 25%; left: 30%; animation-delay: 3s; }
-.firefly:nth-child(5) { top: 80%; left: 15%; animation-delay: 4s; }
-.firefly:nth-child(6) { top: 55%; left: 70%; animation-delay: 5s; }
-.firefly:nth-child(7) { top: 15%; left: 60%; animation-delay: 6s; }
+.firefly:nth-child(1) { top: 10%; left: 20%; }
+.firefly:nth-child(2) { top: 40%; left: 80%; }
+.firefly:nth-child(3) { top: 65%; left: 50%; }
+.firefly:nth-child(4) { top: 25%; left: 30%; }
+.firefly:nth-child(5) { top: 80%; left: 15%; }
+.firefly:nth-child(6) { top: 55%; left: 70%; }
+.firefly:nth-child(7) { top: 15%; left: 60%; }
 
 /* ------------------------- */
 /*   VINES + BOTANICAL ART   */
@@ -156,7 +130,6 @@ body {
     radial-gradient(circle at 10% 60%, rgba(3, 28, 16, 0.95), transparent 55%),
     radial-gradient(circle at 35% 90%, rgba(3, 18, 10, 0.95), transparent 55%);
   filter: blur(1.5px);
-  animation: vineSway 22s ease-in-out infinite;
 }
 
 .vines-left {
@@ -166,12 +139,6 @@ body {
 .vines-right {
   right: 0;
   transform: scaleX(-1);
-}
-
-@keyframes vineSway {
-  0%   { transform: translateY(0) scaleX(1); }
-  50%  { transform: translateY(-18px) scaleX(1.02); }
-  100% { transform: translateY(0) scaleX(1); }
 }
 
 /* ------------------------- */
@@ -224,92 +191,55 @@ body {
 /*     PHILOSOPHER LANTERNS (BACKGROUND)            */
 /* ------------------------------------------------ */
 
-/* fixed to viewport, behind the page, out of the center */
+/* Fixed background, behind everything, full viewport */
 .lanterns-container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   pointer-events: none;
-  z-index: -3; /* behind scroll container */
+  z-index: -3;
 }
 
-/* wide bands on the left & right only */
-.lantern-column {
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  width: 260px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.lantern-column.left {
-  left: -40px;     /* slightly off-screen, only glow peeks in */
-}
-
-.lantern-column.right {
-  right: -40px;
-}
-
-/* ---------------------------- */
-/*     LANTERN (Main body)      */
-/* ---------------------------- */
-
+/* Lantern base */
 .lantern {
   --lantern-scale: 1;
+  position: absolute;
   width: 220px;
-  background: rgba(26, 21, 12, 0.95);
+  background: rgba(26, 21, 12, 0.96);
   border-radius: 16px;
-  padding: 14px;
+  padding: 12px;
   border: 2px solid rgba(247, 211, 120, 0.35);
   box-shadow:
     0 0 18px rgba(247, 211, 120, 0.35),
     0 0 60px rgba(247, 211, 120, 0.18),
     inset 0 0 25px rgba(247, 211, 120, 0.12);
   backdrop-filter: blur(3px);
-  position: relative;
 
   transform-origin: center;
-  transform: scale(var(--lantern-scale));
+  transform: translate(-50%, -50%) scale(var(--lantern-scale));
 }
 
-/* DEPTH VARIANTS – strong contrast */
+/* Size variants (100% down to 5%) */
+.size-100 { --lantern-scale: 1; }
+.size-70  { --lantern-scale: 0.7; }
+.size-40  { --lantern-scale: 0.4; }
+.size-20  { --lantern-scale: 0.2; }
+.size-10  { --lantern-scale: 0.1; }
+.size-5   { --lantern-scale: 0.05; }
 
-.lantern-depth-near {
-  --lantern-scale: 1.2;
-  opacity: 1;
+/* Slightly dim smaller ones */
+.size-20,
+.size-10,
+.size-5 {
+  opacity: 0.7;
+  filter: blur(0.8px);
 }
 
-.lantern-depth-mid {
-  --lantern-scale: 0.85;
-  opacity: 0.85;
-  filter: blur(0.4px);
+.size-5 {
+  opacity: 0.5;
+  filter: blur(1.3px);
 }
 
-.lantern-depth-far {
-  --lantern-scale: 0.55;
-  opacity: 0.55;
-  filter: blur(0.9px);
-}
-
-.lantern-depth-mini {
-  --lantern-scale: 0.28;  /* stupidly small */
-  opacity: 0.40;
-  filter: blur(1.4px);
-}
-
-/* no rope / branches */
-.lantern::before {
-  content: none;
-}
-
-/* ---------------------------- */
-/*     ILLUSTRATED PORTRAITS    */
-/* ---------------------------- */
-
+/* Portrait wrapper */
 .lantern-img-wrapper {
   width: 100%;
   height: 170px;
@@ -337,51 +267,42 @@ body {
 }
 
 .lantern-text {
-  margin-top: 12px;
+  margin-top: 10px;
   font-family: "Crimson Pro", serif;
 }
 
 .lantern-name {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--lantern-gold);
-  text-shadow: 0 0 6px rgba(247, 211, 120, 0.55);
+  text-shadow: 0 0 6px rgba(247, 211, 120, 0.6);
 }
 
 .lantern-era {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #ccb98e;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .lantern-idea {
-  font-size: 0.83rem;
-  line-height: 1.4;
+  font-size: 0.78rem;
+  line-height: 1.35;
   color: #f3e7cf;
 }
 
 .lantern-glow {
   position: absolute;
   inset: -40px;
-  background: radial-gradient(circle, rgba(247,211,120,0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(247,211,120,0.16), transparent 70%);
   z-index: -1;
   filter: blur(8px);
 }
 
-/* ---------------------------- */
-/*   RESPONSIVE TWEAKS         */
-/* ---------------------------- */
-
-@media (max-width: 1200px) {
-  .lanterns-container {
-    opacity: 0.6;
-  }
-}
-
+/* Only show on big screens */
 @media (max-width: 980px) {
   .lanterns-container {
-    display: none; /* hide completely on smaller screens */
+    display: none;
   }
   .scroll-container {
     margin-top: 80px;
@@ -411,341 +332,232 @@ body {
   <div class="firefly"></div>
 </div>
 
-<!-- LANTERNS ROOT CONTAINER (BACKGROUND, FIXED) -->
+<!-- LANTERNS BACKGROUND (FIXED, RANDOM POSITIONS, DO NOT SCROLL) -->
 <div class="lanterns-container">
 
-  <!-- LEFT COLUMN: many philosophers / concepts -->
-  <div class="lantern-column left">
-
-    <div class="lantern lantern-depth-near">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg"
-             alt="Plato">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Plato</div>
-        <div class="lantern-era">Classical Greece</div>
-        <div class="lantern-idea">
-          From cave shadows to forms, he lit the first path upward.
-        </div>
+  <!-- LEFT SIDE LANTERNS -->
+  <!-- Plato - full size -->
+  <div class="lantern size-100" style="top: 18%; left: 8vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-img-wrapper">
+      <img class="lantern-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg"
+           alt="Plato">
+    </div>
+    <div class="lantern-text">
+      <div class="lantern-name">Plato</div>
+      <div class="lantern-era">Classical Greece</div>
+      <div class="lantern-idea">
+        From cave shadows to forms, he lit the first path upward.
       </div>
     </div>
-
-    <div class="lantern lantern-depth-mid">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/1/12/Aristotle_Altemps_Inv8575.jpg"
-             alt="Aristotle">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Aristotle</div>
-        <div class="lantern-era">Classical Greece</div>
-        <div class="lantern-idea">
-          He catalogued reality until it began to sing in categories.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-far">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Saint_Augustine_Portrait.jpg"
-             alt="Augustine">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Saint Augustine</div>
-        <div class="lantern-era">Late Antiquity</div>
-        <div class="lantern-idea">
-          Memory, guilt, and grace mapped as interior continents.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Memory</div>
-        <div class="lantern-idea">
-          Echoes that refuse to die.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-mid">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Immanuel_Kant_%28painted_portrait%29.jpg"
-             alt="Kant">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Immanuel Kant</div>
-        <div class="lantern-era">18th Century</div>
-        <div class="lantern-idea">
-          He drew the border between what we know and what we must merely respect.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Freedom</div>
-        <div class="lantern-idea">
-          A flame that burns its own cage.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-far">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Soren_Kierkegaard.jpg"
-             alt="Kierkegaard">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Søren Kierkegaard</div>
-        <div class="lantern-era">19th Century</div>
-        <div class="lantern-idea">
-          Anxiety as the dizziness of freedom, not its failure.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Doubt</div>
-        <div class="lantern-idea">
-          A small light that demands a larger one.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-mid">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/1/18/Hannah_Arendt_1975.jpg"
-             alt="Hannah Arendt">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Hannah Arendt</div>
-        <div class="lantern-era">20th Century</div>
-        <div class="lantern-idea">
-          She watched how evil could arrive wearing ordinary shoes.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Justice</div>
-        <div class="lantern-idea">
-          A scale hidden in the dark.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-far">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/3/32/Simone_Weil_%28philosopher%29.jpg"
-             alt="Simone Weil">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Simone Weil</div>
-        <div class="lantern-era">20th Century</div>
-        <div class="lantern-idea">
-          Attention as a form of prayer addressed to suffering.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Reason</div>
-        <div class="lantern-idea">
-          A fragile bridge across chaos.
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- RIGHT COLUMN -->
-  <div class="lantern-column right">
-
-    <div class="lantern lantern-depth-mid">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg"
-             alt="Thomas Aquinas">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Thomas Aquinas</div>
-        <div class="lantern-era">13th Century</div>
-        <div class="lantern-idea">
-          A staircase of arguments between revelation and reason.
-        </div>
+  <!-- Aristotle - 70% -->
+  <div class="lantern size-70" style="top: 40%; left: 6vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-img-wrapper">
+      <img class="lantern-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/1/12/Aristotle_Altemps_Inv8575.jpg"
+           alt="Aristotle">
+    </div>
+    <div class="lantern-text">
+      <div class="lantern-name">Aristotle</div>
+      <div class="lantern-era">Classical Greece</div>
+      <div class="lantern-idea">
+        He dissected reality into categories until it began to sing.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-near">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg"
-             alt="Descartes">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">René Descartes</div>
-        <div class="lantern-era">17th Century</div>
-        <div class="lantern-idea">
-          He doubted until only a single spark of certainty survived.
-        </div>
+  <!-- Augustine - 40% -->
+  <div class="lantern size-40" style="top: 65%; left: 9vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-img-wrapper">
+      <img class="lantern-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Saint_Augustine_Portrait.jpg"
+           alt="Saint Augustine">
+    </div>
+    <div class="lantern-text">
+      <div class="lantern-name">Saint Augustine</div>
+      <div class="lantern-era">Late Antiquity</div>
+      <div class="lantern-idea">
+        Memory and guilt mapped as interior continents.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-far">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Nietzsche187a.jpg"
-             alt="Nietzsche">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Friedrich Nietzsche</div>
-        <div class="lantern-era">19th Century</div>
-        <div class="lantern-idea">
-          After the death of God, he searched for a new lightning to live by.
-        </div>
+  <!-- Kant - 20% -->
+  <div class="lantern size-20" style="top: 82%; left: 4vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-img-wrapper">
+      <img class="lantern-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Immanuel_Kant_%28painted_portrait%29.jpg"
+           alt="Immanuel Kant">
+    </div>
+    <div class="lantern-text">
+      <div class="lantern-name">Immanuel Kant</div>
+      <div class="lantern-era">18th Century</div>
+      <div class="lantern-idea">
+        He drew the border between what we know and what we must only respect.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Power</div>
-        <div class="lantern-idea">
-          The shadow cast by every value.
-        </div>
+  <!-- Tiny concept - 5% -->
+  <div class="lantern size-5" style="top: 28%; left: 2vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-text">
+      <div class="lantern-name">Reason</div>
+      <div class="lantern-idea">
+        fragile fire.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-mid">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/9/99/David_Hume.jpg"
-             alt="Hume">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">David Hume</div>
-        <div class="lantern-era">18th Century</div>
-        <div class="lantern-idea">
-          Cause and self both dissolved into habits of the mind.
-        </div>
+  <!-- Tiny concept - 10% -->
+  <div class="lantern size-10" style="top: 54%; left: 3vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-text">
+      <div class="lantern-name">Memory</div>
+      <div class="lantern-idea">
+        echoes that refuse to die.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Consciousness</div>
-        <div class="lantern-idea">
-          A window that never sees itself.
-        </div>
+  <!-- Tiny concept - 5% -->
+  <div class="lantern size-5" style="top: 73%; left: 1vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-text">
+      <div class="lantern-name">Silence</div>
+      <div class="lantern-idea">
+        where thought germinates.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-far">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Spinoza.jpg"
-             alt="Spinoza">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Baruch Spinoza</div>
-        <div class="lantern-era">17th Century</div>
-        <div class="lantern-idea">
-          One substance, infinitely many ways of being illuminated.
-        </div>
+  <!-- Medium concept - 40% -->
+  <div class="lantern size-40" style="top: 90%; left: 7vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-text">
+      <div class="lantern-name">The Garden</div>
+      <div class="lantern-idea">
+        A place where arguments grow slowly instead of exploding.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Being</div>
-        <div class="lantern-idea">
-          The background hum beneath every thought.
-        </div>
+  <!-- RIGHT SIDE LANTERNS -->
+
+  <!-- Descartes - full size -->
+  <div class="lantern size-100" style="top: 22%; left: 92vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-img-wrapper">
+      <img class="lantern-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg"
+           alt="René Descartes">
+    </div>
+    <div class="lantern-text">
+      <div class="lantern-name">René Descartes</div>
+      <div class="lantern-era">17th Century</div>
+      <div class="lantern-idea">
+        He doubted the world until one spark of certainty survived.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-mid">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/8/85/Martin_Heidegger_1960.jpg"
-             alt="Heidegger">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Martin Heidegger</div>
-        <div class="lantern-era">20th Century</div>
-        <div class="lantern-idea">
-          We are thrown into a clearing, already questioning.
-        </div>
+  <!-- Aquinas - 70% -->
+  <div class="lantern size-70" style="top: 44%; left: 94vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-img-wrapper">
+      <img class="lantern-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg"
+           alt="Thomas Aquinas">
+    </div>
+    <div class="lantern-text">
+      <div class="lantern-name">Thomas Aquinas</div>
+      <div class="lantern-era">13th Century</div>
+      <div class="lantern-idea">
+        A staircase of arguments between revelation and reason.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Time</div>
-        <div class="lantern-idea">
-          The garden we walk through once.
-        </div>
+  <!-- Nietzsche - 40% -->
+  <div class="lantern size-40" style="top: 68%; left: 91vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-img-wrapper">
+      <img class="lantern-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Nietzsche187a.jpg"
+           alt="Friedrich Nietzsche">
+    </div>
+    <div class="lantern-text">
+      <div class="lantern-name">Friedrich Nietzsche</div>
+      <div class="lantern-era">19th Century</div>
+      <div class="lantern-idea">
+        After the death of God, he hunted for new lightning.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-far">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/1/14/Simone_de_Beauvoir2.png"
-             alt="Simone de Beauvoir">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Simone de Beauvoir</div>
-        <div class="lantern-era">20th Century</div>
-        <div class="lantern-idea">
-          She traced how freedom is twisted by the fact of being seen.
-        </div>
+  <!-- Hume - 20% -->
+  <div class="lantern size-20" style="top: 83%; left: 96vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-img-wrapper">
+      <img class="lantern-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/9/99/David_Hume.jpg"
+           alt="David Hume">
+    </div>
+    <div class="lantern-text">
+      <div class="lantern-name">David Hume</div>
+      <div class="lantern-era">18th Century</div>
+      <div class="lantern-idea">
+        Cause and self dissolved into habits of expectation.
       </div>
     </div>
+  </div>
 
-    <div class="lantern lantern-depth-mini">
-      <div class="lantern-glow"></div>
-      <div class="lantern-text">
-        <div class="lantern-name">Self</div>
-        <div class="lantern-idea">
-          A story told to the dark.
-        </div>
+  <!-- Tiny concepts on right -->
+
+  <div class="lantern size-5" style="top: 16%; left: 98vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-text">
+      <div class="lantern-name">Doubt</div>
+      <div class="lantern-idea">
+        first spark.
       </div>
     </div>
+  </div>
 
+  <div class="lantern size-10" style="top: 37%; left: 99vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-text">
+      <div class="lantern-name">Freedom</div>
+      <div class="lantern-idea">
+        the risk of becoming real.
+      </div>
+    </div>
+  </div>
+
+  <div class="lantern size-5" style="top: 58%; left: 97vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-text">
+      <div class="lantern-name">Mind</div>
+      <div class="lantern-idea">
+        lightning in a skull.
+      </div>
+    </div>
+  </div>
+
+  <div class="lantern size-40" style="top: 88%; left: 92vw;">
+    <div class="lantern-glow"></div>
+    <div class="lantern-text">
+      <div class="lantern-name">Midnight Library</div>
+      <div class="lantern-idea">
+        Shelves of arguments, lit one page at a time.
+      </div>
+    </div>
   </div>
 
 </div>
