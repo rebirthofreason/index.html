@@ -54,44 +54,51 @@ body {
   z-index: -10;
 }
 
-/* Layer 2: drifting fog (back) */
+/* Layer 2: drifting fog (back) — pure CSS */
 .fog-back {
   position: fixed;
   top: -10%;
   left: -10%;
   width: 130%;
   height: 130%;
-  background: url('https://i.imgur.com/2Qy4qIq.png') repeat;
-  opacity: 0.15;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(circle at 80% 10%, rgba(255,255,255,0.04), transparent 55%),
+    radial-gradient(circle at 60% 80%, rgba(255,255,255,0.05), transparent 55%);
+  opacity: 0.30;
+  mix-blend-mode: screen;
   animation: fogmove 120s linear infinite;
   z-index: -9;
-  filter: blur(6px);
+  filter: blur(16px);
 }
 
 @keyframes fogmove {
-  0% { transform: translate(0,0); }
-  50% { transform: translate(-4%, 3%); }
-  100% { transform: translate(0,0); }
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-20px, 18px, 0) scale(1.03); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
-/* Layer 3: drifting fog (front) */
+/* Layer 3: drifting fog (front) — pure CSS */
 .fog-front {
   position: fixed;
-  top: -10%;
-  left: -10%;
+  top: -15%;
+  left: -15%;
   width: 140%;
   height: 140%;
-  background: url('https://i.imgur.com/2Qy4qIq.png') repeat;
-  opacity: 0.25;
+  background:
+    radial-gradient(circle at 30% 70%, rgba(255,255,255,0.10), transparent 60%),
+    radial-gradient(circle at 75% 40%, rgba(255,255,255,0.08), transparent 60%);
+  opacity: 0.35;
+  mix-blend-mode: screen;
   animation: fogmove2 90s linear infinite;
   z-index: -8;
-  filter: blur(10px);
+  filter: blur(22px);
 }
 
 @keyframes fogmove2 {
-  0% { transform: translate(0,0); }
-  50% { transform: translate(5%, -3%); }
-  100% { transform: translate(0,0); }
+  0%   { transform: translate3d(0, 0, 0) scale(1.02); }
+  50%  { transform: translate3d(25px, -16px, 0) scale(1.06); }
+  100% { transform: translate3d(0, 0, 0) scale(1.02); }
 }
 
 /* Layer 4: fireflies */
@@ -135,35 +142,38 @@ body {
 /*   VINES + BOTANICAL ART   */
 /* ------------------------- */
 
+/* abstract vine silhouettes, no external images */
 .vines-left,
 .vines-right {
   position: fixed;
   top: 0;
   height: 100%;
-  width: 300px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  opacity: 0.35;
-  filter: blur(1px);
+  width: 260px;
+  opacity: 0.38;
   z-index: -4;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(7, 22, 14, 0.9), transparent 55%),
+    radial-gradient(circle at 40% 30%, rgba(5, 40, 22, 0.9), transparent 55%),
+    radial-gradient(circle at 10% 60%, rgba(3, 28, 16, 0.95), transparent 55%),
+    radial-gradient(circle at 35% 90%, rgba(3, 18, 10, 0.95), transparent 55%);
+  filter: blur(1.5px);
+  animation: vineSway 22s ease-in-out infinite;
 }
 
 .vines-left {
   left: 0;
-  background-image: url('https://i.imgur.com/0MsYTw7.png');
-  animation: vineSway 16s ease-in-out infinite;
 }
 
 .vines-right {
   right: 0;
-  background-image: url('https://i.imgur.com/0MsYTw7.png');
   transform: scaleX(-1);
-  animation: vineSway 20s ease-in-out infinite;
 }
 
 @keyframes vineSway {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(-1deg); }
+  0%   { transform: translateY(0) scaleX(1); }
+  50%  { transform: translateY(-18px) scaleX(1.02); }
+  100% { transform: translateY(0) scaleX(1); }
 }
 
 /* ------------------------- */
@@ -190,13 +200,27 @@ body {
   overflow: hidden;
 }
 
-/* Paper grain overlay */
+/* Paper grain overlay — CSS only, no image */
 .paper-scroll::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url('https://i.imgur.com/MlAa9Zi.png');
-  opacity: 0.15;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.035) 0px,
+      rgba(0,0,0,0.035) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.025) 0px,
+      rgba(0,0,0,0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -249,15 +273,18 @@ body {
 /*        BRANCH GRAPHIC        */
 /* ---------------------------- */
 
+/* CSS branch instead of external image */
 .branch {
   width: 260px;
-  height: 70px;
-  background-image: url('https://i.imgur.com/Uu8yNWZ.png');
-  background-size: contain;
-  background-repeat: no-repeat;
+  height: 14px;
   margin-left: 40px;
-  opacity: 0.85;
-  filter: drop-shadow(0 8px 4px rgba(0,0,0,0.6));
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 10% 40%, rgba(255,255,255,0.14), transparent 55%),
+    linear-gradient(to right, #3a2a15, #5c4424, #3a2a15);
+  box-shadow:
+    0 8px 4px rgba(0,0,0,0.6),
+    0 0 10px rgba(0,0,0,0.8);
 }
 
 /* ---------------------------- */
@@ -522,6 +549,7 @@ body {
   </div>
 
 </div>
+
 <!-- MAIN CONTENT SCROLL -->
 <div class="scroll-container">
 
