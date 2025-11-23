@@ -5,31 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Rebirth of Reason — Garden of Thought</title>
 
+<!-- FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Crimson+Pro:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
-/* COLORS */
+/* ------------------------- */
+/*         ROOT STYLE        */
+/* ------------------------- */
+
 :root {
   --ink-black: #020309;
   --night-blue: #07101a;
-  --gold: #f7d378;
+  --forest-deep: #0b1d13;
+  --forest-mid: #143222;
+  --forest-light: #345f49;
+  --lantern-gold: #f7d378;
+  --lantern-glow: rgba(247, 211, 120, 0.35);
   --paper: #e6d9c3;
   --paper-dark: #d2c6b0;
   --paper-edge: #c2b59e;
+  --max-width: 900px;
 }
 
-/* RESET */
-* { margin:0; padding:0; box-sizing:border-box; }
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   background: var(--ink-black);
+  overflow-x: hidden;
   font-family: "Inter", sans-serif;
   color: #f5f5f5;
-  overflow-x: hidden;
 }
 
-/* BACKGROUND */
+/* ------------------------- */
+/*   WORLD BACKGROUND LAYERS */
+/* ------------------------- */
+
+/* Layer 1: deep gradient sky */
 .bg-sky {
   position: fixed;
   inset: 0;
@@ -37,85 +54,361 @@ body {
   z-index: -10;
 }
 
-/* LANTERN COLUMNS (SCROLL WITH PAGE) */
-.lanterns-container {
-  position: absolute;       /* ← THIS is the key change. They scroll with the page */
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 40px;
-  pointer-events: none;
-  z-index: -1;              /* ← stay behind main content */
+/* Layer 2: drifting fog (back) */
+.fog-back {
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 130%;
+  height: 130%;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(circle at 80% 10%, rgba(255,255,255,0.04), transparent 55%),
+    radial-gradient(circle at 60% 80%, rgba(255,255,255,0.05), transparent 55%);
+  opacity: 0.30;
+  mix-blend-mode: screen;
+  animation: fogmove 120s linear infinite;
+  z-index: -9;
+  filter: blur(16px);
 }
 
-/* columns */
+@keyframes fogmove {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-20px, 18px, 0) scale(1.03); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* Layer 3: drifting fog (front) */
+.fog-front {
+  position: fixed;
+  top: -15%;
+  left: -15%;
+  width: 140%;
+  height: 140%;
+  background:
+    radial-gradient(circle at 30% 70%, rgba(255,255,255,0.10), transparent 60%),
+    radial-gradient(circle at 75% 40%, rgba(255,255,255,0.08), transparent 60%);
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  animation: fogmove2 90s linear infinite;
+  z-index: -8;
+  filter: blur(22px);
+}
+
+@keyframes fogmove2 {
+  0%   { transform: translate3d(0, 0, 0) scale(1.02); }
+  50%  { transform: translate3d(25px, -16px, 0) scale(1.06); }
+  100% { transform: translate3d(0, 0, 0) scale(1.02); }
+}
+
+/* ------------------------- */
+/*         FIREFLIES         */
+/* ------------------------- */
+
+.fireflies {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -6;
+}
+
+.firefly {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #fff8b3 0%, rgba(255,255,200,0.3) 70%, transparent 100%);
+  border-radius: 50%;
+  animation: drift 12s ease-in-out infinite, flicker 3s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(-20px, 40px); }
+  100% { transform: translate(0,0); }
+}
+
+@keyframes flicker {
+  0%,100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.firefly:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+.firefly:nth-child(2) { top: 40%; left: 80%; animation-delay: 1s; }
+.firefly:nth-child(3) { top: 65%; left: 50%; animation-delay: 2s; }
+.firefly:nth-child(4) { top: 25%; left: 30%; animation-delay: 3s; }
+.firefly:nth-child(5) { top: 80%; left: 15%; animation-delay: 4s; }
+.firefly:nth-child(6) { top: 55%; left: 70%; animation-delay: 5s; }
+.firefly:nth-child(7) { top: 15%; left: 60%; animation-delay: 6s; }
+
+/* ------------------------- */
+/*   VINES / TREE EDGES      */
+/* ------------------------- */
+
+.vines-left,
+.vines-right {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 260px;
+  opacity: 0.38;
+  z-index: -5;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(7, 22, 14, 0.9), transparent 55%),
+    radial-gradient(circle at 40% 30%, rgba(5, 40, 22, 0.9), transparent 55%),
+    radial-gradient(circle at 10% 60%, rgba(3, 28, 16, 0.95), transparent 55%),
+    radial-gradient(circle at 35% 90%, rgba(3, 18, 10, 0.95), transparent 55%);
+  filter: blur(1.5px);
+  animation: vineSway 22s ease-in-out infinite;
+}
+
+.vines-left {
+  left: 0;
+}
+
+.vines-right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+@keyframes vineSway {
+  0%   { transform: translateY(0) scaleX(1); }
+  50%  { transform: translateY(-18px) scaleX(1.02); }
+  100% { transform: translateY(0) scaleX(1); }
+}
+
+/* ------------------------- */
+/*  CONTENT SCROLL CONTAINER */
+/* ------------------------- */
+
+.scroll-container {
+  position: relative;
+  z-index: 5;
+  max-width: var(--max-width);
+  margin: 150px auto 0 auto;
+  padding-bottom: 200px;
+}
+
+/* The scroll (paper) background */
+.paper-scroll {
+  background: linear-gradient(to bottom, var(--paper) 0%, var(--paper-dark) 100%);
+  border-left: 8px solid var(--paper-edge);
+  border-right: 8px solid var(--paper-edge);
+  padding: 60px 60px;
+  border-radius: 6px;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Paper grain overlay */
+.paper-scroll::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.035) 0px,
+      rgba(0,0,0,0.035) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.025) 0px,
+      rgba(0,0,0,0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------ */
+/*     PHILOSOPHER LANTERNS — SCROLLING WITH PAGE   */
+/* ------------------------------------------------ */
+
+.lanterns-container {
+  position: absolute;    /* ← scrolls with the page */
+  top: 140px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 2;           /* behind the paper scroll (z=5), above background */
+}
+
+/* Lantern group left & right columns */
 .lantern-column {
+  position: absolute;
+  width: 260px;
   display: flex;
   flex-direction: column;
-  gap: 260px;
-  margin-top: 200px;
+  gap: 220px;
 }
 
-/* LANTERN BOX */
+.lantern-column.left {
+  left: 4%;
+  animation: parallaxLeft 20s linear infinite alternate;
+}
+
+.lantern-column.right {
+  right: 4%;
+  animation: parallaxRight 25s linear infinite alternate;
+}
+
+/* Subtle parallax drift */
+@keyframes parallaxLeft {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(40px); }
+}
+
+@keyframes parallaxRight {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-30px); }
+}
+
+/* Hide branches / ropes completely */
+.branch {
+  display: none;
+}
+
+/* ---------------------------- */
+/*     LANTERN (Main body)      */
+/* ---------------------------- */
+
 .lantern {
-  width: 240px;
-  background: rgba(26, 21, 12, 0.85);
-  border-radius: 14px;
+  --lantern-scale: 1;
+  width: 260px;
+  background: rgba(26, 21, 12, 0.9);
+  border-radius: 16px;
   padding: 14px;
   border: 2px solid rgba(247, 211, 120, 0.35);
   box-shadow:
     0 0 18px rgba(247, 211, 120, 0.35),
-    inset 0 0 20px rgba(247, 211, 120, 0.18);
-  animation: sway 14s ease-in-out infinite;
+    0 0 60px rgba(247, 211, 120, 0.18),
+    inset 0 0 25px rgba(247, 211, 120, 0.12);
+  backdrop-filter: blur(3px);
+  position: relative;
+  margin-top: -10px;
   transform-origin: top center;
+  animation: sway 10s ease-in-out infinite;
 }
 
+.lantern:nth-child(odd) {
+  animation-duration: 13s;
+  animation-delay: -3s;
+}
+.lantern:nth-child(even) {
+  animation-duration: 17s;
+  animation-delay: -6s;
+}
+
+/* remove rope / string */
+.lantern::before {
+  content: none;
+}
+
+/* Depth variants */
+.lantern-depth-near {
+  --lantern-scale: 1.15;
+}
+
+.lantern-depth-mid {
+  --lantern-scale: 1.0;
+}
+
+.lantern-depth-far {
+  --lantern-scale: 0.86;
+  opacity: 0.85;
+  filter: blur(0.3px);
+}
+
+/* Sway/bob physics */
 @keyframes sway {
-  0%   { transform: rotate(0deg); }
-  25%  { transform: rotate(1.6deg); }
-  50%  { transform: rotate(0deg); }
-  75%  { transform: rotate(-1.6deg); }
-  100% { transform: rotate(0deg); }
+  0%   { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
+  25%  { transform: scale(var(--lantern-scale)) rotate(1.2deg) translateY(-6px); }
+  50%  { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
+  75%  { transform: scale(var(--lantern-scale)) rotate(-1.2deg) translateY(5px); }
+  100% { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
 }
 
-/* Portraits */
+/* ---------------------------- */
+/*     ILLUSTRATED PORTRAITS    */
+/* ---------------------------- */
+
 .lantern-img-wrapper {
   width: 100%;
-  height: 170px;
-  overflow: hidden;
+  height: 180px;
   border-radius: 12px;
+  overflow: hidden;
+  position: relative;
   border: 2px solid rgba(247, 211, 120, 0.4);
+  box-shadow:
+    0 0 18px rgba(247, 211, 120, 0.35),
+    inset 0 0 45px rgba(247, 211, 120, 0.18);
 }
 
 .lantern-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(1.12) contrast(1.1) sepia(0.2);
+  filter:
+    brightness(1.15)
+    contrast(1.1)
+    saturate(1.3)
+    sepia(0.22)
+    blur(0.6px)
+    drop-shadow(0 0 4px rgba(0,0,0,0.4));
+  mix-blend-mode: lighten;
 }
 
-.lantern-text { margin-top: 12px; font-family: "Crimson Pro"; }
-.lantern-name { font-size:1.05rem; color:var(--gold); font-weight:700; }
-.lantern-era  { color:#ccb98e; font-size:0.85rem; margin-bottom:4px; }
-.lantern-idea { color:#f7f0d7; font-size:0.83rem; line-height:1.4; }
-
-/* MAIN CONTENT */
-.scroll-container {
-  max-width: 900px;
-  margin: 180px auto;
-  position: relative;
-  z-index: 2;
+/* Text below portrait */
+.lantern-text {
+  margin-top: 12px;
+  font-family: "Crimson Pro", serif;
 }
 
-.paper-scroll {
-  background: linear-gradient(to bottom, var(--paper), var(--paper-dark));
-  padding: 60px;
-  border-left: 8px solid var(--paper-edge);
-  border-right: 8px solid var(--paper-edge);
-  border-radius: 6px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+.lantern-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--lantern-gold);
+  text-shadow: 0 0 6px rgba(247, 211, 120, 0.55);
+}
+
+.lantern-era {
+  font-size: 0.85rem;
+  color: #ccb98e;
+  margin-bottom: 4px;
+}
+
+.lantern-idea {
+  font-size: 0.83rem;
+  line-height: 1.4;
+  color: #f3e7cf;
+}
+
+/* Lantern glow halo */
+.lantern-glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(247,211,120,0.15), transparent 70%);
+  z-index: -1;
+  filter: blur(8px);
+}
+
+/* ---------------------------- */
+/*   RESPONSIVE TWEAKS         */
+/* ---------------------------- */
+
+@media (max-width: 980px) {
+  .lanterns-container {
+    display: none;
+  }
+  .scroll-container {
+    margin-top: 80px;
+  }
 }
 
 </style>
@@ -123,77 +416,345 @@ body {
 
 <body>
 
+<!-- BACKGROUND LAYERS -->
 <div class="bg-sky"></div>
+<div class="fog-back"></div>
+<div class="fog-front"></div>
+<div class="vines-left"></div>
+<div class="vines-right"></div>
 
-<!-- LANTERNS (SCROLL WITH PAGE) -->
+<!-- FIREFLIES -->
+<div class="fireflies">
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+</div>
+
+<!-- LANTERNS ROOT CONTAINER (scrolls with page, behind text) -->
 <div class="lanterns-container">
-  <div class="lantern-column">
 
-    <div class="lantern">
+  <!-- LEFT COLUMN -->
+  <div class="lantern-column left">
+
+    <div class="branch"></div>
+    <div class="lantern lantern-depth-near">
+      <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
-        <img class="lantern-img" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg/256px-Plato_Silanion_Musei_Capitolini_MC1377.jpg"
+             alt="Plato">
       </div>
       <div class="lantern-text">
         <div class="lantern-name">Plato</div>
         <div class="lantern-era">Classical Greece</div>
-        <div class="lantern-idea">The cave and the torch of truth.</div>
+        <div class="lantern-idea">
+          His world is a cave of shadows — and his thought is the first torch ever lit.
+        </div>
       </div>
     </div>
 
-    <div class="lantern">
+    <div class="branch"></div>
+    <div class="lantern lantern-depth-mid">
+      <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
-        <img class="lantern-img" src="https://upload.wikimedia.org/wikipedia/commons/1/12/Aristotle_Altemps_Inv8575.jpg">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Aristotle_Altemps_Inv8575.jpg/256px-Aristotle_Altemps_Inv8575.jpg"
+             alt="Aristotle">
       </div>
       <div class="lantern-text">
         <div class="lantern-name">Aristotle</div>
         <div class="lantern-era">Classical Greece</div>
-        <div class="lantern-idea">Reality, categorized into music.</div>
+        <div class="lantern-idea">
+          He disassembled reality into categories — not to limit it, but to understand its music.
+        </div>
+      </div>
+    </div>
+
+    <div class="branch"></div>
+    <div class="lantern lantern-depth-far">
+      <div class="lantern-glow"></div>
+      <div class="lantern-img-wrapper">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Saint_Augustine_Portrait.jpg/256px-Saint_Augustine_Portrait.jpg"
+             alt="Augustine">
+      </div>
+      <div class="lantern-text">
+        <div class="lantern-name">Saint Augustine</div>
+        <div class="lantern-era">Late Antiquity</div>
+        <div class="lantern-idea">
+          Memory as cathedral, guilt as compass, confession as the architecture of a soul.
+        </div>
       </div>
     </div>
 
   </div>
 
-  <div class="lantern-column">
+  <!-- RIGHT COLUMN -->
+  <div class="lantern-column right">
 
-    <div class="lantern">
+    <div class="branch"></div>
+    <div class="lantern lantern-depth-mid">
+      <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
-        <img class="lantern-img" src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg/256px-Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg"
+             alt="Thomas Aquinas">
       </div>
       <div class="lantern-text">
-        <div class="lantern-name">Aquinas</div>
+        <div class="lantern-name">Thomas Aquinas</div>
         <div class="lantern-era">13th Century</div>
-        <div class="lantern-idea">A bridge between faith and reason.</div>
+        <div class="lantern-idea">
+          He forged a bridge between revelation and reason — and walked across both worlds.
+        </div>
       </div>
     </div>
 
-    <div class="lantern">
+    <div class="branch"></div>
+    <div class="lantern lantern-depth-far">
+      <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
-        <img class="lantern-img" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Nietzsche187a.jpg">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/256px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg"
+             alt="Descartes">
       </div>
       <div class="lantern-text">
-        <div class="lantern-name">Nietzsche</div>
+        <div class="lantern-name">René Descartes</div>
+        <div class="lantern-era">17th Century</div>
+        <div class="lantern-idea">
+          He doubted the world until only a single spark of certainty remained in the void.
+        </div>
+      </div>
+    </div>
+
+    <div class="branch"></div>
+    <div class="lantern lantern-depth-near">
+      <div class="lantern-glow"></div>
+      <div class="lantern-img-wrapper">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/256px-Nietzsche187a.jpg"
+             alt="Nietzsche">
+      </div>
+      <div class="lantern-text">
+        <div class="lantern-name">Friedrich Nietzsche</div>
         <div class="lantern-era">19th Century</div>
-        <div class="lantern-idea">The hammer that shattered morality.</div>
+        <div class="lantern-idea">
+          He shattered morality into shards — and dared humanity to build itself anew.
+        </div>
       </div>
     </div>
 
   </div>
+
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN CONTENT SCROLL -->
 <div class="scroll-container">
+
   <div class="paper-scroll">
 
-    <h1 style="font-family:'Playfair Display'; text-align:center; color:#3b2e16; font-size:2.6rem;">
-      Rebirth of Reason —<br><span style="color:#6a5327;">The Garden of Thought</span>
+    <!-- Journal Header -->
+    <h1 style="
+      font-family:'Playfair Display', serif;
+      font-size:2.6rem;
+      margin-bottom:1.2rem;
+      text-align:center;
+      color:#3b2e16;
+      text-shadow:0 0 12px rgba(0,0,0,0.25);
+    ">
+      Rebirth of Reason —<br>
+      <span style="color:#6a5327;">The Garden of Thought</span>
     </h1>
 
-    <p style="font-family:'Crimson Pro'; font-size:1.15rem; line-height:1.65; color:#3c2d19; text-align:center; margin-top:1rem;">
-      A philosophical journal grown in midnight soil, illuminated by lanterns of thinkers who stood before us.
+    <p style="
+      font-family:'Crimson Pro', serif;
+      font-size:1.15rem;
+      line-height:1.65;
+      color:#3c2d19;
+      max-width:720px;
+      margin:0 auto 2.2rem auto;
+      text-align:center;
+    ">
+      A philosophical journal grown in midnight soil, illuminated by lanterns of thinkers
+      who stood before us. Walk gently, breathe deeply, and descend into ideas that bloom
+      in the dark.
     </p>
 
-  </div>
-</div>
+    <!-- SECTION: ABOUT -->
+    <h2 style="
+      font-family:'Playfair Display', serif;
+      font-size:1.8rem;
+      margin-top:2.4rem;
+      margin-bottom:0.8rem;
+      color:#4b3a1d;
+      border-left:6px solid #d9c39d;
+      padding-left:12px;
+    ">About the Journal</h2>
+
+    <p style="
+      font-family:'Crimson Pro', serif;
+      font-size:1.05rem;
+      color:#3b2f1a;
+      margin-bottom:1.3rem;
+    ">
+      <strong>Rebirth of Reason</strong> is not a publication — it is a place.
+      A clearing in a dream-forest where ideas take on physical shape.
+      Here, philosophy is not text, but atmosphere. Not argument, but illumination.
+    </p>
+
+    <p style="
+      font-family:'Crimson Pro', serif;
+      font-size:1.05rem;
+      margin-bottom:1.3rem;
+    ">
+      Every essay is a seed planted in the soil of the mind. With care, with courage,
+      with honesty, it grows. Your task as a thinker is not to imitate but to cultivate.
+      To create thoughts worthy of lanterns.
+    </p>
+
+    <!-- SECTION: ESSAYS -->
+    <h2 style="
+      font-family:'Playfair Display', serif;
+      font-size:1.8rem;
+      margin-top:2.8rem;
+      margin-bottom:0.8rem;
+      color:#4b3a1d;
+      border-left:6px solid #d9c39d;
+      padding-left:12px;
+    ">Featured Essays</h2>
+
+    <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      gap:1.4rem;
+      margin-top:1.4rem;
+    ">
+
+      <div style="
+        background:#f2eadc;
+        border-radius:10px;
+        padding:1rem 1.2rem;
+        border:2px solid #d5c6ac;
+        box-shadow:0 6px 14px rgba(0,0,0,0.15);
+      ">
+        <h3 style="font-family:'Playfair Display'; font-size:1.2rem; color:#3e311b;">
+          Lightning Is Memory
+        </h3>
+        <p style="font-family:'Crimson Pro'; font-size:0.95rem; color:#44361d;">
+          Electrons, storms of thought, and the electrification of consciousness.
+        </p>
+      </div>
+
+      <div style="
+        background:#f2eadc;
+        border-radius:10px;
+        padding:1rem 1.2rem;
+        border:2px solid #d5c6ac;
+        box-shadow:0 6px 14px rgba(0,0,0,0.15);
+      ">
+        <h3 style="font-family:'Playfair Display'; font-size:1.2rem; color:#3e311b;">
+          The Human Bio-Machine
+        </h3>
+        <p style="font-family:'Crimson Pro'; font-size:0.95rem; color:#44361d;">
+          Choice, algorithms, and the illusion we lovingly call free will.
+        </p>
+      </div>
+
+      <div style="
+        background:#f2eadc;
+        border-radius:10px;
+        padding:1rem 1.2rem;
+        border:2px solid #d5c6ac;
+        box-shadow:0 6px 14px rgba(0,0,0,0.15);
+      ">
+        <h3 style="font-family:'Playfair Display'; font-size:1.2rem; color:#3e311b;">
+          Perspective vs Reality
+        </h3>
+        <p style="font-family:'Crimson Pro'; font-size:0.95rem; color:#44361d;">
+          Between the world and the mind lies a garden of illusions.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- SECTION: SUBMIT -->
+    <h2 style="
+      font-family:'Playfair Display', serif;
+      font-size:1.8rem;
+      margin-top:3rem;
+      margin-bottom:0.8rem;
+      color:#4b3a1d;
+      border-left:6px solid #d9c39d;
+      padding-left:12px;
+    ">Submission Guidelines</h2>
+
+    <p style="font-family:'Crimson Pro'; font-size:1.05rem; margin-bottom:1.2rem;">
+      <strong>Length:</strong> 1500–3000 words recommended.<br>
+      <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics, political thought,
+      perception, and anything that genuinely explores human thought with care.<br>
+      <strong>Format:</strong> Send as PDF or Google Doc.
+    </p>
+
+    <div style="
+      background:#f6efdf;
+      border-left:5px solid #c9b27a;
+      padding:1rem 1.2rem;
+      border-radius:4px;
+      margin-bottom:2rem;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    ">
+      <p style="font-family:'Crimson Pro'; font-size:1rem; color:#4a3b23;">
+        Email submissions to:<br>
+        <strong style="font-size:1.1rem;">your-email-here@example.com</strong>
+      </p>
+    </div>
+
+    <!-- SECTION: CONTACT -->
+    <h2 style="
+      font-family:'Playfair Display', serif;
+      font-size:1.8rem;
+      margin-top:3rem;
+      margin-bottom:0.8rem;
+      color:#4b3a1d;
+      border-left:6px solid #d9c39d;
+      padding-left:12px;
+    ">Contact</h2>
+
+    <p style="font-family:'Crimson Pro'; font-size:1.05rem; margin-bottom:1.4rem;">
+      Questions, collaboration, or ideas for future issues are welcome.
+    </p>
+
+    <div style="
+      background:#f6efdf;
+      border-left:5px solid #c9b27a;
+      padding:1rem 1.2rem;
+      border-radius:4px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    ">
+      <p style="font-family:'Crimson Pro'; font-size:1rem; color:#4a3b23;">
+        Email: <strong>your-email-here@example.com</strong>
+      </p>
+    </div>
+
+  </div> <!-- END PAPER SCROLL -->
+
+</div> <!-- END SCROLL CONTAINER -->
+
+<!-- FOOTER -->
+<footer style="
+  text-align:center;
+  color:#ccbfa8;
+  margin-top:120px;
+  margin-bottom:60px;
+  font-family:'Crimson Pro';
+  font-size:0.95rem;
+">
+  This journal grows with every mind that enters the garden.
+  <br>© Rebirth of Reason
+</footer>
 
 </body>
 </html>
