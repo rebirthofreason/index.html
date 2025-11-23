@@ -194,7 +194,7 @@ body {
   border-radius: 6px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* <-- allow full circle logo to be visible */
 }
 
 .paper-scroll::before {
@@ -413,10 +413,10 @@ body {
 }
 
 .footer-constellation {
-  margin-top: 32px;   /* sits clearly under the text */
+  margin-top: 32px;
 }
 
-/* SVG styling – static, no animation, more body detail */
+/* SVG styling – static stars, detailed body */
 .vitruvian-constellation {
   width: 230px;
   max-width: 70vw;
@@ -614,51 +614,78 @@ body {
 <div class="scroll-container">
   <div class="paper-scroll">
 
-    <!-- TOP VITRUVIAN LOGO (SVG, V2) -->
+    <!-- TOP VITRUVIAN LOGO: now uses detailed figure -->
     <div class="journal-logo">
       <svg viewBox="0 0 200 200" aria-hidden="true">
-        <!-- outer circle -->
+        <!-- circles + square -->
         <circle cx="100" cy="100" r="78"
                 fill="none"
                 stroke="#7a5c2c"
                 stroke-width="3"
                 stroke-dasharray="4 3" />
-        <!-- inner circle -->
         <circle cx="100" cy="100" r="66"
                 fill="none"
                 stroke="rgba(122,92,44,0.55)"
                 stroke-width="2"
                 stroke-dasharray="2 4" />
-        <!-- square -->
         <rect x="52" y="40" width="96" height="120"
               fill="none"
               stroke="rgba(122,92,44,0.7)"
               stroke-width="2" />
-        <!-- figure -->
-        <g stroke="#7a5c2c" stroke-width="3" stroke-linecap="round" fill="none">
-          <!-- spine -->
-          <line x1="100" y1="60" x2="100" y2="125" />
-          <!-- shoulders -->
-          <line x1="55" y1="85" x2="145" y2="85" />
-          <!-- horizontal arms -->
-          <line x1="40" y1="95" x2="160" y2="95" />
-          <!-- diagonal arms -->
-          <line x1="55"  y1="85" x2="35"  y2="65" />
-          <line x1="145" y1="85" x2="165" y2="65" />
-          <!-- hips -->
-          <line x1="90" y1="125" x2="110" y2="125" />
-          <!-- legs (down) -->
-          <line x1="92"  y1="125" x2="75"  y2="170" />
-          <line x1="108" y1="125" x2="125" y2="170" />
-          <!-- legs (wide) -->
-          <line x1="92"  y1="125" x2="60"  y2="175" />
-          <line x1="108" y1="125" x2="140" y2="175" />
+
+        <!-- body (same style as constellation, just no stars) -->
+        <g stroke="#7a5c2c" stroke-linecap="round" fill="none">
+          <!-- main lines -->
+          <g stroke-width="3">
+            <!-- spine -->
+            <line x1="100" y1="60" x2="100" y2="130" />
+            <!-- shoulders -->
+            <line x1="55"  y1="85" x2="145" y2="85" />
+            <!-- horizontal arms -->
+            <line x1="40"  y1="95" x2="160" y2="95" />
+            <!-- diagonal arms -->
+            <line x1="55"  y1="85" x2="35"  y2="65" />
+            <line x1="145" y1="85" x2="165" y2="65" />
+            <!-- hips -->
+            <line x1="90"  y1="130" x2="110" y2="130" />
+            <!-- legs (down) -->
+            <line x1="92"  y1="130" x2="75"  y2="175" />
+            <line x1="108" y1="130" x2="125" y2="175" />
+            <!-- legs (wide) -->
+            <line x1="92"  y1="130" x2="60"  y2="180" />
+            <line x1="108" y1="130" x2="140" y2="180" />
+          </g>
+
+          <!-- finer lines -->
+          <g stroke-width="2">
+            <!-- neck -->
+            <line x1="100" y1="60" x2="100" y2="68" />
+            <!-- chest -->
+            <path d="M90 80 Q100 74 110 80" />
+            <!-- pelvis -->
+            <path d="M88 126 Q100 134 112 126" />
+          </g>
         </g>
+
         <!-- head -->
-        <circle cx="100" cy="48" r="12"
+        <circle cx="100" cy="50" r="12"
                 fill="none"
                 stroke="#7a5c2c"
                 stroke-width="3" />
+
+        <!-- joint markers -->
+        <g fill="#7a5c2c">
+          <circle cx="55"  cy="85" r="1.6" />
+          <circle cx="145" cy="85" r="1.6" />
+          <circle cx="45"  cy="75" r="1.4" />
+          <circle cx="155" cy="75" r="1.4" />
+          <circle cx="90"  cy="130" r="1.5" />
+          <circle cx="110" cy="130" r="1.5" />
+          <circle cx="82"  cy="155" r="1.5" />
+          <circle cx="118" cy="155" r="1.5" />
+          <circle cx="69"  cy="165" r="1.4" />
+          <circle cx="131" cy="165" r="1.4" />
+        </g>
       </svg>
     </div>
 
@@ -852,9 +879,8 @@ body {
   <br>© Rebirth of Reason
 
   <div class="footer-constellation">
-    <!-- SVG VITRUVIAN CONSTELLATION – more anatomical detail, no extra shapes -->
+    <!-- same constellation as last version -->
     <svg viewBox="0 0 200 200" class="vitruvian-constellation" aria-hidden="true">
-      <!-- halo + circles + square -->
       <defs>
         <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stop-color="#f7d378" stop-opacity="0.4" />
@@ -868,56 +894,37 @@ body {
       <circle class="inner-circle" cx="100" cy="100" r="68" />
       <rect   class="square"       x="50"  y="40"  width="100" height="120" />
 
-      <!-- BODY – extra lines for chest, pelvis, neck -->
       <g>
-        <!-- spine -->
         <line class="line" x1="100" y1="60" x2="100" y2="130" />
-        <!-- shoulders -->
         <line class="line" x1="55"  y1="85" x2="145" y2="85" />
-        <!-- horizontal arms -->
         <line class="line" x1="40"  y1="95" x2="160" y2="95" />
-        <!-- diagonal arms -->
         <line class="line" x1="55"  y1="85" x2="35"  y2="65" />
         <line class="line" x1="145" y1="85" x2="165" y2="65" />
-        <!-- hips -->
         <line class="line" x1="90"  y1="130" x2="110" y2="130" />
-        <!-- legs (down) -->
         <line class="line" x1="92"  y1="130" x2="75"  y2="175" />
         <line class="line" x1="108" y1="130" x2="125" y2="175" />
-        <!-- legs (wide) -->
         <line class="line" x1="92"  y1="130" x2="60"  y2="180" />
         <line class="line" x1="108" y1="130" x2="140" y2="180" />
-        <!-- neck -->
         <line class="line-fine" x1="100" y1="60" x2="100" y2="68" />
-        <!-- chest line -->
         <path class="line-fine" d="M90 80 Q100 74 110 80" />
-        <!-- pelvis arc -->
         <path class="line-fine" d="M88 126 Q100 134 112 126" />
       </g>
 
-      <!-- head -->
       <circle class="head" cx="100" cy="50" r="12" />
 
-      <!-- JOINT MARKERS (anatomical detail) -->
       <g>
-        <!-- shoulders -->
         <circle class="joint" cx="55"  cy="85" r="1.6" />
         <circle class="joint" cx="145" cy="85" r="1.6" />
-        <!-- elbows (diagonal arms) -->
         <circle class="joint" cx="45"  cy="75" r="1.4" />
         <circle class="joint" cx="155" cy="75" r="1.4" />
-        <!-- hips -->
         <circle class="joint" cx="90"  cy="130" r="1.5" />
         <circle class="joint" cx="110" cy="130" r="1.5" />
-        <!-- knees (inner legs) -->
         <circle class="joint" cx="82"  cy="155" r="1.5" />
         <circle class="joint" cx="118" cy="155" r="1.5" />
-        <!-- knees (outer legs) -->
         <circle class="joint" cx="69"  cy="165" r="1.4" />
         <circle class="joint" cx="131" cy="165" r="1.4" />
       </g>
 
-      <!-- few small “star” points around figure, static -->
       <g>
         <circle class="star dim" cx="100" cy="20"  r="1.5" />
         <circle class="star dim" cx="30"  cy="100" r="1.5" />
