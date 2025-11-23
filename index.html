@@ -183,7 +183,7 @@ body {
   z-index: 5;
   max-width: var(--max-width);
   margin: 150px auto 0 auto;
-  padding-bottom: 200px;
+  padding-bottom: 140px; /* slightly reduced to keep overall page height closer to original */
 }
 
 .paper-scroll {
@@ -194,7 +194,7 @@ body {
   border-radius: 6px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
   position: relative;
-  overflow: visible; /* allow full circle logo to be visible */
+  overflow: visible;
 }
 
 .paper-scroll::before {
@@ -404,8 +404,8 @@ body {
 
 .site-footer {
   position: relative;
-  margin-top: 120px;
-  margin-bottom: 60px;
+  margin-top: 80px;   /* slightly reduced */
+  margin-bottom: 40px;/* slightly reduced */
   font-family: 'Crimson Pro', serif;
   font-size: 0.95rem;
   color: #ccbfa8;
@@ -492,14 +492,15 @@ body {
   opacity: 0.55;
 }
 
-/* ------------- SUBMISSION BOX (IN FOOTER, LEFT) ------------- */
+/* ------------- SUBMISSION BOX (FOOTER LEFT, BIGGER) ------------- */
 
 .submission-box {
-  max-width: 280px;
+  flex: 0 0 320px;
+  max-width: 360px;
   background: radial-gradient(circle at top left, rgba(247,211,120,0.12), transparent 60%),
               rgba(15, 10, 5, 0.95);
   border-radius: 12px;
-  padding: 0.95rem 1rem 1.05rem 1rem;
+  padding: 1.05rem 1.2rem 1.15rem 1.2rem;
   border: 1px solid rgba(201, 178, 122, 0.9);
   box-shadow: 0 12px 26px rgba(0,0,0,0.7);
   font-family: 'Crimson Pro', serif;
@@ -509,8 +510,8 @@ body {
 
 .submission-box h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  margin-bottom: 0.35rem;
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
   color: #f7d378;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -519,11 +520,11 @@ body {
 .submission-box p {
   font-size: 0.9rem;
   line-height: 1.45;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
 }
 
 .submission-box p:last-of-type {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.8rem;
 }
 
 .submission-box strong {
@@ -536,7 +537,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0.55rem 0.8rem;
+  padding: 0.6rem 0.9rem;
   border-radius: 999px;
   border: 1px solid rgba(247,211,120,0.95);
   background: linear-gradient(135deg, #f7d378, #c9a34e);
@@ -566,7 +567,7 @@ body {
 
 /* tiny hint under button */
 .submission-hint {
-  margin-top: 0.3rem;
+  margin-top: 0.35rem;
   font-size: 0.75rem;
   opacity: 0.8;
 }
@@ -586,6 +587,7 @@ body {
   }
 
   .submission-box {
+    flex: 0 1 auto;
     max-width: 380px;
     width: 100%;
   }
@@ -739,36 +741,23 @@ body {
               stroke="rgba(122,92,44,0.7)"
               stroke-width="2" />
 
-        <!-- body (same style as constellation, just no stars) -->
+        <!-- body -->
         <g stroke="#7a5c2c" stroke-linecap="round" fill="none">
-          <!-- main lines -->
           <g stroke-width="3">
-            <!-- spine -->
             <line x1="100" y1="60" x2="100" y2="130" />
-            <!-- shoulders -->
             <line x1="55"  y1="85" x2="145" y2="85" />
-            <!-- horizontal arms -->
             <line x1="40"  y1="95" x2="160" y2="95" />
-            <!-- diagonal arms -->
             <line x1="55"  y1="85" x2="35"  y2="65" />
             <line x1="145" y1="85" x2="165" y2="65" />
-            <!-- hips -->
             <line x1="90"  y1="130" x2="110" y2="130" />
-            <!-- legs (down) -->
             <line x1="92"  y1="130" x2="75"  y2="175" />
             <line x1="108" y1="130" x2="125" y2="175" />
-            <!-- legs (wide) -->
             <line x1="92"  y1="130" x2="60"  y2="180" />
             <line x1="108" y1="130" x2="140" y2="180" />
           </g>
-
-          <!-- finer lines -->
           <g stroke-width="2">
-            <!-- neck -->
             <line x1="100" y1="60" x2="100" y2="68" />
-            <!-- chest -->
             <path d="M90 80 Q100 74 110 80" />
-            <!-- pelvis -->
             <path d="M88 126 Q100 134 112 126" />
           </g>
         </g>
@@ -779,7 +768,7 @@ body {
                 stroke="#7a5c2c"
                 stroke-width="3" />
 
-        <!-- joint markers -->
+        <!-- joints -->
         <g fill="#7a5c2c">
           <circle cx="55"  cy="85" r="1.6" />
           <circle cx="145" cy="85" r="1.6" />
@@ -918,8 +907,7 @@ body {
       </div>
     </div>
 
-    <!-- (Submission Guidelines & Contact removed from main scroll) -->
-
+    <!-- Submission & Contact removed from scroll -->
   </div>
 </div>
 
@@ -952,7 +940,7 @@ body {
       </div>
     </div>
 
-    <!-- MAIN FOOTER CONTENT - CENTER/RIGHT -->
+    <!-- MAIN FOOTER CONTENT -->
     <div class="footer-main">
       This journal grows with every mind that enters the garden.
       <br>© Rebirth of Reason
@@ -1047,3 +1035,4 @@ body {
 
 </body>
 </html>
+
