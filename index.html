@@ -183,7 +183,7 @@ body {
   z-index: 5;
   max-width: var(--max-width);
   margin: 150px auto 0 auto;
-  padding-bottom: 140px; /* slightly reduced to keep overall page height closer to original */
+  padding-bottom: 260px; /* longer vertical length */
 }
 
 .paper-scroll {
@@ -294,7 +294,6 @@ body {
   animation: parallaxRight 22s ease-in-out infinite alternate;
 }
 
-/* softer movement */
 @keyframes parallaxLeft {
   0%   { transform: translateY(-12px); }
   50%  { transform: translateY(18px); }
@@ -404,8 +403,8 @@ body {
 
 .site-footer {
   position: relative;
-  margin-top: 80px;   /* slightly reduced */
-  margin-bottom: 40px;/* slightly reduced */
+  margin-top: 140px;   /* longer vertical feel */
+  margin-bottom: 80px;
   font-family: 'Crimson Pro', serif;
   font-size: 0.95rem;
   color: #ccbfa8;
@@ -492,43 +491,43 @@ body {
   opacity: 0.55;
 }
 
-/* ------------- SUBMISSION BOX (FOOTER LEFT, BIGGER) ------------- */
+/* ------------- SUBMISSION BOX (FOOTER LEFT, SLIGHTLY BIGGER) ------------- */
 
 .submission-box {
-  flex: 0 0 320px;
-  max-width: 360px;
-  background: radial-gradient(circle at top left, rgba(247,211,120,0.12), transparent 60%),
-              rgba(15, 10, 5, 0.95);
-  border-radius: 12px;
-  padding: 1.05rem 1.2rem 1.15rem 1.2rem;
-  border: 1px solid rgba(201, 178, 122, 0.9);
-  box-shadow: 0 12px 26px rgba(0,0,0,0.7);
+  flex: 0 0 360px;
+  max-width: 420px;
+  background: radial-gradient(circle at top left, rgba(247,211,120,0.14), transparent 60%),
+              rgba(15, 10, 5, 0.96);
+  border-radius: 14px;
+  padding: 1.2rem 1.35rem 1.3rem 1.35rem;
+  border: 1px solid rgba(201, 178, 122, 0.95);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.75);
   font-family: 'Crimson Pro', serif;
   color: #f3e7cf;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(7px);
 }
 
 .submission-box h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
-  margin-bottom: 0.4rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.45rem;
   color: #f7d378;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .submission-box p {
-  font-size: 0.9rem;
-  line-height: 1.45;
-  margin-bottom: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.55rem;
 }
 
 .submission-box p:last-of-type {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.9rem;
 }
 
 .submission-box strong {
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 /* button */
@@ -537,17 +536,17 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0.6rem 0.9rem;
+  padding: 0.7rem 1rem;
   border-radius: 999px;
-  border: 1px solid rgba(247,211,120,0.95);
+  border: 1px solid rgba(247,211,120,0.98);
   background: linear-gradient(135deg, #f7d378, #c9a34e);
   color: #2a1c07;
   font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  box-shadow: 0 7px 18px rgba(0,0,0,0.55);
   transition:
     transform 0.12s ease-out,
     box-shadow 0.12s ease-out,
@@ -556,20 +555,20 @@ body {
 
 .submission-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.65);
+  box-shadow: 0 11px 24px rgba(0,0,0,0.7);
   filter: brightness(1.05);
 }
 
 .submission-button:active {
   transform: translateY(1px) scale(0.99);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  box-shadow: 0 4px 11px rgba(0,0,0,0.65);
 }
 
 /* tiny hint under button */
 .submission-hint {
   margin-top: 0.35rem;
-  font-size: 0.75rem;
-  opacity: 0.8;
+  font-size: 0.78rem;
+  opacity: 0.82;
 }
 
 /* ------------- RESPONSIVE ------------- */
@@ -725,7 +724,6 @@ body {
     <!-- TOP VITRUVIAN LOGO -->
     <div class="journal-logo">
       <svg viewBox="0 0 200 200" aria-hidden="true">
-        <!-- circles + square -->
         <circle cx="100" cy="100" r="78"
                 fill="none"
                 stroke="#7a5c2c"
@@ -741,7 +739,6 @@ body {
               stroke="rgba(122,92,44,0.7)"
               stroke-width="2" />
 
-        <!-- body -->
         <g stroke="#7a5c2c" stroke-linecap="round" fill="none">
           <g stroke-width="3">
             <line x1="100" y1="60" x2="100" y2="130" />
@@ -762,13 +759,11 @@ body {
           </g>
         </g>
 
-        <!-- head -->
         <circle cx="100" cy="50" r="12"
                 fill="none"
                 stroke="#7a5c2c"
                 stroke-width="3" />
 
-        <!-- joints -->
         <g fill="#7a5c2c">
           <circle cx="55"  cy="85" r="1.6" />
           <circle cx="145" cy="85" r="1.6" />
@@ -907,7 +902,6 @@ body {
       </div>
     </div>
 
-    <!-- Submission & Contact removed from scroll -->
   </div>
 </div>
 
@@ -1017,13 +1011,11 @@ body {
   var isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(ua);
 
   if (isMobile) {
-    // Opens the default mail app on phones/tablets
     btn.href = 'mailto:rebirthofreason@gmail.com'
       + '?subject=Essay%20Submission%20%E2%80%94%20Rebirth%20of%20Reason'
       + '&body=Please%20include%20your%20name%2C%20essay%20title%2C%20and%20word%20count.';
     btn.target = '_self';
   } else {
-    // Opens Gmail compose in a new tab on desktop
     btn.href = 'https://mail.google.com/mail/?view=cm&fs=1'
       + '&to=rebirthofreason@gmail.com'
       + '&su=Essay%20Submission%20%E2%80%94%20Rebirth%20of%20Reason'
@@ -1035,4 +1027,3 @@ body {
 
 </body>
 </html>
-
