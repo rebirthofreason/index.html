@@ -5,256 +5,228 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Rebirth of Reason — Garden of Thought</title>
 
-<!-- FONTS -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Crimson+Pro:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Crimson+Pro:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+
+/* -------------------------------- */
+/* COLOR VARIABLES                  */
+/* -------------------------------- */
 :root {
   --ink-black: #020309;
-  --night-blue: #07101a;
-  --forest-deep: #0b1d13;
-  --forest-mid: #143222;
-  --forest-light: #345f49;
-  --lantern-gold: #f7d378;
-  --lantern-glow: rgba(247, 211, 120, 0.35);
+  --night-blue: #06101a;
   --paper: #e6d9c3;
   --paper-dark: #d2c6b0;
   --paper-edge: #c2b59e;
-  --max-width: 900px;
-  --ink-brown: #6a5327;
+  --ink-brown: #7a5c2c;
+  --ink-brown-soft: rgba(122, 92, 44, 0.55);
+  --gold: #f7d378;
 }
 
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   background: var(--ink-black);
-  overflow-x: hidden;
   font-family: "Inter", sans-serif;
-  color: #f5f5f5;
+  color: #fff;
+  overflow-x: hidden;
 }
 
-/* ----------------- BACKGROUND ----------------- */
-
+/* -------------------------------- */
+/* BACKGROUND SKY & FOG             */
+/* -------------------------------- */
 .bg-sky {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at top, #0e1b29 0%, #020309 70%);
-  z-index: -10;
+  background: radial-gradient(circle at top, #0d1b2a 0%, #020309 70%);
+  z-index: -20;
 }
 
-.fog-back {
+.fog-back, .fog-front {
   position: fixed;
   top: -10%;
   left: -10%;
   width: 130%;
   height: 130%;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.06), transparent 55%),
-    radial-gradient(circle at 80% 10%, rgba(255,255,255,0.04), transparent 55%),
-    radial-gradient(circle at 60% 80%, rgba(255,255,255,0.05), transparent 55%);
-  opacity: 0.30;
   mix-blend-mode: screen;
-  animation: fogmove 120s linear infinite;
-  z-index: -9;
-  filter: blur(16px);
+  filter: blur(22px);
+  z-index: -18;
 }
 
-@keyframes fogmove {
-  0%   { transform: translate3d(0, 0, 0) scale(1); }
-  50%  { transform: translate3d(-30px, 26px, 0) scale(1.04); }
-  100% { transform: translate3d(0, 0, 0) scale(1); }
+.fog-back {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.04), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05), transparent 60%);
+  opacity: 0.22;
+  animation: fogMove1 90s linear infinite;
 }
 
 .fog-front {
-  position: fixed;
-  top: -15%;
-  left: -15%;
-  width: 140%;
-  height: 140%;
   background:
-    radial-gradient(circle at 30% 70%, rgba(255,255,255,0.10), transparent 60%),
-    radial-gradient(circle at 75% 40%, rgba(255,255,255,0.08), transparent 60%);
-  opacity: 0.35;
-  mix-blend-mode: screen;
-  animation: fogmove2 90s linear infinite;
-  z-index: -8;
-  filter: blur(22px);
+    radial-gradient(circle at 40% 20%, rgba(255,255,255,0.07), transparent 70%),
+    radial-gradient(circle at 65% 85%, rgba(255,255,255,0.09), transparent 70%);
+  opacity: 0.28;
+  animation: fogMove2 130s linear infinite;
 }
 
-@keyframes fogmove2 {
-  0%   { transform: translate3d(0, 0, 0) scale(1.02); }
-  50%  { transform: translate3d(35px, -24px, 0) scale(1.07); }
-  100% { transform: translate3d(0, 0, 0) scale(1.02); }
+@keyframes fogMove1 {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(-25px, 18px); }
+  100% { transform: translate(0,0); }
 }
 
-/* ------------- FIREFLIES ------------- */
+@keyframes fogMove2 {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(40px, -30px); }
+  100% { transform: translate(0,0); }
+}
 
+/* -------------------------------- */
+/* FIRELIES                         */
+/* -------------------------------- */
 .fireflies {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -6;
+  z-index: -14;
 }
 
 .firefly {
   position: absolute;
   width: 6px;
   height: 6px;
-  background: radial-gradient(circle, #fff8b3 0%, rgba(255,255,200,0.3) 70%, transparent 100%);
   border-radius: 50%;
-  animation: drift 14s ease-in-out infinite, flicker 3.2s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(255,255,220,1) 0%, rgba(255,255,200,0.4) 60%, transparent 100%);
+  animation: floatFirefly 12s ease-in-out infinite, flicker 3s infinite;
+  opacity: 0.55;
 }
 
-.firefly:nth-child(1)  { top: 10%; left: 18%; animation-duration: 16s; }
-.firefly:nth-child(2)  { top: 22%; left: 75%; animation-duration: 18s; }
-.firefly:nth-child(3)  { top: 40%; left: 12%; animation-duration: 15s; }
-.firefly:nth-child(4)  { top: 55%; left: 30%; animation-duration: 19s; }
-.firefly:nth-child(5)  { top: 70%; left: 82%; animation-duration: 17s; }
-.firefly:nth-child(6)  { top: 80%; left: 45%; animation-duration: 20s; }
-.firefly:nth-child(7)  { top: 15%; left: 60%; animation-duration: 21s; }
-.firefly:nth-child(8)  { top: 33%; left: 90%; animation-duration: 16s; }
-.firefly:nth-child(9)  { top: 62%; left: 8%;  animation-duration: 18s; }
-.firefly:nth-child(10) { top: 48%; left: 52%; animation-duration: 22s; }
-.firefly:nth-child(11) { top: 85%; left: 68%; animation-duration: 20s; }
-.firefly:nth-child(12) { top: 5%;  left: 40%; animation-duration: 19s; }
-.firefly:nth-child(13) { top: 28%; left: 5%;  animation-duration: 17s; }
-.firefly:nth-child(14) { top: 60%; left: 95%; animation-duration: 23s; }
-.firefly:nth-child(15) { top: 76%; left: 25%; animation-duration: 21s; }
+/* Random positions */
+.firefly:nth-child(1) { top: 12%; left: 20%; animation-delay: 0s; }
+.firefly:nth-child(2) { top: 40%; left: 80%; animation-delay: 1s; }
+.firefly:nth-child(3) { top: 65%; left: 55%; animation-delay: 2s; }
+.firefly:nth-child(4) { top: 35%; left: 30%; animation-delay: 3s; }
+.firefly:nth-child(5) { top: 78%; left: 10%; animation-delay: 4s; }
+.firefly:nth-child(6) { top: 55%; left: 70%; animation-delay: 5s; }
+.firefly:nth-child(7) { top: 18%; left: 62%; animation-delay: 6s; }
+.firefly:nth-child(8) { top: 50%; left: 24%; animation-delay: 1.5s; }
+.firefly:nth-child(9) { top: 82%; left: 45%; animation-delay: 3.2s; }
+.firefly:nth-child(10){ top: 25%; left: 90%; animation-delay: 4.4s; }
 
-.firefly:nth-child(3),
-.firefly:nth-child(7),
-.firefly:nth-child(12) {
-  width: 8px;
-  height: 8px;
-}
-
-@keyframes drift {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(-15px, 25px); }
-  50%  { transform: translate(20px, 40px); }
-  75%  { transform: translate(5px, 10px); }
-  100% { transform: translate(0, 0); }
+@keyframes floatFirefly {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(35px, -25px); }
+  100% { transform: translate(0,0); }
 }
 
 @keyframes flicker {
-  0%, 100% { opacity: 0.35; }
-  40%      { opacity: 1; }
-  60%      { opacity: 0.2; }
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
 }
 
-/* ------------- SIDE VINES ------------- */
-
-.vines-left,
-.vines-right {
-  position: fixed;
+/* -------------------------------- */
+/* LANTERNS SCROLL WITH PAGE        */
+/* -------------------------------- */
+.lanterns-container {
+  position: absolute;
+  width: 100%;
   top: 0;
-  height: 100%;
-  width: 260px;
-  opacity: 0.38;
-  z-index: -5;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: -2;
+}
+
+.lantern-column {
+  display: flex;
+  flex-direction: column;
+  gap: 260px;
+  margin-top: 300px;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(7, 22, 14, 0.9), transparent 55%),
-    radial-gradient(circle at 40% 30%, rgba(5, 40, 22, 0.9), transparent 55%),
-    radial-gradient(circle at 10% 60%, rgba(3, 28, 16, 0.95), transparent 55%),
-    radial-gradient(circle at 35% 90%, rgba(3, 18, 10, 0.95), transparent 55%);
-  filter: blur(1.5px);
-  animation: vineSway 22s ease-in-out infinite;
 }
 
-.vines-left { left: 0; }
-.vines-right { right: 0; transform: scaleX(-1); }
-
-@keyframes vineSway {
-  0%   { transform: translateY(0) scaleX(1); }
-  50%  { transform: translateY(-18px) scaleX(1.02); }
-  100% { transform: translateY(0) scaleX(1); }
+.lantern {
+  width: 240px;
+  border-radius: 14px;
+  padding: 14px;
+  backdrop-filter: blur(2px);
+  background: rgba(26,21,12,0.8);
+  border: 2px solid rgba(247,211,120,0.35);
+  box-shadow:
+    0 0 18px rgba(247,211,120,0.35),
+    inset 0 0 18px rgba(247,211,120,0.2);
+  transform-origin: top center;
+  animation: swayReduced 18s ease-in-out infinite;
 }
 
-/* ------------- SCROLL CONTAINER ------------- */
+@keyframes swayReduced {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(0.9deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(-0.9deg); }
+  100% { transform: rotate(0deg); }
+}
 
+.lantern-img-wrapper {
+  width: 100%;
+  height: 165px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid rgba(247,211,120,0.45);
+}
+
+.lantern-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1.15) contrast(1.05) sepia(0.2);
+}
+
+.lantern-text { margin-top: 10px; font-family: "Crimson Pro"; }
+.lantern-name { font-size: 1.05rem; color: var(--gold); font-weight:700; }
+.lantern-era  { font-size: 0.85rem; color: #ccb98e; margin-bottom:4px; }
+.lantern-idea { font-size: 0.83rem; color:#f3e7cf; line-height:1.4; }
+
+/* -------------------------------- */
+/* MAIN SCROLL CONTAINER            */
+/* -------------------------------- */
 .scroll-container {
+  max-width: 900px;
+  margin: 240px auto;
   position: relative;
   z-index: 5;
-  max-width: var(--max-width);
-  margin: 150px auto 0 auto;
-  padding-bottom: 200px;
 }
 
 .paper-scroll {
-  background: linear-gradient(to bottom, var(--paper) 0%, var(--paper-dark) 100%);
+  background: linear-gradient(to bottom, var(--paper), var(--paper-dark));
   border-left: 8px solid var(--paper-edge);
   border-right: 8px solid var(--paper-edge);
-  padding: 90px 60px 60px 60px;
+  padding: 150px 60px 60px 60px; /* space for the Vitruvian logo */
   border-radius: 6px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
   position: relative;
-  overflow: visible; /* <-- allow full circle logo to be visible */
+  overflow: hidden;
 }
 
-.paper-scroll::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(0,0,0,0.035) 0px,
-      rgba(0,0,0,0.035) 1px,
-      transparent 1px,
-      transparent 3px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,0,0,0.025) 0px,
-      rgba(0,0,0,0.025) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-  opacity: 0.18;
-  pointer-events: none;
-}
-
-.paper-scroll::after {
-  content: "";
-  position: absolute;
-  inset: 10%;
-  border-radius: 4px;
-  background: radial-gradient(circle at 50% 0%, rgba(247,211,120,0.08), transparent 70%);
-  opacity: 0.6;
-  mix-blend-mode: soft-light;
-  animation: paperGlow 10s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes paperGlow {
-  0%, 100% { opacity: 0.4; }
-  50%      { opacity: 0.9; }
-}
-
-/* ------------- TOP VITRUVIAN LOGO ------------- */
-
+/* -------------------------------- */
+/* TOP VITRUVIAN LOGO (full circle) */
+/* -------------------------------- */
 .journal-logo {
   position: absolute;
-  top: -60px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   border: 3px solid var(--ink-brown);
   background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 60%),
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.15), transparent 60%),
     radial-gradient(circle at 50% 80%, rgba(0,0,0,0.45), transparent 70%);
   box-shadow:
     0 14px 26px rgba(0,0,0,0.55),
     0 0 25px rgba(0,0,0,0.7);
-  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -265,406 +237,159 @@ body {
   height: 82%;
 }
 
-/* ------------- LANTERNS ------------- */
-
-.lanterns-container {
-  position: absolute;
-  top: 140px;
-  left: 0;
-  right: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.lantern-column {
-  position: absolute;
-  width: 260px;
-  display: flex;
-  flex-direction: column;
-  gap: 220px;
-}
-
-.lantern-column.left {
-  left: 4%;
-  animation: parallaxLeft 20s ease-in-out infinite alternate;
-}
-
-.lantern-column.right {
-  right: 4%;
-  animation: parallaxRight 22s ease-in-out infinite alternate;
-}
-
-/* softer movement */
-@keyframes parallaxLeft {
-  0%   { transform: translateY(-12px); }
-  50%  { transform: translateY(18px); }
-  100% { transform: translateY(0px); }
-}
-
-@keyframes parallaxRight {
-  0%   { transform: translateY(10px); }
-  50%  { transform: translateY(-20px); }
-  100% { transform: translateY(2px); }
-}
-
-.branch { display: none; }
-
-.lantern {
-  width: 260px;
-  background: rgba(26, 21, 12, 0.92);
-  border-radius: 16px;
-  padding: 14px;
-  border: 2px solid rgba(247, 211, 120, 0.4);
-  box-shadow:
-    0 0 20px rgba(247, 211, 120, 0.45),
-    0 0 70px rgba(247, 211, 120, 0.24),
-    inset 0 0 25px rgba(247, 211, 120, 0.14);
-  backdrop-filter: blur(3px);
-  position: relative;
-  margin-top: -10px;
-  transform-origin: top center;
-  animation: sway 9s ease-in-out infinite;
-}
-
-@keyframes sway {
-  0%   { transform: rotate(0deg) translateY(0); }
-  20%  { transform: rotate(1.8deg) translateY(-7px); }
-  40%  { transform: rotate(0.4deg) translateY(0); }
-  60%  { transform: rotate(-1.8deg) translateY(6px); }
-  80%  { transform: rotate(-0.8deg) translateY(-4px); }
-  100% { transform: rotate(0deg) translateY(0); }
-}
-
-.lantern-glow {
-  position: absolute;
-  inset: -40px;
-  background: radial-gradient(circle, rgba(247,211,120,0.2), transparent 70%);
-  z-index: -1;
-  filter: blur(10px);
-  animation: glowPulse 6s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50%      { opacity: 1;   transform: scale(1.07); }
-}
-
-.lantern-img-wrapper {
-  width: 100%;
-  height: 180px;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  border: 2px solid rgba(247, 211, 120, 0.5);
-  box-shadow:
-    0 0 18px rgba(247, 211, 120, 0.4),
-    inset 0 0 45px rgba(247, 211, 120, 0.2);
-}
-
-.lantern-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter:
-    brightness(1.15)
-    contrast(1.1)
-    saturate(1.3)
-    sepia(0.22)
-    blur(0.5px)
-    drop-shadow(0 0 4px rgba(0,0,0,0.4));
-  mix-blend-mode: lighten;
-}
-
-.lantern-text {
-  margin-top: 12px;
-  font-family: "Crimson Pro", serif;
-}
-
-.lantern-name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--lantern-gold);
-  text-shadow: 0 0 6px rgba(247, 211, 120, 0.8);
-}
-
-.lantern-era {
-  font-size: 0.85rem;
-  color: #ccb98e;
-  margin-bottom: 4px;
-}
-
-.lantern-idea {
-  font-size: 0.83rem;
-  line-height: 1.4;
-  color: #f3e7cf;
-}
-
-/* ------------- FOOTER + CONSTELLATION ------------- */
-
-.site-footer {
-  position: relative;
-  text-align: center;
-  color: #ccbfa8;
-  margin-top: 120px;
-  margin-bottom: 60px;
-  font-family: 'Crimson Pro', serif;
-  font-size: 0.95rem;
-}
+/* -------------------------------- */
+/* FOOTER CONSTELLATION             */
+/* -------------------------------- */
 
 .footer-constellation {
-  margin-top: 32px;
+  width: 100%;
+  margin-top: 120px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 140px;
 }
 
-/* SVG styling – static stars, detailed body */
-.vitruvian-constellation {
-  width: 230px;
-  max-width: 70vw;
-  display: block;
-  margin: 0 auto;
+.footer-constellation svg {
+  width: 280px;
+  opacity: 0.9;
 }
 
-.vitruvian-constellation .outer-circle {
-  stroke: rgba(247,211,120,0.7);
-  stroke-width: 1.6;
-  fill: none;
-  stroke-dasharray: 4 3;
+/* -------------------------------- */
+/* FOOTER TEXT                      */
+/* -------------------------------- */
+footer {
+  text-align:center;
+  margin-top: -60px;
+  margin-bottom: 140px;
+  color:#ccbfa8;
+  font-family:"Crimson Pro";
+  font-size:1rem;
 }
 
-.vitruvian-constellation .inner-circle {
-  stroke: rgba(247,211,120,0.45);
-  stroke-width: 1.2;
-  fill: none;
-  stroke-dasharray: 2 4;
-}
-
-.vitruvian-constellation .square {
-  stroke: rgba(247,211,120,0.55);
-  stroke-width: 1.3;
-  fill: none;
-}
-
-.vitruvian-constellation .line {
-  stroke: rgba(247,211,120,0.88);
-  stroke-width: 1.4;
-  stroke-linecap: round;
-}
-
-.vitruvian-constellation .line-fine {
-  stroke: rgba(247,211,120,0.78);
-  stroke-width: 1.1;
-  stroke-linecap: round;
-}
-
-.vitruvian-constellation .head {
-  stroke: rgba(247,211,120,0.9);
-  stroke-width: 1.6;
-  fill: none;
-}
-
-.vitruvian-constellation .joint {
-  fill: #fffbe7;
-  stroke: rgba(247,211,120,0.8);
-  stroke-width: 0.6;
-}
-
-.vitruvian-constellation .star {
-  fill: #fffbe7;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 4px rgba(247,211,120,0.75));
-}
-
-.vitruvian-constellation .star.dim {
-  opacity: 0.55;
-}
-
-/* ------------- RESPONSIVE ------------- */
-
-@media (max-width: 980px) {
-  .lanterns-container { display: none; }
-  .scroll-container { margin-top: 80px; }
-}
 </style>
 </head>
 
+
 <body>
 
-<!-- BACKGROUND LAYERS -->
+<!-- Background Layers -->
 <div class="bg-sky"></div>
 <div class="fog-back"></div>
 <div class="fog-front"></div>
-<div class="vines-left"></div>
-<div class="vines-right"></div>
 
-<!-- FIREFLIES -->
+<!-- Fireflies -->
 <div class="fireflies">
-  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
-  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
-  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
-  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
-  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
 </div>
 
-<!-- LANTERNS ROOT CONTAINER -->
+<!-- Lanterns -->
 <div class="lanterns-container">
-  <!-- LEFT COLUMN -->
-  <div class="lantern-column left">
+
+  <div class="lantern-column">
+
     <div class="lantern">
-      <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg/256px-Plato_Silanion_Musei_Capitolini_MC1377.jpg"
-             alt="Plato">
+             src="https://upload.wikimedia.org/wikipedia/commons/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg">
       </div>
       <div class="lantern-text">
         <div class="lantern-name">Plato</div>
         <div class="lantern-era">Classical Greece</div>
-        <div class="lantern-idea">
-          His world is a cave of shadows — and his thought is the first torch ever lit.
-        </div>
+        <div class="lantern-idea">The cave and the torch of truth.</div>
       </div>
     </div>
 
     <div class="lantern">
-      <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Aristotle_Altemps_Inv8575.jpg/256px-Aristotle_Altemps_Inv8575.jpg"
-             alt="Aristotle">
+             src="https://upload.wikimedia.org/wikipedia/commons/1/12/Aristotle_Altemps_Inv8575.jpg">
       </div>
       <div class="lantern-text">
         <div class="lantern-name">Aristotle</div>
         <div class="lantern-era">Classical Greece</div>
-        <div class="lantern-idea">
-          He disassembled reality into categories — not to limit it, but to understand its music.
-        </div>
+        <div class="lantern-idea">Reality, logic, and the structure of thought.</div>
       </div>
     </div>
 
-    <div class="lantern">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Saint_Augustine_Portrait.jpg/256px-Saint_Augustine_Portrait.jpg"
-             alt="Augustine">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Saint Augustine</div>
-        <div class="lantern-era">Late Antiquity</div>
-        <div class="lantern-idea">
-          Memory as cathedral, guilt as compass, confession as the architecture of a soul.
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- RIGHT COLUMN -->
-  <div class="lantern-column right">
+  <div class="lantern-column">
+
     <div class="lantern">
-      <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg/256px-Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg"
-             alt="Thomas Aquinas">
+             src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg">
       </div>
       <div class="lantern-text">
-        <div class="lantern-name">Thomas Aquinas</div>
+        <div class="lantern-name">Aquinas</div>
         <div class="lantern-era">13th Century</div>
-        <div class="lantern-idea">
-          He forged a bridge between revelation and reason — and walked across both worlds.
-        </div>
+        <div class="lantern-idea">Unity between reason and revelation.</div>
       </div>
     </div>
 
     <div class="lantern">
-      <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/256px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg"
-             alt="Descartes">
+             src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Nietzsche187a.jpg">
       </div>
       <div class="lantern-text">
-        <div class="lantern-name">René Descartes</div>
-        <div class="lantern-era">17th Century</div>
-        <div class="lantern-idea">
-          He doubted the world until only a single spark of certainty remained in the void.
-        </div>
-      </div>
-    </div>
-
-    <div class="lantern">
-      <div class="lantern-glow"></div>
-      <div class="lantern-img-wrapper">
-        <img class="lantern-img"
-             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/256px-Nietzsche187a.jpg"
-             alt="Nietzsche">
-      </div>
-      <div class="lantern-text">
-        <div class="lantern-name">Friedrich Nietzsche</div>
+        <div class="lantern-name">Nietzsche</div>
         <div class="lantern-era">19th Century</div>
-        <div class="lantern-idea">
-          He shattered morality into shards — and dared humanity to build itself anew.
-        </div>
+        <div class="lantern-idea">The hammer that reshaped morality.</div>
       </div>
     </div>
+
   </div>
+
 </div>
+
 
 <!-- MAIN CONTENT -->
 <div class="scroll-container">
+
   <div class="paper-scroll">
 
-    <!-- TOP VITRUVIAN LOGO: now uses detailed figure -->
+    <!-- TOP LOGO (Vitruvian v2, Full Circle, No Outer Border) -->
     <div class="journal-logo">
       <svg viewBox="0 0 200 200" aria-hidden="true">
-        <!-- circles + square -->
-        <circle cx="100" cy="100" r="78"
-                fill="none"
-                stroke="#7a5c2c"
-                stroke-width="3"
-                stroke-dasharray="4 3" />
+
+        <!-- Inner circle only -->
         <circle cx="100" cy="100" r="66"
                 fill="none"
                 stroke="rgba(122,92,44,0.55)"
                 stroke-width="2"
                 stroke-dasharray="2 4" />
+
+        <!-- Square -->
         <rect x="52" y="40" width="96" height="120"
               fill="none"
               stroke="rgba(122,92,44,0.7)"
               stroke-width="2" />
 
-        <!-- body (same style as constellation, just no stars) -->
+        <!-- Body -->
         <g stroke="#7a5c2c" stroke-linecap="round" fill="none">
-          <!-- main lines -->
+
           <g stroke-width="3">
-            <!-- spine -->
             <line x1="100" y1="60" x2="100" y2="130" />
-            <!-- shoulders -->
-            <line x1="55"  y1="85" x2="145" y2="85" />
-            <!-- horizontal arms -->
-            <line x1="40"  y1="95" x2="160" y2="95" />
-            <!-- diagonal arms -->
-            <line x1="55"  y1="85" x2="35"  y2="65" />
+            <line x1="55" y1="85" x2="145" y2="85" />
+            <line x1="40" y1="95" x2="160" y2="95" />
+            <line x1="55" y1="85" x2="35" y2="65" />
             <line x1="145" y1="85" x2="165" y2="65" />
-            <!-- hips -->
-            <line x1="90"  y1="130" x2="110" y2="130" />
-            <!-- legs (down) -->
-            <line x1="92"  y1="130" x2="75"  y2="175" />
+            <line x1="90" y1="130" x2="110" y2="130" />
+            <line x1="92" y1="130" x2="75" y2="175" />
             <line x1="108" y1="130" x2="125" y2="175" />
-            <!-- legs (wide) -->
-            <line x1="92"  y1="130" x2="60"  y2="180" />
+            <line x1="92" y1="130" x2="60" y2="180" />
             <line x1="108" y1="130" x2="140" y2="180" />
           </g>
 
-          <!-- finer lines -->
+          <!-- finer detail -->
           <g stroke-width="2">
-            <!-- neck -->
             <line x1="100" y1="60" x2="100" y2="68" />
-            <!-- chest -->
             <path d="M90 80 Q100 74 110 80" />
-            <!-- pelvis -->
             <path d="M88 126 Q100 134 112 126" />
           </g>
+
         </g>
 
         <!-- head -->
@@ -673,271 +398,99 @@ body {
                 stroke="#7a5c2c"
                 stroke-width="3" />
 
-        <!-- joint markers -->
-        <g fill="#7a5c2c">
-          <circle cx="55"  cy="85" r="1.6" />
-          <circle cx="145" cy="85" r="1.6" />
-          <circle cx="45"  cy="75" r="1.4" />
-          <circle cx="155" cy="75" r="1.4" />
-          <circle cx="90"  cy="130" r="1.5" />
-          <circle cx="110" cy="130" r="1.5" />
-          <circle cx="82"  cy="155" r="1.5" />
-          <circle cx="118" cy="155" r="1.5" />
-          <circle cx="69"  cy="165" r="1.4" />
-          <circle cx="131" cy="165" r="1.4" />
-        </g>
       </svg>
     </div>
 
-    <!-- Journal Header -->
+
+    <!-- TITLE -->
     <h1 style="
-      font-family:'Playfair Display', serif;
+      font-family:'Playfair Display';
       font-size:2.6rem;
-      margin-bottom:1.2rem;
       text-align:center;
       color:#3b2e16;
-      text-shadow:0 0 12px rgba(0,0,0,0.25);
+      margin-bottom:1.4rem;
     ">
       Rebirth of Reason —<br>
       <span style="color:#6a5327;">The Garden of Thought</span>
     </h1>
 
     <p style="
-      font-family:'Crimson Pro', serif;
+      font-family:'Crimson Pro';
       font-size:1.15rem;
       line-height:1.65;
       color:#3c2d19;
-      max-width:720px;
-      margin:0 auto 2.2rem auto;
       text-align:center;
+      margin-bottom:2.5rem;
     ">
-      A philosophical journal grown in midnight soil, illuminated by lanterns of thinkers
-      who stood before us. Walk gently, breathe deeply, and descend into ideas that bloom
-      in the dark.
+      A philosophical journal grown in midnight soil, illuminated by lanterns of thinkers who once shaped the world.
     </p>
 
-    <!-- About -->
-    <h2 style="
-      font-family:'Playfair Display', serif;
-      font-size:1.8rem;
-      margin-top:2.4rem;
-      margin-bottom:0.8rem;
-      color:#4b3a1d;
-      border-left:6px solid #d9c39d;
-      padding-left:12px;
-    ">About the Journal</h2>
-
-    <p style="
-      font-family:'Crimson Pro', serif;
-      font-size:1.05rem;
-      color:#3b2f1a;
-      margin-bottom:1.3rem;
-    ">
-      <strong>Rebirth of Reason</strong> is not a publication — it is a place.
-      A clearing in a dream-forest where ideas take on physical shape.
-      Here, philosophy is not text, but atmosphere. Not argument, but illumination.
-    </p>
-
-    <p style="
-      font-family:'Crimson Pro', serif;
-      font-size:1.05rem;
-      margin-bottom:1.3rem;
-    ">
-      Every essay is a seed planted in the soil of the mind. With care, with courage,
-      with honesty, it grows. Your task as a thinker is not to imitate but to cultivate.
-      To create thoughts worthy of lanterns.
-    </p>
-
-    <!-- Featured Essays -->
-    <h2 style="
-      font-family:'Playfair Display', serif;
-      font-size:1.8rem;
-      margin-top:2.8rem;
-      margin-bottom:0.8rem;
-      color:#4b3a1d;
-      border-left:6px solid #d9c39d;
-      padding-left:12px;
-    ">Featured Essays</h2>
-
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-      gap:1.4rem;
-      margin-top:1.4rem;
-    ">
-
-      <div style="
-        background:#f2eadc;
-        border-radius:10px;
-        padding:1rem 1.2rem;
-        border:2px solid #d5c6ac;
-        box-shadow:0 6px 14px rgba(0,0,0,0.15);
-      ">
-        <h3 style="font-family:'Playfair Display'; font-size:1.2rem; color:#3e311b;">
-          Lightning Is Memory
-        </h3>
-        <p style="font-family:'Crimson Pro'; font-size:0.95rem; color:#44361d;">
-          Electrons, storms of thought, and the electrification of consciousness.
-        </p>
-      </div>
-
-      <div style="
-        background:#f2eadc;
-        border-radius:10px;
-        padding:1rem 1.2rem;
-        border:2px solid #d5c6ac;
-        box-shadow:0 6px 14px rgba(0,0,0,0.15);
-      ">
-        <h3 style="font-family:'Playfair Display'; font-size:1.2rem; color:#3e311b;">
-          The Human Bio-Machine
-        </h3>
-        <p style="font-family:'Crimson Pro'; font-size:0.95rem; color:#44361d;">
-          Choice, algorithms, and the illusion we lovingly call free will.
-        </p>
-      </div>
-
-      <div style="
-        background:#f2eadc;
-        border-radius:10px;
-        padding:1rem 1.2rem;
-        border:2px solid #d5c6ac;
-        box-shadow:0 6px 14px rgba(0,0,0,0.15);
-      ">
-        <h3 style="font-family:'Playfair Display'; font-size:1.2rem; color:#3e311b;">
-          Perspective vs Reality
-        </h3>
-        <p style="font-family:'Crimson Pro'; font-size:0.95rem; color:#44361d;">
-          Between the world and the mind lies a garden of illusions.
-        </p>
-      </div>
-    </div>
-
-    <!-- Submission Guidelines -->
-    <h2 style="
-      font-family:'Playfair Display', serif;
-      font-size:1.8rem;
-      margin-top:3rem;
-      margin-bottom:0.8rem;
-      color:#4b3a1d;
-      border-left:6px solid #d9c39d;
-      padding-left:12px;
-    ">Submission Guidelines</h2>
-
-    <p style="font-family:'Crimson Pro'; font-size:1.05rem; margin-bottom:1.2rem;">
-      <strong>Length:</strong> 1500–3000 words recommended.<br>
-      <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics, political thought,
-      perception, and anything that genuinely explores human thought with care.<br>
-      <strong>Format:</strong> Send as PDF or Google Doc.
-    </p>
-
-    <div style="
-      background:#f6efdf;
-      border-left:5px solid #c9b27a;
-      padding:1rem 1.2rem;
-      border-radius:4px;
-      margin-bottom:2rem;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    ">
-      <p style="font-family:'Crimson Pro'; font-size:1rem; color:#4a3b23;">
-        Email submissions to:<br>
-        <strong style="font-size:1.1rem;">your-email-here@example.com</strong>
-      </p>
-    </div>
-
-    <!-- Contact -->
-    <h2 style="
-      font-family:'Playfair Display', serif;
-      font-size:1.8rem;
-      margin-top:3rem;
-      margin-bottom:0.8rem;
-      color:#4b3a1d;
-      border-left:6px solid #d9c39d;
-      padding-left:12px;
-    ">Contact</h2>
-
-    <p style="font-family:'Crimson Pro'; font-size:1.05rem; margin-bottom:1.4rem;">
-      Questions, collaboration, or ideas for future issues are welcome.
-    </p>
-
-    <div style="
-      background:#f6efdf;
-      border-left:5px solid #c9b27a;
-      padding:1rem 1.2rem;
-      border-radius:4px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    ">
-      <p style="font-family:'Crimson Pro'; font-size:1rem; color:#4a3b23;">
-        Email: <strong>your-email-here@example.com</strong>
-      </p>
-    </div>
   </div>
+
 </div>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  This journal grows with every mind that enters the garden.
-  <br>© Rebirth of Reason
 
-  <div class="footer-constellation">
-    <!-- same constellation as last version -->
-    <svg viewBox="0 0 200 200" class="vitruvian-constellation" aria-hidden="true">
-      <defs>
-        <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#f7d378" stop-opacity="0.4" />
-          <stop offset="60%" stop-color="#f7d378" stop-opacity="0.0" />
-          <stop offset="100%" stop-color="#f7d378" stop-opacity="0.0" />
-        </radialGradient>
-      </defs>
-      <circle cx="100" cy="100" r="84" fill="url(#haloGrad)" opacity="0.35" />
+<!-- FOOTER CONSTELLATION -->
+<div class="footer-constellation">
+  <svg viewBox="0 0 200 200" aria-hidden="true">
 
-      <circle class="outer-circle" cx="100" cy="100" r="80" />
-      <circle class="inner-circle" cx="100" cy="100" r="68" />
-      <rect   class="square"       x="50"  y="40"  width="100" height="120" />
+    <!-- Circle + Square -->
+    <circle cx="100" cy="100" r="70"
+            fill="none" stroke="rgba(255,255,220,0.35)" stroke-width="1"/>
 
-      <g>
-        <line class="line" x1="100" y1="60" x2="100" y2="130" />
-        <line class="line" x1="55"  y1="85" x2="145" y2="85" />
-        <line class="line" x1="40"  y1="95" x2="160" y2="95" />
-        <line class="line" x1="55"  y1="85" x2="35"  y2="65" />
-        <line class="line" x1="145" y1="85" x2="165" y2="65" />
-        <line class="line" x1="90"  y1="130" x2="110" y2="130" />
-        <line class="line" x1="92"  y1="130" x2="75"  y2="175" />
-        <line class="line" x1="108" y1="130" x2="125" y2="175" />
-        <line class="line" x1="92"  y1="130" x2="60"  y2="180" />
-        <line class="line" x1="108" y1="130" x2="140" y2="180" />
-        <line class="line-fine" x1="100" y1="60" x2="100" y2="68" />
-        <path class="line-fine" d="M90 80 Q100 74 110 80" />
-        <path class="line-fine" d="M88 126 Q100 134 112 126" />
-      </g>
+    <rect x="45" y="30" width="110" height="140"
+          fill="none" stroke="rgba(255,255,220,0.35)" stroke-width="1"/>
 
-      <circle class="head" cx="100" cy="50" r="12" />
+    <!-- STAR POINTS (body) -->
+    <g fill="#fff9d0" stroke="rgba(255,255,220,0.45)" stroke-width="0.5">
 
-      <g>
-        <circle class="joint" cx="55"  cy="85" r="1.6" />
-        <circle class="joint" cx="145" cy="85" r="1.6" />
-        <circle class="joint" cx="45"  cy="75" r="1.4" />
-        <circle class="joint" cx="155" cy="75" r="1.4" />
-        <circle class="joint" cx="90"  cy="130" r="1.5" />
-        <circle class="joint" cx="110" cy="130" r="1.5" />
-        <circle class="joint" cx="82"  cy="155" r="1.5" />
-        <circle class="joint" cx="118" cy="155" r="1.5" />
-        <circle class="joint" cx="69"  cy="165" r="1.4" />
-        <circle class="joint" cx="131" cy="165" r="1.4" />
-      </g>
+      <!-- head -->
+      <circle cx="100" cy="40" r="2.1"/>
 
-      <g>
-        <circle class="star dim" cx="100" cy="20"  r="1.5" />
-        <circle class="star dim" cx="30"  cy="100" r="1.5" />
-        <circle class="star dim" cx="170" cy="100" r="1.5" />
-        <circle class="star dim" cx="100" cy="185" r="1.5" />
-        <circle class="star"     cx="45"  cy="40"  r="1.4" />
-        <circle class="star"     cx="155" cy="40"  r="1.4" />
-        <circle class="star"     cx="45"  cy="160" r="1.4" />
-        <circle class="star"     cx="155" cy="160" r="1.4" />
-      </g>
-    </svg>
-  </div>
+      <!-- shoulders -->
+      <circle cx="60" cy="80" r="2"/>
+      <circle cx="140" cy="80" r="2"/>
+
+      <!-- hands -->
+      <circle cx="40" cy="100" r="2"/>
+      <circle cx="160" cy="100" r="2"/>
+
+      <!-- hips -->
+      <circle cx="85" cy="130" r="2"/>
+      <circle cx="115" cy="130" r="2"/>
+
+      <!-- knees -->
+      <circle cx="70" cy="160" r="2"/>
+      <circle cx="130" cy="160" r="2"/>
+
+      <!-- ankles -->
+      <circle cx="55" cy="180" r="2"/>
+      <circle cx="145" cy="180" r="2"/>
+    </g>
+
+    <!-- LINES CONNECTING STARS (body shape) -->
+    <g stroke="rgba(255,255,220,0.5)" stroke-width="1.1" stroke-linecap="round">
+      <line x1="100" y1="40" x2="60" y2="80"/>
+      <line x1="100" y1="40" x2="140" y2="80"/>
+      <line x1="60" y1="80" x2="40" y2="100"/>
+      <line x1="140" y1="80" x2="160" y2="100"/>
+      <line x1="40" y1="100" x2="85" y2="130"/>
+      <line x1="160" y1="100" x2="115" y2="130"/>
+      <line x1="85" y1="130" x2="70" y2="160"/>
+      <line x1="115" y1="130" x2="130" y2="160"/>
+      <line x1="70" y1="160" x2="55" y2="180"/>
+      <line x1="130" y1="160" x2="145" y2="180"/>
+    </g>
+
+  </svg>
+</div>
+
+
+<footer>
+  This journal grows with every mind that enters the garden.<br>
+  © Rebirth of Reason
 </footer>
+
 
 </body>
 </html>
