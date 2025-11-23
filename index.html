@@ -478,11 +478,54 @@ body {
   opacity: 0.55;
 }
 
+/* ------------- SUBMISSION BOX (BOTTOM LEFT) ------------- */
+
+.submission-box {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  max-width: 260px;
+  background: rgba(15, 10, 5, 0.92);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(201, 178, 122, 0.7);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.55);
+  z-index: 20;
+  font-family: 'Crimson Pro', serif;
+  color: #f3e7cf;
+}
+
+.submission-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: #f7d378;
+}
+
+.submission-box p {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  margin-bottom: 0.4rem;
+}
+
+.submission-box strong {
+  font-size: 0.95rem;
+}
+
 /* ------------- RESPONSIVE ------------- */
 
 @media (max-width: 980px) {
   .lanterns-container { display: none; }
   .scroll-container { margin-top: 80px; }
+}
+
+@media (max-width: 640px) {
+  .submission-box {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+  }
 }
 </style>
 </head>
@@ -812,64 +855,8 @@ body {
       </div>
     </div>
 
-    <!-- Submission Guidelines -->
-    <h2 style="
-      font-family:'Playfair Display', serif;
-      font-size:1.8rem;
-      margin-top:3rem;
-      margin-bottom:0.8rem;
-      color:#4b3a1d;
-      border-left:6px solid #d9c39d;
-      padding-left:12px;
-    ">Submission Guidelines</h2>
+    <!-- (Submission Guidelines + Contact removed from here, per request) -->
 
-    <p style="font-family:'Crimson Pro'; font-size:1.05rem; margin-bottom:1.2rem;">
-      <strong>Length:</strong> 1500–3000 words recommended.<br>
-      <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics, political thought,
-      perception, and anything that genuinely explores human thought with care.<br>
-      <strong>Format:</strong> Send as PDF or Google Doc.
-    </p>
-
-    <div style="
-      background:#f6efdf;
-      border-left:5px solid #c9b27a;
-      padding:1rem 1.2rem;
-      border-radius:4px;
-      margin-bottom:2rem;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    ">
-      <p style="font-family:'Crimson Pro'; font-size:1rem; color:#4a3b23;">
-        Email submissions to:<br>
-        <strong style="font-size:1.1rem;">rebirthofreason@gmail.com</strong>
-      </p>
-    </div>
-
-    <!-- Contact -->
-    <h2 style="
-      font-family:'Playfair Display', serif;
-      font-size:1.8rem;
-      margin-top:3rem;
-      margin-bottom:0.8rem;
-      color:#4b3a1d;
-      border-left:6px solid #d9c39d;
-      padding-left:12px;
-    ">Contact</h2>
-
-    <p style="font-family:'Crimson Pro'; font-size:1.05rem; margin-bottom:1.4rem;">
-      Questions, collaboration, or ideas for future issues are welcome.
-    </p>
-
-    <div style="
-      background:#f6efdf;
-      border-left:5px solid #c9b27a;
-      padding:1rem 1.2rem;
-      border-radius:4px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    ">
-      <p style="font-family:'Crimson Pro'; font-size:1rem; color:#4a3b23;">
-        Email: <strong>rebirthofreason@gmail.com</strong>
-      </p>
-    </div>
   </div>
 </div>
 
@@ -938,6 +925,22 @@ body {
     </svg>
   </div>
 </footer>
+
+<!-- SUBMISSION BOX - BOTTOM LEFT -->
+<div class="submission-box">
+  <h3>Submission Guidelines</h3>
+  <p>
+    <strong>Length:</strong> 1500–3000 words recommended.<br>
+    <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics,
+    political thought, perception, and anything that genuinely explores
+    human thought with care.<br>
+    <strong>Format:</strong> Send as PDF or Google Doc.
+  </p>
+  <p>
+    Email submissions to:<br>
+    <strong>rebirthofreason@gmail.com</strong>
+  </p>
+</div>
 
 </body>
 </html>
