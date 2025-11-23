@@ -74,7 +74,7 @@ body {
 
 @keyframes fogmove {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
-  50%  { transform: translate3d(-20px, 18px, 0) scale(1.03); }
+  50%  { transform: translate3d(-30px, 26px, 0) scale(1.04); }
   100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
@@ -97,7 +97,7 @@ body {
 
 @keyframes fogmove2 {
   0%   { transform: translate3d(0, 0, 0) scale(1.02); }
-  50%  { transform: translate3d(25px, -16px, 0) scale(1.06); }
+  50%  { transform: translate3d(35px, -24px, 0) scale(1.07); }
   100% { transform: translate3d(0, 0, 0) scale(1.02); }
 }
 
@@ -112,33 +112,53 @@ body {
   z-index: -6;
 }
 
+/* all fireflies share base style */
 .firefly {
   position: absolute;
   width: 6px;
   height: 6px;
   background: radial-gradient(circle, #fff8b3 0%, rgba(255,255,200,0.3) 70%, transparent 100%);
   border-radius: 50%;
-  animation: drift 12s ease-in-out infinite, flicker 3s ease-in-out infinite;
+  animation: drift 14s ease-in-out infinite, flicker 3.2s ease-in-out infinite;
+}
+
+/* varied positions / speeds / sizes */
+.firefly:nth-child(1)  { top: 10%; left: 18%; animation-duration: 16s; }
+.firefly:nth-child(2)  { top: 22%; left: 75%; animation-duration: 18s; }
+.firefly:nth-child(3)  { top: 40%; left: 12%; animation-duration: 15s; }
+.firefly:nth-child(4)  { top: 55%; left: 30%; animation-duration: 19s; }
+.firefly:nth-child(5)  { top: 70%; left: 82%; animation-duration: 17s; }
+.firefly:nth-child(6)  { top: 80%; left: 45%; animation-duration: 20s; }
+.firefly:nth-child(7)  { top: 15%; left: 60%; animation-duration: 21s; }
+.firefly:nth-child(8)  { top: 33%; left: 90%; animation-duration: 16s; }
+.firefly:nth-child(9)  { top: 62%; left: 8%;  animation-duration: 18s; }
+.firefly:nth-child(10) { top: 48%; left: 52%; animation-duration: 22s; }
+.firefly:nth-child(11) { top: 85%; left: 68%; animation-duration: 20s; }
+.firefly:nth-child(12) { top: 5%;  left: 40%; animation-duration: 19s; }
+.firefly:nth-child(13) { top: 28%; left: 5%;  animation-duration: 17s; }
+.firefly:nth-child(14) { top: 60%; left: 95%; animation-duration: 23s; }
+.firefly:nth-child(15) { top: 76%; left: 25%; animation-duration: 21s; }
+
+.firefly:nth-child(3),
+.firefly:nth-child(7),
+.firefly:nth-child(12) {
+  width: 8px;
+  height: 8px;
 }
 
 @keyframes drift {
-  0% { transform: translate(0,0); }
-  50% { transform: translate(-20px, 40px); }
-  100% { transform: translate(0,0); }
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-15px, 25px); }
+  50%  { transform: translate(20px, 40px); }
+  75%  { transform: translate(5px, 10px); }
+  100% { transform: translate(0, 0); }
 }
 
 @keyframes flicker {
-  0%,100% { opacity: 0.4; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.35; }
+  40%      { opacity: 1; }
+  60%      { opacity: 0.2; }
 }
-
-.firefly:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
-.firefly:nth-child(2) { top: 40%; left: 80%; animation-delay: 1s; }
-.firefly:nth-child(3) { top: 65%; left: 50%; animation-delay: 2s; }
-.firefly:nth-child(4) { top: 25%; left: 30%; animation-delay: 3s; }
-.firefly:nth-child(5) { top: 80%; left: 15%; animation-delay: 4s; }
-.firefly:nth-child(6) { top: 55%; left: 70%; animation-delay: 5s; }
-.firefly:nth-child(7) { top: 15%; left: 60%; animation-delay: 6s; }
 
 /* ------------------------- */
 /*   VINES / TREE EDGES      */
@@ -225,12 +245,30 @@ body {
   pointer-events: none;
 }
 
+/* subtle inner glow pulse on the paper */
+.paper-scroll::after {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 0%, rgba(247,211,120,0.08), transparent 70%);
+  opacity: 0.6;
+  mix-blend-mode: soft-light;
+  animation: paperGlow 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes paperGlow {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.9; }
+}
+
 /* ------------------------------------------------ */
 /*     PHILOSOPHER LANTERNS — SCROLLING WITH PAGE   */
 /* ------------------------------------------------ */
 
 .lanterns-container {
-  position: absolute;    /* ← scrolls with the page */
+  position: absolute;    /* scrolls with the page */
   top: 140px;
   left: 0;
   right: 0;
@@ -249,26 +287,28 @@ body {
 
 .lantern-column.left {
   left: 4%;
-  animation: parallaxLeft 20s linear infinite alternate;
+  animation: parallaxLeft 16s ease-in-out infinite alternate;
 }
 
 .lantern-column.right {
   right: 4%;
-  animation: parallaxRight 25s linear infinite alternate;
+  animation: parallaxRight 18s ease-in-out infinite alternate;
 }
 
-/* Subtle parallax drift */
+/* they move more now */
 @keyframes parallaxLeft {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(40px); }
+  0%   { transform: translateY(-30px); }
+  50%  { transform: translateY(40px); }
+  100% { transform: translateY(-10px); }
 }
 
 @keyframes parallaxRight {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-30px); }
+  0%   { transform: translateY(30px); }
+  50%  { transform: translateY(-50px); }
+  100% { transform: translateY(10px); }
 }
 
-/* Hide branches / ropes completely */
+/* Hide branches completely */
 .branch {
   display: none;
 }
@@ -278,59 +318,54 @@ body {
 /* ---------------------------- */
 
 .lantern {
-  --lantern-scale: 1;
-  width: 260px;
-  background: rgba(26, 21, 12, 0.9);
+  width: 260px; /* standard size for all */
+  background: rgba(26, 21, 12, 0.92);
   border-radius: 16px;
   padding: 14px;
-  border: 2px solid rgba(247, 211, 120, 0.35);
+  border: 2px solid rgba(247, 211, 120, 0.4);
   box-shadow:
-    0 0 18px rgba(247, 211, 120, 0.35),
-    0 0 60px rgba(247, 211, 120, 0.18),
-    inset 0 0 25px rgba(247, 211, 120, 0.12);
+    0 0 20px rgba(247, 211, 120, 0.45),
+    0 0 70px rgba(247, 211, 120, 0.24),
+    inset 0 0 25px rgba(247, 211, 120, 0.14);
   backdrop-filter: blur(3px);
   position: relative;
   margin-top: -10px;
+
   transform-origin: top center;
-  animation: sway 10s ease-in-out infinite;
+  animation: sway 7s ease-in-out infinite; /* faster & more motion */
 }
 
-.lantern:nth-child(odd) {
-  animation-duration: 13s;
-  animation-delay: -3s;
-}
-.lantern:nth-child(even) {
-  animation-duration: 17s;
-  animation-delay: -6s;
-}
+/* all lanterns same opacity, same size, no depth dimming */
 
-/* remove rope / string */
-.lantern::before {
-  content: none;
-}
-
-/* Depth variants */
-.lantern-depth-near {
-  --lantern-scale: 1.15;
-}
-
-.lantern-depth-mid {
-  --lantern-scale: 1.0;
-}
-
-.lantern-depth-far {
-  --lantern-scale: 0.86;
-  opacity: 0.85;
-  filter: blur(0.3px);
-}
-
-/* Sway/bob physics */
+/* Sway/bob physics — more movement now */
 @keyframes sway {
-  0%   { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
-  25%  { transform: scale(var(--lantern-scale)) rotate(1.2deg) translateY(-6px); }
-  50%  { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
-  75%  { transform: scale(var(--lantern-scale)) rotate(-1.2deg) translateY(5px); }
-  100% { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
+  0%   { transform: rotate(0deg) translateY(0); }
+  20%  { transform: rotate(3deg) translateY(-10px); }
+  40%  { transform: rotate(0.5deg) translateY(0); }
+  60%  { transform: rotate(-3deg) translateY(8px); }
+  80%  { transform: rotate(-1deg) translateY(-5px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+/* Lantern glow halo with pulse */
+.lantern-glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(247,211,120,0.2), transparent 70%);
+  z-index: -1;
+  filter: blur(10px);
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
 }
 
 /* ---------------------------- */
@@ -343,10 +378,10 @@ body {
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  border: 2px solid rgba(247, 211, 120, 0.4);
+  border: 2px solid rgba(247, 211, 120, 0.5);
   box-shadow:
-    0 0 18px rgba(247, 211, 120, 0.35),
-    inset 0 0 45px rgba(247, 211, 120, 0.18);
+    0 0 18px rgba(247, 211, 120, 0.4),
+    inset 0 0 45px rgba(247, 211, 120, 0.2);
 }
 
 .lantern-img {
@@ -358,7 +393,7 @@ body {
     contrast(1.1)
     saturate(1.3)
     sepia(0.22)
-    blur(0.6px)
+    blur(0.5px)
     drop-shadow(0 0 4px rgba(0,0,0,0.4));
   mix-blend-mode: lighten;
 }
@@ -374,7 +409,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--lantern-gold);
-  text-shadow: 0 0 6px rgba(247, 211, 120, 0.55);
+  text-shadow: 0 0 6px rgba(247, 211, 120, 0.8);
 }
 
 .lantern-era {
@@ -387,15 +422,6 @@ body {
   font-size: 0.83rem;
   line-height: 1.4;
   color: #f3e7cf;
-}
-
-/* Lantern glow halo */
-.lantern-glow {
-  position: absolute;
-  inset: -40px;
-  background: radial-gradient(circle, rgba(247,211,120,0.15), transparent 70%);
-  z-index: -1;
-  filter: blur(8px);
 }
 
 /* ---------------------------- */
@@ -432,6 +458,14 @@ body {
   <div class="firefly"></div>
   <div class="firefly"></div>
   <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
 </div>
 
 <!-- LANTERNS ROOT CONTAINER (scrolls with page, behind text) -->
@@ -441,7 +475,7 @@ body {
   <div class="lantern-column left">
 
     <div class="branch"></div>
-    <div class="lantern lantern-depth-near">
+    <div class="lantern">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -458,7 +492,7 @@ body {
     </div>
 
     <div class="branch"></div>
-    <div class="lantern lantern-depth-mid">
+    <div class="lantern">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -475,7 +509,7 @@ body {
     </div>
 
     <div class="branch"></div>
-    <div class="lantern lantern-depth-far">
+    <div class="lantern">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -497,7 +531,7 @@ body {
   <div class="lantern-column right">
 
     <div class="branch"></div>
-    <div class="lantern lantern-depth-mid">
+    <div class="lantern">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -514,7 +548,7 @@ body {
     </div>
 
     <div class="branch"></div>
-    <div class="lantern lantern-depth-far">
+    <div class="lantern">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -531,7 +565,7 @@ body {
     </div>
 
     <div class="branch"></div>
-    <div class="lantern lantern-depth-near">
+    <div class="lantern">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
