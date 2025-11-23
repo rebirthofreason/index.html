@@ -386,58 +386,58 @@
       font-size: 0.8rem;
     }
 
-    /* PHILOSOPHER SIDE STRIPS (bigger, with real images) */
+    /* PHILOSOPHER SIDE STRIPS – WAY BIGGER */
 
     .philo-strip {
       position: absolute;
       top: 220px;
-      width: 230px;
+      width: 340px;
       display: flex;
       flex-direction: column;
-      gap: 1.1rem;
+      gap: 1.4rem;
       pointer-events: none;
       z-index: 1;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     .philo-strip.left {
-      left: calc(50% - var(--max-width) / 2 - 250px);
+      left: calc(50% - var(--max-width) / 2 - 360px);
     }
 
     .philo-strip.right {
-      right: calc(50% - var(--max-width) / 2 - 250px);
-      top: 520px; /* starts a bit lower so you discover more while scrolling */
+      right: calc(50% - var(--max-width) / 2 - 360px);
+      top: 560px; /* start lower on the right so you discover more while scrolling */
     }
 
     .philo-card {
       background: radial-gradient(circle at top, rgba(245, 194, 79, 0.18), transparent 70%),
-                  linear-gradient(145deg, #151729, #060712);
-      border-radius: 22px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      padding: 0.75rem 0.85rem;
-      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.65);
+                  linear-gradient(145deg, #191b33, #060712);
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 1rem 1.1rem;
+      box-shadow: 0 26px 56px rgba(0, 0, 0, 0.75);
       display: flex;
-      gap: 0.7rem;
+      gap: 1rem;
       align-items: center;
-      animation: bob 11s ease-in-out infinite;
+      animation: bob 13s ease-in-out infinite;
     }
 
     .philo-card:nth-child(odd) {
-      animation-delay: -4s;
+      animation-delay: -5s;
     }
     .philo-card:nth-child(even) {
-      animation-delay: -8s;
+      animation-delay: -9s;
     }
 
     .philo-avatar {
       position: relative;
       flex-shrink: 0;
-      width: 56px;
-      height: 56px;
-      border-radius: 999px;
+      width: 96px;
+      height: 96px;
+      border-radius: 24px;
       overflow: hidden;
-      border: 2px solid rgba(245, 194, 79, 0.8);
-      box-shadow: 0 0 18px rgba(245, 194, 79, 0.65);
+      border: 2px solid rgba(245, 194, 79, 0.9);
+      box-shadow: 0 0 26px rgba(245, 194, 79, 0.85);
       background: #11131f;
     }
 
@@ -450,51 +450,50 @@
 
     .philo-avatar span {
       position: absolute;
-      bottom: 3px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.65rem;
+      bottom: 6px;
+      right: 6px;
+      font-size: 0.7rem;
       font-weight: 700;
       color: #1b1205;
-      background: rgba(244, 215, 157, 0.95);
-      padding: 1px 6px;
+      background: rgba(244, 215, 157, 0.98);
+      padding: 2px 8px;
       border-radius: 999px;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
     .philo-text {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
 
     .philo-name {
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      font-size: 0.72rem;
+      font-size: 0.78rem;
     }
 
     .philo-era {
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       color: var(--muted);
+      margin-bottom: 0.2rem;
     }
 
     .philo-idea {
-      font-size: 0.74rem;
+      font-size: 0.8rem;
       color: #e5e7f7;
-      margin-top: 0.2rem;
     }
 
     @keyframes bob {
       0%   { transform: translateY(0); }
-      25%  { transform: translateY(-7px); }
+      25%  { transform: translateY(-9px); }
       50%  { transform: translateY(0); }
-      75%  { transform: translateY(5px); }
+      75%  { transform: translateY(6px); }
       100% { transform: translateY(0); }
     }
 
-    /* hide strips on smaller screens so layout stays clean */
-    @media (max-width: 1180px) {
+    /* hide strips on smaller widths so page doesn’t explode */
+    @media (max-width: 1400px) {
       .philo-strip {
         display: none;
       }
@@ -538,11 +537,11 @@
 </head>
 
 <body>
-  <!-- LEFT STRIP -->
+  <!-- LEFT STRIP – big philosopher cards with working thumbnail images -->
   <div class="philo-strip left">
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg" alt="Bust of Plato">
+        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg/256px-Plato_Silanion_Musei_Capitolini_MC1377.jpg" alt="Bust of Plato">
         <span>PL</span>
       </div>
       <div class="philo-text">
@@ -554,7 +553,7 @@
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/1/12/Aristotle_Altemps_Inv8575.jpg" alt="Bust of Aristotle">
+        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Aristotle_Altemps_Inv8575.jpg/256px-Aristotle_Altemps_Inv8575.jpg" alt="Bust of Aristotle">
         <span>AR</span>
       </div>
       <div class="philo-text">
@@ -566,19 +565,19 @@
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Saint_Augustine_Portrait.jpg" alt="Augustine painting">
+        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Saint_Augustine_Portrait.jpg/256px-Saint_Augustine_Portrait.jpg" alt="Saint Augustine painting">
         <span>AU</span>
       </div>
       <div class="philo-text">
         <div class="philo-name">Augustine</div>
         <div class="philo-era">Late Antiquity</div>
-        <div class="philo-idea">Time, memory, and confession as method.</div>
+        <div class="philo-idea">Time, memory, and confession as a method.</div>
       </div>
     </div>
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg" alt="Thomas Aquinas painting">
+        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg/256px-Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg" alt="Thomas Aquinas painting">
         <span>AQ</span>
       </div>
       <div class="philo-text">
@@ -593,7 +592,7 @@
   <div class="philo-strip right">
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg" alt="Portrait of René Descartes">
+        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/256px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg" alt="Portrait of René Descartes">
         <span>RD</span>
       </div>
       <div class="philo-text">
@@ -605,7 +604,7 @@
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Kant_gemaelde_3.jpg" alt="Portrait of Immanuel Kant">
+        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Kant_gemaelde_3.jpg/256px-Kant_gemaelde_3.jpg" alt="Portrait of Immanuel Kant">
         <span>IK</span>
       </div>
       <div class="philo-text">
@@ -617,7 +616,7 @@
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Nietzsche187a.jpg" alt="Portrait of Friedrich Nietzsche">
+        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/256px-Nietzsche187a.jpg" alt="Portrait of Friedrich Nietzsche">
         <span>FN</span>
       </div>
       <div class="philo-text">
@@ -629,7 +628,7 @@
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Hannah_Arendt_1958.jpg" alt="Portrait of Hannah Arendt">
+        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Hannah_Arendt_1958.jpg/256px-Hannah_Arendt_1958.jpg" alt="Portrait of Hannah Arendt">
         <span>HA</span>
       </div>
       <div class="philo-text">
@@ -640,7 +639,8 @@
     </div>
   </div>
 
-  <!-- MAIN PAGE (unchanged from your favourite version) -->
+  <!-- MAIN PAGE CONTENT -->
+
   <header>
     <div class="nav-inner">
       <div class="brand">
