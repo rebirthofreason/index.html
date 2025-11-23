@@ -5,18 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rebirth of Reason – Philosophy Journal</title>
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #05060a;
-      --bg-alt: #0d0f18;
+      --bg: #06070a;
+      --bg-alt: #0e1016;
       --accent: #f5c24f;
       --accent-soft: rgba(245, 194, 79, 0.15);
-      --text: #f7f7f7;
-      --muted: #a0a4b5;
-      --border: #262939;
+      --text: #f5f5f5;
+      --muted: #a3a7b8;
+      --border: #222532;
+      --max-width: 1100px;
       --radius-lg: 18px;
-      --shadow-soft: 0 18px 38px rgba(0, 0, 0, 0.4);
-      --max-width: 980px;
+      --radius-sm: 10px;
+      --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.35);
     }
 
     * {
@@ -26,8 +32,8 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #191b2b, #03040a 55%, #020308 100%);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #151827 0, #050509 45%, #020306 100%);
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
@@ -40,114 +46,50 @@
       text-decoration: none;
     }
 
-    /* SIDE "SOUL" ART -------------------------------------------------- */
-
-    .ambient-orbit {
-      position: fixed;
-      width: 180px;
-      height: 260px;
-      border-radius: 24px;
-      background: radial-gradient(circle at top, rgba(245, 194, 79, 0.18), transparent 60%),
-                  linear-gradient(145deg, #101322, #050611 60%, #19182a 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 32px 60px rgba(0, 0, 0, 0.55);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      opacity: 0.35;
-      mix-blend-mode: screen;
-      pointer-events: none;
-      animation: floatSlow 18s ease-in-out infinite;
-      z-index: 0;
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 4rem;
+      position: relative;
+      z-index: 2; /* above side strips */
     }
 
-    .ambient-orbit::before {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border-radius: 20px;
-      border: 1px dashed rgba(245, 194, 79, 0.22);
-      opacity: 0.8;
-    }
-
-    .ambient-emoji {
-      font-size: 2rem;
-      filter: drop-shadow(0 0 14px rgba(245, 194, 79, 0.7));
-    }
-
-    .ambient-caption {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    .ambient-subcaption {
-      font-size: 0.7rem;
-      color: rgba(210, 212, 230, 0.85);
-      text-align: center;
-      max-width: 8rem;
-    }
-
-    .orbit-left {
-      left: 1.3rem;
-      top: 25%;
-      animation-delay: -4s;
-    }
-
-    .orbit-right {
-      right: 1.3rem;
-      top: 55%;
-      animation-delay: -10s;
-    }
-
-    @keyframes floatSlow {
-      0%   { transform: translateY(0px) rotate(-2deg); }
-      25%  { transform: translateY(-16px) rotate(1deg); }
-      50%  { transform: translateY(0px) rotate(3deg); }
-      75%  { transform: translateY(12px) rotate(-1deg); }
-      100% { transform: translateY(0px) rotate(-2deg); }
-    }
-
-    /* hide on smaller screens so it doesn’t clutter */
-    @media (max-width: 1024px) {
-      .ambient-orbit {
-        display: none;
-      }
-    }
-
-    /* HEADER & NAV ----------------------------------------------------- */
+    /* NAVBAR */
 
     header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(3, 4, 10, 0.96);
-      backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(3, 5, 12, 0.96), rgba(3, 5, 12, 0.75));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     }
 
     .nav-inner {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 0.75rem 1.1rem;
+      padding: 0.85rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      font-size: 0.86rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
     }
 
     .brand-title {
+      font-family: "Playfair Display", serif;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
+      font-size: 0.95rem;
       text-transform: uppercase;
-      font-size: 0.9rem;
     }
 
-    .brand-sub {
+    .brand-tagline {
       font-size: 0.75rem;
       color: var(--muted);
     }
@@ -155,14 +97,15 @@
     nav ul {
       list-style: none;
       display: flex;
-      gap: 1.1rem;
+      gap: 1.2rem;
+      font-size: 0.9rem;
     }
 
     nav a {
       color: var(--muted);
-      padding-bottom: 0.1rem;
+      padding-bottom: 0.15rem;
       border-bottom: 1px solid transparent;
-      transition: color 0.15s ease, border-color 0.15s ease;
+      transition: color 0.18s ease, border-color 0.18s ease;
     }
 
     nav a:hover {
@@ -170,132 +113,239 @@
       border-color: var(--accent-soft);
     }
 
-    /* MAIN LAYOUT ------------------------------------------------------ */
+    /* HERO */
 
-    main {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 2.5rem 1.1rem 3.2rem;
-      position: relative;
-      z-index: 1; /* sits above the ambient-orbit panels */
+    .hero {
+      padding-top: 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 3rem;
+      align-items: center;
     }
 
-    h1, h2, h3 {
-      font-weight: 600;
+    .hero-text h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
     }
 
-    .hero-title {
-      font-size: clamp(2.1rem, 4vw, 2.7rem);
-      margin-bottom: 0.7rem;
-    }
-
-    .hero-title span {
+    .hero-highlight {
       color: var(--accent);
     }
 
-    .hero-lead {
-      font-size: 0.98rem;
+    .hero-subtitle {
       color: var(--muted);
-      max-width: 34rem;
-      margin-bottom: 1.4rem;
+      font-size: 0.98rem;
+      max-width: 32rem;
+      margin-bottom: 1.6rem;
     }
 
-    .tagline {
-      display: inline-block;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      background: none;
+      color: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f5c24f, #f38b2a);
+      color: #1b1205;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-ghost {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(15, 18, 28, 0.9);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent-soft);
+      background: rgba(21, 25, 37, 0.95);
+    }
+
+    .hero-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hero-meta span {
+      border-radius: 999px;
+      padding: 0.25rem 0.65rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-right: 0.35rem;
     }
 
     .hero-card {
-      background: var(--bg-alt);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 1rem 1.1rem;
+      background: radial-gradient(circle at top left, #272946, var(--bg-alt));
+      border-radius: 24px;
+      padding: 1.5rem 1.4rem;
       box-shadow: var(--shadow-soft);
-      margin-top: 1.5rem;
-      font-size: 0.86rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-card strong {
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(245, 194, 79, 0.14), transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       color: var(--accent);
+      margin-bottom: 0.45rem;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
-      gap: 2rem;
-      align-items: flex-start;
-      margin-bottom: 3rem;
+    .hero-card-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
     }
+
+    .hero-card-body {
+      font-size: 0.85rem;
+      color: #d5d7e6;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-card-list {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-card-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.72rem;
+      background: rgba(6, 7, 12, 0.75);
+      backdrop-filter: blur(10px);
+      margin-right: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    /* SECTIONS */
 
     section {
-      margin-top: 2.8rem;
+      margin-top: 4rem;
     }
 
     section h2 {
-      font-size: 1.35rem;
-      margin-bottom: 0.4rem;
+      font-family: "Playfair Display", serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
     }
 
-    .section-intro {
-      font-size: 0.9rem;
+    section p.section-intro {
       color: var(--muted);
-      max-width: 32rem;
-      margin-bottom: 1.3rem;
+      font-size: 0.93rem;
+      max-width: 38rem;
+      margin-bottom: 1.8rem;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.1rem;
+      gap: 1.4rem;
     }
 
     .card {
-      background: var(--bg-alt);
+      background: rgba(9, 12, 20, 0.9);
       border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 0.95rem 1.05rem;
-      font-size: 0.88rem;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+      padding: 1rem 1.15rem 1.05rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
     }
 
     .card h3 {
       font-size: 1rem;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.4rem;
     }
 
     .card .meta {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       color: var(--muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .card p {
+      font-size: 0.87rem;
+      color: #dfe2f2;
     }
 
     .badge {
       display: inline-block;
       font-size: 0.7rem;
-      padding: 0.16rem 0.5rem;
+      padding: 0.18rem 0.55rem;
       border-radius: 999px;
       background: var(--accent-soft);
       color: var(--accent);
-      margin-bottom: 0.25rem;
+      margin-right: 0.4rem;
     }
 
-    ul.list {
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .list {
       list-style: none;
-      padding-left: 0;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
+      color: #d8d9e4;
     }
 
-    ul.list li {
-      margin-bottom: 0.4rem;
+    .list li {
+      margin-bottom: 0.45rem;
       position: relative;
-      padding-left: 0.9rem;
+      padding-left: 1rem;
     }
 
-    ul.list li::before {
+    .list li::before {
       content: "•";
       position: absolute;
       left: 0;
@@ -303,22 +353,27 @@
     }
 
     .callout {
-      margin-top: 0.6rem;
-      padding: 0.9rem 1rem;
+      background: rgba(10, 13, 22, 0.98);
       border-radius: var(--radius-lg);
-      background: #101222;
+      padding: 1rem 1.15rem;
       border: 1px solid var(--accent-soft);
-      font-size: 0.84rem;
+      font-size: 0.85rem;
+      color: #e3e4f4;
     }
 
-    /* FOOTER ----------------------------------------------------------- */
+    .callout strong {
+      color: var(--accent);
+    }
+
+    /* FOOTER */
 
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 1.1rem;
-      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.4rem;
       font-size: 0.78rem;
       color: var(--muted);
+      text-align: center;
     }
 
     footer a {
@@ -331,11 +386,137 @@
       font-size: 0.8rem;
     }
 
-    /* RESPONSIVE ------------------------------------------------------- */
+    /* PHILOSOPHER SIDE STRIPS (catalog of history) */
 
-    @media (max-width: 780px) {
-      .hero-grid {
+    .philo-strip {
+      position: absolute;
+      top: 220px;
+      width: 190px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.65;
+    }
+
+    .philo-strip.right {
+      right: calc(50% - var(--max-width) / 2 - 220px);
+    }
+
+    .philo-strip.left {
+      left: calc(50% - var(--max-width) / 2 - 220px);
+    }
+
+    .philo-card {
+      background: radial-gradient(circle at top, rgba(245, 194, 79, 0.18), transparent 70%),
+                  linear-gradient(145deg, #151729, #070814);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.65rem 0.75rem;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.6);
+      display: flex;
+      gap: 0.55rem;
+      align-items: center;
+      animation: bob 10s ease-in-out infinite;
+    }
+
+    .philo-card:nth-child(odd) {
+      animation-delay: -4s;
+    }
+    .philo-card:nth-child(even) {
+      animation-delay: -8s;
+    }
+
+    .philo-avatar {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 25%, #fff7db, #d4a85a 45%, #5a3b23 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .philo-avatar::before {
+      /* simple "hair" shape for cartoon vibe */
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -4px;
+      right: -4px;
+      height: 55%;
+      border-bottom-left-radius: 60%;
+      border-bottom-right-radius: 60%;
+      background: linear-gradient(135deg, rgba(40, 32, 21, 0.95), rgba(18, 12, 8, 0.95));
+      opacity: 0.95;
+    }
+
+    .philo-avatar span {
+      position: absolute;
+      bottom: 7px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #1b1205;
+      background: rgba(244, 215, 157, 0.85);
+      padding: 1px 4px;
+      border-radius: 999px;
+      margin: 0 5px;
+    }
+
+    .philo-text {
+      font-size: 0.78rem;
+    }
+
+    .philo-name {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+    }
+
+    .philo-era {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .philo-idea {
+      font-size: 0.72rem;
+      color: #e5e7f7;
+      margin-top: 0.15rem;
+    }
+
+    @keyframes bob {
+      0%   { transform: translateY(0); }
+      25%  { transform: translateY(-6px); }
+      50%  { transform: translateY(0); }
+      75%  { transform: translateY(4px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* stagger the right column further down so you discover more while scrolling */
+    .philo-strip.right {
+      top: 520px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1180px) {
+      .philo-strip {
+        display: none;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .hero {
         grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        order: -1;
       }
 
       header {
@@ -351,31 +532,98 @@
         flex-wrap: wrap;
       }
     }
+
+    @media (max-width: 600px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding-inline: 1rem;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <!-- floating “discovery / innovation” cards giving the page more soul -->
-  <div class="ambient-orbit orbit-left">
-    <div class="ambient-emoji">🔭</div>
-    <div class="ambient-caption">Discovery</div>
-    <div class="ambient-subcaption">
-      Minds pointing outward, looking for new stars to name.
+  <!-- scrolling catalog of philosophers -->
+  <div class="philo-strip left">
+    <div class="philo-card">
+      <div class="philo-avatar"><span>PL</span></div>
+      <div class="philo-text">
+        <div class="philo-name">Plato</div>
+        <div class="philo-era">Classical Greece</div>
+        <div class="philo-idea">Shadows on cave walls vs. the real forms.</div>
+      </div>
+    </div>
+    <div class="philo-card">
+      <div class="philo-avatar"><span>AR</span></div>
+      <div class="philo-text">
+        <div class="philo-name">Aristotle</div>
+        <div class="philo-era">Classical Greece</div>
+        <div class="philo-idea">Classification, causes, and careful logic.</div>
+      </div>
+    </div>
+    <div class="philo-card">
+      <div class="philo-avatar"><span>AU</span></div>
+      <div class="philo-text">
+        <div class="philo-name">Augustine</div>
+        <div class="philo-era">Late Antiquity</div>
+        <div class="philo-idea">Time, memory, and confession as method.</div>
+      </div>
+    </div>
+    <div class="philo-card">
+      <div class="philo-avatar"><span>AQ</span></div>
+      <div class="philo-text">
+        <div class="philo-name">Aquinas</div>
+        <div class="philo-era">13th century</div>
+        <div class="philo-idea">Faith arguing in the language of reason.</div>
+      </div>
     </div>
   </div>
 
-  <div class="ambient-orbit orbit-right">
-    <div class="ambient-emoji">⚙️</div>
-    <div class="ambient-caption">Innovation</div>
-    <div class="ambient-subcaption">
-      Ideas engineered into arguments sharp enough to matter.
+  <div class="philo-strip right">
+    <div class="philo-card">
+      <div class="philo-avatar"><span>RD</span></div>
+      <div class="philo-text">
+        <div class="philo-name">Descartes</div>
+        <div class="philo-era">17th century</div>
+        <div class="philo-idea">Doubt everything until one clear thought remains.</div>
+      </div>
+    </div>
+    <div class="philo-card">
+      <div class="philo-avatar"><span>IK</span></div>
+      <div class="philo-text">
+        <div class="philo-name">Kant</div>
+        <div class="philo-era">18th century</div>
+        <div class="philo-idea">The mind as architect of experience.</div>
+      </div>
+    </div>
+    <div class="philo-card">
+      <div class="philo-avatar"><span>FN</span></div>
+      <div class="philo-text">
+        <div class="philo-name">Nietzsche</div>
+        <div class="philo-era">19th century</div>
+        <div class="philo-idea">Values as inventions, not discoveries.</div>
+      </div>
+    </div>
+    <div class="philo-card">
+      <div class="philo-avatar"><span>AH</span></div>
+      <div class="philo-text">
+        <div class="philo-name">Hannah Arendt</div>
+        <div class="philo-era">20th century</div>
+        <div class="philo-idea">Thinking as the last defence against banality.</div>
+      </div>
     </div>
   </div>
 
   <header>
     <div class="nav-inner">
-      <div>
-        <div class="brand-title">Rebirth of Reason</div>
-        <div class="brand-sub">Independent Philosophy Journal</div>
+      <div class="brand">
+        <div>
+          <div class="brand-title">Rebirth of Reason</div>
+          <div class="brand-tagline">Independent Journal of Young Philosophy</div>
+        </div>
       </div>
       <nav>
         <ul>
@@ -388,173 +636,228 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero-grid" id="top">
-      <div>
-        <span class="tagline">Issue 01 · Drafting Reality</span>
-        <h1 class="hero-title">
-          A journal for minds in <span>rebellion</span> against lazy thinking.
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-text">
+        <h1>
+          A journal for minds in
+          <span class="hero-highlight">rebellion</span>
+          against lazy thinking.
         </h1>
-        <p class="hero-lead">
-          <strong>Rebirth of Reason</strong> publishes clear, argument-driven philosophy
-          from young writers who refuse clichés. We are interested in essays that question
-          “common sense”, dismantle illusions, and rebuild ideas from first principles.
+        <p class="hero-subtitle">
+          <strong>Rebirth of Reason</strong> publishes sharp, unapologetic philosophy
+          from young writers who refuse clichés. We welcome essays that question common sense,
+          dismantle illusions, and rebuild arguments from first principles.
         </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#essays">
+            Read featured essays →
+          </a>
+          <a class="btn btn-ghost" href="#submit">
+            Submit your work
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <span>Issue 01 – Drafting Reality</span>
+          Open for submissions · 2025
+        </div>
       </div>
 
       <aside class="hero-card">
-        <p><strong>Current focus:</strong> perception, memory, and the illusion of free will.</p>
-        <p style="margin-top:0.4rem;">
-          How much of your life is choice, and how much is code? If memory is just
-          electrical patterns in a brain, what does that do to ideas like identity,
-          responsibility, or meaning?
-        </p>
-        <p style="margin-top:0.6rem; font-size:0.8rem; color:var(--muted);">
-          We welcome essays from roughly 14–22 year-olds who are willing to think seriously.
-        </p>
+        <div class="hero-card-inner">
+          <div class="hero-card-label">Current theme</div>
+          <div class="hero-card-title">Perception, memory, and the illusion of freedom</div>
+          <p class="hero-card-body">
+            How reliable is what we call “experience”? Are we free agents, or
+            elegantly wired bio-machines following hidden code? This issue
+            explores the fracture line between objective reality and the stories
+            we tell ourselves about it.
+          </p>
+          <ul class="hero-card-list">
+            <li>🧠 Consciousness, perception, and selfhood</li>
+            <li>⚡ Memory as pattern, signal, or “lightning”</li>
+            <li>🧩 Free will, agency, and mental algorithms</li>
+          </ul>
+          <div style="margin-top:0.7rem;">
+            <span class="pill">1500–3000 word essays</span>
+            <span class="pill">Young writers (≈14–22)</span>
+          </div>
+        </div>
       </aside>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
       <h2>About the journal</h2>
       <p class="section-intro">
-        <strong>Rebirth of Reason</strong> is an online, student-run philosophy journal.
-        It exists for people who care more about the strength of an argument than about
-        how academic it sounds.
+        <strong>Rebirth of Reason</strong> is an online, student-driven philosophy journal.
+        Our aim is simple: to create a space where young thinkers can test serious ideas
+        without dumbing them down for algorithms, trends, or school rubrics.
       </p>
 
       <div class="grid">
         <article class="card">
           <h3>What we publish</h3>
           <p>
-            Argumentative essays, thought experiments, short theses, or manifestos
-            that take a clear stance and defend it. Speculation is fine; laziness is not.
+            We are interested in argumentative essays, short theses, thought experiments,
+            and conceptual “manifestos”. Your work can be speculative, but it must be
+            intellectually honest and clearly argued.
           </p>
         </article>
+
         <article class="card">
-          <h3>Who it’s for</h3>
+          <h3>Who we are for</h3>
           <p>
-            High-school or early university students — or anyone at a similar level —
-            who take ideas seriously and want a place to test them in public.
+            High-school and undergraduate students, or anyone early in their philosophical
+            journey who takes ideas seriously. You do not need formal credentials; you do
+            need discipline and clarity.
           </p>
         </article>
+
         <article class="card">
           <h3>How we read</h3>
           <p>
-            We look for clarity, originality, and honesty. You don’t need jargon;
-            you do need to show each step of your reasoning.
+            Submissions are evaluated on clarity, originality, and argumentative strength.
+            You won’t be rejected for not sounding like a textbook — but you will be pushed
+            to justify every step of your reasoning.
           </p>
         </article>
       </div>
     </section>
 
+    <!-- ESSAYS -->
     <section id="essays">
-      <h2>Sample essay ideas</h2>
+      <h2>Featured essays (sample placeholders)</h2>
       <p class="section-intro">
-        Replace these cards with real essays once you start publishing. For now
-        they show the kind of work the journal is built to host.
+        Replace these with your own essays as you publish them. You can link each
+        card to a full PDF, a Google Doc, or another page later.
       </p>
 
       <div class="grid">
         <article class="card">
-          <span class="badge">Essay</span>
-          <h3>Lightning Is Memory</h3>
-          <div class="meta">On electrons, experience, and the shape of thought.</div>
+          <span class="badge">Essay · 2500 words</span>
+          <h3>Lightning Is Memory: On Electrons, Experience, and the Shape of Thought</h3>
+          <div class="meta">by <em>Your Name</em> · Issue 01</div>
           <p>
-            If memory is electrical activity, then in theory a perfectly arranged
-            “lightning strike” could recreate a whole life. Is that horrifying,
-            or the most respectful way to think about a mind?
+            If memory is only electricity flowing between neurons, then in theory an exact
+            electrical storm could recreate a life. This essay asks whether that picture
+            trivialises us — or finally takes us seriously.
           </p>
         </article>
 
         <article class="card">
-          <span class="badge">Essay</span>
-          <h3>The Human Bio-Machine</h3>
-          <div class="meta">Why free will might be a beautiful illusion.</div>
+          <span class="badge">Essay · 1800 words</span>
+          <h3>The Human Bio-Machine and the Myth of Free Will</h3>
+          <div class="meta">by <em>Your Name</em> · Issue 01</div>
           <p>
-            Hunger, fear, status and habit: if every choice can be traced back to simple
-            algorithms, what exactly is left for “freedom” to do?
+            Hunger, fear, status, habit: if every decision traces back to predictable
+            mental algorithms, what exactly is left for “will” to do? A look at determinism
+            from inside the machine.
           </p>
         </article>
 
         <article class="card">
-          <span class="badge">Essay</span>
-          <h3>Perspective vs Objective Reality</h3>
-          <div class="meta">Living in the delay between world and mind.</div>
+          <span class="badge">Essay · 2100 words</span>
+          <h3>Perspective Reality vs Objective Reality</h3>
+          <div class="meta">by <em>Your Name</em> · Issue 01</div>
           <p>
-            Between the external world and our perception of it sits a filter,
-            a delay, and a story. Philosophy lives in that gap.
+            Between the world as it is and the world as we perceive it lies a delay,
+            a filter, and a story. This piece maps that gap — and asks whether philosophy
+            should live inside it.
           </p>
         </article>
       </div>
     </section>
 
+    <!-- SUBMIT -->
     <section id="submit">
       <h2>Submission guidelines</h2>
       <p class="section-intro">
-        Adjust these rules however you like later. They are just a clean starting point.
+        These are starter rules. Edit them freely so they match how you actually want
+        the journal to work.
+      </p>
+
+      <div class="two-column">
+        <div>
+          <ul class="list">
+            <li><strong>Length:</strong> Aim for 1500–3000 words. Shorter pieces are fine if the idea is tight.</li>
+            <li><strong>Format:</strong> PDF or Google Docs link. Use a readable font, 1.15–1.5 line spacing.</li>
+            <li><strong>Audience:</strong> Assume an intelligent student who has basic familiarity with philosophy,
+              but not necessarily with your specific topic.</li>
+            <li><strong>Referencing:</strong> Any consistent citation style is fine (APA, MLA, Chicago, etc.).
+              Just be coherent and give sources for key claims.</li>
+            <li><strong>Originality:</strong> Your work must be your own. AI tools may help with grammar,
+              but <em>the thinking must be yours</em>.</li>
+            <li><strong>Topics:</strong> Philosophy of mind, ethics, metaphysics, political philosophy,
+              logic, philosophy of science, or anything that seriously questions how we live and think.</li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <p style="margin-bottom:0.6rem;">
+            <strong>How to submit</strong>
+          </p>
+          <p style="margin-bottom:0.4rem;">
+            Send your essay as an attachment or share link to:
+          </p>
+          <p style="margin-bottom:0.4rem;">
+            <strong>Email:</strong> <em>your-email-here@example.com</em><br />
+            <!-- TODO: replace with your real email -->
+          </p>
+          <p>
+            Include in the email:
+          </p>
+          <ul class="list" style="margin-top:0.4rem;">
+            <li>Your full name (or pseudonym if you prefer to publish under one).</li>
+            <li>Age, country, and current level of study (e.g. high school, first year university).</li>
+            <li>Title of the essay and 2–3 sentences summarising your main claim.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact & future plans</h2>
+      <p class="section-intro">
+        This journal is still evolving. Over time you can add issues, host PDFs, run contests,
+        or invite guest editors. For now, this is your hub.
       </p>
 
       <div class="grid">
         <article class="card">
-          <h3>Basics</h3>
-          <ul class="list">
-            <li><strong>Length:</strong> 1500–3000 words recommended.</li>
-            <li><strong>Format:</strong> PDF or Google Docs link, readable font, 1.15–1.5 spacing.</li>
-            <li><strong>Audience:</strong> Smart students; don’t assume they’ve read everything.</li>
-            <li><strong>Sources:</strong> Any consistent citation style is fine.</li>
-          </ul>
+          <h3>Contact</h3>
+          <p>
+            For submissions, questions, or collaboration ideas, write to:
+            <br /><br />
+            <strong>Email:</strong> <em>your-email-here@example.com</em><br />
+            <!-- TODO: replace with your email in both places -->
+          </p>
         </article>
 
         <article class="card">
-          <h3>Topics we like</h3>
-          <ul class="list">
-            <li>Philosophy of mind, perception, and consciousness.</li>
-            <li>Free will, agency, and determinism.</li>
-            <li>Ethics, political philosophy, and responsibility.</li>
-            <li>Philosophy of science and technology.</li>
+          <h3>Future features</h3>
+          <p>
+            Later you can add:
+          </p>
+          <ul class="list" style="margin-top:0.5rem;">
+            <li>Separate pages for each issue.</li>
+            <li>A PDF archive of all published essays.</li>
+            <li>Announcements for talks, debates, or reading groups.</li>
+            <li>A section for translations or responses to classic texts.</li>
           </ul>
-        </article>
-
-        <article class="card">
-          <h3>How to submit</h3>
-          <div class="callout">
-            <p>
-              Send your essay to: <br />
-              <strong>your-email-here@example.com</strong>
-              <!-- replace with your real email -->
-            </p>
-            <p style="margin-top:0.4rem;">
-              Include your name (or pseudonym), age, country, level of study, and
-              2–3 sentences summarising your main argument.
-            </p>
-          </div>
         </article>
       </div>
     </section>
 
-    <section id="contact">
-      <h2>Contact & future plans</h2>
-      <p class="section-intro">
-        Over time you can add separate pages for each issue, host PDFs, or run contests.
-        For now, this page is the central hub.
-      </p>
-
-      <div class="card">
-        <h3>Contact</h3>
-        <p style="font-size:0.88rem; margin-top:0.4rem;">
-          General questions or collaboration ideas:<br />
-          <strong>your-email-here@example.com</strong>
-          <!-- replace everywhere with your real email -->
-        </p>
-      </div>
-    </section>
+    <footer>
+      <a class="top-link" href="#top">↑ Back to top</a>
+      <div>Rebirth of Reason &middot; An independent philosophy journal for young thinkers.</div>
+      <div>Hosted with GitHub Pages · Designed by you.</div>
+    </footer>
   </main>
-
-  <footer>
-    <a class="top-link" href="#top">↑ Back to top</a>
-    <div>Rebirth of Reason · an independent journal for young thinkers.</div>
-    <div>Hosted on GitHub Pages.</div>
-  </footer>
 </body>
 </html>
