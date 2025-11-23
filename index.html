@@ -386,7 +386,7 @@
       font-size: 0.8rem;
     }
 
-    /* PHILOSOPHER SIDE STRIPS – WAY BIGGER */
+    /* PHILOSOPHER SIDE STRIPS – BIG CARDS, TEXT BELOW IMAGE, NO INITIALS */
 
     .philo-strip {
       position: absolute;
@@ -414,11 +414,12 @@
                   linear-gradient(145deg, #191b33, #060712);
       border-radius: 28px;
       border: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 1rem 1.1rem;
+      padding: 1rem 1.1rem 1.1rem;
       box-shadow: 0 26px 56px rgba(0, 0, 0, 0.75);
       display: flex;
-      gap: 1rem;
-      align-items: center;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: flex-start;
       animation: bob 13s ease-in-out infinite;
     }
 
@@ -430,11 +431,10 @@
     }
 
     .philo-avatar {
-      position: relative;
-      flex-shrink: 0;
-      width: 96px;
-      height: 96px;
-      border-radius: 24px;
+      width: 100%;
+      max-width: 260px;
+      height: 180px;
+      border-radius: 22px;
       overflow: hidden;
       border: 2px solid rgba(245, 194, 79, 0.9);
       box-shadow: 0 0 26px rgba(245, 194, 79, 0.85);
@@ -446,20 +446,6 @@
       height: 100%;
       object-fit: cover;
       filter: contrast(1.05) saturate(1.05);
-    }
-
-    .philo-avatar span {
-      position: absolute;
-      bottom: 6px;
-      right: 6px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #1b1205;
-      background: rgba(244, 215, 157, 0.98);
-      padding: 2px 8px;
-      border-radius: 999px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
     }
 
     .philo-text {
@@ -537,53 +523,69 @@
 </head>
 
 <body>
-  <!-- LEFT STRIP – big philosopher cards with working thumbnail images -->
+  <!-- LEFT STRIP – big philosopher cards, text under portraits -->
   <div class="philo-strip left">
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg/256px-Plato_Silanion_Musei_Capitolini_MC1377.jpg" alt="Bust of Plato">
-        <span>PL</span>
+        <img class="philo-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg/256px-Plato_Silanion_Musei_Capitolini_MC1377.jpg"
+             alt="Bust of Plato"
+             loading="lazy">
       </div>
       <div class="philo-text">
         <div class="philo-name">Plato</div>
         <div class="philo-era">Classical Greece</div>
-        <div class="philo-idea">Shadows on cave walls versus the real forms.</div>
+        <div class="philo-idea">
+          From cave shadows to the realm of Forms, he turns suspicion into a method for hunting the real.
+        </div>
       </div>
     </div>
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Aristotle_Altemps_Inv8575.jpg/256px-Aristotle_Altemps_Inv8575.jpg" alt="Bust of Aristotle">
-        <span>AR</span>
+        <img class="philo-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Aristotle_Altemps_Inv8575.jpg/256px-Aristotle_Altemps_Inv8575.jpg"
+             alt="Bust of Aristotle"
+             loading="lazy">
       </div>
       <div class="philo-text">
         <div class="philo-name">Aristotle</div>
         <div class="philo-era">Classical Greece</div>
-        <div class="philo-idea">Classification, causes, and careful logic.</div>
+        <div class="philo-idea">
+          Obsessed with categories, causes, and precise language, he treats reality like something to be indexed.
+        </div>
       </div>
     </div>
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Saint_Augustine_Portrait.jpg/256px-Saint_Augustine_Portrait.jpg" alt="Saint Augustine painting">
-        <span>AU</span>
+        <img class="philo-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Saint_Augustine_Portrait.jpg/256px-Saint_Augustine_Portrait.jpg"
+             alt="Saint Augustine painting"
+             loading="lazy">
       </div>
       <div class="philo-text">
         <div class="philo-name">Augustine</div>
         <div class="philo-era">Late Antiquity</div>
-        <div class="philo-idea">Time, memory, and confession as a method.</div>
+        <div class="philo-idea">
+          Turns autobiography into philosophy, using memory, guilt, and time to dissect what a self even is.
+        </div>
       </div>
     </div>
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg/256px-Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg" alt="Thomas Aquinas painting">
-        <span>AQ</span>
+        <img class="philo-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg/256px-Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg"
+             alt="Thomas Aquinas painting"
+             loading="lazy">
       </div>
       <div class="philo-text">
         <div class="philo-name">Aquinas</div>
         <div class="philo-era">13th century</div>
-        <div class="philo-idea">Faith arguing in the language of reason.</div>
+        <div class="philo-idea">
+          Weds faith to Aristotelian logic, trying to prove that revelation and reason can share the same spine.
+        </div>
       </div>
     </div>
   </div>
@@ -592,54 +594,70 @@
   <div class="philo-strip right">
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/256px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg" alt="Portrait of René Descartes">
-        <span>RD</span>
+        <img class="philo-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/256px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg"
+             alt="Portrait of René Descartes"
+             loading="lazy">
       </div>
       <div class="philo-text">
         <div class="philo-name">Descartes</div>
         <div class="philo-era">17th century</div>
-        <div class="philo-idea">Doubt everything until one clear thought remains.</div>
+        <div class="philo-idea">
+          Dismantles certainty down to one stubborn fact: a thinking thing, wondering if anything is real.
+        </div>
       </div>
     </div>
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Kant_gemaelde_3.jpg/256px-Kant_gemaelde_3.jpg" alt="Portrait of Immanuel Kant">
-        <span>IK</span>
+        <img class="philo-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Kant_gemaelde_3.jpg/256px-Kant_gemaelde_3.jpg"
+             alt="Portrait of Immanuel Kant"
+             loading="lazy">
       </div>
       <div class="philo-text">
         <div class="philo-name">Kant</div>
         <div class="philo-era">18th century</div>
-        <div class="philo-idea">The mind as architect of experience.</div>
+        <div class="philo-idea">
+          Claims the mind doesn’t just receive the world; it quietly builds the stage on which we see it.
+        </div>
       </div>
     </div>
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/256px-Nietzsche187a.jpg" alt="Portrait of Friedrich Nietzsche">
-        <span>FN</span>
+        <img class="philo-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/256px-Nietzsche187a.jpg"
+             alt="Portrait of Friedrich Nietzsche"
+             loading="lazy">
       </div>
       <div class="philo-text">
         <div class="philo-name">Nietzsche</div>
         <div class="philo-era">19th century</div>
-        <div class="philo-idea">Values as inventions, not discoveries.</div>
+        <div class="philo-idea">
+          Treats morals as inventions, not discoveries, and asks what happens when the old gods stay dead.
+        </div>
       </div>
     </div>
 
     <div class="philo-card">
       <div class="philo-avatar">
-        <img class="philo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Hannah_Arendt_1958.jpg/256px-Hannah_Arendt_1958.jpg" alt="Portrait of Hannah Arendt">
-        <span>HA</span>
+        <img class="philo-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Hannah_Arendt_1958.jpg/256px-Hannah_Arendt_1958.jpg"
+             alt="Portrait of Hannah Arendt"
+             loading="lazy">
       </div>
       <div class="philo-text">
         <div class="philo-name">Hannah Arendt</div>
         <div class="philo-era">20th century</div>
-        <div class="philo-idea">Thinking as the last defence against banality.</div>
+        <div class="philo-idea">
+          Tracks how thoughtlessness breeds horror, and why paying attention is a political act.
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- MAIN PAGE CONTENT -->
+  <!-- MAIN PAGE CONTENT (unchanged center) -->
 
   <header>
     <div class="nav-inner">
