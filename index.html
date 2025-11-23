@@ -161,6 +161,75 @@ body {
 }
 
 /* ------------------------- */
+/*        FLOATING EMBERS    */
+/* ------------------------- */
+
+.embers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -7; /* behind fireflies (-6) and in front of fog (-8/-9) */
+  overflow: hidden;
+}
+
+/* each ember = a tiny vertical glow that rises and fades */
+.ember {
+  position: absolute;
+  width: 3px;
+  height: 18px;
+  background: linear-gradient(to top,
+    rgba(247, 211, 120, 0) 0%,
+    rgba(247, 211, 120, 0.7) 40%,
+    rgba(255, 245, 210, 1) 100%
+  );
+  border-radius: 999px;
+  opacity: 0;
+  filter: blur(0.4px);
+  animation: emberRise 11s linear infinite;
+}
+
+/* random-ish positions / speeds */
+.ember:nth-child(1)  { left: 12%; bottom: -10px; animation-duration: 12s; animation-delay: 0s; }
+.ember:nth-child(2)  { left: 24%; bottom: -14px; animation-duration: 10s; animation-delay: 2s; }
+.ember:nth-child(3)  { left: 37%; bottom: -18px; animation-duration: 13s; animation-delay: 1s; }
+.ember:nth-child(4)  { left: 49%; bottom: -12px; animation-duration: 9s;  animation-delay: 3s; }
+.ember:nth-child(5)  { left: 61%; bottom: -16px; animation-duration: 11s; animation-delay: 4s; }
+.ember:nth-child(6)  { left: 73%; bottom: -20px; animation-duration: 14s; animation-delay: 2.5s; }
+.ember:nth-child(7)  { left: 85%; bottom: -15px; animation-duration: 10s; animation-delay: 5s; }
+.ember:nth-child(8)  { left: 18%; bottom: -22px; animation-duration: 13s; animation-delay: 6s; }
+.ember:nth-child(9)  { left: 42%; bottom: -18px; animation-duration: 12s; animation-delay: 3.5s; }
+.ember:nth-child(10) { left: 68%; bottom: -24px; animation-duration: 15s; animation-delay: 1.5s; }
+
+/* slightly larger / brighter few */
+.ember:nth-child(3),
+.ember:nth-child(7) {
+  width: 4px;
+  height: 22px;
+}
+
+/* rising + fading path */
+@keyframes emberRise {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(0, -140px, 0);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate3d(0, -220px, 0);
+    opacity: 0;
+  }
+}
+
+/* ------------------------- */
 /*   VINES / TREE EDGES      */
 /* ------------------------- */
 
@@ -214,7 +283,7 @@ body {
   background: linear-gradient(to bottom, var(--paper) 0%, var(--paper-dark) 100%);
   border-left: 8px solid var(--paper-edge);
   border-right: 8px solid var(--paper-edge);
-  padding: 60px 60px;
+  padding: 90px 60px 60px 60px; /* extra top padding for logo */
   border-radius: 6px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
   position: relative;
@@ -261,6 +330,40 @@ body {
 @keyframes paperGlow {
   0%, 100% { opacity: 0.4; }
   50%      { opacity: 0.9; }
+}
+
+/* ------------------------- */
+/* Da Vinci Vitruvian logo   */
+/* ------------------------- */
+
+.journal-logo {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #6a5327;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.16), transparent 60%),
+    radial-gradient(circle at 50% 80%, rgba(0,0,0,0.5), transparent 70%);
+  overflow: hidden;
+  box-shadow:
+    0 14px 26px rgba(0,0,0,0.55),
+    0 0 25px rgba(0,0,0,0.7);
+  z-index: 3;
+}
+
+.journal-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter:
+    sepia(1)
+    contrast(1.1)
+    brightness(0.85);
+  mix-blend-mode: multiply;
 }
 
 /* ------------------------------------------------ */
@@ -334,8 +437,6 @@ body {
   transform-origin: top center;
   animation: sway 7s ease-in-out infinite; /* faster & more motion */
 }
-
-/* all lanterns same opacity, same size, no depth dimming */
 
 /* Sway/bob physics — more movement now */
 @keyframes sway {
@@ -425,6 +526,77 @@ body {
 }
 
 /* ---------------------------- */
+/*   FOOTER + CONSTELLATION    */
+/* ---------------------------- */
+
+.site-footer {
+  position: relative;
+  text-align: center;
+  color: #ccbfa8;
+  margin-top: 120px;
+  margin-bottom: 60px;
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.95rem;
+  padding-bottom: 150px; /* space for constellation */
+}
+
+.footer-constellation {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 220px;
+  height: 220px;
+  transform: translateX(-50%);
+  opacity: 0.85;
+}
+
+/* tiny stars that form a Vitruvian-ish human */
+.star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffdf4 0%, #f7d378 60%, transparent 100%);
+  box-shadow: 0 0 8px rgba(247,211,120,0.9);
+  animation: starTwinkle 5s ease-in-out infinite;
+}
+
+/* Vitruvian-ish layout (rough human in circle) */
+/* head */
+.star:nth-child(1)  { top: 10%; left: 50%; }
+/* shoulders / arms extended */
+.star:nth-child(2)  { top: 22%; left: 32%; }
+.star:nth-child(3)  { top: 22%; left: 68%; }
+.star:nth-child(4)  { top: 28%; left: 42%; }
+.star:nth-child(5)  { top: 28%; left: 58%; }
+/* torso */
+.star:nth-child(6)  { top: 36%; left: 50%; }
+.star:nth-child(7)  { top: 44%; left: 50%; }
+/* hips */
+.star:nth-child(8)  { top: 52%; left: 46%; }
+.star:nth-child(9)  { top: 52%; left: 54%; }
+/* legs */
+.star:nth-child(10) { top: 64%; left: 42%; }
+.star:nth-child(11) { top: 78%; left: 38%; }
+.star:nth-child(12) { top: 64%; left: 58%; }
+.star:nth-child(13) { top: 78%; left: 62%; }
+/* circle around */
+.star:nth-child(14) { top: 6%;  left: 35%; }
+.star:nth-child(15) { top: 6%;  left: 65%; }
+.star:nth-child(16) { top: 26%; left: 22%; }
+.star:nth-child(17) { top: 50%; left: 20%; }
+.star:nth-child(18) { top: 74%; left: 28%; }
+.star:nth-child(19) { top: 86%; left: 50%; }
+.star:nth-child(20) { top: 74%; left: 72%; }
+.star:nth-child(21) { top: 50%; left: 80%; }
+.star:nth-child(22) { top: 26%; left: 78%; }
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.2); }
+}
+
+/* ---------------------------- */
 /*   RESPONSIVE TWEAKS         */
 /* ---------------------------- */
 
@@ -466,6 +638,20 @@ body {
   <div class="firefly"></div>
   <div class="firefly"></div>
   <div class="firefly"></div>
+</div>
+
+<!-- EMBERS / RISING THOUGHT-SPARKS -->
+<div class="embers">
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
 </div>
 
 <!-- LANTERNS ROOT CONTAINER (scrolls with page, behind text) -->
@@ -589,6 +775,14 @@ body {
 <div class="scroll-container">
 
   <div class="paper-scroll">
+
+    <!-- Da Vinci logo -->
+    <div class="journal-logo">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Da_Vinci_Vitruve_Luc_Viatour.jpg/320px-Da_Vinci_Vitruve_Luc_Viatour.jpg"
+        alt="Vitruvian Man logo"
+      >
+    </div>
 
     <!-- Journal Header -->
     <h1 style="
@@ -778,16 +972,34 @@ body {
 </div> <!-- END SCROLL CONTAINER -->
 
 <!-- FOOTER -->
-<footer style="
-  text-align:center;
-  color:#ccbfa8;
-  margin-top:120px;
-  margin-bottom:60px;
-  font-family:'Crimson Pro';
-  font-size:0.95rem;
-">
+<footer class="site-footer">
   This journal grows with every mind that enters the garden.
   <br>© Rebirth of Reason
+
+  <div class="footer-constellation">
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+  </div>
 </footer>
 
 </body>
