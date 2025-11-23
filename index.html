@@ -281,7 +281,7 @@ body {
   width: 260px;
   display: flex;
   flex-direction: column;
-  gap: 220px;
+  gap: 220px; /* spacing between portraits AND submission box */
 }
 
 .lantern-column.left {
@@ -294,6 +294,7 @@ body {
   animation: parallaxRight 22s ease-in-out infinite alternate;
 }
 
+/* softer movement */
 @keyframes parallaxLeft {
   0%   { transform: translateY(-12px); }
   50%  { transform: translateY(18px); }
@@ -399,29 +400,95 @@ body {
   color: #f3e7cf;
 }
 
-/* ------------- FOOTER + CONSTELLATION + SUBMISSION BOX ------------- */
+/* ------------- SUBMISSION BOX UNDER BOTTOM-LEFT PORTRAIT ------------- */
+
+.submission-box {
+  width: 260px;
+  background: radial-gradient(circle at top left, rgba(247,211,120,0.14), transparent 60%),
+              rgba(15, 10, 5, 0.96);
+  border-radius: 14px;
+  padding: 1.2rem 1.35rem 1.3rem 1.35rem;
+  border: 1px solid rgba(201, 178, 122, 0.95);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.75);
+  font-family: 'Crimson Pro', serif;
+  color: #f3e7cf;
+  backdrop-filter: blur(7px);
+  pointer-events: auto; /* allow click while columns keep pointer-events:none parent */
+}
+
+.submission-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.45rem;
+  color: #f7d378;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.submission-box p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.55rem;
+}
+
+.submission-box p:last-of-type {
+  margin-bottom: 0.9rem;
+}
+
+.submission-box strong {
+  font-size: 1rem;
+}
+
+/* button */
+.submission-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(247,211,120,0.98);
+  background: linear-gradient(135deg, #f7d378, #c9a34e);
+  color: #2a1c07;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(0,0,0,0.55);
+  transition:
+    transform 0.12s ease-out,
+    box-shadow 0.12s ease-out,
+    filter 0.12s ease-out;
+}
+
+.submission-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 11px 24px rgba(0,0,0,0.7);
+  filter: brightness(1.05);
+}
+
+.submission-button:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 4px 11px rgba(0,0,0,0.65);
+}
+
+/* tiny hint under button */
+.submission-hint {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  opacity: 0.82;
+}
+
+/* ------------- FOOTER + CONSTELLATION (RECENTERED) ------------- */
 
 .site-footer {
   position: relative;
-  margin-top: 140px;   /* longer vertical feel */
+  margin-top: 140px;
   margin-bottom: 80px;
   font-family: 'Crimson Pro', serif;
   font-size: 0.95rem;
   color: #ccbfa8;
-}
-
-.footer-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.footer-main {
-  flex: 1 1 260px;
   text-align: center;
 }
 
@@ -491,104 +558,50 @@ body {
   opacity: 0.55;
 }
 
-/* ------------- SUBMISSION BOX (FOOTER LEFT, SLIGHTLY BIGGER) ------------- */
-
-.submission-box {
-  flex: 0 0 360px;
-  max-width: 420px;
-  background: radial-gradient(circle at top left, rgba(247,211,120,0.14), transparent 60%),
-              rgba(15, 10, 5, 0.96);
-  border-radius: 14px;
-  padding: 1.2rem 1.35rem 1.3rem 1.35rem;
-  border: 1px solid rgba(201, 178, 122, 0.95);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.75);
-  font-family: 'Crimson Pro', serif;
-  color: #f3e7cf;
-  backdrop-filter: blur(7px);
-}
-
-.submission-box h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  margin-bottom: 0.45rem;
-  color: #f7d378;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.submission-box p {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 0.55rem;
-}
-
-.submission-box p:last-of-type {
-  margin-bottom: 0.9rem;
-}
-
-.submission-box strong {
-  font-size: 1rem;
-}
-
-/* button */
-.submission-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 0.7rem 1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(247,211,120,0.98);
-  background: linear-gradient(135deg, #f7d378, #c9a34e);
-  color: #2a1c07;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0 7px 18px rgba(0,0,0,0.55);
-  transition:
-    transform 0.12s ease-out,
-    box-shadow 0.12s ease-out,
-    filter 0.12s ease-out;
-}
-
-.submission-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 11px 24px rgba(0,0,0,0.7);
-  filter: brightness(1.05);
-}
-
-.submission-button:active {
-  transform: translateY(1px) scale(0.99);
-  box-shadow: 0 4px 11px rgba(0,0,0,0.65);
-}
-
-/* tiny hint under button */
-.submission-hint {
-  margin-top: 0.35rem;
-  font-size: 0.78rem;
-  opacity: 0.82;
-}
-
 /* ------------- RESPONSIVE ------------- */
 
 @media (max-width: 980px) {
-  .lanterns-container { display: none; }
-  .scroll-container { margin-top: 80px; }
-}
+  /* let lanterns and submission box stack nicely on mobile instead of hiding them */
+  .lanterns-container {
+    position: static;
+    max-width: var(--max-width);
+    margin: 40px auto 0 auto;
+    pointer-events: none;
+  }
 
-@media (max-width: 640px) {
-  .footer-inner {
-    flex-direction: column;
+  .lantern-column {
+    position: static;
+    width: 100%;
     align-items: center;
-    text-align: center;
+    animation: none;
+  }
+
+  .lantern-column.right {
+    margin-top: 40px;
+  }
+
+  .lantern {
+    width: 70%;
+    max-width: 320px;
   }
 
   .submission-box {
-    flex: 0 1 auto;
+    width: 70%;
     max-width: 380px;
-    width: 100%;
+  }
+
+  .scroll-container {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .lantern {
+    width: 90%;
+  }
+
+  .submission-box {
+    width: 90%;
   }
 }
 </style>
@@ -661,6 +674,32 @@ body {
         <div class="lantern-idea">
           Memory as cathedral, guilt as compass, confession as the architecture of a soul.
         </div>
+      </div>
+    </div>
+
+    <!-- SUBMISSION BOX UNDER BOTTOM-LEFT PORTRAIT -->
+    <div class="submission-box" aria-label="Submission guidelines">
+      <h3>Submit Your Essay</h3>
+      <p>
+        <strong>Length:</strong> 1500–3000 words recommended.<br>
+        <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics,
+        political thought, perception, and any work that genuinely explores
+        human thought with care.<br>
+        <strong>Format:</strong> Send as PDF or Google Doc.
+      </p>
+      <p>
+        Email submissions to:<br>
+        <strong>rebirthofreason@gmail.com</strong>
+      </p>
+      <a
+        id="submissionButton"
+        class="submission-button"
+        href="#"
+      >
+        Open email to submit
+      </a>
+      <div class="submission-hint">
+        On phone: opens your mail app. On computer: opens Gmail compose.
       </div>
     </div>
   </div>
@@ -907,97 +946,66 @@ body {
 
 <!-- FOOTER -->
 <footer class="site-footer">
-  <div class="footer-inner">
-    <!-- SUBMISSION BOX - LEFT -->
-    <div class="submission-box" aria-label="Submission guidelines">
-      <h3>Submit Your Essay</h3>
-      <p>
-        <strong>Length:</strong> 1500–3000 words recommended.<br>
-        <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics,
-        political thought, perception, and any work that genuinely explores
-        human thought with care.<br>
-        <strong>Format:</strong> Send as PDF or Google Doc.
-      </p>
-      <p>
-        Email submissions to:<br>
-        <strong>rebirthofreason@gmail.com</strong>
-      </p>
-      <a
-        id="submissionButton"
-        class="submission-button"
-        href="#"
-      >
-        Open email to submit
-      </a>
-      <div class="submission-hint">
-        On phone: opens your mail app. On computer: opens Gmail compose.
-      </div>
-    </div>
+  This journal grows with every mind that enters the garden.
+  <br>© Rebirth of Reason
 
-    <!-- MAIN FOOTER CONTENT -->
-    <div class="footer-main">
-      This journal grows with every mind that enters the garden.
-      <br>© Rebirth of Reason
+  <div class="footer-constellation">
+    <svg viewBox="0 0 200 200" class="vitruvian-constellation" aria-hidden="true">
+      <defs>
+        <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f7d378" stop-opacity="0.4" />
+          <stop offset="60%" stop-color="#f7d378" stop-opacity="0.0" />
+          <stop offset="100%" stop-color="#f7d378" stop-opacity="0.0" />
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="84" fill="url(#haloGrad)" opacity="0.35" />
 
-      <div class="footer-constellation">
-        <svg viewBox="0 0 200 200" class="vitruvian-constellation" aria-hidden="true">
-          <defs>
-            <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#f7d378" stop-opacity="0.4" />
-              <stop offset="60%" stop-color="#f7d378" stop-opacity="0.0" />
-              <stop offset="100%" stop-color="#f7d378" stop-opacity="0.0" />
-            </radialGradient>
-          </defs>
-          <circle cx="100" cy="100" r="84" fill="url(#haloGrad)" opacity="0.35" />
+      <circle class="outer-circle" cx="100" cy="100" r="80" />
+      <circle class="inner-circle" cx="100" cy="100" r="68" />
+      <rect   class="square"       x="50"  y="40"  width="100" height="120" />
 
-          <circle class="outer-circle" cx="100" cy="100" r="80" />
-          <circle class="inner-circle" cx="100" cy="100" r="68" />
-          <rect   class="square"       x="50"  y="40"  width="100" height="120" />
+      <g>
+        <line class="line" x1="100" y1="60" x2="100" y2="130" />
+        <line class="line" x1="55"  y1="85" x2="145" y2="85" />
+        <line class="line" x1="40"  y1="95" x2="160" y2="95" />
+        <line class="line" x1="55"  y1="85" x2="35"  y2="65" />
+        <line class="line" x1="145" y1="85" x2="165" y2="65" />
+        <line class="line" x1="90"  y1="130" x2="110" y2="130" />
+        <line class="line" x1="92"  y1="130" x2="75"  y2="175" />
+        <line class="line" x1="108" y1="130" x2="125" y2="175" />
+        <line class="line" x1="92"  y1="130" x2="60"  y2="180" />
+        <line class="line" x1="108" y1="130" x2="140" y2="180" />
+        <line class="line-fine" x1="100" y1="60" x2="100" y2="68" />
+        <path class="line-fine" d="M90 80 Q100 74 110 80" />
+        <path class="line-fine" d="M88 126 Q100 134 112 126" />
+      </g>
 
-          <g>
-            <line class="line" x1="100" y1="60" x2="100" y2="130" />
-            <line class="line" x1="55"  y1="85" x2="145" y2="85" />
-            <line class="line" x1="40"  y1="95" x2="160" y2="95" />
-            <line class="line" x1="55"  y1="85" x2="35"  y2="65" />
-            <line class="line" x1="145" y1="85" x2="165" y2="65" />
-            <line class="line" x1="90"  y1="130" x2="110" y2="130" />
-            <line class="line" x1="92"  y1="130" x2="75"  y2="175" />
-            <line class="line" x1="108" y1="130" x2="125" y2="175" />
-            <line class="line" x1="92"  y1="130" x2="60"  y2="180" />
-            <line class="line" x1="108" y1="130" x2="140" y2="180" />
-            <line class="line-fine" x1="100" y1="60" x2="100" y2="68" />
-            <path class="line-fine" d="M90 80 Q100 74 110 80" />
-            <path class="line-fine" d="M88 126 Q100 134 112 126" />
-          </g>
+      <circle class="head" cx="100" cy="50" r="12" />
 
-          <circle class="head" cx="100" cy="50" r="12" />
+      <g>
+        <circle class="joint" cx="55"  cy="85" r="1.6" />
+        <circle class="joint" cx="145" cy="85" r="1.6" />
+        <circle class="joint" cx="45"  cy="75" r="1.4" />
+        <circle class="joint" cx="155" cy="75" r="1.4" />
+        <circle class="joint" cx="90"  cy="130" r="1.5" />
+        <circle class="joint" cx="110" cy="130" r="1.5" />
+        <circle class="joint" cx="82"  cy="155" r="1.5" />
+        <circle class="joint" cx="118" cy="155" r="1.5" />
+        <circle class="joint" cx="69"  cy="165" r="1.4" />
+        <circle class="joint" cx="131" cy="165" r="1.4" />
+      </g>
 
-          <g>
-            <circle class="joint" cx="55"  cy="85" r="1.6" />
-            <circle class="joint" cx="145" cy="85" r="1.6" />
-            <circle class="joint" cx="45"  cy="75" r="1.4" />
-            <circle class="joint" cx="155" cy="75" r="1.4" />
-            <circle class="joint" cx="90"  cy="130" r="1.5" />
-            <circle class="joint" cx="110" cy="130" r="1.5" />
-            <circle class="joint" cx="82"  cy="155" r="1.5" />
-            <circle class="joint" cx="118" cy="155" r="1.5" />
-            <circle class="joint" cx="69"  cy="165" r="1.4" />
-            <circle class="joint" cx="131" cy="165" r="1.4" />
-          </g>
-
-          <g>
-            <circle class="star dim" cx="100" cy="20"  r="1.5" />
-            <circle class="star dim" cx="30"  cy="100" r="1.5" />
-            <circle class="star dim" cx="170" cy="100" r="1.5" />
-            <circle class="star dim" cx="100" cy="185" r="1.5" />
-            <circle class="star"     cx="45"  cy="40"  r="1.4" />
-            <circle class="star"     cx="155" cy="40"  r="1.4" />
-            <circle class="star"     cx="45"  cy="160" r="1.4" />
-            <circle class="star"     cx="155" cy="160" r="1.4" />
-          </g>
-        </svg>
-      </div>
-    </div>
+      <g>
+        <circle class="star dim" cx="100" cy="20"  r="1.5" />
+        <circle class="star dim" cx="30"  cy="100" r="1.5" />
+        <circle class="star dim" cx="170" cy="100" r="1.5" />
+        <circle class="star dim" cx="100" cy="185" r="1.5" />
+        <circle class="star"     cx="45"  cy="40"  r="1.4" />
+        <circle class="star"     cx="155" cy="40"  r="1.4" />
+        <circle class="star"     cx="45"  cy="160" r="1.4" />
+        <circle class="star"     cx="155" cy="160" r="1.4" />
+      </g>
+    </svg>
   </div>
 </footer>
 
