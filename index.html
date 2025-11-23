@@ -228,12 +228,12 @@ body {
 /*     PHILOSOPHER LANTERNS — HANGING FROM TREES    */
 /* ------------------------------------------------ */
 
+/* Pull lanterns into view & give depth */
 .lanterns-container {
   position: absolute;
-  top: 0;
-  left: 50%;
-  width: 1400px;
-  transform: translateX(-50%);
+  top: 140px;
+  left: 0;
+  right: 0;
   pointer-events: none;
   z-index: 3;
 }
@@ -241,20 +241,19 @@ body {
 /* Lantern group left & right columns */
 .lantern-column {
   position: absolute;
-  top: 300px;
-  width: 360px;
+  width: 260px;
   display: flex;
   flex-direction: column;
   gap: 220px;
 }
 
 .lantern-column.left {
-  left: -480px;
+  left: 4%;
   animation: parallaxLeft 20s linear infinite alternate;
 }
 
 .lantern-column.right {
-  right: -480px;
+  right: 4%;
   animation: parallaxRight 25s linear infinite alternate;
 }
 
@@ -292,6 +291,7 @@ body {
 /* ---------------------------- */
 
 .lantern {
+  --lantern-scale: 1;
   width: 260px;
   background: rgba(26, 21, 12, 0.9);
   border-radius: 16px;
@@ -305,6 +305,7 @@ body {
   position: relative;
   margin-top: -10px;
 
+  transform-origin: top center;
   animation: sway 10s ease-in-out infinite;
 }
 
@@ -317,13 +318,28 @@ body {
   animation-delay: -6s;
 }
 
-/* Sway/bob physics */
+/* Depth variants */
+.lantern-depth-near {
+  --lantern-scale: 1.15;
+}
+
+.lantern-depth-mid {
+  --lantern-scale: 1.0;
+}
+
+.lantern-depth-far {
+  --lantern-scale: 0.86;
+  opacity: 0.85;
+  filter: blur(0.3px);
+}
+
+/* Sway/bob physics, including scale */
 @keyframes sway {
-  0% { transform: rotate(0deg) translateY(0); }
-  25% { transform: rotate(1.2deg) translateY(-6px); }
-  50% { transform: rotate(0deg) translateY(0); }
-  75% { transform: rotate(-1.2deg) translateY(5px); }
-  100% { transform: rotate(0deg) translateY(0); }
+  0%   { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
+  25%  { transform: scale(var(--lantern-scale)) rotate(1.2deg) translateY(-6px); }
+  50%  { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
+  75%  { transform: scale(var(--lantern-scale)) rotate(-1.2deg) translateY(5px); }
+  100% { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
 }
 
 /* String / rope */
@@ -406,10 +422,6 @@ body {
   filter: blur(8px);
 }
 
-/* ----------------------------------- */
-/*   PHILOSOPHER LANTERN POPULATION    */
-/* ----------------------------------- */
-
 </style>
 </head>
 
@@ -440,7 +452,7 @@ body {
   <div class="lantern-column left">
 
     <div class="branch"></div>
-    <div class="lantern">
+    <div class="lantern lantern-depth-near">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -457,7 +469,7 @@ body {
     </div>
 
     <div class="branch"></div>
-    <div class="lantern">
+    <div class="lantern lantern-depth-mid">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -474,7 +486,7 @@ body {
     </div>
 
     <div class="branch"></div>
-    <div class="lantern">
+    <div class="lantern lantern-depth-far">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -496,7 +508,7 @@ body {
   <div class="lantern-column right">
 
     <div class="branch"></div>
-    <div class="lantern">
+    <div class="lantern lantern-depth-mid">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -513,7 +525,7 @@ body {
     </div>
 
     <div class="branch"></div>
-    <div class="lantern">
+    <div class="lantern lantern-depth-far">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -530,7 +542,7 @@ body {
     </div>
 
     <div class="branch"></div>
-    <div class="lantern">
+    <div class="lantern lantern-depth-near">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
