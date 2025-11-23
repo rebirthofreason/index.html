@@ -47,7 +47,6 @@ body {
 /*   WORLD BACKGROUND LAYERS */
 /* ------------------------- */
 
-/* Layer 1: deep gradient sky */
 .bg-sky {
   position: fixed;
   inset: 0;
@@ -55,7 +54,6 @@ body {
   z-index: -10;
 }
 
-/* Layer 2: drifting fog (back) */
 .fog-back {
   position: fixed;
   top: -10%;
@@ -79,7 +77,6 @@ body {
   100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
-/* Layer 3: drifting fog (front) */
 .fog-front {
   position: fixed;
   top: -15%;
@@ -113,7 +110,6 @@ body {
   z-index: -6;
 }
 
-/* all fireflies share base style */
 .firefly {
   position: absolute;
   width: 6px;
@@ -123,7 +119,6 @@ body {
   animation: drift 14s ease-in-out infinite, flicker 3.2s ease-in-out infinite;
 }
 
-/* varied positions / speeds / sizes */
 .firefly:nth-child(1)  { top: 10%; left: 18%; animation-duration: 16s; }
 .firefly:nth-child(2)  { top: 22%; left: 75%; animation-duration: 18s; }
 .firefly:nth-child(3)  { top: 40%; left: 12%; animation-duration: 15s; }
@@ -183,14 +178,8 @@ body {
   animation: vineSway 22s ease-in-out infinite;
 }
 
-.vines-left {
-  left: 0;
-}
-
-.vines-right {
-  right: 0;
-  transform: scaleX(-1);
-}
+.vines-left { left: 0; }
+.vines-right { right: 0; transform: scaleX(-1); }
 
 @keyframes vineSway {
   0%   { transform: translateY(0) scaleX(1); }
@@ -210,19 +199,17 @@ body {
   padding-bottom: 200px;
 }
 
-/* The scroll (paper) background */
 .paper-scroll {
   background: linear-gradient(to bottom, var(--paper) 0%, var(--paper-dark) 100%);
   border-left: 8px solid var(--paper-edge);
   border-right: 8px solid var(--paper-edge);
-  padding: 90px 60px 60px 60px; /* extra top padding for logo */
+  padding: 90px 60px 60px 60px;
   border-radius: 6px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
   position: relative;
   overflow: hidden;
 }
 
-/* Paper grain overlay */
 .paper-scroll::before {
   content: "";
   position: absolute;
@@ -246,7 +233,6 @@ body {
   pointer-events: none;
 }
 
-/* subtle inner glow pulse on the paper */
 .paper-scroll::after {
   content: "";
   position: absolute;
@@ -270,7 +256,7 @@ body {
 
 .journal-logo {
   position: absolute;
-  top: -60px; /* slightly tucked into the top edge */
+  top: -60px;
   left: 50%;
   transform: translateX(-50%);
   width: 120px;
@@ -289,7 +275,6 @@ body {
   justify-content: center;
 }
 
-/* inner Vitruvian circle + human drawn with CSS in brown */
 .vitruvian-figure {
   position: relative;
   width: 78%;
@@ -321,7 +306,7 @@ body {
   background: var(--ink-brown);
 }
 
-/* horizontal arms */
+/* arms */
 .vf-arm-horizontal {
   position: absolute;
   top: 36%;
@@ -331,7 +316,6 @@ body {
   background: var(--ink-brown);
 }
 
-/* diagonal arms */
 .vf-arm-diag-left,
 .vf-arm-diag-right {
   position: absolute;
@@ -351,7 +335,7 @@ body {
   transform: rotate(30deg);
 }
 
-/* hip line */
+/* hips + legs */
 .vf-hips {
   position: absolute;
   top: 52%;
@@ -360,8 +344,6 @@ body {
   height: 2px;
   background: var(--ink-brown);
 }
-
-/* legs */
 .vf-leg-left,
 .vf-leg-right {
   position: absolute;
@@ -385,15 +367,14 @@ body {
 /* ------------------------------------------------ */
 
 .lanterns-container {
-  position: absolute;    /* scrolls with the page */
+  position: absolute;
   top: 140px;
   left: 0;
   right: 0;
   pointer-events: none;
-  z-index: 2;           /* behind the paper scroll (z=5), above background */
+  z-index: 2;
 }
 
-/* Lantern group left & right columns */
 .lantern-column {
   position: absolute;
   width: 260px;
@@ -412,7 +393,7 @@ body {
   animation: parallaxRight 22s ease-in-out infinite alternate;
 }
 
-/* portraits move less than before, more than original */
+/* softer movement */
 @keyframes parallaxLeft {
   0%   { transform: translateY(-12px); }
   50%  { transform: translateY(18px); }
@@ -425,17 +406,14 @@ body {
   100% { transform: translateY(2px); }
 }
 
-/* Hide branches completely */
-.branch {
-  display: none;
-}
+.branch { display: none; }
 
 /* ---------------------------- */
 /*     LANTERN (Main body)      */
 /* ---------------------------- */
 
 .lantern {
-  width: 260px; /* standard size for all */
+  width: 260px;
   background: rgba(26, 21, 12, 0.92);
   border-radius: 16px;
   padding: 14px;
@@ -447,12 +425,10 @@ body {
   backdrop-filter: blur(3px);
   position: relative;
   margin-top: -10px;
-
   transform-origin: top center;
-  animation: sway 9s ease-in-out infinite; /* gentler than last version */
+  animation: sway 9s ease-in-out infinite;
 }
 
-/* Sway/bob physics — reduced from ±3deg/10px to ±1.8deg/7px */
 @keyframes sway {
   0%   { transform: rotate(0deg) translateY(0); }
   20%  { transform: rotate(1.8deg) translateY(-7px); }
@@ -462,7 +438,6 @@ body {
   100% { transform: rotate(0deg) translateY(0); }
 }
 
-/* Lantern glow halo with pulse */
 .lantern-glow {
   position: absolute;
   inset: -40px;
@@ -473,19 +448,9 @@ body {
 }
 
 @keyframes glowPulse {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.07);
-  }
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.07); }
 }
-
-/* ---------------------------- */
-/*     ILLUSTRATED PORTRAITS    */
-/* ---------------------------- */
 
 .lantern-img-wrapper {
   width: 100%;
@@ -513,7 +478,6 @@ body {
   mix-blend-mode: lighten;
 }
 
-/* Text below portrait */
 .lantern-text {
   margin-top: 12px;
   font-family: "Crimson Pro", serif;
@@ -551,28 +515,26 @@ body {
   margin-bottom: 60px;
   font-family: 'Crimson Pro', serif;
   font-size: 0.95rem;
-  padding-bottom: 180px; /* space for constellation */
+  padding-bottom: 40px;
 }
 
 .footer-constellation {
-  position: absolute;
-  left: 50%;
-  bottom: 10px;
+  position: relative;
   width: 260px;
   height: 260px;
-  transform: translateX(-50%);
-  opacity: 0.92;
+  margin: 40px auto 0 auto; /* sits clearly BELOW the text */
 }
 
-/* container layers so we can style stars + lines separately */
 .const-stars,
 .const-lines {
   position: absolute;
   inset: 0;
 }
 
-/* tiny stars that form a Vitruvian-ish human + circle */
-.footer-constellation .star {
+.const-lines { z-index: 0; }
+.const-stars { z-index: 1; }
+
+.star {
   position: absolute;
   width: 4px;
   height: 4px;
@@ -582,96 +544,183 @@ body {
   animation: starTwinkle 5s ease-in-out infinite;
 }
 
-/* Head + torso */
-.footer-constellation .star:nth-child(1)  { top: 10%; left: 50%; } /* head */
-.footer-constellation .star:nth-child(2)  { top: 19%; left: 50%; }
-.footer-constellation .star:nth-child(3)  { top: 28%; left: 50%; }
-.footer-constellation .star:nth-child(4)  { top: 37%; left: 50%; }
-.footer-constellation .star:nth-child(5)  { top: 46%; left: 50%; }
+/* --- Human figure stars --- */
 
-/* horizontal shoulders */
-.footer-constellation .star:nth-child(6)  { top: 28%; left: 32%; }
-.footer-constellation .star:nth-child(7)  { top: 28%; left: 68%; }
+/* head + spine */
+.star-head      { top: 10%; left: 50%; }
+.star-neck      { top: 18%; left: 50%; }
+.star-upperchest{ top: 24%; left: 50%; }
+.star-midchest  { top: 30%; left: 50%; }
+.star-navel     { top: 36%; left: 50%; }
 
-/* diagonal upper arms */
-.footer-constellation .star:nth-child(8)  { top: 32%; left: 23%; }
-.footer-constellation .star:nth-child(9)  { top: 32%; left: 77%; }
+/* shoulders */
+.star-shoulder-left  { top: 26%; left: 38%; }
+.star-shoulder-right { top: 26%; left: 62%; }
 
-/* wrists extended */
-.footer-constellation .star:nth-child(10) { top: 34%; left: 16%; }
-.footer-constellation .star:nth-child(11) { top: 34%; left: 84%; }
+/* elbows */
+.star-elbow-left  { top: 30%; left: 30%; }
+.star-elbow-right { top: 30%; left: 70%; }
+
+/* hands (horizontal) */
+.star-hand-left  { top: 34%; left: 22%; }
+.star-hand-right { top: 34%; left: 78%; }
 
 /* hips */
-.footer-constellation .star:nth-child(12) { top: 54%; left: 46%; }
-.footer-constellation .star:nth-child(13) { top: 54%; left: 54%; }
+.star-hip-left  { top: 42%; left: 46%; }
+.star-hip-right { top: 42%; left: 54%; }
 
-/* legs down */
-.footer-constellation .star:nth-child(14) { top: 66%; left: 44%; }
-.footer-constellation .star:nth-child(15) { top: 76%; left: 42%; }
-.footer-constellation .star:nth-child(16) { top: 66%; left: 56%; }
-.footer-constellation .star:nth-child(17) { top: 76%; left: 58%; }
+/* knees */
+.star-knee-left  { top: 58%; left: 44%; }
+.star-knee-right { top: 58%; left: 56%; }
 
-/* wide legs */
-.footer-constellation .star:nth-child(18) { top: 72%; left: 36%; }
-.footer-constellation .star:nth-child(19) { top: 84%; left: 34%; }
-.footer-constellation .star:nth-child(20) { top: 72%; left: 64%; }
-.footer-constellation .star:nth-child(21) { top: 84%; left: 66%; }
+/* ankles */
+.star-ankle-left  { top: 74%; left: 42%; }
+.star-ankle-right { top: 74%; left: 58%; }
 
-/* circle around (more points) */
-.footer-constellation .star:nth-child(22) { top: 6%;  left: 35%; }
-.footer-constellation .star:nth-child(23) { top: 6%;  left: 65%; }
-.footer-constellation .star:nth-child(24) { top: 16%; left: 24%; }
-.footer-constellation .star:nth-child(25) { top: 30%; left: 18%; }
-.footer-constellation .star:nth-child(26) { top: 46%; left: 16%; }
-.footer-constellation .star:nth-child(27) { top: 62%; left: 18%; }
-.footer-constellation .star:nth-child(28) { top: 76%; left: 24%; }
-.footer-constellation .star:nth-child(29) { top: 88%; left: 35%; }
-.footer-constellation .star:nth-child(30) { top: 92%; left: 50%; }
-.footer-constellation .star:nth-child(31) { top: 88%; left: 65%; }
-.footer-constellation .star:nth-child(32) { top: 76%; left: 76%; }
-.footer-constellation .star:nth-child(33) { top: 62%; left: 82%; }
-.footer-constellation .star:nth-child(34) { top: 46%; left: 84%; }
-.footer-constellation .star:nth-child(35) { top: 30%; left: 82%; }
-.footer-constellation .star:nth-child(36) { top: 16%; left: 76%; }
+/* wide feet */
+.star-foot-left-inner  { top: 84%; left: 40%; }
+.star-foot-left-outer  { top: 88%; left: 34%; }
+.star-foot-right-inner { top: 84%; left: 60%; }
+.star-foot-right-outer { top: 88%; left: 66%; }
 
-/* connecting lines between key points */
+/* --- Circle stars around the figure --- */
+
+.star-circle-top        { top: 6%;  left: 50%; }
+.star-circle-top-left   { top: 10%; left: 34%; }
+.star-circle-top-right  { top: 10%; left: 66%; }
+
+.star-circle-mid-left1  { top: 22%; left: 24%; }
+.star-circle-mid-left2  { top: 38%; left: 18%; }
+.star-circle-mid-left3  { top: 56%; left: 18%; }
+.star-circle-mid-left4  { top: 72%; left: 24%; }
+
+.star-circle-bottom-left{ top: 86%; left: 36%; }
+.star-circle-bottom     { top: 92%; left: 50%; }
+.star-circle-bottom-right{top: 86%; left: 64%; }
+
+.star-circle-mid-right4 { top: 72%; left: 76%; }
+.star-circle-mid-right3 { top: 56%; left: 82%; }
+.star-circle-mid-right2 { top: 38%; left: 82%; }
+.star-circle-mid-right1 { top: 22%; left: 76%; }
+
+/* --- Connecting lines --- */
+
 .const-line {
   position: absolute;
   height: 2px;
   background: linear-gradient(to right,
-    rgba(247,211,120,0.4),
+    rgba(247,211,120,0.3),
     rgba(255,253,240,0.95));
   transform-origin: left center;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* Head to torso */
-.const-lines .const-line:nth-child(1)  { top: 14%; left: 50%; width: 1px; transform: translateX(-0.5px) rotate(90deg); }
-/* shoulders */
-.const-lines .const-line:nth-child(2)  { top: 28%; left: 32%; width: 36%; }
-/* torso */
-.const-lines .const-line:nth-child(3)  { top: 23%; left: 50%; width: 26%; transform: translateX(-1px) rotate(90deg); }
-/* arms diagonals */
-.const-lines .const-line:nth-child(4)  { top: 30%; left: 32%; width: 18%; transform: rotate(-20deg); }
-.const-lines .const-line:nth-child(5)  { top: 30%; left: 50%; width: 18%; transform-origin:left center; transform: rotate(20deg); }
+/* spine line */
+.line-spine {
+  top: 14%;
+  left: 50%;
+  width: 26%;
+  transform: translateX(-1px) rotate(90deg);
+}
+
+/* shoulders line */
+.line-shoulders {
+  top: 26%;
+  left: 38%;
+  width: 24%;
+}
+
+/* arms */
+.line-arm-left {
+  top: 30%;
+  left: 38%;
+  width: 18%;
+  transform: rotate(-18deg);
+}
+.line-arm-right {
+  top: 30%;
+  left: 50%;
+  width: 18%;
+  transform-origin: left center;
+  transform: rotate(18deg);
+}
+
 /* hips */
-.const-lines .const-line:nth-child(6)  { top: 54%; left: 46%; width: 8%; }
-/* legs diagonals */
-.const-lines .const-line:nth-child(7)  { top: 56%; left: 46%; width: 12%; transform: rotate(40deg); }
-.const-lines .const-line:nth-child(8)  { top: 56%; left: 54%; width: 12%; transform-origin:left center; transform: rotate(-40deg); }
-/* circle – approximate with 4 arcs */
-.const-lines .const-line:nth-child(9)  { top: 6%;  left: 35%; width: 30%; }
-.const-lines .const-line:nth-child(10) { top: 16%; left: 24%; width: 22%; transform: rotate(60deg); }
-.const-lines .const-line:nth-child(11) { top: 46%; left: 16%; width: 22%; transform: rotate(90deg); }
-.const-lines .const-line:nth-child(12) { top: 76%; left: 24%; width: 22%; transform: rotate(120deg); }
-.const-lines .const-line:nth-child(13) { top: 88%; left: 35%; width: 30%; }
-.const-lines .const-line:nth-child(14) { top: 76%; left: 65%; width: 22%; transform-origin:left center; transform: rotate(60deg); }
-.const-lines .const-line:nth-child(15) { top: 46%; left: 78%; width: 22%; transform-origin:left center; transform: rotate(90deg); }
-.const-lines .const-line:nth-child(16) { top: 16%; left: 65%; width: 22%; transform-origin:left center; transform: rotate(120deg); }
+.line-hips {
+  top: 42%;
+  left: 46%;
+  width: 8%;
+}
+
+/* legs */
+.line-leg-left {
+  top: 46%;
+  left: 46%;
+  width: 26%;
+  transform: rotate(65deg);
+}
+.line-leg-right {
+  top: 46%;
+  left: 54%;
+  width: 26%;
+  transform-origin: left center;
+  transform: rotate(-65deg);
+}
+
+/* circle arcs (approximate) */
+.line-circle-top {
+  top: 6%;
+  left: 34%;
+  width: 32%;
+}
+.line-circle-upper-left {
+  top: 12%;
+  left: 34%;
+  width: 18%;
+  transform: rotate(55deg);
+}
+.line-circle-left {
+  top: 30%;
+  left: 24%;
+  width: 20%;
+  transform: rotate(90deg);
+}
+.line-circle-lower-left {
+  top: 62%;
+  left: 24%;
+  width: 18%;
+  transform: rotate(120deg);
+}
+.line-circle-bottom {
+  top: 92%;
+  left: 36%;
+  width: 28%;
+}
+.line-circle-lower-right {
+  top: 62%;
+  left: 58%;
+  width: 18%;
+  transform-origin:left center;
+  transform: rotate(60deg);
+}
+.line-circle-right {
+  top: 30%;
+  left: 72%;
+  width: 20%;
+  transform-origin:left center;
+  transform: rotate(90deg);
+}
+.line-circle-upper-right {
+  top: 12%;
+  left: 50%;
+  width: 18%;
+  transform-origin:left center;
+  transform: rotate(125deg);
+}
 
 @keyframes starTwinkle {
   0%, 100% { opacity: 0.6; transform: scale(1); }
-  50%      { opacity: 1;   transform: scale(1.2); }
+  50%      { opacity: 1;   transform: scale(1.15); }
 }
 
 /* ---------------------------- */
@@ -679,12 +728,8 @@ body {
 /* ---------------------------- */
 
 @media (max-width: 980px) {
-  .lanterns-container {
-    display: none;
-  }
-  .scroll-container {
-    margin-top: 80px;
-  }
+  .lanterns-container { display: none; }
+  .scroll-container { margin-top: 80px; }
 }
 
 </style>
@@ -701,29 +746,18 @@ body {
 
 <!-- FIREFLIES -->
 <div class="fireflies">
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
+  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+  <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
 </div>
 
-<!-- LANTERNS ROOT CONTAINER (scrolls with page, behind text) -->
+<!-- LANTERNS ROOT CONTAINER -->
 <div class="lanterns-container">
 
   <!-- LEFT COLUMN -->
   <div class="lantern-column left">
-
     <div class="branch"></div>
     <div class="lantern">
       <div class="lantern-glow"></div>
@@ -774,12 +808,10 @@ body {
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- RIGHT COLUMN -->
   <div class="lantern-column right">
-
     <div class="branch"></div>
     <div class="lantern">
       <div class="lantern-glow"></div>
@@ -830,17 +862,14 @@ body {
         </div>
       </div>
     </div>
-
   </div>
-
 </div>
 
 <!-- MAIN CONTENT SCROLL -->
 <div class="scroll-container">
-
   <div class="paper-scroll">
 
-    <!-- Da Vinci logo drawn with CSS -->
+    <!-- Da Vinci logo drawn in CSS -->
     <div class="journal-logo">
       <div class="vitruvian-figure">
         <span class="vf-head"></span>
@@ -881,7 +910,7 @@ body {
       in the dark.
     </p>
 
-    <!-- SECTION: ABOUT -->
+    <!-- About -->
     <h2 style="
       font-family:'Playfair Display', serif;
       font-size:1.8rem;
@@ -913,7 +942,7 @@ body {
       To create thoughts worthy of lanterns.
     </p>
 
-    <!-- SECTION: ESSAYS -->
+    <!-- Featured Essays -->
     <h2 style="
       font-family:'Playfair Display', serif;
       font-size:1.8rem;
@@ -975,10 +1004,9 @@ body {
           Between the world and the mind lies a garden of illusions.
         </p>
       </div>
-
     </div>
 
-    <!-- SECTION: SUBMIT -->
+    <!-- Submission Guidelines -->
     <h2 style="
       font-family:'Playfair Display', serif;
       font-size:1.8rem;
@@ -1010,7 +1038,7 @@ body {
       </p>
     </div>
 
-    <!-- SECTION: CONTACT -->
+    <!-- Contact -->
     <h2 style="
       font-family:'Playfair Display', serif;
       font-size:1.8rem;
@@ -1036,10 +1064,8 @@ body {
         Email: <strong>your-email-here@example.com</strong>
       </p>
     </div>
-
-  </div> <!-- END PAPER SCROLL -->
-
-</div> <!-- END SCROLL CONTAINER -->
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="site-footer">
@@ -1047,24 +1073,63 @@ body {
   <br>© Rebirth of Reason
 
   <div class="footer-constellation">
-    <div class="const-stars">
-      <!-- 36 stars, see CSS nth-child mapping -->
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
-      <div class="star"></div><div class="star"></div>
-    </div>
     <div class="const-lines">
-      <!-- 16 connecting lines, positions in CSS -->
-      <div class="const-line"></div><div class="const-line"></div><div class="const-line"></div><div class="const-line"></div>
-      <div class="const-line"></div><div class="const-line"></div><div class="const-line"></div><div class="const-line"></div>
-      <div class="const-line"></div><div class="const-line"></div><div class="const-line"></div><div class="const-line"></div>
-      <div class="const-line"></div><div class="const-line"></div><div class="const-line"></div><div class="const-line"></div>
+      <div class="const-line line-spine"></div>
+      <div class="const-line line-shoulders"></div>
+      <div class="const-line line-arm-left"></div>
+      <div class="const-line line-arm-right"></div>
+      <div class="const-line line-hips"></div>
+      <div class="const-line line-leg-left"></div>
+      <div class="const-line line-leg-right"></div>
+      <div class="const-line line-circle-top"></div>
+      <div class="const-line line-circle-upper-left"></div>
+      <div class="const-line line-circle-left"></div>
+      <div class="const-line line-circle-lower-left"></div>
+      <div class="const-line line-circle-bottom"></div>
+      <div class="const-line line-circle-lower-right"></div>
+      <div class="const-line line-circle-right"></div>
+      <div class="const-line line-circle-upper-right"></div>
+    </div>
+
+    <div class="const-stars">
+      <!-- human -->
+      <div class="star star-head"></div>
+      <div class="star star-neck"></div>
+      <div class="star star-upperchest"></div>
+      <div class="star star-midchest"></div>
+      <div class="star star-navel"></div>
+      <div class="star star-shoulder-left"></div>
+      <div class="star star-shoulder-right"></div>
+      <div class="star star-elbow-left"></div>
+      <div class="star star-elbow-right"></div>
+      <div class="star star-hand-left"></div>
+      <div class="star star-hand-right"></div>
+      <div class="star star-hip-left"></div>
+      <div class="star star-hip-right"></div>
+      <div class="star star-knee-left"></div>
+      <div class="star star-knee-right"></div>
+      <div class="star star-ankle-left"></div>
+      <div class="star star-ankle-right"></div>
+      <div class="star star-foot-left-inner"></div>
+      <div class="star star-foot-left-outer"></div>
+      <div class="star star-foot-right-inner"></div>
+      <div class="star star-foot-right-outer"></div>
+
+      <!-- circle -->
+      <div class="star star-circle-top"></div>
+      <div class="star star-circle-top-left"></div>
+      <div class="star star-circle-top-right"></div>
+      <div class="star star-circle-mid-left1"></div>
+      <div class="star star-circle-mid-left2"></div>
+      <div class="star star-circle-mid-left3"></div>
+      <div class="star star-circle-mid-left4"></div>
+      <div class="star star-circle-bottom-left"></div>
+      <div class="star star-circle-bottom"></div>
+      <div class="star star-circle-bottom-right"></div>
+      <div class="star star-circle-mid-right4"></div>
+      <div class="star star-circle-mid-right3"></div>
+      <div class="star star-circle-mid-right2"></div>
+      <div class="star star-circle-mid-right1"></div>
     </div>
   </div>
 </footer>
