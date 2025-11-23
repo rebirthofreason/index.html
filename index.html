@@ -194,7 +194,7 @@ body {
   border-radius: 6px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
   position: relative;
-  overflow: visible; /* <-- allow full circle logo to be visible */
+  overflow: visible; /* allow full circle logo to be visible */
 }
 
 .paper-scroll::before {
@@ -400,16 +400,30 @@ body {
   color: #f3e7cf;
 }
 
-/* ------------- FOOTER + CONSTELLATION ------------- */
+/* ------------- FOOTER + CONSTELLATION + SUBMISSION BOX ------------- */
 
 .site-footer {
   position: relative;
-  text-align: center;
-  color: #ccbfa8;
   margin-top: 120px;
   margin-bottom: 60px;
   font-family: 'Crimson Pro', serif;
   font-size: 0.95rem;
+  color: #ccbfa8;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer-main {
+  flex: 1 1 260px;
+  text-align: center;
 }
 
 .footer-constellation {
@@ -478,12 +492,9 @@ body {
   opacity: 0.55;
 }
 
-/* ------------- SUBMISSION BOX (BOTTOM LEFT) ------------- */
+/* ------------- SUBMISSION BOX (IN FOOTER, LEFT) ------------- */
 
 .submission-box {
-  position: fixed;
-  left: 24px;
-  bottom: 24px;
   max-width: 280px;
   background: radial-gradient(circle at top left, rgba(247,211,120,0.12), transparent 60%),
               rgba(15, 10, 5, 0.95);
@@ -491,7 +502,6 @@ body {
   padding: 0.95rem 1rem 1.05rem 1rem;
   border: 1px solid rgba(201, 178, 122, 0.9);
   box-shadow: 0 12px 26px rgba(0,0,0,0.7);
-  z-index: 20;
   font-family: 'Crimson Pro', serif;
   color: #f3e7cf;
   backdrop-filter: blur(6px);
@@ -569,11 +579,15 @@ body {
 }
 
 @media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
   .submission-box {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    max-width: none;
+    max-width: 380px;
+    width: 100%;
   }
 }
 </style>
@@ -706,7 +720,7 @@ body {
 <div class="scroll-container">
   <div class="paper-scroll">
 
-    <!-- TOP VITRUVIAN LOGO: now uses detailed figure -->
+    <!-- TOP VITRUVIAN LOGO -->
     <div class="journal-logo">
       <svg viewBox="0 0 200 200" aria-hidden="true">
         <!-- circles + square -->
@@ -904,101 +918,132 @@ body {
       </div>
     </div>
 
-    <!-- Submission Guidelines & Contact removed from main scroll -->
+    <!-- (Submission Guidelines & Contact removed from main scroll) -->
 
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer class="site-footer">
-  This journal grows with every mind that enters the garden.
-  <br>© Rebirth of Reason
+  <div class="footer-inner">
+    <!-- SUBMISSION BOX - LEFT -->
+    <div class="submission-box" aria-label="Submission guidelines">
+      <h3>Submit Your Essay</h3>
+      <p>
+        <strong>Length:</strong> 1500–3000 words recommended.<br>
+        <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics,
+        political thought, perception, and any work that genuinely explores
+        human thought with care.<br>
+        <strong>Format:</strong> Send as PDF or Google Doc.
+      </p>
+      <p>
+        Email submissions to:<br>
+        <strong>rebirthofreason@gmail.com</strong>
+      </p>
+      <a
+        id="submissionButton"
+        class="submission-button"
+        href="#"
+      >
+        Open email to submit
+      </a>
+      <div class="submission-hint">
+        On phone: opens your mail app. On computer: opens Gmail compose.
+      </div>
+    </div>
 
-  <div class="footer-constellation">
-    <!-- same constellation as last version -->
-    <svg viewBox="0 0 200 200" class="vitruvian-constellation" aria-hidden="true">
-      <defs>
-        <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#f7d378" stop-opacity="0.4" />
-          <stop offset="60%" stop-color="#f7d378" stop-opacity="0.0" />
-          <stop offset="100%" stop-color="#f7d378" stop-opacity="0.0" />
-        </radialGradient>
-      </defs>
-      <circle cx="100" cy="100" r="84" fill="url(#haloGrad)" opacity="0.35" />
+    <!-- MAIN FOOTER CONTENT - CENTER/RIGHT -->
+    <div class="footer-main">
+      This journal grows with every mind that enters the garden.
+      <br>© Rebirth of Reason
 
-      <circle class="outer-circle" cx="100" cy="100" r="80" />
-      <circle class="inner-circle" cx="100" cy="100" r="68" />
-      <rect   class="square"       x="50"  y="40"  width="100" height="120" />
+      <div class="footer-constellation">
+        <svg viewBox="0 0 200 200" class="vitruvian-constellation" aria-hidden="true">
+          <defs>
+            <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f7d378" stop-opacity="0.4" />
+              <stop offset="60%" stop-color="#f7d378" stop-opacity="0.0" />
+              <stop offset="100%" stop-color="#f7d378" stop-opacity="0.0" />
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="84" fill="url(#haloGrad)" opacity="0.35" />
 
-      <g>
-        <line class="line" x1="100" y1="60" x2="100" y2="130" />
-        <line class="line" x1="55"  y1="85" x2="145" y2="85" />
-        <line class="line" x1="40"  y1="95" x2="160" y2="95" />
-        <line class="line" x1="55"  y1="85" x2="35"  y2="65" />
-        <line class="line" x1="145" y1="85" x2="165" y2="65" />
-        <line class="line" x1="90"  y1="130" x2="110" y2="130" />
-        <line class="line" x1="92"  y1="130" x2="75"  y2="175" />
-        <line class="line" x1="108" y1="130" x2="125" y2="175" />
-        <line class="line" x1="92"  y1="130" x2="60"  y2="180" />
-        <line class="line" x1="108" y1="130" x2="140" y2="180" />
-        <line class="line-fine" x1="100" y1="60" x2="100" y2="68" />
-        <path class="line-fine" d="M90 80 Q100 74 110 80" />
-        <path class="line-fine" d="M88 126 Q100 134 112 126" />
-      </g>
+          <circle class="outer-circle" cx="100" cy="100" r="80" />
+          <circle class="inner-circle" cx="100" cy="100" r="68" />
+          <rect   class="square"       x="50"  y="40"  width="100" height="120" />
 
-      <circle class="head" cx="100" cy="50" r="12" />
+          <g>
+            <line class="line" x1="100" y1="60" x2="100" y2="130" />
+            <line class="line" x1="55"  y1="85" x2="145" y2="85" />
+            <line class="line" x1="40"  y1="95" x2="160" y2="95" />
+            <line class="line" x1="55"  y1="85" x2="35"  y2="65" />
+            <line class="line" x1="145" y1="85" x2="165" y2="65" />
+            <line class="line" x1="90"  y1="130" x2="110" y2="130" />
+            <line class="line" x1="92"  y1="130" x2="75"  y2="175" />
+            <line class="line" x1="108" y1="130" x2="125" y2="175" />
+            <line class="line" x1="92"  y1="130" x2="60"  y2="180" />
+            <line class="line" x1="108" y1="130" x2="140" y2="180" />
+            <line class="line-fine" x1="100" y1="60" x2="100" y2="68" />
+            <path class="line-fine" d="M90 80 Q100 74 110 80" />
+            <path class="line-fine" d="M88 126 Q100 134 112 126" />
+          </g>
 
-      <g>
-        <circle class="joint" cx="55"  cy="85" r="1.6" />
-        <circle class="joint" cx="145" cy="85" r="1.6" />
-        <circle class="joint" cx="45"  cy="75" r="1.4" />
-        <circle class="joint" cx="155" cy="75" r="1.4" />
-        <circle class="joint" cx="90"  cy="130" r="1.5" />
-        <circle class="joint" cx="110" cy="130" r="1.5" />
-        <circle class="joint" cx="82"  cy="155" r="1.5" />
-        <circle class="joint" cx="118" cy="155" r="1.5" />
-        <circle class="joint" cx="69"  cy="165" r="1.4" />
-        <circle class="joint" cx="131" cy="165" r="1.4" />
-      </g>
+          <circle class="head" cx="100" cy="50" r="12" />
 
-      <g>
-        <circle class="star dim" cx="100" cy="20"  r="1.5" />
-        <circle class="star dim" cx="30"  cy="100" r="1.5" />
-        <circle class="star dim" cx="170" cy="100" r="1.5" />
-        <circle class="star dim" cx="100" cy="185" r="1.5" />
-        <circle class="star"     cx="45"  cy="40"  r="1.4" />
-        <circle class="star"     cx="155" cy="40"  r="1.4" />
-        <circle class="star"     cx="45"  cy='160' r='1.4' />
-        <circle class="star"     cx="155" cy='160' r='1.4' />
-      </g>
-    </svg>
+          <g>
+            <circle class="joint" cx="55"  cy="85" r="1.6" />
+            <circle class="joint" cx="145" cy="85" r="1.6" />
+            <circle class="joint" cx="45"  cy="75" r="1.4" />
+            <circle class="joint" cx="155" cy="75" r="1.4" />
+            <circle class="joint" cx="90"  cy="130" r="1.5" />
+            <circle class="joint" cx="110" cy="130" r="1.5" />
+            <circle class="joint" cx="82"  cy="155" r="1.5" />
+            <circle class="joint" cx="118" cy="155" r="1.5" />
+            <circle class="joint" cx="69"  cy="165" r="1.4" />
+            <circle class="joint" cx="131" cy="165" r="1.4" />
+          </g>
+
+          <g>
+            <circle class="star dim" cx="100" cy="20"  r="1.5" />
+            <circle class="star dim" cx="30"  cy="100" r="1.5" />
+            <circle class="star dim" cx="170" cy="100" r="1.5" />
+            <circle class="star dim" cx="100" cy="185" r="1.5" />
+            <circle class="star"     cx="45"  cy="40"  r="1.4" />
+            <circle class="star"     cx="155" cy="40"  r="1.4" />
+            <circle class="star"     cx="45"  cy="160" r="1.4" />
+            <circle class="star"     cx="155" cy="160" r="1.4" />
+          </g>
+        </svg>
+      </div>
+    </div>
   </div>
 </footer>
 
-<!-- SUBMISSION BOX - BOTTOM LEFT (FIXED) -->
-<div class="submission-box" aria-label="Submission guidelines">
-  <h3>Submit Your Essay</h3>
-  <p>
-    <strong>Length:</strong> 1500–3000 words recommended.<br>
-    <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics,
-    political thought, perception, and any work that genuinely explores
-    human thought with care.<br>
-    <strong>Format:</strong> Send as PDF or Google Doc.
-  </p>
-  <p>
-    Email submissions to:<br>
-    <strong>rebirthofreason@gmail.com</strong>
-  </p>
-  <a
-    class="submission-button"
-    href="mailto:rebirthofreason@gmail.com?subject=Essay%20Submission%20%E2%80%94%20Rebirth%20of%20Reason&body=Please%20include%20your%20name%2C%20essay%20title%2C%20and%20word%20count."
-  >
-    Open email to submit
-  </a>
-  <div class="submission-hint">
-    Clicking the button opens your email app with a pre-filled subject line.
-  </div>
-</div>
+<!-- BUTTON BEHAVIOR: mobile = mail app, desktop = Gmail -->
+<script>
+(function () {
+  var btn = document.getElementById('submissionButton');
+  if (!btn) return;
+
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(ua);
+
+  if (isMobile) {
+    // Opens the default mail app on phones/tablets
+    btn.href = 'mailto:rebirthofreason@gmail.com'
+      + '?subject=Essay%20Submission%20%E2%80%94%20Rebirth%20of%20Reason'
+      + '&body=Please%20include%20your%20name%2C%20essay%20title%2C%20and%20word%20count.';
+    btn.target = '_self';
+  } else {
+    // Opens Gmail compose in a new tab on desktop
+    btn.href = 'https://mail.google.com/mail/?view=cm&fs=1'
+      + '&to=rebirthofreason@gmail.com'
+      + '&su=Essay%20Submission%20%E2%80%94%20Rebirth%20of%20Reason'
+      + '&body=Please%20include%20your%20name%2C%20essay%20title%2C%20and%20word%20count.';
+    btn.target = '_blank';
+  }
+})();
+</script>
 
 </body>
 </html>
