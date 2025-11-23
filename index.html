@@ -484,22 +484,26 @@ body {
   position: fixed;
   left: 24px;
   bottom: 24px;
-  max-width: 260px;
-  background: rgba(15, 10, 5, 0.92);
-  border-radius: 10px;
-  padding: 0.9rem 1rem;
-  border: 1px solid rgba(201, 178, 122, 0.7);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.55);
+  max-width: 280px;
+  background: radial-gradient(circle at top left, rgba(247,211,120,0.12), transparent 60%),
+              rgba(15, 10, 5, 0.95);
+  border-radius: 12px;
+  padding: 0.95rem 1rem 1.05rem 1rem;
+  border: 1px solid rgba(201, 178, 122, 0.9);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.7);
   z-index: 20;
   font-family: 'Crimson Pro', serif;
   color: #f3e7cf;
+  backdrop-filter: blur(6px);
 }
 
 .submission-box h3 {
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   color: #f7d378;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .submission-box p {
@@ -508,8 +512,53 @@ body {
   margin-bottom: 0.4rem;
 }
 
+.submission-box p:last-of-type {
+  margin-bottom: 0.7rem;
+}
+
 .submission-box strong {
   font-size: 0.95rem;
+}
+
+/* button */
+.submission-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(247,211,120,0.95);
+  background: linear-gradient(135deg, #f7d378, #c9a34e);
+  color: #2a1c07;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  transition:
+    transform 0.12s ease-out,
+    box-shadow 0.12s ease-out,
+    filter 0.12s ease-out;
+}
+
+.submission-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.65);
+  filter: brightness(1.05);
+}
+
+.submission-button:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+/* tiny hint under button */
+.submission-hint {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  opacity: 0.8;
 }
 
 /* ------------- RESPONSIVE ------------- */
@@ -855,7 +904,7 @@ body {
       </div>
     </div>
 
-    <!-- (Submission Guidelines + Contact removed from here, per request) -->
+    <!-- Submission Guidelines & Contact removed from main scroll -->
 
   </div>
 </div>
@@ -919,20 +968,20 @@ body {
         <circle class="star dim" cx="100" cy="185" r="1.5" />
         <circle class="star"     cx="45"  cy="40"  r="1.4" />
         <circle class="star"     cx="155" cy="40"  r="1.4" />
-        <circle class="star"     cx="45"  cy="160" r="1.4" />
-        <circle class="star"     cx="155" cy="160" r="1.4" />
+        <circle class="star"     cx="45"  cy='160' r='1.4' />
+        <circle class="star"     cx="155" cy='160' r='1.4' />
       </g>
     </svg>
   </div>
 </footer>
 
-<!-- SUBMISSION BOX - BOTTOM LEFT -->
-<div class="submission-box">
-  <h3>Submission Guidelines</h3>
+<!-- SUBMISSION BOX - BOTTOM LEFT (FIXED) -->
+<div class="submission-box" aria-label="Submission guidelines">
+  <h3>Submit Your Essay</h3>
   <p>
     <strong>Length:</strong> 1500–3000 words recommended.<br>
     <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics,
-    political thought, perception, and anything that genuinely explores
+    political thought, perception, and any work that genuinely explores
     human thought with care.<br>
     <strong>Format:</strong> Send as PDF or Google Doc.
   </p>
@@ -940,6 +989,15 @@ body {
     Email submissions to:<br>
     <strong>rebirthofreason@gmail.com</strong>
   </p>
+  <a
+    class="submission-button"
+    href="mailto:rebirthofreason@gmail.com?subject=Essay%20Submission%20%E2%80%94%20Rebirth%20of%20Reason&body=Please%20include%20your%20name%2C%20essay%20title%2C%20and%20word%20count."
+  >
+    Open email to submit
+  </a>
+  <div class="submission-hint">
+    Clicking the button opens your email app with a pre-filled subject line.
+  </div>
 </div>
 
 </body>
