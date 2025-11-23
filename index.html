@@ -46,7 +46,6 @@ body {
 /*   WORLD BACKGROUND LAYERS */
 /* ------------------------- */
 
-/* Layer 1: deep gradient sky */
 .bg-sky {
   position: fixed;
   inset: 0;
@@ -54,7 +53,6 @@ body {
   z-index: -10;
 }
 
-/* Layer 2: drifting fog (back) — pure CSS */
 .fog-back {
   position: fixed;
   top: -10%;
@@ -78,7 +76,6 @@ body {
   100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
-/* Layer 3: drifting fog (front) — pure CSS */
 .fog-front {
   position: fixed;
   top: -15%;
@@ -101,7 +98,10 @@ body {
   100% { transform: translate3d(0, 0, 0) scale(1.02); }
 }
 
-/* Layer 4: fireflies */
+/* ------------------------- */
+/*         FIREFLIES         */
+/* ------------------------- */
+
 .fireflies {
   position: fixed;
   inset: 0;
@@ -129,7 +129,6 @@ body {
   50% { opacity: 1; }
 }
 
-/* Generate multiple fireflies */
 .firefly:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
 .firefly:nth-child(2) { top: 40%; left: 80%; animation-delay: 1s; }
 .firefly:nth-child(3) { top: 65%; left: 50%; animation-delay: 2s; }
@@ -142,7 +141,6 @@ body {
 /*   VINES + BOTANICAL ART   */
 /* ------------------------- */
 
-/* abstract vine silhouettes, no external images */
 .vines-left,
 .vines-right {
   position: fixed;
@@ -184,11 +182,10 @@ body {
   position: relative;
   z-index: 5;
   max-width: var(--max-width);
-  margin: 150px auto 0 auto;
+  margin: 180px auto 0 auto;
   padding-bottom: 200px;
 }
 
-/* The scroll (paper) background */
 .paper-scroll {
   background: linear-gradient(to bottom, var(--paper) 0%, var(--paper-dark) 100%);
   border-left: 8px solid var(--paper-edge);
@@ -200,7 +197,6 @@ body {
   overflow: hidden;
 }
 
-/* Paper grain overlay — CSS only, no image */
 .paper-scroll::before {
   content: "";
   position: absolute;
@@ -225,39 +221,38 @@ body {
 }
 
 /* ------------------------------------------------ */
-/*     PHILOSOPHER LANTERNS — HANGING FROM TREES    */
+/*     PHILOSOPHER LANTERNS                         */
 /* ------------------------------------------------ */
 
-/* Pull lanterns into view & give depth */
 .lanterns-container {
-  position: absolute;
-  top: 140px;
-  left: 0;
-  right: 0;
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
   pointer-events: none;
-  z-index: 3;
+  z-index: 6;
 }
 
-/* Lantern group left & right columns */
 .lantern-column {
   position: absolute;
-  width: 260px;
+  width: 220px;
   display: flex;
   flex-direction: column;
   gap: 220px;
 }
 
 .lantern-column.left {
-  left: 4%;
+  left: 0;
   animation: parallaxLeft 20s linear infinite alternate;
 }
 
 .lantern-column.right {
-  right: 4%;
+  right: 0;
   animation: parallaxRight 25s linear infinite alternate;
 }
 
-/* Subtle parallax drift */
 @keyframes parallaxLeft {
   0% { transform: translateY(0); }
   100% { transform: translateY(40px); }
@@ -272,18 +267,9 @@ body {
 /*        BRANCH GRAPHIC        */
 /* ---------------------------- */
 
-/* CSS branch instead of external image */
+/* hide branches completely */
 .branch {
-  width: 260px;
-  height: 14px;
-  margin-left: 40px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 10% 40%, rgba(255,255,255,0.14), transparent 55%),
-    linear-gradient(to right, #3a2a15, #5c4424, #3a2a15);
-  box-shadow:
-    0 8px 4px rgba(0,0,0,0.6),
-    0 0 10px rgba(0,0,0,0.8);
+  display: none;
 }
 
 /* ---------------------------- */
@@ -292,7 +278,7 @@ body {
 
 .lantern {
   --lantern-scale: 1;
-  width: 260px;
+  width: 220px;
   background: rgba(26, 21, 12, 0.9);
   border-radius: 16px;
   padding: 14px;
@@ -303,7 +289,7 @@ body {
     inset 0 0 25px rgba(247, 211, 120, 0.12);
   backdrop-filter: blur(3px);
   position: relative;
-  margin-top: -10px;
+  margin-top: 0;
 
   transform-origin: top center;
   animation: sway 10s ease-in-out infinite;
@@ -318,19 +304,30 @@ body {
   animation-delay: -6s;
 }
 
-/* Depth variants */
+/* DEPTH VARIANTS – big contrast */
+
 .lantern-depth-near {
-  --lantern-scale: 1.15;
+  --lantern-scale: 1.4;
+  z-index: 3;
 }
 
 .lantern-depth-mid {
-  --lantern-scale: 1.0;
+  --lantern-scale: 1.05;
+  z-index: 2;
 }
 
 .lantern-depth-far {
-  --lantern-scale: 0.86;
-  opacity: 0.85;
-  filter: blur(0.3px);
+  --lantern-scale: 0.75;
+  opacity: 0.6;
+  filter: blur(0.8px);
+  z-index: 1;
+}
+
+.lantern-depth-very-far {
+  --lantern-scale: 0.5;
+  opacity: 0.35;
+  filter: blur(1.6px);
+  z-index: 0;
 }
 
 /* Sway/bob physics, including scale */
@@ -342,18 +339,9 @@ body {
   100% { transform: scale(var(--lantern-scale)) rotate(0deg) translateY(0); }
 }
 
-/* String / rope */
+/* remove rope/line above lanterns */
 .lantern::before {
-  content: "";
-  position: absolute;
-  top: -65px;
-  left: 50%;
-  width: 4px;
-  height: 65px;
-  transform: translateX(-50%);
-  background: linear-gradient(to bottom, #c9b27a, #a38b58);
-  border-radius: 2px;
-  box-shadow: 0 0 6px rgba(247, 211, 120, 0.4);
+  content: none;
 }
 
 /* ---------------------------- */
@@ -362,7 +350,7 @@ body {
 
 .lantern-img-wrapper {
   width: 100%;
-  height: 180px;
+  height: 170px;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -372,7 +360,6 @@ body {
     inset 0 0 45px rgba(247, 211, 120, 0.18);
 }
 
-/* Turn real portrait into painted illustration */
 .lantern-img {
   width: 100%;
   height: 100%;
@@ -387,7 +374,6 @@ body {
   mix-blend-mode: lighten;
 }
 
-/* Text below portrait */
 .lantern-text {
   margin-top: 12px;
   font-family: "Crimson Pro", serif;
@@ -413,13 +399,25 @@ body {
   color: #f3e7cf;
 }
 
-/* Lantern glow halo */
 .lantern-glow {
   position: absolute;
   inset: -40px;
   background: radial-gradient(circle, rgba(247,211,120,0.15), transparent 70%);
   z-index: -1;
   filter: blur(8px);
+}
+
+/* ---------------------------- */
+/*   RESPONSIVE TWEAKS         */
+/* ---------------------------- */
+
+@media (max-width: 980px) {
+  .lanterns-container {
+    display: none;
+  }
+  .scroll-container {
+    margin-top: 80px;
+  }
 }
 
 </style>
@@ -452,6 +450,7 @@ body {
   <div class="lantern-column left">
 
     <div class="branch"></div>
+    <!-- Plato: very close -->
     <div class="lantern lantern-depth-near">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
@@ -469,6 +468,7 @@ body {
     </div>
 
     <div class="branch"></div>
+    <!-- Aristotle: mid distance -->
     <div class="lantern lantern-depth-mid">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
@@ -486,7 +486,8 @@ body {
     </div>
 
     <div class="branch"></div>
-    <div class="lantern lantern-depth-far">
+    <!-- Augustine: very far -->
+    <div class="lantern lantern-depth-very-far">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
         <img class="lantern-img"
@@ -508,6 +509,7 @@ body {
   <div class="lantern-column right">
 
     <div class="branch"></div>
+    <!-- Aquinas: mid distance -->
     <div class="lantern lantern-depth-mid">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
@@ -525,6 +527,7 @@ body {
     </div>
 
     <div class="branch"></div>
+    <!-- Descartes: far -->
     <div class="lantern lantern-depth-far">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
@@ -542,6 +545,7 @@ body {
     </div>
 
     <div class="branch"></div>
+    <!-- Nietzsche: very close -->
     <div class="lantern lantern-depth-near">
       <div class="lantern-glow"></div>
       <div class="lantern-img-wrapper">
@@ -750,11 +754,10 @@ body {
       </p>
     </div>
 
-  </div> <!-- END PAPER SCROLL -->
+  </div>
 
-</div> <!-- END SCROLL CONTAINER -->
+</div>
 
-<!-- FOOTER -->
 <footer style="
   text-align:center;
   color:#ccbfa8;
