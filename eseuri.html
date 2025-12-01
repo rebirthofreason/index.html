@@ -36,14 +36,10 @@
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
-      position: relative;
       overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .container {
       max-width: var(--max-width);
@@ -51,6 +47,7 @@
       padding: 1.75rem 1.25rem 4rem;
       position: relative;
       z-index: 2;
+      background: transparent !important;     /* FULL CLEAN FIX */
     }
 
     /* NAVBAR */
@@ -82,10 +79,7 @@
       text-transform: uppercase;
     }
 
-    .brand-tagline {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
+    .brand-tagline { font-size: 0.75rem; color: var(--muted); }
 
     nav ul {
       list-style: none;
@@ -101,21 +95,15 @@
       transition: color 0.18s ease, border-color 0.18s ease;
     }
 
-    nav a:hover {
-      color: var(--accent);
-      border-color: var(--accent-soft);
-    }
+    nav a:hover { color: var(--accent); border-color: var(--accent-soft); }
+    nav a.active { color: var(--accent); border-color: var(--accent-soft); }
 
-    nav a.active {
-      color: var(--accent);
-      border-color: var(--accent-soft);
-    }
-
-    /* PAGE TITLE / INTRO */
-
+    /* PAGE HEADER — FULL FIX */
     .page-header {
       margin-top: 2.5rem;
       margin-bottom: 1.5rem;
+      background: transparent !important;   /* REMOVE DARK BLOCK */
+      padding: 0 !important;                /* REMOVE ANY PADDING BLOCK */
     }
 
     .page-header h1 {
@@ -131,14 +119,13 @@
     }
 
     /* FILTER BAR */
-
     .filter-bar {
       margin-top: 2rem;
       margin-bottom: 2rem;
-      padding: 0;              /* no inner padding */
-      border-radius: 0;        /* no rounded pill */
-      background: transparent; /* remove darker background */
-      border: none;            /* remove border */
+      padding: 0;
+      border-radius: 0;
+      background: transparent !important;  /* REMOVE ALL BACKGROUND */
+      border: none !important;
       display: flex;
       align-items: center;
       gap: 0.8rem;
@@ -148,7 +135,6 @@
     .filter-label {
       font-size: 0.8rem;
       color: var(--muted);
-      margin-right: 0.4rem;
       white-space: nowrap;
     }
 
@@ -166,7 +152,7 @@
       font-size: 0.78rem;
       padding: 0.32rem 0.9rem;
       color: var(--muted);
-      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.08s ease;
+      transition: 0.18s ease;
     }
 
     .filter-btn:hover {
@@ -183,9 +169,7 @@
 
     /* GRID + CARDS */
 
-    section {
-      margin-top: 1.5rem;
-    }
+    section { margin-top: 1.5rem; }
 
     .grid {
       display: grid;
@@ -202,9 +186,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
-      text-decoration: none;
-      color: inherit;
-      transition: border-color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+      transition: 0.18s ease;
     }
 
     .card:hover {
@@ -233,23 +215,11 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .card h3 {
-      font-size: 1rem;
-      margin-top: 0.1rem;
-    }
-
-    .meta {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .card p {
-      font-size: 0.87rem;
-      color: #dfe2f2;
-    }
+    .card h3 { font-size: 1rem; }
+    .meta { font-size: 0.78rem; color: var(--muted); }
+    .card p { font-size: 0.87rem; color: #dfe2f2; }
 
     /* FOOTER */
-
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       margin-top: 3rem;
@@ -259,30 +229,7 @@
       text-align: center;
     }
 
-    footer a {
-      color: var(--accent);
-    }
-
-    .top-link {
-      display: inline-block;
-      margin-bottom: 0.3rem;
-      font-size: 0.8rem;
-    }
-
-    @media (max-width: 820px) {
-      header {
-        position: static;
-      }
-
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav ul {
-        flex-wrap: wrap;
-      }
-    }
+    .top-link { font-size: 0.8rem; display: inline-block; margin-bottom: 0.3rem; }
   </style>
 </head>
 
@@ -290,11 +237,10 @@
   <header>
     <div class="nav-inner">
       <div class="brand">
-        <div>
-          <div class="brand-title">Asociatia Filosofilor Moldova</div>
-          <div class="brand-tagline">Jurnal independent de filosofie pentru tineri</div>
-        </div>
+        <div class="brand-title">Asociatia Filosofilor Moldova</div>
+        <div class="brand-tagline">Jurnal independent de filosofie pentru tineri</div>
       </div>
+
       <nav>
         <ul>
           <li><a href="index.html">Acasă</a></li>
@@ -309,10 +255,7 @@
   <main class="container">
     <header class="page-header">
       <h1>Eseuri publicate</h1>
-      <p>
-        Aici vei găsi toate eseurile trimise și acceptate de <strong>Asociatia Filosofilor Moldova</strong>.
-        Poți filtra textele după lungimea lor aproximativă, în funcție de cât de adânc vrei să intri într-o idee.
-      </p>
+      <p>Aici vei găsi toate eseurile trimise și acceptate...</p>
     </header>
 
     <!-- FILTER BAR -->
@@ -320,153 +263,70 @@
       <span class="filter-label">Filtrează după lungime:</span>
       <div class="filter-buttons">
         <button class="filter-btn active" data-filter="all">Toate</button>
-        <button class="filter-btn" data-filter="1k-2_5k">1k–2.5k cuvinte</button>
-        <button class="filter-btn" data-filter="2_5k-4k">2.5k–4k cuvinte</button>
-        <button class="filter-btn" data-filter="4k-6k">4k–6k cuvinte</button>
-        <button class="filter-btn" data-filter="6k-plus">6k+ cuvinte</button>
+        <button class="filter-btn" data-filter="1k-2_5k">1k–2.5k</button>
+        <button class="filter-btn" data-filter="2_5k-4k">2.5k–4k</button>
+        <button class="filter-btn" data-filter="4k-6k">4k–6k</button>
+        <button class="filter-btn" data-filter="6k-plus">6k+</button>
       </div>
     </div>
 
-    <!-- ESSAY GRID -->
-    <section aria-label="Lista eseurilor">
+    <!-- GRID -->
+    <section>
       <div class="grid">
 
-        <!-- EXAMPLE CARD – 2.5k–4k -->
-        <a class="card" data-range="2_5k-4k" href="#">
+        <!-- EXAMPLE CARDS -->
+        <a href="#" class="card" data-range="2_5k-4k">
           <div>
             <span class="badge">Eseu</span>
-            <span class="range-tag">~2.800 de cuvinte</span>
+            <span class="range-tag">~2.800 cuvinte</span>
           </div>
-          <h3>Fulgerul este memorie: despre electroni, experiență și forma gândului</h3>
-          <div class="meta">de <em>Nume Autor</em> · Filosofia minții</div>
-          <p>
-            Dacă memoria este doar electricitate care curge între neuroni, atunci, teoretic,
-            o furtună electrică identică ar putea recrea o viață. Eseul pune în discuție ce
-            mai rămâne din „eu” dacă totul este doar tipar electric.
-          </p>
+          <h3>Fulgerul este memorie</h3>
+          <div class="meta">de Nume Autor · Filosofia minții</div>
+          <p>Eseu despre memorie, electricitate și identitate.</p>
         </a>
 
-        <!-- EXAMPLE CARD – 1k–2.5k -->
-        <a class="card" data-range="1k-2_5k" href="#">
+        <a href="#" class="card" data-range="1k-2_5k">
           <div>
             <span class="badge">Eseu</span>
-            <span class="range-tag">~1.600 de cuvinte</span>
+            <span class="range-tag">~1.600 cuvinte</span>
           </div>
-          <h3>Bio-mașina umană și mitul alegerii libere</h3>
-          <div class="meta">de <em>Nume Autor</em> · Etică & metafizică</div>
-          <p>
-            De la foame și frică până la dorința de statut, fiecare decizie pare legată
-            de algoritmi interiori previzibili. Textul analizează dacă „liberul arbitru”
-            mai înseamnă ceva într-un creier complet determinist.
-          </p>
+          <h3>Bio-mașina umană</h3>
+          <div class="meta">de Nume Autor · Etică</div>
+          <p>Despre determinism și alegerea liberă.</p>
         </a>
 
-        <!-- EXAMPLE CARD – 4k–6k -->
-        <a class="card" data-range="4k-6k" href="#">
+        <a href="#" class="card" data-range="4k-6k">
           <div>
             <span class="badge">Eseu extins</span>
-            <span class="range-tag">~4.700 de cuvinte</span>
+            <span class="range-tag">~4.700 cuvinte</span>
           </div>
-          <h3>Realitatea perspectivală vs realitatea obiectivă</h3>
-          <div class="meta">de <em>Nume Autor</em> · Epistemologie</div>
-          <p>
-            Între lume și percepție există un filtru de întârzieri, interpretări și narațiuni.
-            Acest eseu cartografiază diferența dintre „ce este” și „ce ni se pare că este”,
-            și discută dacă filosofia trebuie să rămână în acest spațiu intermediar.
-          </p>
-        </a>
-
-        <!-- EXAMPLE CARD – 6k+ -->
-        <a class="card" data-range="6k-plus" href="#">
-          <div>
-            <span class="badge">Studiu</span>
-            <span class="range-tag">~6.800 de cuvinte</span>
-          </div>
-          <h3>Politica memoriei: uitare, vină și reconstrucția identității colective</h3>
-          <div class="meta">de <em>Nume Autor</em> · Filosofie politică</div>
-          <p>
-            Cum rescriu statele trecutul prin manuale, monumente și tăceri oficiale?
-            Studiul examinează modul în care memoria colectivă este „programată” și ce
-            înseamnă responsabilitatea morală într-o societate care uită selectiv.
-          </p>
-        </a>
-
-        <!-- ANOTHER 1k–2.5k EXAMPLE -->
-        <a class="card" data-range="1k-2_5k" href="#">
-          <div>
-            <span class="badge">Eseu</span>
-            <span class="range-tag">~1.200 de cuvinte</span>
-          </div>
-          <h3>Argumentul din oglindă: cât de sincer este „eu-l” pe care îl vedem?</h3>
-          <div class="meta">de <em>Nume Autor</em> · Filosofie a sinelui</div>
-          <p>
-            Un eseu scurt despre felul în care imaginea de sine este construită din reflexii,
-            comparații și feedback social, și ce se întâmplă când toate aceste oglinzi sunt
-            deformate.
-          </p>
-        </a>
-
-        <!-- ANOTHER 2.5k–4k EXAMPLE -->
-        <a class="card" data-range="2_5k-4k" href="#">
-          <div>
-            <span class="badge">Eseu</span>
-            <span class="range-tag">~3.300 de cuvinte</span>
-          </div>
-          <h3>Logica emoțiilor: pot sentimentele să fie raționale?</h3>
-          <div class="meta">de <em>Nume Autor</em> · Filosofie a minții</div>
-          <p>
-            De obicei opunem rațiunea emoției. Acest text argumentează că emoțiile pot avea
-            o structură logică internă și că, în anumite situații, sunt chiar mai „raționale”
-            decât calculele reci.
-          </p>
-        </a>
-
-        <!-- ANOTHER 4k–6k EXAMPLE -->
-        <a class="card" data-range="4k-6k" href="#">
-          <div>
-            <span class="badge">Eseu extins</span>
-            <span class="range-tag">~5.200 de cuvinte</span>
-          </div>
-          <h3>Etica algoritmilor: cine este responsabil pentru deciziile unei mașini?</h3>
-          <div class="meta">de <em>Nume Autor</em> · Etică aplicată</div>
-          <p>
-            De la recomandări de conținut până la sisteme de justiție asistate de AI, algoritmii
-            iau decizii cu impact real. Eseul explorează ce înseamnă vinovăție și responsabilitate
-            într-un lanț de decizie în care oamenii „dau vina” pe mașini.
-          </p>
+          <h3>Realitatea perspectivală</h3>
+          <div class="meta">de Nume Autor · Epistemologie</div>
+          <p>Diferența dintre percepție și realitate.</p>
         </a>
 
       </div>
     </section>
 
     <footer>
-      <a class="top-link" href="#top">↑ Înapoi sus</a>
-      <div>Asociatia Filosofilor Moldova &middot; Jurnal de filosofie pentru tineri gânditori.</div>
-      <div>Găzduit cu GitHub Pages &middot; Proiectat de tine.</div>
+      <a href="#top" class="top-link">↑ Sus</a>
+      <div>Asociatia Filosofilor Moldova – Jurnal de filosofie.</div>
     </footer>
   </main>
 
   <script>
-    // Filtrare după lungime
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    const buttons = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.card[data-range]');
 
-    filterButtons.forEach((btn) => {
+    buttons.forEach(btn => {
       btn.addEventListener('click', () => {
-        const filter = btn.getAttribute('data-filter');
-
-        // active state pe butoane
-        filterButtons.forEach(b => b.classList.remove('active'));
+        buttons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // afișează / ascunde cărțile
+        const filter = btn.dataset.filter;
         cards.forEach(card => {
-          const range = card.getAttribute('data-range');
-          if (filter === 'all' || filter === range) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
+          if (filter === 'all' || card.dataset.range === filter) card.style.display = '';
+          else card.style.display = 'none';
         });
       });
     });
