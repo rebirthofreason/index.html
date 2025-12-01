@@ -135,10 +135,10 @@
     .filter-bar {
       margin-top: 2rem;
       margin-bottom: 2rem;
-      padding: 0.75rem 0.85rem;
-      border-radius: 999px;
-      background: rgba(10, 12, 20, 0.96);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0;              /* no inner padding */
+      border-radius: 0;        /* no rounded pill */
+      background: transparent; /* remove darker background */
+      border: none;            /* remove border */
       display: flex;
       align-items: center;
       gap: 0.8rem;
@@ -202,6 +202,15 @@
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+    }
+
+    .card:hover {
+      border-color: var(--accent-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
     }
 
     .badge {
@@ -239,21 +248,6 @@
       color: #dfe2f2;
     }
 
-    .card-footer {
-      margin-top: 0.4rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .card-footer a {
-      font-size: 0.78rem;
-      color: var(--accent);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-    }
-
     /* FOOTER */
 
     footer {
@@ -287,10 +281,6 @@
 
       nav ul {
         flex-wrap: wrap;
-      }
-
-      .filter-bar {
-        border-radius: 16px;
       }
     }
   </style>
@@ -342,7 +332,7 @@
       <div class="grid">
 
         <!-- EXAMPLE CARD – 2.5k–4k -->
-        <article class="card" data-range="2_5k-4k">
+        <a class="card" data-range="2_5k-4k" href="#">
           <div>
             <span class="badge">Eseu</span>
             <span class="range-tag">~2.800 de cuvinte</span>
@@ -354,14 +344,10 @@
             o furtună electrică identică ar putea recrea o viață. Eseul pune în discuție ce
             mai rămâne din „eu” dacă totul este doar tipar electric.
           </p>
-          <div class="card-footer">
-            <!-- Înlocuiește # cu link către PDF / pagină -->
-            <a href="#">Deschide eseul</a>
-          </div>
-        </article>
+        </a>
 
         <!-- EXAMPLE CARD – 1k–2.5k -->
-        <article class="card" data-range="1k-2_5k">
+        <a class="card" data-range="1k-2_5k" href="#">
           <div>
             <span class="badge">Eseu</span>
             <span class="range-tag">~1.600 de cuvinte</span>
@@ -373,13 +359,10 @@
             de algoritmi interiori previzibili. Textul analizează dacă „liberul arbitru”
             mai înseamnă ceva într-un creier complet determinist.
           </p>
-          <div class="card-footer">
-            <a href="#">Deschide eseul</a>
-          </div>
-        </article>
+        </a>
 
         <!-- EXAMPLE CARD – 4k–6k -->
-        <article class="card" data-range="4k-6k">
+        <a class="card" data-range="4k-6k" href="#">
           <div>
             <span class="badge">Eseu extins</span>
             <span class="range-tag">~4.700 de cuvinte</span>
@@ -391,13 +374,10 @@
             Acest eseu cartografiază diferența dintre „ce este” și „ce ni se pare că este”,
             și discută dacă filosofia trebuie să rămână în acest spațiu intermediar.
           </p>
-          <div class="card-footer">
-            <a href="#">Deschide eseul</a>
-          </div>
-        </article>
+        </a>
 
         <!-- EXAMPLE CARD – 6k+ -->
-        <article class="card" data-range="6k-plus">
+        <a class="card" data-range="6k-plus" href="#">
           <div>
             <span class="badge">Studiu</span>
             <span class="range-tag">~6.800 de cuvinte</span>
@@ -409,13 +389,10 @@
             Studiul examinează modul în care memoria colectivă este „programată” și ce
             înseamnă responsabilitatea morală într-o societate care uită selectiv.
           </p>
-          <div class="card-footer">
-            <a href="#">Deschide eseul</a>
-          </div>
-        </article>
+        </a>
 
         <!-- ANOTHER 1k–2.5k EXAMPLE -->
-        <article class="card" data-range="1k-2_5k">
+        <a class="card" data-range="1k-2_5k" href="#">
           <div>
             <span class="badge">Eseu</span>
             <span class="range-tag">~1.200 de cuvinte</span>
@@ -427,13 +404,10 @@
             comparații și feedback social, și ce se întâmplă când toate aceste oglinzi sunt
             deformate.
           </p>
-          <div class="card-footer">
-            <a href="#">Deschide eseul</a>
-          </div>
-        </article>
+        </a>
 
         <!-- ANOTHER 2.5k–4k EXAMPLE -->
-        <article class="card" data-range="2_5k-4k">
+        <a class="card" data-range="2_5k-4k" href="#">
           <div>
             <span class="badge">Eseu</span>
             <span class="range-tag">~3.300 de cuvinte</span>
@@ -445,13 +419,10 @@
             o structură logică internă și că, în anumite situații, sunt chiar mai „raționale”
             decât calculele reci.
           </p>
-          <div class="card-footer">
-            <a href="#">Deschide eseul</a>
-          </div>
-        </article>
+        </a>
 
         <!-- ANOTHER 4k–6k EXAMPLE -->
-        <article class="card" data-range="4k-6k">
+        <a class="card" data-range="4k-6k" href="#">
           <div>
             <span class="badge">Eseu extins</span>
             <span class="range-tag">~5.200 de cuvinte</span>
@@ -463,10 +434,7 @@
             iau decizii cu impact real. Eseul explorează ce înseamnă vinovăție și responsabilitate
             într-un lanț de decizie în care oamenii „dau vina” pe mașini.
           </p>
-          <div class="card-footer">
-            <a href="#">Deschide eseul</a>
-          </div>
-        </article>
+        </a>
 
       </div>
     </section>
