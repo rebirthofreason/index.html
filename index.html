@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asociatia Filosofilor Moldova – Jurnal de Filosofie</title>
+  <title>The Moldovan Philosophy Organization – Philosophy Journal</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,6 +75,12 @@
       gap: 1rem;
     }
 
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
     .brand-title {
       font-family: "Playfair Display", serif;
       font-weight: 600;
@@ -86,6 +92,12 @@
     .brand-tagline {
       font-size: 0.75rem;
       color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
     nav ul {
@@ -105,6 +117,23 @@
     nav a:hover {
       color: var(--accent);
       border-color: var(--accent-soft);
+    }
+
+    .lang-toggle {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(10, 13, 22, 0.9);
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 0.25rem 0.7rem;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.08s ease;
+    }
+
+    .lang-toggle:hover {
+      border-color: var(--accent-soft);
+      color: var(--accent);
+      transform: translateY(-1px);
     }
 
     /* HERO */
@@ -420,17 +449,18 @@
     <div class="nav-inner">
       <div class="brand">
         <div>
-          <div class="brand-title">Asociatia Filosofilor Moldova</div>
-          <div class="brand-tagline">Jurnal independent de filosofie pentru tineri</div>
+          <div class="brand-title" data-i18n="brand.title">The Moldovan Philosophy Organization</div>
+          <div class="brand-tagline" data-i18n="brand.tagline">Independent philosophy journal for young thinkers</div>
         </div>
       </div>
       <nav>
         <ul>
-          <li><a href="#about">Despre</a></li>
-          <li><a href="eseuri.html">Eseuri</a></li>
-          <li><a href="#submit">Trimite</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about" data-i18n="nav.about">Despre</a></li>
+          <li><a href="#essays" data-i18n="nav.essays">Eseuri</a></li>
+          <li><a href="#submit" data-i18n="nav.submit">Trimite</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
+        <button class="lang-toggle" id="langToggle">EN</button>
       </nav>
     </div>
   </header>
@@ -439,51 +469,48 @@
     <!-- HERO -->
     <section class="hero" id="top">
       <div class="hero-text">
-        <h1>
-          Un jurnal pentru minți în
-          <span class="hero-highlight">rebeliune</span>
-          împotriva gândirii leneșe.
+        <h1 data-i18n="hero.title">
+          Un jurnal pentru minți în <span class="hero-highlight">rebeliune</span> împotriva gândirii leneșe.
         </h1>
-        <p class="hero-subtitle">
-          <strong>Asociatia Filosofilor Moldova</strong> publică filosofie tăioasă, unapologetic,
-          de la tineri autori care refuză clișeele. Primim eseuri care pun sub semnul întrebării
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          <strong>The Moldovan Philosophy Organization</strong> publică filosofie tăioasă, necompromisă,
+          scrisă de tineri autori care refuză clișeele. Primim eseuri care pun sub semnul întrebării
           „bunul simț”, dărâmă iluzii și reconstruiesc argumente de la primul principiu.
         </p>
 
         <div class="hero-actions">
-          <!-- NOW GOES TO SEPARATE PAGE -->
-          <a class="btn btn-primary" href="eseuri.html">
+          <a class="btn btn-primary" href="eseuri.html" data-i18n="hero.btn.read">
             Citește eseurile prezentate →
           </a>
-          <a class="btn btn-ghost" href="#submit">
+          <a class="btn btn-ghost" href="#submit" data-i18n="hero.btn.submit">
             Trimite-ți lucrarea
           </a>
         </div>
 
         <div class="hero-meta">
-          <span>Numărul 01 – Schițând realitatea</span>
-          Deschis pentru trimiterea eseurilor · 2025
+          <span data-i18n="hero.meta.badge">Numărul 01 – Schițând realitatea</span>
+          <span data-i18n="hero.meta.text">Deschis pentru trimiterea eseurilor · 2025</span>
         </div>
       </div>
 
       <aside class="hero-card">
         <div class="hero-card-inner">
-          <div class="hero-card-label">Temă curentă</div>
-          <div class="hero-card-title">Percepție, memorie și iluzia libertății</div>
-          <p class="hero-card-body">
+          <div class="hero-card-label" data-i18n="hero.card.label">Temă curentă</div>
+          <div class="hero-card-title" data-i18n="hero.card.title">Percepție, memorie și iluzia libertății</div>
+          <p class="hero-card-body" data-i18n="hero.card.body">
             Cât de fiabil este ceea ce numim „experiență”? Suntem agenți liberi sau
             bio-mașini cablate elegant, care urmează un cod ascuns? Acest număr
             explorează linia de fractură dintre realitatea obiectivă și poveștile
             pe care ni le spunem despre ea.
           </p>
           <ul class="hero-card-list">
-            <li>🧠 Conștiință, percepție și identitate personală</li>
-            <li>⚡ Memoria ca tipar, semnal sau „fulger”</li>
-            <li>🧩 Liberul arbitru, agenția și algoritmii mentali</li>
+            <li data-i18n="hero.card.li1">🧠 Conștiință, percepție și identitate personală</li>
+            <li data-i18n="hero.card.li2">⚡ Memoria ca tipar, semnal sau „fulger”</li>
+            <li data-i18n="hero.card.li3">🧩 Liberul arbitru, agenția și algoritmii mentali</li>
           </ul>
           <div style="margin-top:0.7rem;">
-            <span class="pill">Eseuri de 1500–3000 de cuvinte</span>
-            <span class="pill">Tineri autori (≈14–22 ani)</span>
+            <span class="pill" data-i18n="hero.card.pill1">Eseuri de 1500–3000 de cuvinte</span>
+            <span class="pill" data-i18n="hero.card.pill2">Tineri autori (≈14–22 ani)</span>
           </div>
         </div>
       </aside>
@@ -491,18 +518,18 @@
 
     <!-- ABOUT -->
     <section id="about">
-      <h2>Despre jurnal</h2>
-      <p class="section-intro">
-        <strong>Asociatia Filosofilor Moldova</strong> este un jurnal de filosofie online,
-        condus de elevi și studenți. Scopul nostru este simplu: să creăm un spațiu în care
+      <h2 data-i18n="about.title">Despre jurnal</h2>
+      <p class="section-intro" data-i18n="about.intro">
+        <strong>The Moldovan Philosophy Organization</strong> este un jurnal de filosofie online,
+        condus de elevi și studenți. Scopul nostru este să creăm un spațiu în care
         tinerii gânditori își pot testa ideile serioase fără să le dilueze pentru algoritmi,
         trenduri sau rubrici școlare.
       </p>
 
       <div class="grid">
         <article class="card">
-          <h3>Ce publicăm</h3>
-          <p>
+          <h3 data-i18n="about.card1.title">Ce publicăm</h3>
+          <p data-i18n="about.card1.body">
             Ne interesează eseurile argumentative, tezele scurte, experimentele de gândire
             și „manifestele” conceptuale. Textul tău poate fi speculativ, dar trebuie să fie
             intelectual onest și argumentat clar.
@@ -510,16 +537,16 @@
         </article>
 
         <article class="card">
-          <h3>Pentru cine este</h3>
-          <p>
+          <h3 data-i18n="about.card2.title">Pentru cine este</h3>
+          <p data-i18n="about.card2.body">
             Liceeni și studenți, sau oricine se află la începutul traseului filosofic și ia ideile
             în serios. Nu ai nevoie de diplome formale; ai nevoie de disciplină și claritate.
           </p>
         </article>
 
         <article class="card">
-          <h3>Cum citim</h3>
-          <p>
+          <h3 data-i18n="about.card3.title">Cum citim</h3>
+          <p data-i18n="about.card3.body">
             Textele sunt evaluate în funcție de claritate, originalitate și forța argumentării.
             Nu vei fi respins pentru că nu „sună academic” — dar vei fi împins să justifici
             fiecare pas al raționamentului tău.
@@ -528,20 +555,20 @@
       </div>
     </section>
 
-    <!-- ESSAYS PREVIEW (still just preview; real list on eseurile.html) -->
+    <!-- ESSAYS -->
     <section id="essays">
-      <h2>Eseuri prezentate (exemple provizorii)</h2>
-      <p class="section-intro">
+      <h2 data-i18n="essays.title">Eseuri prezentate (exemple provizorii)</h2>
+      <p class="section-intro" data-i18n="essays.intro">
         Înlocuiește aceste exemple cu propriile tale eseuri pe măsură ce le publici.
         Pentru lista completă, folosește pagina <strong>Eseuri</strong>.
       </p>
 
       <div class="grid">
         <article class="card">
-          <span class="badge">Eseu · 2500 de cuvinte</span>
-          <h3>Fulgerul este memorie: despre electroni, experiență și forma gândului</h3>
-          <div class="meta">de <em>Numele tău</em> · Numărul 01</div>
-          <p>
+          <span class="badge" data-i18n="essays.card1.badge">Eseu · 2500 de cuvinte</span>
+          <h3 data-i18n="essays.card1.title">Fulgerul este memorie: despre electroni, experiență și forma gândului</h3>
+          <div class="meta" data-i18n="essays.card1.meta">de <em>Numele tău</em> · Numărul 01</div>
+          <p data-i18n="essays.card1.body">
             Dacă memoria este doar electricitate care curge între neuroni, atunci, teoretic,
             o furtună electrică identică ar putea recrea o viață. Acest eseu întreabă dacă
             această imagine ne trivializează — sau, din contră, ne ia în sfârșit în serios.
@@ -549,10 +576,10 @@
         </article>
 
         <article class="card">
-          <span class="badge">Eseu · 1800 de cuvinte</span>
-          <h3>Bio-mașina umană și mitul liberului arbitru</h3>
-          <div class="meta">de <em>Numele tău</em> · Numărul 01</div>
-          <p>
+          <span class="badge" data-i18n="essays.card2.badge">Eseu · 1800 de cuvinte</span>
+          <h3 data-i18n="essays.card2.title">Bio-mașina umană și mitul liberului arbitru</h3>
+          <div class="meta" data-i18n="essays.card2.meta">de <em>Numele tău</em> · Numărul 01</div>
+          <p data-i18n="essays.card2.body">
             Foamea, frica, statutul, obișnuința: dacă fiecare decizie poate fi urmărită până
             la algoritmi mentali predictibili, ce mai rămâne de făcut pentru „voință”?
             O privire asupra determinismului din interiorul mașinii.
@@ -560,10 +587,10 @@
         </article>
 
         <article class="card">
-          <span class="badge">Eseu · 2100 de cuvinte</span>
-          <h3>Realitatea perspectivală vs realitatea obiectivă</h3>
-          <div class="meta">de <em>Numele tău</em> · Numărul 01</div>
-          <p>
+          <span class="badge" data-i18n="essays.card3.badge">Eseu · 2100 de cuvinte</span>
+          <h3 data-i18n="essays.card3.title">Realitatea perspectivală vs realitatea obiectivă</h3>
+          <div class="meta" data-i18n="essays.card3.meta">de <em>Numele tău</em> · Numărul 01</div>
+          <p data-i18n="essays.card3.body">
             Între lumea așa cum este și lumea așa cum o percepem există un decalaj, un filtru
             și o poveste. Acest text cartografiază acea distanță — și întreabă dacă filosofia
             ar trebui să locuiască tocmai în ea.
@@ -574,8 +601,8 @@
 
     <!-- SUBMIT -->
     <section id="submit">
-      <h2>Ghid de trimitere a eseurilor</h2>
-      <p class="section-intro">
+      <h2 data-i18n="submit.title">Ghid de trimitere a eseurilor</h2>
+      <p class="section-intro" data-i18n="submit.intro">
         Acestea sunt reguli de început. Modifică-le liber ca să se potrivească felului în care
         vrei cu adevărat să funcționeze jurnalul.
       </p>
@@ -583,32 +610,32 @@
       <div class="two-column">
         <div>
           <ul class="list">
-            <li><strong>Lungime:</strong> 1500–3000 de cuvinte. Textele mai scurte sunt în regulă dacă ideea este foarte concentrată.</li>
-            <li><strong>Format:</strong> PDF sau link Google Docs. Folosește un font lizibil și spațiere 1,15–1,5 între rânduri.</li>
-            <li><strong>Public:</strong> Presupune un elev sau student inteligent, cu o familiaritate de bază cu filosofia, dar nu neapărat cu tema ta specifică.</li>
-            <li><strong>Referințe:</strong> Orice stil de citare consecvent este acceptat (APA, MLA, Chicago etc.). Important este să fii coerent și să oferi surse pentru afirmațiile principale.</li>
-            <li><strong>Originalitate:</strong> Textul trebuie să fie al tău. Uneltele de AI pot ajuta la gramatică, dar <em>gândirea trebuie să fie a ta</em>.</li>
-            <li><strong>Teme:</strong> Filosofia minții, etică, metafizică, filosofie politică, logică, filosofia științei sau orice pune serios sub semnul întrebării felul în care trăim și gândim.</li>
+            <li data-i18n="submit.li1"><strong>Lungime:</strong> 1500–3000 de cuvinte. Textele mai scurte sunt în regulă dacă ideea este foarte concentrată.</li>
+            <li data-i18n="submit.li2"><strong>Format:</strong> PDF sau link Google Docs. Folosește un font lizibil și spațiere 1,15–1,5 între rânduri.</li>
+            <li data-i18n="submit.li3"><strong>Public:</strong> Presupune un elev sau student inteligent, cu o familiaritate de bază cu filosofia, dar nu neapărat cu tema ta specifică.</li>
+            <li data-i18n="submit.li4"><strong>Referințe:</strong> Orice stil de citare consecvent este acceptat (APA, MLA, Chicago etc.). Important este să fii coerent și să oferi surse pentru afirmațiile principale.</li>
+            <li data-i18n="submit.li5"><strong>Originalitate:</strong> Textul trebuie să fie al tău. Uneltele de AI pot ajuta la gramatică, dar <em>gândirea trebuie să fie a ta</em>.</li>
+            <li data-i18n="submit.li6"><strong>Teme:</strong> Filosofia minții, etică, metafizică, filosofie politică, logică, filosofia științei sau orice pune serios sub semnul întrebării felul în care trăim și gândim.</li>
           </ul>
         </div>
 
         <div class="callout">
-          <p style="margin-bottom:0.6rem;">
+          <p style="margin-bottom:0.6rem;" data-i18n="submit.callout.title">
             <strong>Cum trimiți</strong>
           </p>
-          <p style="margin-bottom:0.4rem;">
+          <p style="margin-bottom:0.4rem;" data-i18n="submit.callout.text1">
             Trimite eseul ca atașament sau ca link de partajare la:
           </p>
-          <p style="margin-bottom:0.4rem;">
+          <p style="margin-bottom:0.4rem;" data-i18n="submit.callout.text2">
             <strong>Email:</strong> <em>your-email-here@example.com</em><br />
           </p>
-          <p>
+          <p data-i18n="submit.callout.text3">
             Include în email:
           </p>
           <ul class="list" style="margin-top:0.4rem;">
-            <li>Numele tău complet (sau un pseudonim, dacă preferi să publici sub unul).</li>
-            <li>Vârsta, țara și nivelul actual de studiu (de ex. liceu, primul an de universitate).</li>
-            <li>Titlul eseului și 2–3 propoziții care rezumă ideea ta principală.</li>
+            <li data-i18n="submit.callout.li1">Numele tău complet (sau un pseudonim, dacă preferi să publici sub unul).</li>
+            <li data-i18n="submit.callout.li2">Vârsta, țara și nivelul actual de studiu (de ex. liceu, primul an de universitate).</li>
+            <li data-i18n="submit.callout.li3">Titlul eseului și 2–3 propoziții care rezumă ideea ta principală.</li>
           </ul>
         </div>
       </div>
@@ -616,16 +643,16 @@
 
     <!-- CONTACT -->
     <section id="contact">
-      <h2>Contact și planuri de viitor</h2>
-      <p class="section-intro">
+      <h2 data-i18n="contact.title">Contact și planuri de viitor</h2>
+      <p class="section-intro" data-i18n="contact.intro">
         Acest jurnal este încă în evoluție. Cu timpul poți adăuga numere noi, poți găzdui PDF-uri,
         poți organiza concursuri sau poți invita redactori invitați. Deocamdată, acesta este centrul tău de bază.
       </p>
 
       <div class="grid">
         <article class="card">
-          <h3>Contact</h3>
-          <p>
+          <h3 data-i18n="contact.card1.title">Contact</h3>
+          <p data-i18n="contact.card1.body">
             Pentru trimiteri, întrebări sau idei de colaborare, scrie la:
             <br /><br />
             <strong>Email:</strong> <em>your-email-here@example.com</em><br />
@@ -633,25 +660,220 @@
         </article>
 
         <article class="card">
-          <h3>Funcționalități viitoare</h3>
-          <p>
+          <h3 data-i18n="contact.card2.title">Funcționalități viitoare</h3>
+          <p data-i18n="contact.card2.body">
             Mai târziu poți adăuga:
           </p>
           <ul class="list" style="margin-top:0.5rem;">
-            <li>Pagini separate pentru fiecare număr.</li>
-            <li>O arhivă PDF cu toate eseurile publicate.</li>
-            <li>Anunțuri pentru conferințe, dezbateri sau grupuri de lectură.</li>
-            <li>O secțiune pentru traduceri sau răspunsuri la texte clasice.</li>
+            <li data-i18n="contact.card2.li1">Pagini separate pentru fiecare număr.</li>
+            <li data-i18n="contact.card2.li2">O arhivă PDF cu toate eseurile publicate.</li>
+            <li data-i18n="contact.card2.li3">Anunțuri pentru conferințe, dezbateri sau grupuri de lectură.</li>
+            <li data-i18n="contact.card2.li4">O secțiune pentru traduceri sau răspunsuri la texte clasice.</li>
           </ul>
         </article>
       </div>
     </section>
 
     <footer>
-      <a class="top-link" href="#top">↑ Înapoi sus</a>
-      <div>Asociatia Filosofilor Moldova &middot; Un jurnal independent de filosofie pentru tineri gânditori.</div>
-      <div>Găzduit cu GitHub Pages &middot; Proiectat de tine.</div>
+      <a class="top-link" href="#top" data-i18n="footer.top">↑ Înapoi sus</a>
+      <div data-i18n="footer.line1">The Moldovan Philosophy Organization &middot; Un jurnal independent de filosofie pentru tineri gânditori.</div>
+      <div data-i18n="footer.line2">Găzduit cu GitHub Pages &middot; Proiectat de tine.</div>
     </footer>
   </main>
+
+  <script>
+    let currentLang = 'ro';
+
+    const translations = {
+      ro: {
+        "brand.title": "The Moldovan Philosophy Organization",
+        "brand.tagline": "Jurnal independent de filosofie pentru tineri gânditori",
+
+        "nav.about": "Despre",
+        "nav.essays": "Eseuri",
+        "nav.submit": "Trimite",
+        "nav.contact": "Contact",
+
+        "hero.title": 'Un jurnal pentru minți în <span class="hero-highlight">rebeliune</span> împotriva gândirii leneșe.',
+        "hero.subtitle": '<strong>The Moldovan Philosophy Organization</strong> publică filosofie tăioasă, necompromisă, scrisă de tineri autori care refuză clișeele. Primim eseuri care pun sub semnul întrebării „bunul simț”, dărâmă iluzii și reconstruiesc argumente de la primul principiu.',
+        "hero.btn.read": "Citește eseurile prezentate →",
+        "hero.btn.submit": "Trimite-ți lucrarea",
+        "hero.meta.badge": "Numărul 01 – Schițând realitatea",
+        "hero.meta.text": "Deschis pentru trimiterea eseurilor · 2025",
+
+        "hero.card.label": "Temă curentă",
+        "hero.card.title": "Percepție, memorie și iluzia libertății",
+        "hero.card.body": "Cât de fiabil este ceea ce numim „experiență”? Suntem agenți liberi sau bio-mașini cablate elegant, care urmează un cod ascuns? Acest număr explorează linia de fractură dintre realitatea obiectivă și poveștile pe care ni le spunem despre ea.",
+        "hero.card.li1": "🧠 Conștiință, percepție și identitate personală",
+        "hero.card.li2": "⚡ Memoria ca tipar, semnal sau „fulger”",
+        "hero.card.li3": "🧩 Liberul arbitru, agenția și algoritmii mentali",
+        "hero.card.pill1": "Eseuri de 1500–3000 de cuvinte",
+        "hero.card.pill2": "Tineri autori (≈14–22 ani)",
+
+        "about.title": "Despre jurnal",
+        "about.intro": "<strong>The Moldovan Philosophy Organization</strong> este un jurnal de filosofie online, condus de elevi și studenți. Scopul nostru este să creăm un spațiu în care tinerii gânditori își pot testa ideile serioase fără să le dilueze pentru algoritmi, trenduri sau rubrici școlare.",
+        "about.card1.title": "Ce publicăm",
+        "about.card1.body": "Ne interesează eseurile argumentative, tezele scurte, experimentele de gândire și „manifestele” conceptuale. Textul tău poate fi speculativ, dar trebuie să fie intelectual onest și argumentat clar.",
+        "about.card2.title": "Pentru cine este",
+        "about.card2.body": "Liceeni și studenți, sau oricine se află la începutul traseului filosofic și ia ideile în serios. Nu ai nevoie de diplome formale; ai nevoie de disciplină și claritate.",
+        "about.card3.title": "Cum citim",
+        "about.card3.body": "Textele sunt evaluate în funcție de claritate, originalitate și forța argumentării. Nu vei fi respins pentru că nu „sună academic” — dar vei fi împins să justifici fiecare pas al raționamentului tău.",
+
+        "essays.title": "Eseuri prezentate (exemple provizorii)",
+        "essays.intro": "Înlocuiește aceste exemple cu propriile tale eseuri pe măsură ce le publici. Pentru lista completă, folosește pagina <strong>Eseuri</strong>.",
+        "essays.card1.badge": "Eseu · 2500 de cuvinte",
+        "essays.card1.title": "Fulgerul este memorie: despre electroni, experiență și forma gândului",
+        "essays.card1.meta": "de <em>Numele tău</em> · Numărul 01",
+        "essays.card1.body": "Dacă memoria este doar electricitate care curge între neuroni, atunci, teoretic, o furtună electrică identică ar putea recrea o viață. Acest eseu întreabă dacă această imagine ne trivializează — sau, din contră, ne ia în sfârșit în serios.",
+        "essays.card2.badge": "Eseu · 1800 de cuvinte",
+        "essays.card2.title": "Bio-mașina umană și mitul liberului arbitru",
+        "essays.card2.meta": "de <em>Numele tău</em> · Numărul 01",
+        "essays.card2.body": "Foamea, frica, statutul, obișnuința: dacă fiecare decizie poate fi urmărită până la algoritmi mentali predictibili, ce mai rămâne de făcut pentru „voință”? O privire asupra determinismului din interiorul mașinii.",
+        "essays.card3.badge": "Eseu · 2100 de cuvinte",
+        "essays.card3.title": "Realitatea perspectivală vs realitatea obiectivă",
+        "essays.card3.meta": "de <em>Numele tău</em> · Numărul 01",
+        "essays.card3.body": "Între lumea așa cum este și lumea așa cum o percepem există un decalaj, un filtru și o poveste. Acest text cartografiază acea distanță — și întreabă dacă filosofia ar trebui să locuiască tocmai în ea.",
+
+        "submit.title": "Ghid de trimitere a eseurilor",
+        "submit.intro": "Acestea sunt reguli de început. Modifică-le liber ca să se potrivească felului în care vrei cu adevărat să funcționeze jurnalul.",
+        "submit.li1": "<strong>Lungime:</strong> 1500–3000 de cuvinte. Textele mai scurte sunt în regulă dacă ideea este foarte concentrată.",
+        "submit.li2": "<strong>Format:</strong> PDF sau link Google Docs. Folosește un font lizibil și spațiere 1,15–1,5 între rânduri.",
+        "submit.li3": "<strong>Public:</strong> Presupune un elev sau student inteligent, cu o familiaritate de bază cu filosofia, dar nu neapărat cu tema ta specifică.",
+        "submit.li4": "<strong>Referințe:</strong> Orice stil de citare consecvent este acceptat (APA, MLA, Chicago etc.). Important este să fii coerent și să oferi surse pentru afirmațiile principale.",
+        "submit.li5": "<strong>Originalitate:</strong> Textul trebuie să fie al tău. Uneltele de AI pot ajuta la gramatică, dar <em>gândirea trebuie să fie a ta</em>.",
+        "submit.li6": "<strong>Teme:</strong> Filosofia minții, etică, metafizică, filosofie politică, logică, filosofia științei sau orice pune serios sub semnul întrebării felul în care trăim și gândim.",
+
+        "submit.callout.title": "<strong>Cum trimiți</strong>",
+        "submit.callout.text1": "Trimite eseul ca atașament sau ca link de partajare la:",
+        "submit.callout.text2": "<strong>Email:</strong> <em>your-email-here@example.com</em><br />",
+        "submit.callout.text3": "Include în email:",
+        "submit.callout.li1": "Numele tău complet (sau un pseudonim, dacă preferi să publici sub unul).",
+        "submit.callout.li2": "Vârsta, țara și nivelul actual de studiu (de ex. liceu, primul an de universitate).",
+        "submit.callout.li3": "Titlul eseului și 2–3 propoziții care rezumă ideea ta principală.",
+
+        "contact.title": "Contact și planuri de viitor",
+        "contact.intro": "Acest jurnal este încă în evoluție. Cu timpul poți adăuga numere noi, poți găzdui PDF-uri, poți organiza concursuri sau poți invita redactori invitați. Deocamdată, acesta este centrul tău de bază.",
+        "contact.card1.title": "Contact",
+        "contact.card1.body": "Pentru trimiteri, întrebări sau idei de colaborare, scrie la:<br /><br /><strong>Email:</strong> <em>your-email-here@example.com</em><br />",
+        "contact.card2.title": "Funcționalități viitoare",
+        "contact.card2.body": "Mai târziu poți adăuga:",
+        "contact.card2.li1": "Pagini separate pentru fiecare număr.",
+        "contact.card2.li2": "O arhivă PDF cu toate eseurile publicate.",
+        "contact.card2.li3": "Anunțuri pentru conferințe, dezbateri sau grupuri de lectură.",
+        "contact.card2.li4": "O secțiune pentru traduceri sau răspunsuri la texte clasice.",
+
+        "footer.top": "↑ Înapoi sus",
+        "footer.line1": "The Moldovan Philosophy Organization &middot; Un jurnal independent de filosofie pentru tineri gânditori.",
+        "footer.line2": "Găzduit cu GitHub Pages &middot; Proiectat de tine."
+      },
+
+      en: {
+        "brand.title": "The Moldovan Philosophy Organization",
+        "brand.tagline": "Independent philosophy journal for young thinkers",
+
+        "nav.about": "About",
+        "nav.essays": "Essays",
+        "nav.submit": "Submit",
+        "nav.contact": "Contact",
+
+        "hero.title": 'A journal for minds in <span class="hero-highlight">rebellion</span> against lazy thinking.',
+        "hero.subtitle": '<strong>The Moldovan Philosophy Organization</strong> publishes sharp, uncompromising philosophy from young writers who refuse clichés. We welcome essays that question “common sense”, dismantle illusions, and rebuild arguments from first principles.',
+        "hero.btn.read": "Read featured essays →",
+        "hero.btn.submit": "Submit your work",
+        "hero.meta.badge": "Issue 01 – Drafting Reality",
+        "hero.meta.text": "Open for submissions · 2025",
+
+        "hero.card.label": "Current theme",
+        "hero.card.title": "Perception, memory, and the illusion of freedom",
+        "hero.card.body": "How reliable is what we call “experience”? Are we free agents, or elegantly wired bio-machines following hidden code? This issue explores the fracture line between objective reality and the stories we tell ourselves about it.",
+        "hero.card.li1": "🧠 Consciousness, perception, and personal identity",
+        "hero.card.li2": "⚡ Memory as pattern, signal, or “lightning”",
+        "hero.card.li3": "🧩 Free will, agency, and mental algorithms",
+        "hero.card.pill1": "1500–3000 word essays",
+        "hero.card.pill2": "Young writers (≈14–22)",
+
+        "about.title": "About the journal",
+        "about.intro": "<strong>The Moldovan Philosophy Organization</strong> is an online, student-driven philosophy journal. Our aim is to create a space where young thinkers can test serious ideas without watering them down for algorithms, trends, or school rubrics.",
+        "about.card1.title": "What we publish",
+        "about.card1.body": "We are interested in argumentative essays, short theses, thought experiments, and conceptual “manifestos”. Your work may be speculative, but it must be intellectually honest and clearly argued.",
+        "about.card2.title": "Who it’s for",
+        "about.card2.body": "High-school and university students, or anyone early in their philosophical journey who takes ideas seriously. You don’t need formal credentials; you do need discipline and clarity.",
+        "about.card3.title": "How we read",
+        "about.card3.body": "We evaluate submissions on clarity, originality, and argumentative strength. You won’t be rejected for not sounding like a textbook — but you will be pushed to justify every step of your reasoning.",
+
+        "essays.title": "Featured essays (sample placeholders)",
+        "essays.intro": "Replace these with your own essays as you publish them. For the full list, use the dedicated <strong>Essays</strong> page.",
+        "essays.card1.badge": "Essay · 2500 words",
+        "essays.card1.title": "Lightning Is Memory: On Electrons, Experience, and the Shape of Thought",
+        "essays.card1.meta": "by <em>Your Name</em> · Issue 01",
+        "essays.card1.body": "If memory is only electricity flowing between neurons, then in theory an identical electrical storm could recreate a life. This essay asks whether that picture trivialises us — or finally takes us seriously.",
+        "essays.card2.badge": "Essay · 1800 words",
+        "essays.card2.title": "The Human Bio-Machine and the Myth of Free Will",
+        "essays.card2.meta": "by <em>Your Name</em> · Issue 01",
+        "essays.card2.body": "Hunger, fear, status, habit: if every decision traces back to predictable mental algorithms, what exactly is left for “will” to do? A look at determinism from inside the machine.",
+        "essays.card3.badge": "Essay · 2100 words",
+        "essays.card3.title": "Perspective Reality vs Objective Reality",
+        "essays.card3.meta": "by <em>Your Name</em> · Issue 01",
+        "essays.card3.body": "Between the world as it is and the world as we perceive it lies a delay, a filter, and a story. This piece maps that gap — and asks whether philosophy should live inside it.",
+
+        "submit.title": "Submission guidelines",
+        "submit.intro": "These are starting rules. Feel free to adapt them so they match how you actually want the journal to work.",
+        "submit.li1": "<strong>Length:</strong> Aim for 1500–3000 words. Shorter pieces are fine if the idea is tight.",
+        "submit.li2": "<strong>Format:</strong> PDF or Google Docs link. Use a readable font and 1.15–1.5 line spacing.",
+        "submit.li3": "<strong>Audience:</strong> Assume an intelligent student with basic familiarity with philosophy, but not necessarily with your specific topic.",
+        "submit.li4": "<strong>Referencing:</strong> Any consistent citation style is fine (APA, MLA, Chicago, etc.). Just be coherent and give sources for key claims.",
+        "submit.li5": "<strong>Originality:</strong> Your work must be your own. AI tools may help with grammar, but <em>the thinking must be yours</em>.",
+        "submit.li6": "<strong>Topics:</strong> Philosophy of mind, ethics, metaphysics, political philosophy, logic, philosophy of science, or anything that seriously questions how we live and think.",
+
+        "submit.callout.title": "<strong>How to submit</strong>",
+        "submit.callout.text1": "Send your essay as an attachment or share link to:",
+        "submit.callout.text2": "<strong>Email:</strong> <em>your-email-here@example.com</em><br />",
+        "submit.callout.text3": "Include in the email:",
+        "submit.callout.li1": "Your full name (or pseudonym, if you prefer to publish under one).",
+        "submit.callout.li2": "Age, country, and current level of study (e.g. high school, first year university).",
+        "submit.callout.li3": "Title of the essay and 2–3 sentences summarising your main claim.",
+
+        "contact.title": "Contact & future plans",
+        "contact.intro": "This journal is still evolving. Over time you can add issues, host PDFs, run contests, or invite guest editors. For now, this is your hub.",
+        "contact.card1.title": "Contact",
+        "contact.card1.body": "For submissions, questions, or collaboration ideas, write to:<br /><br /><strong>Email:</strong> <em>your-email-here@example.com</em><br />",
+        "contact.card2.title": "Future features",
+        "contact.card2.body": "Later you can add:",
+        "contact.card2.li1": "Separate pages for each issue.",
+        "contact.card2.li2": "A PDF archive of all published essays.",
+        "contact.card2.li3": "Announcements for talks, debates, or reading groups.",
+        "contact.card2.li4": "A section for translations or responses to classic texts.",
+
+        "footer.top": "↑ Back to top",
+        "footer.line1": "The Moldovan Philosophy Organization &middot; An independent philosophy journal for young thinkers.",
+        "footer.line2": "Hosted with GitHub Pages &middot; Designed by you."
+      }
+    };
+
+    function applyTranslations() {
+      const elements = document.querySelectorAll("[data-i18n]");
+      elements.forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        const value = translations[currentLang][key];
+        if (value !== undefined) {
+          el.innerHTML = value;
+        }
+      });
+      document.documentElement.lang = currentLang;
+      const toggle = document.getElementById("langToggle");
+      if (toggle) toggle.textContent = currentLang === "ro" ? "EN" : "RO";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      applyTranslations();
+      const toggle = document.getElementById("langToggle");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          currentLang = currentLang === "ro" ? "en" : "ro";
+          applyTranslations();
+        });
+      }
+    });
+  </script>
 </body>
 </html>
