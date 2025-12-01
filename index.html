@@ -183,7 +183,7 @@ body {
   z-index: 5;
   max-width: var(--max-width);
   margin: 150px auto 0 auto;
-  padding-bottom: 260px;
+  padding-bottom: 260px; /* longer vertical length */
 }
 
 .paper-scroll {
@@ -265,7 +265,222 @@ body {
   height: 82%;
 }
 
-/* ------------- FOOTER + CONSTELLATION ------------- */
+/* ------------- LANTERNS ------------- */
+
+.lanterns-container {
+  position: absolute;
+  top: 140px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.lantern-column {
+  position: absolute;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 220px; /* spacing between portraits AND submission box */
+}
+
+.lantern-column.left {
+  left: 4%;
+  animation: parallaxLeft 20s ease-in-out infinite alternate;
+}
+
+.lantern-column.right {
+  right: 4%;
+  animation: parallaxRight 22s ease-in-out infinite alternate;
+}
+
+/* softer movement */
+@keyframes parallaxLeft {
+  0%   { transform: translateY(-12px); }
+  50%  { transform: translateY(18px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes parallaxRight {
+  0%   { transform: translateY(10px); }
+  50%  { transform: translateY(-20px); }
+  100% { transform: translateY(2px); }
+}
+
+.branch { display: none; }
+
+.lantern {
+  width: 260px;
+  background: rgba(26, 21, 12, 0.92);
+  border-radius: 16px;
+  padding: 14px;
+  border: 2px solid rgba(247, 211, 120, 0.4);
+  box-shadow:
+    0 0 20px rgba(247, 211, 120, 0.45),
+    0 0 70px rgba(247, 211, 120, 0.24),
+    inset 0 0 25px rgba(247, 211, 120, 0.14);
+  backdrop-filter: blur(3px);
+  position: relative;
+  margin-top: -10px;
+  transform-origin: top center;
+  animation: sway 9s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%   { transform: rotate(0deg) translateY(0); }
+  20%  { transform: rotate(1.8deg) translateY(-7px); }
+  40%  { transform: rotate(0.4deg) translateY(0); }
+  60%  { transform: rotate(-1.8deg) translateY(6px); }
+  80%  { transform: rotate(-0.8deg) translateY(-4px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+.lantern-glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(247,211,120,0.2), transparent 70%);
+  z-index: -1;
+  filter: blur(10px);
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.07); }
+}
+
+.lantern-img-wrapper {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid rgba(247, 211, 120, 0.5);
+  box-shadow:
+    0 0 18px rgba(247, 211, 120, 0.4),
+    inset 0 0 45px rgba(247, 211, 120, 0.2);
+}
+
+.lantern-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter:
+    brightness(1.15)
+    contrast(1.1)
+    saturate(1.3)
+    sepia(0.22)
+    blur(0.5px)
+    drop-shadow(0 0 4px rgba(0,0,0,0.4));
+  mix-blend-mode: lighten;
+}
+
+.lantern-text {
+  margin-top: 12px;
+  font-family: "Crimson Pro", serif;
+}
+
+.lantern-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--lantern-gold);
+  text-shadow: 0 0 6px rgba(247, 211, 120, 0.8);
+}
+
+.lantern-era {
+  font-size: 0.85rem;
+  color: #ccb98e;
+  margin-bottom: 4px;
+}
+
+.lantern-idea {
+  font-size: 0.83rem;
+  line-height: 1.4;
+  color: #f3e7cf;
+}
+
+/* ------------- SUBMISSION BOX UNDER BOTTOM-LEFT PORTRAIT ------------- */
+
+.submission-box {
+  width: 260px;
+  background: radial-gradient(circle at top left, rgba(247,211,120,0.14), transparent 60%),
+              rgba(15, 10, 5, 0.96);
+  border-radius: 14px;
+  padding: 1.2rem 1.35rem 1.3rem 1.35rem;
+  border: 1px solid rgba(201, 178, 122, 0.95);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.75);
+  font-family: 'Crimson Pro', serif;
+  color: #f3e7cf;
+  backdrop-filter: blur(7px);
+  pointer-events: auto; /* allow click while columns keep pointer-events:none parent */
+}
+
+.submission-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.45rem;
+  color: #f7d378;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.submission-box p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.55rem;
+}
+
+.submission-box p:last-of-type {
+  margin-bottom: 0.9rem;
+}
+
+.submission-box strong {
+  font-size: 1rem;
+}
+
+/* button */
+.submission-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(247,211,120,0.98);
+  background: linear-gradient(135deg, #f7d378, #c9a34e);
+  color: #2a1c07;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(0,0,0,0.55);
+  transition:
+    transform 0.12s ease-out,
+    box-shadow 0.12s ease-out,
+    filter 0.12s ease-out;
+}
+
+.submission-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 11px 24px rgba(0,0,0,0.7);
+  filter: brightness(1.05);
+}
+
+.submission-button:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 4px 11px rgba(0,0,0,0.65);
+}
+
+/* tiny hint under button */
+.submission-hint {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  opacity: 0.82;
+}
+
+/* ------------- FOOTER + CONSTELLATION (RECENTERED) ------------- */
 
 .site-footer {
   position: relative;
@@ -281,7 +496,7 @@ body {
   margin-top: 32px;
 }
 
-/* SVG styling */
+/* SVG styling – static stars, detailed body */
 .vitruvian-constellation {
   width: 230px;
   max-width: 70vw;
@@ -346,8 +561,47 @@ body {
 /* ------------- RESPONSIVE ------------- */
 
 @media (max-width: 980px) {
+  /* let lanterns and submission box stack nicely on mobile instead of hiding them */
+  .lanterns-container {
+    position: static;
+    max-width: var(--max-width);
+    margin: 40px auto 0 auto;
+    pointer-events: none;
+  }
+
+  .lantern-column {
+    position: static;
+    width: 100%;
+    align-items: center;
+    animation: none;
+  }
+
+  .lantern-column.right {
+    margin-top: 40px;
+  }
+
+  .lantern {
+    width: 70%;
+    max-width: 320px;
+  }
+
+  .submission-box {
+    width: 70%;
+    max-width: 380px;
+  }
+
   .scroll-container {
     margin-top: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .lantern {
+    width: 90%;
+  }
+
+  .submission-box {
+    width: 90%;
   }
 }
 </style>
@@ -369,6 +623,137 @@ body {
   <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
   <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
   <div class="firefly"></div><div class="firefly"></div><div class="firefly"></div>
+</div>
+
+<!-- LANTERNS ROOT CONTAINER -->
+<div class="lanterns-container">
+  <!-- LEFT COLUMN -->
+  <div class="lantern-column left">
+    <div class="lantern">
+      <div class="lantern-glow"></div>
+      <div class="lantern-img-wrapper">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Plato_Silanion_Musei_Capitolini_MC1377.jpg/256px-Plato_Silanion_Musei_Capitolini_MC1377.jpg"
+             alt="Plato">
+      </div>
+      <div class="lantern-text">
+        <div class="lantern-name">Plato</div>
+        <div class="lantern-era">Classical Greece</div>
+        <div class="lantern-idea">
+          His world is a cave of shadows — and his thought is the first torch ever lit.
+        </div>
+      </div>
+    </div>
+
+    <div class="lantern">
+      <div class="lantern-glow"></div>
+      <div class="lantern-img-wrapper">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Aristotle_Altemps_Inv8575.jpg/256px-Aristotle_Altemps_Inv8575.jpg"
+             alt="Aristotle">
+      </div>
+      <div class="lantern-text">
+        <div class="lantern-name">Aristotle</div>
+        <div class="lantern-era">Classical Greece</div>
+        <div class="lantern-idea">
+          He disassembled reality into categories — not to limit it, but to understand its music.
+        </div>
+      </div>
+    </div>
+
+    <div class="lantern">
+      <div class="lantern-glow"></div>
+      <div class="lantern-img-wrapper">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Saint_Augustine_Portrait.jpg/256px-Saint_Augustine_Portrait.jpg"
+             alt="Augustine">
+      </div>
+      <div class="lantern-text">
+        <div class="lantern-name">Saint Augustine</div>
+        <div class="lantern-era">Late Antiquity</div>
+        <div class="lantern-idea">
+          Memory as cathedral, guilt as compass, confession as the architecture of a soul.
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMISSION BOX UNDER BOTTOM-LEFT PORTRAIT -->
+    <div class="submission-box" aria-label="Submission guidelines">
+      <h3>Submit Your Essay</h3>
+      <p>
+        <strong>Length:</strong> 1500–3000 words recommended.<br>
+        <strong>Topics:</strong> Philosophy of mind, ethics, metaphysics,
+        political thought, perception, and any work that genuinely explores
+        human thought with care.<br>
+        <strong>Format:</strong> Send as PDF or Google Doc.
+      </p>
+      <p>
+        Email submissions to:<br>
+        <strong>rebirthofreason@gmail.com</strong>
+      </p>
+      <a
+        id="submissionButton"
+        class="submission-button"
+        href="#"
+      >
+        Open email to submit
+      </a>
+      <div class="submission-hint">
+        On phone: opens your mail app. On computer: opens Gmail compose.
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="lantern-column right">
+    <div class="lantern">
+      <div class="lantern-glow"></div>
+      <div class="lantern-img-wrapper">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg/256px-Carlo_Crivelli_-_Saint_Thomas_Aquinas_-_Google_Art_Project.jpg"
+             alt="Thomas Aquinas">
+      </div>
+      <div class="lantern-text">
+        <div class="lantern-name">Thomas Aquinas</div>
+        <div class="lantern-era">13th Century</div>
+        <div class="lantern-idea">
+          He forged a bridge between revelation and reason — and walked across both worlds.
+        </div>
+      </div>
+    </div>
+
+    <div class="lantern">
+      <div class="lantern-glow"></div>
+      <div class="lantern-img-wrapper">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/256px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg"
+             alt="Descartes">
+      </div>
+      <div class="lantern-text">
+        <div class="lantern-name">René Descartes</div>
+        <div class="lantern-era">17th Century</div>
+        <div class="lantern-idea">
+          He doubted the world until only a single spark of certainty remained in the void.
+        </div>
+      </div>
+    </div>
+
+    <div class="lantern">
+      <div class="lantern-glow"></div>
+      <div class="lantern-img-wrapper">
+        <img class="lantern-img"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/256px-Nietzsche187a.jpg"
+             alt="Nietzsche">
+      </div>
+      <div class="lantern-text">
+        <div class="lantern-name">Friedrich Nietzsche</div>
+        <div class="lantern-era">19th Century</div>
+        <div class="lantern-idea">
+          He shattered morality into shards — and dared humanity to build itself anew.
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- MAIN CONTENT -->
@@ -623,6 +1008,30 @@ body {
     </svg>
   </div>
 </footer>
+
+<!-- BUTTON BEHAVIOR: mobile = mail app, desktop = Gmail -->
+<script>
+(function () {
+  var btn = document.getElementById('submissionButton');
+  if (!btn) return;
+
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(ua);
+
+  if (isMobile) {
+    btn.href = 'mailto:rebirthofreason@gmail.com'
+      + '?subject=Essay%20Submission%20%E2%80%94%20Rebirth%20of%20Reason'
+      + '&body=Please%20include%20your%20name%2C%20essay%20title%2C%20and%20word%20count.';
+    btn.target = '_self';
+  } else {
+    btn.href = 'https://mail.google.com/mail/?view=cm&fs=1'
+      + '&to=rebirthofreason@gmail.com'
+      + '&su=Essay%20Submission%20%E2%80%94%20Rebirth%20of%20Reason'
+      + '&body=Please%20include%20your%20name%2C%20essay%20title%2C%20and%20word%20count.';
+    btn.target = '_blank';
+  }
+})();
+</script>
 
 </body>
 </html>
