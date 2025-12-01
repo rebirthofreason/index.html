@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rebirth of Reason – Philosophy Journal</title>
+  <title>Asociatia Filosofilor Moldova – Jurnal de Filosofie</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,8 +53,6 @@
       position: relative;
       z-index: 2;
     }
-
-    /* NAVBAR */
 
     header {
       position: sticky;
@@ -106,8 +104,6 @@
       color: var(--accent);
       border-color: var(--accent-soft);
     }
-
-    /* HERO */
 
     .hero {
       padding-top: 3rem;
@@ -248,245 +244,4 @@
       padding-left: 1rem;
     }
 
-    .list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
-
-    .callout {
-      background: rgba(10, 13, 22, 0.98);
-      border-radius: var(--radius-lg);
-      padding: 1rem 1.15rem;
-      border: 1px solid var(--accent-soft);
-      font-size: 0.85rem;
-      color: #e3e4f4;
-    }
-
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: 3rem;
-      padding-top: 1.4rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    @media (max-width: 820px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card {
-        order: -1;
-      }
-
-      header {
-        position: static;
-      }
-
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav ul {
-        flex-wrap: wrap;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .two-column {
-        grid-template-columns: 1fr;
-      }
-
-      .container {
-        padding-inline: 1rem;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <div class="nav-inner">
-      <div class="brand">
-        <div>
-          <div class="brand-title">Rebirth of Reason</div>
-          <div class="brand-tagline">Independent Journal of Young Philosophy</div>
-        </div>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#essays">Essays</a></li>
-          <li><a href="#submit">Submit</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="hero-text">
-        <h1>
-          A journal for minds in
-          <span class="hero-highlight">rebellion</span>
-          against lazy thinking.
-        </h1>
-        <p class="hero-subtitle">
-          <strong>Rebirth of Reason</strong> publishes sharp, unapologetic philosophy
-          from young writers who refuse clichés. We welcome essays that question common sense,
-          dismantle illusions, and rebuild arguments from first principles.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#essays">Read featured essays →</a>
-          <a class="btn btn-ghost" href="#submit">Submit your work</a>
-        </div>
-
-        <div class="hero-meta">
-          <span>Issue 01 – Drafting Reality</span>
-          Open for submissions · 2025
-        </div>
-      </div>
-
-      <aside class="hero-card">
-        <div class="hero-card-inner">
-          <div class="hero-card-label">Current theme</div>
-          <div class="hero-card-title">Perception, memory, and the illusion of freedom</div>
-          <p class="hero-card-body">
-            How reliable is what we call “experience”? Are we free agents, or
-            elegantly wired bio-machines following hidden code?
-          </p>
-          <ul class="hero-card-list">
-            <li>🧠 Consciousness, perception, and selfhood</li>
-            <li>⚡ Memory as pattern, signal, or “lightning”</li>
-            <li>🧩 Free will, agency, and mental algorithms</li>
-          </ul>
-          <div style="margin-top:0.7rem;">
-            <span class="pill">1500–3000 word essays</span>
-            <span class="pill">Young writers (≈14–22)</span>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <h2>About the journal</h2>
-      <p class="section-intro">
-        <strong>Rebirth of Reason</strong> is an online, student-driven philosophy journal.
-      </p>
-
-      <div class="grid">
-        <article class="card">
-          <h3>What we publish</h3>
-          <p>
-            We are interested in argumentative essays, short theses, thought experiments,
-            and conceptual manifestos.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>Who we are for</h3>
-          <p>
-            High-school and undergraduate students who take ideas seriously.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>How we read</h3>
-          <p>
-            Submissions are evaluated on clarity, originality, and argumentative strength.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ESSAYS -->
-    <section id="essays">
-      <h2>Featured essays (sample placeholders)</h2>
-      <p class="section-intro">Replace these with your own essays later.</p>
-
-      <div class="grid">
-        <article class="card">
-          <span class="badge">Essay · 2500 words</span>
-          <h3>Lightning Is Memory</h3>
-          <p>Memory as electricity — does this trivialize us or define us?</p>
-        </article>
-
-        <article class="card">
-          <span class="badge">Essay · 1800 words</span>
-          <h3>The Human Bio-Machine and the Myth of Free Will</h3>
-          <p>Determinism from inside the machine.</p>
-        </article>
-
-        <article class="card">
-          <span class="badge">Essay · 2100 words</span>
-          <h3>Perspective Reality vs Objective Reality</h3>
-          <p>Mapping the filter between world and perception.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- SUBMIT -->
-    <section id="submit">
-      <h2>Submission guidelines</h2>
-      <p class="section-intro">Starter rules — edit freely.</p>
-
-      <div class="two-column">
-        <div>
-          <ul class="list">
-            <li><strong>Length:</strong> 1500–3000 words.</li>
-            <li><strong>Format:</strong> PDF or Google Doc.</li>
-            <li><strong>Audience:</strong> Intelligent student, not expert.</li>
-            <li><strong>Referencing:</strong> Any consistent style.</li>
-            <li><strong>Originality:</strong> Thinking must be yours.</li>
-            <li><strong>Topics:</strong> Mind, ethics, metaphysics, politics, etc.</li>
-          </ul>
-        </div>
-
-        <div class="callout">
-          <p><strong>How to submit</strong></p>
-          <p>Email: <em>your-email-here@example.com</em></p>
-          <p>Include name, age, country, study level, and summary.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <h2>Contact & future plans</h2>
-      <p class="section-intro">The journal will grow with time.</p>
-
-      <div class="grid">
-        <article class="card">
-          <h3>Contact</h3>
-          <p>Email: <em>your-email-here@example.com</em></p>
-        </article>
-
-        <article class="card">
-          <h3>Future features</h3>
-          <ul class="list">
-            <li>Separate pages for issues</li>
-            <li>PDF archive</li>
-            <li>Announcements and debates</li>
-            <li>Translations section</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <footer>
-      <a class="top-link" href="#top">↑ Back to top</a>
-      <div>Rebirth of Reason · An independent philosophy journal.</div>
-      <div>Hosted with GitHub Pages · Designed by you.</div>
-    </footer>
-  </main>
-</body>
-</html>
+    .list li::
