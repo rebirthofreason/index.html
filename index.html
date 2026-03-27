@@ -502,13 +502,12 @@
           <span class="eyebrow">Region Map</span>
           <h2>Black Sea area</h2>
           <p>
-            A simple outline map of the countries around the Black Sea area. Click a country to highlight it.
+            A simple outline map of the countries around the Black Sea area. Click a country to highlight it and open its article tab.
           </p>
         </div>
 
         <div class="map-shell">
           <div class="map-toolbar">
-            <button data-country="all">Show all</button>
             <button data-country="Romania">Romania</button>
             <button data-country="Bulgaria">Bulgaria</button>
             <button data-country="Turkey">Turkey</button>
@@ -551,6 +550,7 @@
   
   
   
+  
   <script>
     const countryButtons = document.querySelectorAll('[data-country]');
     const countryPaths = document.querySelectorAll('.country');
@@ -562,12 +562,8 @@
     const mapShell = document.querySelector('.map-shell');
     const svg = document.querySelector('.map-frame svg');
 
-    let lastClickX = null;
-    let lastClickY = null;
-
     const descriptions = {
       neutral: 'Click a country to highlight it and open its article tab.',
-      all: 'This map is drawn as a simple outline view of the Black Sea region and its surrounding countries.',
       Romania: 'Romania sits on the western Black Sea coast and is useful for articles on the western basin, NATO presence, and Moldova-related security questions.',
       Bulgaria: 'Bulgaria forms part of the western Black Sea littoral and works well for western basin, alliance, and maritime security articles.',
       Turkey: 'Turkey controls the straits, so it is one of the most important states in the whole Black Sea system.',
@@ -593,26 +589,38 @@
       Azerbaijan: ['#', 'Open Azerbaijan articles']
     };
 
-    function positionPopupAtPoint(clientX, clientY) {
-      if (!mapPopup || !mapShell || clientX === null || clientY === null) return;
+    function fallbackPointFromPath(path) {
+      if (!svg || !path) return null;
+      const bbox = path.getBBox();
+      const point = svg.createSVGPoint();
+      point.x = bbox.x + bbox.width / 2;
+      point.y = bbox.y + bbox.height / 2;
+      const screenPoint = point.matrixTransform(path.getScreenCTM());
+      return { x: screenPoint.x, y: screenPoint.y };
+    }
+
+    function positionPopupForCountry(path) {
+      if (!mapPopup || !mapShell || !path) return;
 
       const shellRect = mapShell.getBoundingClientRect();
       const popupWidth = 220;
       const popupHeight = 86;
+      const point = fallbackPointFromPath(path);
+      if (!point) return;
 
-      let left = clientX - shellRect.left + 4;
-      let top = clientY - shellRect.top + 4;
+      let left = point.x - shellRect.left + 8;
+      let top = point.y - shellRect.top + 6;
       let above = false;
 
       if (left + popupWidth > shellRect.width - 8) {
-        left = shellRect.width - popupWidth - 8;
+        left = point.x - shellRect.left - popupWidth - 8;
       }
       if (left < 8) {
         left = 8;
       }
 
       if (top + popupHeight > shellRect.height - 8) {
-        top = clientY - shellRect.top - popupHeight - 8;
+        top = point.y - shellRect.top - popupHeight - 8;
         above = true;
       }
       if (top < 8) {
@@ -625,36 +633,14 @@
       mapPopup.classList.toggle('above', above);
     }
 
-    function fallbackPointFromPath(path) {
-      if (!svg || !path) return null;
-      const bbox = path.getBBox();
-      const point = svg.createSVGPoint();
-      point.x = bbox.x + bbox.width / 2;
-      point.y = bbox.y + bbox.height / 2;
-      const screenPoint = point.matrixTransform(path.getScreenCTM());
-      return { x: screenPoint.x, y: screenPoint.y };
-    }
-
-    function showPopup(name, path = null) {
+    function showPopup(name, path) {
       const match = countryLinks[name];
-      if (!match || !mapPopup) return;
+      if (!match || !mapPopup || !path) return;
 
       mapPopupTitle.textContent = name;
       mapPopupLink.textContent = match[1];
       mapPopupLink.href = match[0];
-
-      let x = lastClickX;
-      let y = lastClickY;
-
-      if ((x === null || y === null) && path) {
-        const fp = fallbackPointFromPath(path);
-        if (fp) {
-          x = fp.x;
-          y = fp.y;
-        }
-      }
-
-      positionPopupAtPoint(x, y);
+      positionPopupForCountry(path);
       mapPopup.classList.add('visible');
     }
 
@@ -673,7 +659,10 @@
       hidePopup();
     }
 
-    function setActiveCountry(name, path = null) {
+    function setActiveCountry(name) {
+      const path = document.querySelector(`.country[data-name="${name}"]`);
+      if (!path) return;
+
       countryButtons.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.country === name);
       });
@@ -683,34 +672,28 @@
       });
 
       mapTitle.textContent = name;
-      mapText.textContent = descriptions[name] || descriptions.all;
+      mapText.textContent = descriptions[name] || descriptions.neutral;
       showPopup(name, path);
     }
 
     countryButtons.forEach(btn => {
-      btn.addEventListener('click', (event) => {
-        const name = btn.dataset.country;
-        if (name === 'all') {
-          lastClickX = null;
-          lastClickY = null;
-          setNeutralState();
-          return;
-        }
-
-        lastClickX = event.clientX;
-        lastClickY = event.clientY;
-        const path = document.querySelector(`.country[data-name="${name}"]`);
-        setActiveCountry(name, path);
+      btn.addEventListener('click', () => {
+        setActiveCountry(btn.dataset.country);
       });
     });
 
     countryPaths.forEach(path => {
-      path.addEventListener('click', (event) => {
-        lastClickX = event.clientX;
-        lastClickY = event.clientY;
+      path.addEventListener('click', () => {
         const name = path.dataset.name;
-        setActiveCountry(name, path);
+        setActiveCountry(name);
       });
+    });
+
+    window.addEventListener('resize', () => {
+      const activeButton = document.querySelector('.map-toolbar button.active');
+      if (activeButton) {
+        setActiveCountry(activeButton.dataset.country);
+      }
     });
 
     document.addEventListener('click', (event) => {
@@ -718,8 +701,6 @@
       const clickedCountry = event.target.closest('.country');
       const clickedToolbar = event.target.closest('.map-toolbar');
       if (!clickedInsidePopup && !clickedCountry && !clickedToolbar) {
-        lastClickX = null;
-        lastClickY = null;
         setNeutralState();
       }
     });
