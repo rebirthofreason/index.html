@@ -293,19 +293,18 @@
     }
 
     .breakaway {
-      fill: rgba(238,138,22,0.22);
-      stroke: rgba(255,183,92,0.95);
-      stroke-width: 1.6;
-      stroke-dasharray: 5 4;
+      fill: rgba(255,255,255,0.01);
+      stroke: rgba(255,255,255,0.72);
+      stroke-width: 1.45;
       transition: 0.18s ease;
       cursor: pointer;
     }
 
     .breakaway:hover,
     .breakaway.active {
-      fill: rgba(238,138,22,0.34);
-      stroke: #ffd19a;
-      stroke-width: 2.2;
+      fill: rgba(255,255,255,0.05);
+      stroke: rgba(255,255,255,0.94);
+      stroke-width: 2.0;
     }
 
     .map-articles {
@@ -501,10 +500,10 @@
               </g>
             
               <g id="map-breakaways">
-                <path class="breakaway" data-name="Transnistria" d="M 398 252 L 405 246 L 415 248 L 421 256 L 420 266 L 414 275 L 406 278 L 398 272 L 396 262 Z"></path>
-                <path class="breakaway" data-name="Crimea" d="M 640 160 L 672 150 L 714 156 L 746 170 L 756 193 L 742 209 L 711 213 L 686 204 L 666 190 L 651 188 L 634 177 Z"></path>
-                <path class="breakaway" data-name="Abkhazia" d="M 896 248 L 918 243 L 939 247 L 942 258 L 926 266 L 904 265 L 893 258 Z"></path>
-                <path class="breakaway" data-name="South Ossetia" d="M 954 214 L 968 210 L 981 214 L 982 224 L 971 230 L 957 228 L 951 221 Z"></path>
+                <path class="breakaway" data-name="Transnistria" d="M 392 170 L 398 171 L 403 182 L 404 197 L 407 214 L 406 231 L 408 248 L 406 263 L 401 277 L 395 279 L 391 269 L 392 251 L 389 233 L 389 215 L 390 198 L 388 182 Z"></path>
+                <path class="breakaway" data-name="Crimea" d="M 763 216 L 781 209 L 806 210 L 826 218 L 841 229 L 845 242 L 838 251 L 824 253 L 814 259 L 799 258 L 785 251 L 774 248 L 765 239 L 758 228 Z"></path>
+                <path class="breakaway" data-name="Abkhazia" d="M 838 340 L 856 336 L 876 338 L 885 344 L 876 349 L 858 350 L 842 347 Z"></path>
+                <path class="breakaway" data-name="South Ossetia" d="M 878 315 L 892 311 L 907 313 L 913 320 L 905 325 L 890 325 L 879 321 Z"></path>
               </g>
 
             </svg>
@@ -544,7 +543,7 @@
     const articlesList = document.getElementById('map-articles-list');
 
     const descriptions = {
-      all: 'This map is drawn as a simple outline view of the Black Sea region and its surrounding countries, with breakaway states layered on top for quick geopolitical reading.',
+      all: 'This map is drawn as a simple outline view of the Black Sea region and its surrounding countries, with breakaway states layered into the same border language.',
       Romania: 'Romania sits on the western Black Sea coast and anchors the north-western basin, especially in relation to NATO, maritime access, and Moldova.',
       Bulgaria: 'Bulgaria forms part of the western Black Sea littoral and matters in the basin through maritime geography, alliance structure, and regional balance.',
       Turkey: 'Turkey controls the straits and remains one of the key strategic states in the Black Sea system because access and naval movement run through it.',
@@ -552,10 +551,10 @@
       Russia: 'Russia remains one of the main military and strategic actors shaping the wider Black Sea theatre through force posture, naval power, and coercive reach.',
       Ukraine: 'Ukraine occupies much of the northern Black Sea coast and is central to the basin’s military balance, coastline security, and access politics.',
       Moldova: 'Moldova matters strategically through vulnerability, state fragility, and the presence of Transnistria on its eastern edge.',
-      Transnistria: 'Transnistria is a narrow breakaway strip inside Moldova and one of the clearest examples of how frozen conflicts can look more militarily potent than they really are.',
-      Crimea: 'Crimea remains one of the most important strategic locations in the Black Sea because of basing, coastline control, maritime posture, and symbolic weight.',
-      Abkhazia: 'Abkhazia is a breakaway region on the eastern Black Sea coast that matters through Russian leverage, regional instability, and Georgian territorial fragmentation.',
-      'South Ossetia': 'South Ossetia is not on the coast, but it shapes Georgian strategic vulnerability and is part of the wider Russian pressure architecture in the Black Sea security space.'
+      Transnistria: 'Transnistria is shown as a narrow breakaway strip running along the eastern side of Moldova.',
+      Crimea: 'Crimea is shown on the northern Black Sea coast as its own breakaway focus area on the map.',
+      Abkhazia: 'Abkhazia is shown on the eastern Black Sea coast, integrated into the coastline area north-west of Georgia proper.',
+      'South Ossetia': 'South Ossetia is shown as an inland breakaway area north of central Georgia.'
     };
 
     const reading = {
