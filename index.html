@@ -508,7 +508,7 @@
 
         <div class="map-shell">
           <div class="map-toolbar">
-            <button class="active" data-country="all">Show all</button>
+            <button data-country="all">Show all</button>
             <button data-country="Romania">Romania</button>
             <button data-country="Bulgaria">Bulgaria</button>
             <button data-country="Turkey">Turkey</button>
@@ -566,6 +566,7 @@
     let lastClickY = null;
 
     const descriptions = {
+      neutral: 'Click a country to highlight it and open its article tab.',
       all: 'This map is drawn as a simple outline view of the Black Sea region and its surrounding countries.',
       Romania: 'Romania sits on the western Black Sea coast and is useful for articles on the western basin, NATO presence, and Moldova-related security questions.',
       Bulgaria: 'Bulgaria forms part of the western Black Sea littoral and works well for western basin, alliance, and maritime security articles.',
@@ -599,8 +600,8 @@
       const popupWidth = 220;
       const popupHeight = 86;
 
-      let left = clientX - shellRect.left + 10;
-      let top = clientY - shellRect.top + 12;
+      let left = clientX - shellRect.left + 4;
+      let top = clientY - shellRect.top + 4;
       let above = false;
 
       if (left + popupWidth > shellRect.width - 8) {
@@ -611,7 +612,7 @@
       }
 
       if (top + popupHeight > shellRect.height - 8) {
-        top = clientY - shellRect.top - popupHeight - 14;
+        top = clientY - shellRect.top - popupHeight - 8;
         above = true;
       }
       if (top < 8) {
@@ -664,27 +665,26 @@
       }
     }
 
+    function setNeutralState() {
+      countryButtons.forEach(btn => btn.classList.remove('active'));
+      countryPaths.forEach(countryPath => countryPath.classList.remove('active'));
+      mapTitle.textContent = 'Black Sea area';
+      mapText.textContent = descriptions.neutral;
+      hidePopup();
+    }
+
     function setActiveCountry(name, path = null) {
       countryButtons.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.country === name);
       });
 
       countryPaths.forEach(countryPath => {
-        if (name === 'all') {
-          countryPath.classList.add('active');
-        } else {
-          countryPath.classList.toggle('active', countryPath.dataset.name === name);
-        }
+        countryPath.classList.toggle('active', countryPath.dataset.name === name);
       });
 
-      mapTitle.textContent = name === 'all' ? 'Black Sea area' : name;
+      mapTitle.textContent = name;
       mapText.textContent = descriptions[name] || descriptions.all;
-
-      if (name === 'all') {
-        hidePopup();
-      } else {
-        showPopup(name, path);
-      }
+      showPopup(name, path);
     }
 
     countryButtons.forEach(btn => {
@@ -693,7 +693,7 @@
         if (name === 'all') {
           lastClickX = null;
           lastClickY = null;
-          setActiveCountry('all');
+          setNeutralState();
           return;
         }
 
@@ -720,11 +720,11 @@
       if (!clickedInsidePopup && !clickedCountry && !clickedToolbar) {
         lastClickX = null;
         lastClickY = null;
-        setActiveCountry('all');
+        setNeutralState();
       }
     });
 
-    setActiveCountry('all');
+    setNeutralState();
   </script>
 </body>
 </html>
