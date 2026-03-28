@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | BlackSeaBrief</title>
-  <meta name="description" content="Contact BlackSeaBrief for submissions, enquiries, partnerships, and publication-related correspondence." />
+  <title>About | BlackSeaBrief</title>
+  <meta name="description" content="About BlackSeaBrief — a publication focused on Black Sea geopolitics, security, frozen conflicts, and regional analysis." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="shortcut icon" href="favicon.ico" />
   <style>
@@ -203,13 +203,13 @@
       font-size: 1rem;
     }
 
-    .contact-section {
+    .about-section {
       padding: 10px 0 90px;
     }
 
-    .contact-grid {
+    .about-grid {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.08fr 0.92fr;
       gap: 26px;
       align-items: start;
     }
@@ -225,15 +225,15 @@
 
     .panel h2 {
       font-size: 1.5rem;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .panel > p {
       color: var(--muted);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    .contact-card {
+    .about-card {
       background: rgba(0,0,0,0.24);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 20px;
@@ -241,7 +241,7 @@
       margin-bottom: 14px;
     }
 
-    .contact-card:last-child {
+    .about-card:last-child {
       margin-bottom: 0;
     }
 
@@ -261,35 +261,14 @@
       font-weight: 400;
     }
 
-    .contact-card h3 {
+    .about-card h3 {
       font-size: 1.12rem;
       margin-bottom: 8px;
     }
 
-    .contact-card p {
+    .about-card p {
       color: var(--muted);
       font-size: 0.96rem;
-      margin-bottom: 12px;
-    }
-
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 0 14px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(238,138,22,0.18), rgba(238,138,22,0.10));
-      border: 1px solid rgba(238,138,22,0.28);
-      color: var(--text);
-      font-size: 0.92rem;
-      transition: 0.18s ease;
-    }
-
-    .contact-link:hover {
-      transform: translateY(-1px);
-      background: linear-gradient(180deg, rgba(238,138,22,0.24), rgba(238,138,22,0.13));
-      border-color: rgba(255,190,114,0.45);
     }
 
     .info-stack {
@@ -331,7 +310,7 @@
     }
 
     @media (max-width: 980px) {
-      .contact-grid {
+      .about-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -376,8 +355,8 @@
 
       <nav class="nav-links">
         <a href="recent.html" data-i18n="nav_recent">Recent</a>
-        <a href="about.html" data-i18n="nav_about">About</a>
-        <a href="contact.html" class="active" data-i18n="nav_contact">Contact</a>
+        <a href="about.html" class="active" data-i18n="nav_about">About</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
 
         <div class="lang-switcher">
           <button class="lang-toggle" id="lang-toggle" type="button">Language</button>
@@ -395,81 +374,78 @@
   <main>
     <section class="page-hero">
       <div class="container">
-        <span class="eyebrow" data-i18n="hero_eyebrow">Contact</span>
-        <h1 data-i18n-html="hero_title">Get in touch with <span class="accent">BlackSeaBrief</span>.</h1>
+        <span class="eyebrow" data-i18n="hero_eyebrow">About</span>
+        <h1 data-i18n-html="hero_title">About <span class="accent">BlackSeaBrief</span>.</h1>
         <p data-i18n="hero_text">
-          For submissions, publication enquiries, partnerships, or general correspondence, use the channels below.
+          A focused publication on Black Sea geopolitics, frozen conflicts, regional security, and strategic pressure points.
         </p>
       </div>
     </section>
 
-    <section class="contact-section">
-      <div class="container contact-grid">
+    <section class="about-section">
+      <div class="container about-grid">
         <div class="panel">
-          <h2 data-i18n="main_heading">Contact channels</h2>
+          <h2 data-i18n="main_heading">What this site is</h2>
           <p data-i18n="main_text">
-            Keep this page clean and direct. You can replace the placeholder email and social handles with your real ones later.
+            BlackSeaBrief is designed as a clean, serious publication space for concise analysis on the Black Sea and its surrounding strategic environment.
           </p>
 
-          <div class="contact-card">
+          <div class="about-card">
             <div class="card-top">
-              <span data-i18n="card_general_tag">General</span>
-              <strong data-i18n="card_general_label">Main inbox</strong>
+              <span data-i18n="card_focus_tag">Focus</span>
+              <strong data-i18n="card_focus_label">Coverage</strong>
             </div>
-            <h3 data-i18n="general_title">General enquiries</h3>
-            <p data-i18n="general_text">
-              For general questions, media contact, or publication-related communication.
+            <h3 data-i18n="focus_title">Regional and strategic</h3>
+            <p data-i18n="focus_text">
+              The site is built for writing on Moldova, Transnistria, Ukraine, Russia, Turkey, the western Black Sea basin, and the wider regional balance.
             </p>
-            <a class="contact-link" href="mailto:contact@blackseabrief.com">contact@blackseabrief.com</a>
           </div>
 
-          <div class="contact-card">
+          <div class="about-card">
             <div class="card-top">
-              <span data-i18n="card_submissions_tag">Writing</span>
-              <strong data-i18n="card_submissions_label">Submissions</strong>
+              <span data-i18n="card_style_tag">Style</span>
+              <strong data-i18n="card_style_label">Tone</strong>
             </div>
-            <h3 data-i18n="submissions_title">Article submissions</h3>
-            <p data-i18n="submissions_text">
-              Use this for pitches, completed articles, and publication proposals.
+            <h3 data-i18n="style_title">Clear and analytical</h3>
+            <p data-i18n="style_text">
+              The intended tone is direct, restrained, and publication-oriented: more analysis, less clutter, and no unnecessary noise.
             </p>
-            <a class="contact-link" href="mailto:submissions@blackseabrief.com">submissions@blackseabrief.com</a>
           </div>
 
-          <div class="contact-card">
+          <div class="about-card">
             <div class="card-top">
-              <span data-i18n="card_social_tag">Social</span>
-              <strong data-i18n="card_social_label">Public</strong>
+              <span data-i18n="card_purpose_tag">Purpose</span>
+              <strong data-i18n="card_purpose_label">Mission</strong>
             </div>
-            <h3 data-i18n="social_title">Public channels</h3>
-            <p data-i18n="social_text">
-              Add your public-facing platforms here for updates, announcements, and outreach.
+            <h3 data-i18n="purpose_title">A serious front for serious writing</h3>
+            <p data-i18n="purpose_text">
+              This page gives readers a quick sense of the publication’s direction, scope, and editorial feel before they move into the articles themselves.
             </p>
-            <a class="contact-link" href="#">@BlackSeaBrief</a>
           </div>
         </div>
 
         <div class="info-stack">
           <div class="info-box">
-            <h3 data-i18n="expect_heading">What to send</h3>
+            <h3 data-i18n="topics_heading">Core topics</h3>
             <ul>
-              <li data-i18n="expect_1">A clear subject line.</li>
-              <li data-i18n="expect_2">A short explanation of why you are writing.</li>
-              <li data-i18n="expect_3">A finished piece or a concise pitch, if relevant.</li>
-              <li data-i18n="expect_4">Links or attachments only where necessary.</li>
+              <li data-i18n="topics_1">Frozen conflicts and unresolved territorial disputes.</li>
+              <li data-i18n="topics_2">Military posture and regional deterrence.</li>
+              <li data-i18n="topics_3">Energy leverage, infrastructure, and strategic dependency.</li>
+              <li data-i18n="topics_4">Power politics in and around the Black Sea.</li>
             </ul>
           </div>
 
           <div class="info-box">
-            <h3 data-i18n="response_heading">Response style</h3>
-            <p data-i18n="response_text">
-              This page is designed to look formal, spare, and publication-oriented, matching the tone of the front page.
+            <h3 data-i18n="editorial_heading">Editorial direction</h3>
+            <p data-i18n="editorial_text">
+              The visual style matches the front page so the site feels consistent: dark, minimal, formal, and built around readable analysis.
             </p>
           </div>
 
           <div class="info-box">
             <h3 data-i18n="note_heading">Note</h3>
             <p data-i18n="note_text">
-              Replace the placeholder email addresses with your real ones before publishing. If you want, you can also swap one of these boxes for a simple contact form later.
+              You can later replace this text with a founder note, editorial statement, or short publication mission once the site is fully live.
             </p>
           </div>
         </div>
@@ -479,7 +455,7 @@
 
   <footer class="footer">
     <div class="container">
-      <span data-i18n="footer_text">BlackSeaBrief contact page draft.</span>
+      <span data-i18n="footer_text">BlackSeaBrief about page draft.</span>
     </div>
   </footer>
 
@@ -496,33 +472,33 @@
         nav_about: 'About',
         nav_contact: 'Contact',
         brand_sub: 'Geopolitics & Security',
-        hero_eyebrow: 'Contact',
-        hero_title: 'Get in touch with <span class="accent">BlackSeaBrief</span>.',
-        hero_text: 'For submissions, publication enquiries, partnerships, or general correspondence, use the channels below.',
-        main_heading: 'Contact channels',
-        main_text: 'Keep this page clean and direct. You can replace the placeholder email and social handles with your real ones later.',
-        card_general_tag: 'General',
-        card_general_label: 'Main inbox',
-        general_title: 'General enquiries',
-        general_text: 'For general questions, media contact, or publication-related communication.',
-        card_submissions_tag: 'Writing',
-        card_submissions_label: 'Submissions',
-        submissions_title: 'Article submissions',
-        submissions_text: 'Use this for pitches, completed articles, and publication proposals.',
-        card_social_tag: 'Social',
-        card_social_label: 'Public',
-        social_title: 'Public channels',
-        social_text: 'Add your public-facing platforms here for updates, announcements, and outreach.',
-        expect_heading: 'What to send',
-        expect_1: 'A clear subject line.',
-        expect_2: 'A short explanation of why you are writing.',
-        expect_3: 'A finished piece or a concise pitch, if relevant.',
-        expect_4: 'Links or attachments only where necessary.',
-        response_heading: 'Response style',
-        response_text: 'This page is designed to look formal, spare, and publication-oriented, matching the tone of the front page.',
+        hero_eyebrow: 'About',
+        hero_title: 'About <span class="accent">BlackSeaBrief</span>.',
+        hero_text: 'A focused publication on Black Sea geopolitics, frozen conflicts, regional security, and strategic pressure points.',
+        main_heading: 'What this site is',
+        main_text: 'BlackSeaBrief is designed as a clean, serious publication space for concise analysis on the Black Sea and its surrounding strategic environment.',
+        card_focus_tag: 'Focus',
+        card_focus_label: 'Coverage',
+        focus_title: 'Regional and strategic',
+        focus_text: 'The site is built for writing on Moldova, Transnistria, Ukraine, Russia, Turkey, the western Black Sea basin, and the wider regional balance.',
+        card_style_tag: 'Style',
+        card_style_label: 'Tone',
+        style_title: 'Clear and analytical',
+        style_text: 'The intended tone is direct, restrained, and publication-oriented: more analysis, less clutter, and no unnecessary noise.',
+        card_purpose_tag: 'Purpose',
+        card_purpose_label: 'Mission',
+        purpose_title: 'A serious front for serious writing',
+        purpose_text: 'This page gives readers a quick sense of the publication’s direction, scope, and editorial feel before they move into the articles themselves.',
+        topics_heading: 'Core topics',
+        topics_1: 'Frozen conflicts and unresolved territorial disputes.',
+        topics_2: 'Military posture and regional deterrence.',
+        topics_3: 'Energy leverage, infrastructure, and strategic dependency.',
+        topics_4: 'Power politics in and around the Black Sea.',
+        editorial_heading: 'Editorial direction',
+        editorial_text: 'The visual style matches the front page so the site feels consistent: dark, minimal, formal, and built around readable analysis.',
         note_heading: 'Note',
-        note_text: 'Replace the placeholder email addresses with your real ones before publishing. If you want, you can also swap one of these boxes for a simple contact form later.',
-        footer_text: 'BlackSeaBrief contact page draft.',
+        note_text: 'You can later replace this text with a founder note, editorial statement, or short publication mission once the site is fully live.',
+        footer_text: 'BlackSeaBrief about page draft.',
         language_button: 'Language'
       },
       ro: {
@@ -530,33 +506,33 @@
         nav_about: 'Despre',
         nav_contact: 'Contact',
         brand_sub: 'Geopolitică și Securitate',
-        hero_eyebrow: 'Contact',
-        hero_title: 'Ia legătura cu <span class="accent">BlackSeaBrief</span>.',
-        hero_text: 'Pentru trimiteri de articole, întrebări despre publicație, parteneriate sau corespondență generală, folosește opțiunile de mai jos.',
-        main_heading: 'Canale de contact',
-        main_text: 'Păstrează această pagină curată și directă. Poți înlocui mai târziu emailurile și conturile placeholder cu cele reale.',
-        card_general_tag: 'General',
-        card_general_label: 'Inbox principal',
-        general_title: 'Întrebări generale',
-        general_text: 'Pentru întrebări generale, contact media sau comunicare legată de publicație.',
-        card_submissions_tag: 'Scris',
-        card_submissions_label: 'Trimiteri',
-        submissions_title: 'Trimiteri de articole',
-        submissions_text: 'Folosește aceasta pentru pitch-uri, articole complete și propuneri de publicare.',
-        card_social_tag: 'Social',
-        card_social_label: 'Public',
-        social_title: 'Canale publice',
-        social_text: 'Adaugă aici platformele tale publice pentru actualizări, anunțuri și outreach.',
-        expect_heading: 'Ce să trimiți',
-        expect_1: 'Un subiect clar.',
-        expect_2: 'O explicație scurtă despre motivul mesajului.',
-        expect_3: 'Un text finalizat sau un pitch concis, dacă este relevant.',
-        expect_4: 'Linkuri sau atașamente doar unde este necesar.',
-        response_heading: 'Stilul paginii',
-        response_text: 'Această pagină este făcută să pară formală, sobră și orientată spre publicație, în ton cu pagina principală.',
+        hero_eyebrow: 'Despre',
+        hero_title: 'Despre <span class="accent">BlackSeaBrief</span>.',
+        hero_text: 'O publicație concentrată pe geopolitica Mării Negre, conflicte înghețate, securitate regională și puncte de presiune strategică.',
+        main_heading: 'Ce este acest site',
+        main_text: 'BlackSeaBrief este gândit ca un spațiu curat și serios pentru analiză concisă despre Marea Neagră și mediul ei strategic.',
+        card_focus_tag: 'Focus',
+        card_focus_label: 'Acoperire',
+        focus_title: 'Regional și strategic',
+        focus_text: 'Site-ul este construit pentru texte despre Moldova, Transnistria, Ucraina, Rusia, Turcia, bazinul vestic al Mării Negre și echilibrul regional mai larg.',
+        card_style_tag: 'Stil',
+        card_style_label: 'Ton',
+        style_title: 'Clar și analitic',
+        style_text: 'Tonul dorit este direct, sobru și orientat spre publicație: mai multă analiză, mai puțină aglomerație și fără zgomot inutil.',
+        card_purpose_tag: 'Scop',
+        card_purpose_label: 'Misiune',
+        purpose_title: 'O față serioasă pentru texte serioase',
+        purpose_text: 'Această pagină le oferă cititorilor o idee rapidă despre direcția publicației, aria ei și tonul editorial înainte de articole.',
+        topics_heading: 'Teme centrale',
+        topics_1: 'Conflicte înghețate și dispute teritoriale nerezolvate.',
+        topics_2: 'Postură militară și descurajare regională.',
+        topics_3: 'Pârghii energetice, infrastructură și dependență strategică.',
+        topics_4: 'Jocuri de putere în și în jurul Mării Negre.',
+        editorial_heading: 'Direcție editorială',
+        editorial_text: 'Stilul vizual se potrivește cu pagina principală, astfel încât site-ul să pară coerent: întunecat, minimalist, formal și construit pentru analiză lizibilă.',
         note_heading: 'Notă',
-        note_text: 'Înlocuiește adresele placeholder cu cele reale înainte de publicare. Poți și să schimbi una dintre aceste casete cu un formular simplu de contact mai târziu.',
-        footer_text: 'Schiță pentru pagina de contact BlackSeaBrief.',
+        note_text: 'Mai târziu poți înlocui acest text cu o notă a fondatorului, o declarație editorială sau o scurtă misiune a publicației.',
+        footer_text: 'Schiță pentru pagina Despre BlackSeaBrief.',
         language_button: 'Limbă'
       },
       ru: {
@@ -564,33 +540,33 @@
         nav_about: 'О сайте',
         nav_contact: 'Контакт',
         brand_sub: 'Геополитика и безопасность',
-        hero_eyebrow: 'Контакт',
-        hero_title: 'Связаться с <span class="accent">BlackSeaBrief</span>.',
-        hero_text: 'Для отправки материалов, вопросов о публикации, партнёрств или общей переписки используйте каналы ниже.',
-        main_heading: 'Каналы связи',
-        main_text: 'Оставьте эту страницу чистой и прямой. Позже вы сможете заменить временные адреса и соцсети на реальные.',
-        card_general_tag: 'Общее',
-        card_general_label: 'Основной ящик',
-        general_title: 'Общие запросы',
-        general_text: 'Для общих вопросов, связи со СМИ или переписки по публикации.',
-        card_submissions_tag: 'Тексты',
-        card_submissions_label: 'Материалы',
-        submissions_title: 'Отправка статей',
-        submissions_text: 'Используйте это для питчей, готовых статей и предложений по публикации.',
-        card_social_tag: 'Соцсети',
-        card_social_label: 'Публично',
-        social_title: 'Публичные каналы',
-        social_text: 'Добавьте сюда ваши публичные платформы для обновлений, объявлений и внешней связи.',
-        expect_heading: 'Что отправлять',
-        expect_1: 'Чёткую тему письма.',
-        expect_2: 'Короткое объяснение, зачем вы пишете.',
-        expect_3: 'Готовый текст или краткий питч, если это уместно.',
-        expect_4: 'Ссылки или вложения только при необходимости.',
-        response_heading: 'Стиль страницы',
-        response_text: 'Эта страница сделана формальной, сдержанной и ориентированной на публикацию, чтобы соответствовать тону главной страницы.',
+        hero_eyebrow: 'О сайте',
+        hero_title: 'О <span class="accent">BlackSeaBrief</span>.',
+        hero_text: 'Сфокусированное издание о геополитике Чёрного моря, замороженных конфликтах, региональной безопасности и стратегических точках давления.',
+        main_heading: 'Что это за сайт',
+        main_text: 'BlackSeaBrief задуман как чистое и серьёзное пространство для краткой аналитики о Чёрном море и окружающей его стратегической среде.',
+        card_focus_tag: 'Фокус',
+        card_focus_label: 'Охват',
+        focus_title: 'Регионально и стратегически',
+        focus_text: 'Сайт создан для текстов о Молдове, Приднестровье, Украине, России, Турции, западном бассейне Чёрного моря и более широком региональном балансе.',
+        card_style_tag: 'Стиль',
+        card_style_label: 'Тон',
+        style_title: 'Ясно и аналитично',
+        style_text: 'Предполагаемый тон — прямой, сдержанный и ориентированный на публикацию: больше анализа, меньше перегруза и никакого лишнего шума.',
+        card_purpose_tag: 'Назначение',
+        card_purpose_label: 'Миссия',
+        purpose_title: 'Серьёзная оболочка для серьёзных текстов',
+        purpose_text: 'Эта страница быстро даёт читателю понимание направления, охвата и редакционного ощущения издания перед переходом к самим статьям.',
+        topics_heading: 'Основные темы',
+        topics_1: 'Замороженные конфликты и нерешённые территориальные споры.',
+        topics_2: 'Военная позиция и региональное сдерживание.',
+        topics_3: 'Энергетические рычаги, инфраструктура и стратегическая зависимость.',
+        topics_4: 'Политика силы в и вокруг Чёрного моря.',
+        editorial_heading: 'Редакционное направление',
+        editorial_text: 'Визуальный стиль совпадает с главной страницей, чтобы сайт ощущался цельным: тёмным, минималистичным, формальным и построенным вокруг читаемой аналитики.',
         note_heading: 'Примечание',
-        note_text: 'Замените временные адреса на реальные перед публикацией. Позже вы также можете заменить один из блоков на простую форму обратной связи.',
-        footer_text: 'Черновик страницы контактов BlackSeaBrief.',
+        note_text: 'Позже вы сможете заменить этот текст на записку основателя, редакционное заявление или краткую миссию издания.',
+        footer_text: 'Черновик страницы About для BlackSeaBrief.',
         language_button: 'Язык'
       },
       tr: {
@@ -598,33 +574,33 @@
         nav_about: 'Hakkında',
         nav_contact: 'İletişim',
         brand_sub: 'Jeopolitik ve Güvenlik',
-        hero_eyebrow: 'İletişim',
-        hero_title: '<span class="accent">BlackSeaBrief</span> ile iletişime geçin.',
-        hero_text: 'Yazı gönderileri, yayın soruları, ortaklıklar veya genel yazışmalar için aşağıdaki kanalları kullanın.',
-        main_heading: 'İletişim kanalları',
-        main_text: 'Bu sayfayı temiz ve doğrudan tutun. Daha sonra yer tutucu e-posta ve sosyal hesapları gerçek olanlarla değiştirebilirsiniz.',
-        card_general_tag: 'Genel',
-        card_general_label: 'Ana kutu',
-        general_title: 'Genel sorular',
-        general_text: 'Genel sorular, medya iletişimi veya yayınla ilgili yazışmalar için.',
-        card_submissions_tag: 'Yazı',
-        card_submissions_label: 'Gönderiler',
-        submissions_title: 'Makale gönderileri',
-        submissions_text: 'Bunu öneriler, tamamlanmış yazılar ve yayın teklifleri için kullanın.',
-        card_social_tag: 'Sosyal',
-        card_social_label: 'Açık',
-        social_title: 'Kamusal kanallar',
-        social_text: 'Güncellemeler, duyurular ve dış iletişim için kamusal platformlarınızı buraya ekleyin.',
-        expect_heading: 'Ne gönderilmeli',
-        expect_1: 'Açık bir konu başlığı.',
-        expect_2: 'Neden yazdığınızı anlatan kısa bir açıklama.',
-        expect_3: 'Uygunsa tamamlanmış bir yazı veya kısa bir öneri.',
-        expect_4: 'Yalnızca gerektiğinde bağlantılar veya ekler.',
-        response_heading: 'Sayfa tarzı',
-        response_text: 'Bu sayfa, ana sayfanın tonuna uyması için resmî, sade ve yayın odaklı görünecek şekilde tasarlandı.',
+        hero_eyebrow: 'Hakkında',
+        hero_title: '<span class="accent">BlackSeaBrief</span> hakkında.',
+        hero_text: 'Karadeniz jeopolitiği, donmuş çatışmalar, bölgesel güvenlik ve stratejik baskı noktalarına odaklanan bir yayın.',
+        main_heading: 'Bu site nedir',
+        main_text: 'BlackSeaBrief, Karadeniz ve çevresindeki stratejik ortam üzerine kısa analizler için temiz ve ciddi bir yayın alanı olarak tasarlandı.',
+        card_focus_tag: 'Odak',
+        card_focus_label: 'Kapsam',
+        focus_title: 'Bölgesel ve stratejik',
+        focus_text: 'Site; Moldova, Transdinyester, Ukrayna, Rusya, Türkiye, Karadeniz’in batı havzası ve daha geniş bölgesel denge üzerine yazılar için kuruldu.',
+        card_style_tag: 'Tarz',
+        card_style_label: 'Ton',
+        style_title: 'Açık ve analitik',
+        style_text: 'Hedeflenen ton doğrudan, ölçülü ve yayın odaklıdır: daha çok analiz, daha az kalabalık ve gereksiz gürültü yok.',
+        card_purpose_tag: 'Amaç',
+        card_purpose_label: 'Misyon',
+        purpose_title: 'Ciddi yazılar için ciddi bir yüz',
+        purpose_text: 'Bu sayfa, okuyucuya makalelere geçmeden önce yayının yönü, kapsamı ve editoryal hissi hakkında hızlı bir fikir verir.',
+        topics_heading: 'Temel başlıklar',
+        topics_1: 'Donmuş çatışmalar ve çözülmemiş toprak anlaşmazlıkları.',
+        topics_2: 'Askerî duruş ve bölgesel caydırıcılık.',
+        topics_3: 'Enerji kaldıracı, altyapı ve stratejik bağımlılık.',
+        topics_4: 'Karadeniz içinde ve çevresinde güç siyaseti.',
+        editorial_heading: 'Editoryal yön',
+        editorial_text: 'Görsel tarz ana sayfayla uyumludur; böylece site karanlık, minimal, resmî ve okunabilir analiz etrafında kurulmuş tutarlı bir yapı hissi verir.',
         note_heading: 'Not',
-        note_text: 'Yayınlamadan önce yer tutucu e-posta adreslerini gerçek olanlarla değiştirin. İsterseniz daha sonra bu kutulardan birini basit bir iletişim formuyla da değiştirebilirsiniz.',
-        footer_text: 'BlackSeaBrief iletişim sayfası taslağı.',
+        note_text: 'Daha sonra bu metni bir kurucu notu, editoryal açıklama veya kısa yayın misyonu ile değiştirebilirsiniz.',
+        footer_text: 'BlackSeaBrief hakkında sayfası taslağı.',
         language_button: 'Dil'
       }
     };
