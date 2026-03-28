@@ -1,1 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | BlackSeaBrief</title>
+  <meta name="description" content="Contact BlackSeaBrief for submissions, enquiries, partnerships, and publication-related correspondence." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    :root {
+      --bg: #040404;
+      --bg-soft: #0b0b0b;
+      --panel: #121212;
+      --line: rgba(255,255,255,0.08);
+      --text: #f5f5f5;
+      --muted: #b6b6b6;
+      --accent: #ee8a16;
+      --max: 1220px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top right, rgba(238,138,22,0.08), transparent 24%),
+        linear-gradient(180deg, #020202 0%, #080808 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 34px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header .container {
+      width: min(calc(100% - 14px), 1500px);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(4,4,4,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navbar {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand img {
+      height: 76px;
+      width: auto;
+      object-fit: contain;
+      margin-left: -6px;
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-title {
+      font-size: 1.6rem;
+    }
+
+    .brand-sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 0.97rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .lang-switcher {
+      position: relative;
+      margin-left: 10px;
+    }
+
+    .lang-toggle {
+      background: #0f0f0f;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font: inherit;
+    }
+
+    .lang-toggle:hover,
+    .lang-toggle.active {
+      border-color: rgba(238,138,22,0.24);
+      background: rgba(238,138,22,0.11);
+    }
+
+    .lang-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      min-width: 170px;
+      background: linear-gradient(180deg, #121212, #0b0b0b);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      box-shadow: 0 16px 34px rgba(0,0,0,0.30);
+      padding: 8px;
+      display: none;
+      z-index: 1001;
+    }
+
+    .lang-menu.open {
+      display: block;
+    }
+
+    .lang-option {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      color: var(--muted);
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: 0.18s ease;
+      font: inherit;
+    }
+
+    .lang-option:hover,
+    .lang-option.active {
+      background: rgba(238,138,22,0.11);
+      color: var(--text);
+    }
+
+    .page-hero {
+      padding: 74px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 0.98;
+      max-width: 900px;
+      margin-bottom: 16px;
+    }
+
+    .page-hero h1 .accent {
+      color: var(--accent);
+    }
+
+    .page-hero p {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .contact-section {
+      padding: 10px 0 90px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .panel {
+      background:
+        linear-gradient(180deg, rgba(238,138,22,0.08), rgba(238,138,22,0.015)),
+        linear-gradient(180deg, #121212, #0a0a0a);
+      border: 1px solid rgba(238,138,22,0.14);
+      border-radius: 28px;
+      padding: 24px;
+    }
+
+    .panel h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .panel > p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .contact-card {
+      background: rgba(0,0,0,0.24);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .contact-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.76rem;
+    }
+
+    .card-top strong {
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .contact-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(238,138,22,0.18), rgba(238,138,22,0.10));
+      border: 1px solid rgba(238,138,22,0.28);
+      color: var(--text);
+      font-size: 0.92rem;
+      transition: 0.18s ease;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-1px);
+      background: linear-gradient(180deg, rgba(238,138,22,0.24), rgba(238,138,22,0.13));
+      border-color: rgba(255,190,114,0.45);
+    }
+
+    .info-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .info-box h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+
+    .info-box p,
+    .info-box li {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .info-box ul {
+      padding-left: 18px;
+    }
+
+    .info-box li {
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      padding: 26px 0 40px;
+      border-top: 1px solid var(--line);
+      color: #8f8f8f;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .navbar {
+        flex-wrap: wrap;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        gap: 18px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .brand img {
+        height: 56px;
+      }
+
+      .brand-title {
+        font-size: 1.32rem;
+      }
+
+      .page-hero {
+        padding-top: 42px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <a class="brand" href="index.html">
+        <img src="blackseabrief-logo.png" alt="BlackSeaBrief logo" />
+        <div class="brand-block">
+          <div class="brand-title">BlackSeaBrief</div>
+          <div class="brand-sub" data-i18n="brand_sub">Geopolitics &amp; Security</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="recent.html" data-i18n="nav_recent">Recent</a>
+        <a href="about.html" data-i18n="nav_about">About</a>
+        <a href="contact.html" class="active" data-i18n="nav_contact">Contact</a>
+
+        <div class="lang-switcher">
+          <button class="lang-toggle" id="lang-toggle" type="button">Language</button>
+          <div class="lang-menu" id="lang-menu">
+            <button class="lang-option active" type="button" data-lang="en">British English</button>
+            <button class="lang-option" type="button" data-lang="ro">Română</button>
+            <button class="lang-option" type="button" data-lang="ru">Русский</button>
+            <button class="lang-option" type="button" data-lang="tr">Türkçe</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow" data-i18n="hero_eyebrow">Contact</span>
+        <h1 data-i18n-html="hero_title">Get in touch with <span class="accent">BlackSeaBrief</span>.</h1>
+        <p data-i18n="hero_text">
+          For submissions, publication enquiries, partnerships, or general correspondence, use the channels below.
+        </p>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="container contact-grid">
+        <div class="panel">
+          <h2 data-i18n="main_heading">Contact channels</h2>
+          <p data-i18n="main_text">
+            Keep this page clean and direct. You can replace the placeholder email and social handles with your real ones later.
+          </p>
+
+          <div class="contact-card">
+            <div class="card-top">
+              <span data-i18n="card_general_tag">General</span>
+              <strong data-i18n="card_general_label">Main inbox</strong>
+            </div>
+            <h3 data-i18n="general_title">General enquiries</h3>
+            <p data-i18n="general_text">
+              For general questions, media contact, or publication-related communication.
+            </p>
+            <a class="contact-link" href="mailto:contact@blackseabrief.com">contact@blackseabrief.com</a>
+          </div>
+
+          <div class="contact-card">
+            <div class="card-top">
+              <span data-i18n="card_submissions_tag">Writing</span>
+              <strong data-i18n="card_submissions_label">Submissions</strong>
+            </div>
+            <h3 data-i18n="submissions_title">Article submissions</h3>
+            <p data-i18n="submissions_text">
+              Use this for pitches, completed articles, and publication proposals.
+            </p>
+            <a class="contact-link" href="mailto:submissions@blackseabrief.com">submissions@blackseabrief.com</a>
+          </div>
+
+          <div class="contact-card">
+            <div class="card-top">
+              <span data-i18n="card_social_tag">Social</span>
+              <strong data-i18n="card_social_label">Public</strong>
+            </div>
+            <h3 data-i18n="social_title">Public channels</h3>
+            <p data-i18n="social_text">
+              Add your public-facing platforms here for updates, announcements, and outreach.
+            </p>
+            <a class="contact-link" href="#">@BlackSeaBrief</a>
+          </div>
+        </div>
+
+        <div class="info-stack">
+          <div class="info-box">
+            <h3 data-i18n="expect_heading">What to send</h3>
+            <ul>
+              <li data-i18n="expect_1">A clear subject line.</li>
+              <li data-i18n="expect_2">A short explanation of why you are writing.</li>
+              <li data-i18n="expect_3">A finished piece or a concise pitch, if relevant.</li>
+              <li data-i18n="expect_4">Links or attachments only where necessary.</li>
+            </ul>
+          </div>
+
+          <div class="info-box">
+            <h3 data-i18n="response_heading">Response style</h3>
+            <p data-i18n="response_text">
+              This page is designed to look formal, spare, and publication-oriented, matching the tone of the front page.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3 data-i18n="note_heading">Note</h3>
+            <p data-i18n="note_text">
+              Replace the placeholder email addresses with your real ones before publishing. If you want, you can also swap one of these boxes for a simple contact form later.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span data-i18n="footer_text">BlackSeaBrief contact page draft.</span>
+    </div>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('lang-toggle');
+    const langMenu = document.getElementById('lang-menu');
+    const langOptions = document.querySelectorAll('.lang-option');
+
+    let currentLang = 'en';
+
+    const translations = {
+      en: {
+        nav_recent: 'Recent',
+        nav_about: 'About',
+        nav_contact: 'Contact',
+        brand_sub: 'Geopolitics & Security',
+        hero_eyebrow: 'Contact',
+        hero_title: 'Get in touch with <span class="accent">BlackSeaBrief</span>.',
+        hero_text: 'For submissions, publication enquiries, partnerships, or general correspondence, use the channels below.',
+        main_heading: 'Contact channels',
+        main_text: 'Keep this page clean and direct. You can replace the placeholder email and social handles with your real ones later.',
+        card_general_tag: 'General',
+        card_general_label: 'Main inbox',
+        general_title: 'General enquiries',
+        general_text: 'For general questions, media contact, or publication-related communication.',
+        card_submissions_tag: 'Writing',
+        card_submissions_label: 'Submissions',
+        submissions_title: 'Article submissions',
+        submissions_text: 'Use this for pitches, completed articles, and publication proposals.',
+        card_social_tag: 'Social',
+        card_social_label: 'Public',
+        social_title: 'Public channels',
+        social_text: 'Add your public-facing platforms here for updates, announcements, and outreach.',
+        expect_heading: 'What to send',
+        expect_1: 'A clear subject line.',
+        expect_2: 'A short explanation of why you are writing.',
+        expect_3: 'A finished piece or a concise pitch, if relevant.',
+        expect_4: 'Links or attachments only where necessary.',
+        response_heading: 'Response style',
+        response_text: 'This page is designed to look formal, spare, and publication-oriented, matching the tone of the front page.',
+        note_heading: 'Note',
+        note_text: 'Replace the placeholder email addresses with your real ones before publishing. If you want, you can also swap one of these boxes for a simple contact form later.',
+        footer_text: 'BlackSeaBrief contact page draft.',
+        language_button: 'Language'
+      },
+      ro: {
+        nav_recent: 'Recente',
+        nav_about: 'Despre',
+        nav_contact: 'Contact',
+        brand_sub: 'Geopolitică și Securitate',
+        hero_eyebrow: 'Contact',
+        hero_title: 'Ia legătura cu <span class="accent">BlackSeaBrief</span>.',
+        hero_text: 'Pentru trimiteri de articole, întrebări despre publicație, parteneriate sau corespondență generală, folosește opțiunile de mai jos.',
+        main_heading: 'Canale de contact',
+        main_text: 'Păstrează această pagină curată și directă. Poți înlocui mai târziu emailurile și conturile placeholder cu cele reale.',
+        card_general_tag: 'General',
+        card_general_label: 'Inbox principal',
+        general_title: 'Întrebări generale',
+        general_text: 'Pentru întrebări generale, contact media sau comunicare legată de publicație.',
+        card_submissions_tag: 'Scris',
+        card_submissions_label: 'Trimiteri',
+        submissions_title: 'Trimiteri de articole',
+        submissions_text: 'Folosește aceasta pentru pitch-uri, articole complete și propuneri de publicare.',
+        card_social_tag: 'Social',
+        card_social_label: 'Public',
+        social_title: 'Canale publice',
+        social_text: 'Adaugă aici platformele tale publice pentru actualizări, anunțuri și outreach.',
+        expect_heading: 'Ce să trimiți',
+        expect_1: 'Un subiect clar.',
+        expect_2: 'O explicație scurtă despre motivul mesajului.',
+        expect_3: 'Un text finalizat sau un pitch concis, dacă este relevant.',
+        expect_4: 'Linkuri sau atașamente doar unde este necesar.',
+        response_heading: 'Stilul paginii',
+        response_text: 'Această pagină este făcută să pară formală, sobră și orientată spre publicație, în ton cu pagina principală.',
+        note_heading: 'Notă',
+        note_text: 'Înlocuiește adresele placeholder cu cele reale înainte de publicare. Poți și să schimbi una dintre aceste casete cu un formular simplu de contact mai târziu.',
+        footer_text: 'Schiță pentru pagina de contact BlackSeaBrief.',
+        language_button: 'Limbă'
+      },
+      ru: {
+        nav_recent: 'Недавнее',
+        nav_about: 'О сайте',
+        nav_contact: 'Контакт',
+        brand_sub: 'Геополитика и безопасность',
+        hero_eyebrow: 'Контакт',
+        hero_title: 'Связаться с <span class="accent">BlackSeaBrief</span>.',
+        hero_text: 'Для отправки материалов, вопросов о публикации, партнёрств или общей переписки используйте каналы ниже.',
+        main_heading: 'Каналы связи',
+        main_text: 'Оставьте эту страницу чистой и прямой. Позже вы сможете заменить временные адреса и соцсети на реальные.',
+        card_general_tag: 'Общее',
+        card_general_label: 'Основной ящик',
+        general_title: 'Общие запросы',
+        general_text: 'Для общих вопросов, связи со СМИ или переписки по публикации.',
+        card_submissions_tag: 'Тексты',
+        card_submissions_label: 'Материалы',
+        submissions_title: 'Отправка статей',
+        submissions_text: 'Используйте это для питчей, готовых статей и предложений по публикации.',
+        card_social_tag: 'Соцсети',
+        card_social_label: 'Публично',
+        social_title: 'Публичные каналы',
+        social_text: 'Добавьте сюда ваши публичные платформы для обновлений, объявлений и внешней связи.',
+        expect_heading: 'Что отправлять',
+        expect_1: 'Чёткую тему письма.',
+        expect_2: 'Короткое объяснение, зачем вы пишете.',
+        expect_3: 'Готовый текст или краткий питч, если это уместно.',
+        expect_4: 'Ссылки или вложения только при необходимости.',
+        response_heading: 'Стиль страницы',
+        response_text: 'Эта страница сделана формальной, сдержанной и ориентированной на публикацию, чтобы соответствовать тону главной страницы.',
+        note_heading: 'Примечание',
+        note_text: 'Замените временные адреса на реальные перед публикацией. Позже вы также можете заменить один из блоков на простую форму обратной связи.',
+        footer_text: 'Черновик страницы контактов BlackSeaBrief.',
+        language_button: 'Язык'
+      },
+      tr: {
+        nav_recent: 'Son Yazılar',
+        nav_about: 'Hakkında',
+        nav_contact: 'İletişim',
+        brand_sub: 'Jeopolitik ve Güvenlik',
+        hero_eyebrow: 'İletişim',
+        hero_title: '<span class="accent">BlackSeaBrief</span> ile iletişime geçin.',
+        hero_text: 'Yazı gönderileri, yayın soruları, ortaklıklar veya genel yazışmalar için aşağıdaki kanalları kullanın.',
+        main_heading: 'İletişim kanalları',
+        main_text: 'Bu sayfayı temiz ve doğrudan tutun. Daha sonra yer tutucu e-posta ve sosyal hesapları gerçek olanlarla değiştirebilirsiniz.',
+        card_general_tag: 'Genel',
+        card_general_label: 'Ana kutu',
+        general_title: 'Genel sorular',
+        general_text: 'Genel sorular, medya iletişimi veya yayınla ilgili yazışmalar için.',
+        card_submissions_tag: 'Yazı',
+        card_submissions_label: 'Gönderiler',
+        submissions_title: 'Makale gönderileri',
+        submissions_text: 'Bunu öneriler, tamamlanmış yazılar ve yayın teklifleri için kullanın.',
+        card_social_tag: 'Sosyal',
+        card_social_label: 'Açık',
+        social_title: 'Kamusal kanallar',
+        social_text: 'Güncellemeler, duyurular ve dış iletişim için kamusal platformlarınızı buraya ekleyin.',
+        expect_heading: 'Ne gönderilmeli',
+        expect_1: 'Açık bir konu başlığı.',
+        expect_2: 'Neden yazdığınızı anlatan kısa bir açıklama.',
+        expect_3: 'Uygunsa tamamlanmış bir yazı veya kısa bir öneri.',
+        expect_4: 'Yalnızca gerektiğinde bağlantılar veya ekler.',
+        response_heading: 'Sayfa tarzı',
+        response_text: 'Bu sayfa, ana sayfanın tonuna uyması için resmî, sade ve yayın odaklı görünecek şekilde tasarlandı.',
+        note_heading: 'Not',
+        note_text: 'Yayınlamadan önce yer tutucu e-posta adreslerini gerçek olanlarla değiştirin. İsterseniz daha sonra bu kutulardan birini basit bir iletişim formuyla da değiştirebilirsiniz.',
+        footer_text: 'BlackSeaBrief iletişim sayfası taslağı.',
+        language_button: 'Dil'
+      }
+    };
+
+    function t(key) {
+      return (translations[currentLang] && translations[currentLang][key]) || (translations.en && translations.en[key]) || key;
+    }
+
+    function applyTranslations() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = t(el.getAttribute('data-i18n'));
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        el.innerHTML = t(el.getAttribute('data-i18n-html'));
+      });
+      langToggle.textContent = t('language_button');
+      langOptions.forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === currentLang);
+      });
+    }
+
+    langToggle.addEventListener('click', () => {
+      langMenu.classList.toggle('open');
+      langToggle.classList.toggle('active');
+    });
+
+    langOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        currentLang = option.dataset.lang;
+        applyTranslations();
+        langMenu.classList.remove('open');
+        langToggle.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const clickedLang = event.target.closest('.lang-switcher');
+      if (!clickedLang) {
+        langMenu.classList.remove('open');
+        langToggle.classList.remove('active');
+      }
+    });
+
+    applyTranslations();
+  </script>
+</body>
+</html>
