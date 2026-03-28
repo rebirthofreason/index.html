@@ -391,6 +391,65 @@
       font-size: 0.92rem;
     }
 
+    .lang-switcher {
+      position: relative;
+      margin-left: 10px;
+    }
+
+    .lang-toggle {
+      background: #0f0f0f;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font: inherit;
+    }
+
+    .lang-toggle:hover,
+    .lang-toggle.active {
+      border-color: rgba(238,138,22,0.24);
+      background: rgba(238,138,22,0.11);
+    }
+
+    .lang-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      min-width: 170px;
+      background: linear-gradient(180deg, #121212, #0b0b0b);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      box-shadow: 0 16px 34px rgba(0,0,0,0.30);
+      padding: 8px;
+      display: none;
+      z-index: 1001;
+    }
+
+    .lang-menu.open {
+      display: block;
+    }
+
+    .lang-option {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      color: var(--muted);
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: 0.18s ease;
+      font: inherit;
+    }
+
+    .lang-option:hover,
+    .lang-option.active {
+      background: rgba(238,138,22,0.11);
+      color: var(--text);
+    }
+
     @media (max-width: 980px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -435,15 +494,25 @@
         <img src="blackseabrief-logo.png" alt="BlackSeaBrief logo" />
         <div class="brand-block">
           <div class="brand-title">BlackSeaBrief</div>
-          <div class="brand-sub">Geopolitics &amp; Security</div>
+          <div class="brand-sub" data-i18n="brand_sub">Geopolitics &amp; Security</div>
         </div>
       </a>
 
       <nav class="nav-links">
-        <a href="#map">Recent</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#map" data-i18n="nav_recent">Recent</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
+
+      <div class="lang-switcher">
+        <button class="lang-toggle" id="lang-toggle" type="button">Language</button>
+        <div class="lang-menu" id="lang-menu">
+          <button class="lang-option active" type="button" data-lang="en">British English</button>
+          <button class="lang-option" type="button" data-lang="ro">Română</button>
+          <button class="lang-option" type="button" data-lang="ru">Русский</button>
+          <button class="lang-option" type="button" data-lang="tr">Türkçe</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -451,9 +520,9 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <span class="eyebrow">Black Sea Security • Frozen Conflicts • Regional Analysis</span>
-          <h1>Serious writing on the <span class="accent">Black Sea</span>, its conflicts, and the power politics shaping its future.</h1>
-          <p>
+          <span class="eyebrow" data-i18n="hero_eyebrow">Black Sea Security • Frozen Conflicts • Regional Analysis</span>
+          <h1 data-i18n-html="hero_title">Serious writing on the <span class="accent">Black Sea</span>, its conflicts, and the power politics shaping its future.</h1>
+          <p data-i18n="hero_text">
             Black Sea geopolitics, military posture, frozen conflicts, energy pressure,
             and regional strategic risk.
           </p>
@@ -462,33 +531,33 @@
         <aside class="hero-panel">
           <div class="hero-box">
             <div class="hero-box-top">
-              <span>Featured</span>
-              <strong>Lead Piece</strong>
+              <span data-i18n="featured_tag">Featured</span>
+              <strong data-i18n="lead_piece">Lead Piece</strong>
             </div>
-            <h3>Why Transnistria Is Strategically Overestimated</h3>
-            <p>
+            <h3 data-i18n="featured_title">Why Transnistria Is Strategically Overestimated</h3>
+            <p data-i18n="featured_text">
               A clean lead slot for your strongest article, without the extra clutter from the newer front page.
             </p>
           </div>
 
           <div class="hero-box" id="about">
             <div class="hero-box-top">
-              <span>Scope</span>
-              <strong>Focus</strong>
+              <span data-i18n="scope_tag">Scope</span>
+              <strong data-i18n="focus_tag">Focus</strong>
             </div>
-            <h3>What the site covers</h3>
-            <p>
+            <h3 data-i18n="scope_title">What the site covers</h3>
+            <p data-i18n="scope_text">
               Moldova, Transnistria, Russia, the Black Sea theatre, energy leverage, and strategic competition.
             </p>
           </div>
 
           <div class="hero-box" id="contact">
             <div class="hero-box-top">
-              <span>Contact</span>
-              <strong>Submissions</strong>
+              <span data-i18n="contact_tag">Contact</span>
+              <strong data-i18n="submissions_tag">Submissions</strong>
             </div>
-            <h3>Direct and simple</h3>
-            <p>
+            <h3 data-i18n="contact_title">Direct and simple</h3>
+            <p data-i18n="contact_text">
               Keep this area for your email, submissions, or publication contact details later.
             </p>
           </div>
@@ -499,25 +568,25 @@
     <section class="map-section" id="map">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">Region Map</span>
-          <h2>Black Sea area</h2>
-          <p>
+          <span class="eyebrow" data-i18n="map_eyebrow">Region Map</span>
+          <h2 data-i18n="map_heading">Black Sea area</h2>
+          <p data-i18n="map_intro">
             A simple outline map of the countries around the Black Sea area. Click a country to highlight it and open its article tab.
           </p>
         </div>
 
         <div class="map-shell">
           <div class="map-toolbar">
-            <button data-country="Romania">Romania</button>
-            <button data-country="Bulgaria">Bulgaria</button>
-            <button data-country="Turkey">Turkey</button>
-            <button data-country="Georgia">Georgia</button>
-            <button data-country="Russia">Russia</button>
-            <button data-country="Ukraine">Ukraine</button>
-            <button data-country="Moldova">Moldova</button>
-            <button data-country="Greece">Greece</button>
-            <button data-country="Armenia">Armenia</button>
-            <button data-country="Azerbaijan">Azerbaijan</button>
+            <button data-country="Romania" data-i18n="country_romania">Romania</button>
+            <button data-country="Bulgaria" data-i18n="country_bulgaria">Bulgaria</button>
+            <button data-country="Turkey" data-i18n="country_turkey">Turkey</button>
+            <button data-country="Georgia" data-i18n="country_georgia">Georgia</button>
+            <button data-country="Russia" data-i18n="country_russia">Russia</button>
+            <button data-country="Ukraine" data-i18n="country_ukraine">Ukraine</button>
+            <button data-country="Moldova" data-i18n="country_moldova">Moldova</button>
+            <button data-country="Greece" data-i18n="country_greece">Greece</button>
+            <button data-country="Armenia" data-i18n="country_armenia">Armenia</button>
+            <button data-country="Azerbaijan" data-i18n="country_azerbaijan">Azerbaijan</button>
           </div>
 
           <div class="map-frame">
@@ -544,9 +613,10 @@
   </main>
 
   <div class="footer">
-    <div class="container">BlackSeaBrief front-page draft.</div>
+    <div class="container" data-i18n="footer_text">BlackSeaBrief front-page draft.</div>
   </div>
 
+  
   
   
   
@@ -561,19 +631,158 @@
     const mapPopupLink = document.getElementById('map-popup-link');
     const mapShell = document.querySelector('.map-shell');
     const svg = document.querySelector('.map-frame svg');
+    const langToggle = document.getElementById('lang-toggle');
+    const langMenu = document.getElementById('lang-menu');
+    const langOptions = document.querySelectorAll('.lang-option');
 
-    const descriptions = {
-      neutral: 'Click a country to highlight it and open its article tab.',
-      Romania: 'Romania sits on the western Black Sea coast and is useful for articles on the western basin, NATO presence, and Moldova-related security questions.',
-      Bulgaria: 'Bulgaria forms part of the western Black Sea littoral and works well for western basin, alliance, and maritime security articles.',
-      Turkey: 'Turkey controls the straits, so it is one of the most important states in the whole Black Sea system.',
-      Georgia: 'Georgia links the eastern Black Sea coast to the South Caucasus and works for regional vulnerability and pressure pieces.',
-      Russia: 'Russia is one of the central actors shaping the Black Sea through force posture, leverage, and regional fragmentation.',
-      Ukraine: 'Ukraine is central to the northern Black Sea coast, maritime balance, and regional war-related analysis.',
-      Moldova: 'Moldova matters through fragility, regional exposure, and the Transnistria question.',
-      Greece: 'Greece is not a Black Sea littoral state, but it still fits the wider regional architecture through the eastern Mediterranean, NATO, and southern access routes.',
-      Armenia: 'Armenia is not on the Black Sea coast, but it belongs to the wider regional security picture through the South Caucasus.',
-      Azerbaijan: 'Azerbaijan matters through the South Caucasus, energy routes, and wider regional corridor politics.'
+    let currentCountry = null;
+    let currentLang = 'en';
+
+    const translations = {
+      en: {
+        nav_recent: 'Recent', nav_about: 'About', nav_contact: 'Contact',
+        brand_sub: 'Geopolitics & Security',
+        hero_eyebrow: 'Black Sea Security • Frozen Conflicts • Regional Analysis',
+        hero_title: 'Serious writing on the <span class="accent">Black Sea</span>, its conflicts, and the power politics shaping its future.',
+        hero_text: 'Black Sea geopolitics, military posture, frozen conflicts, energy pressure, and regional strategic risk.',
+        featured_tag: 'Featured', lead_piece: 'Lead Piece',
+        featured_title: 'Why Transnistria Is Strategically Overestimated',
+        featured_text: 'A clean lead slot for your strongest article, without the extra clutter from the newer front page.',
+        scope_tag: 'Scope', focus_tag: 'Focus',
+        scope_title: 'What the site covers',
+        scope_text: 'Moldova, Transnistria, Russia, the Black Sea theatre, energy leverage, and strategic competition.',
+        contact_tag: 'Contact', submissions_tag: 'Submissions',
+        contact_title: 'Direct and simple',
+        contact_text: 'Keep this area for your email, submissions, or publication contact details later.',
+        map_eyebrow: 'Region Map', map_heading: 'Black Sea area',
+        map_intro: 'A simple outline map of the countries around the Black Sea area. Click a country to highlight it and open its article tab.',
+        country_romania: 'Romania', country_bulgaria: 'Bulgaria', country_turkey: 'Turkey', country_georgia: 'Georgia',
+        country_russia: 'Russia', country_ukraine: 'Ukraine', country_moldova: 'Moldova', country_greece: 'Greece',
+        country_armenia: 'Armenia', country_azerbaijan: 'Azerbaijan',
+        footer_text: 'BlackSeaBrief front-page draft.', language_button: 'Language',
+        popup_open_articles: 'Open articles', neutral_title: 'Black Sea area',
+        neutral_text: 'Click a country to highlight it and open its article tab.',
+        Romania: 'Romania', Bulgaria: 'Bulgaria', Turkey: 'Turkey', Georgia: 'Georgia', Russia: 'Russia',
+        Ukraine: 'Ukraine', Moldova: 'Moldova', Greece: 'Greece', Armenia: 'Armenia', Azerbaijan: 'Azerbaijan',
+        desc_Romania: 'Romania sits on the western Black Sea coast and is useful for articles on the western basin, NATO presence, and Moldova-related security questions.',
+        desc_Bulgaria: 'Bulgaria forms part of the western Black Sea littoral and works well for western basin, alliance, and maritime security articles.',
+        desc_Turkey: 'Turkey controls the straits, so it is one of the most important states in the whole Black Sea system.',
+        desc_Georgia: 'Georgia links the eastern Black Sea coast to the South Caucasus and works for regional vulnerability and pressure pieces.',
+        desc_Russia: 'Russia is one of the central actors shaping the Black Sea through force posture, leverage, and regional fragmentation.',
+        desc_Ukraine: 'Ukraine is central to the northern Black Sea coast, maritime balance, and regional war-related analysis.',
+        desc_Moldova: 'Moldova matters through fragility, regional exposure, and the Transnistria question.',
+        desc_Greece: 'Greece is not a Black Sea littoral state, but it still fits the wider regional architecture through the eastern Mediterranean, NATO, and southern access routes.',
+        desc_Armenia: 'Armenia is not on the Black Sea coast, but it belongs to the wider regional security picture through the South Caucasus.',
+        desc_Azerbaijan: 'Azerbaijan matters through the South Caucasus, energy routes, and wider regional corridor politics.'
+      },
+      ro: {
+        nav_recent: 'Recente', nav_about: 'Despre', nav_contact: 'Contact',
+        brand_sub: 'Geopolitică și Securitate',
+        hero_eyebrow: 'Securitatea Mării Negre • Conflicte înghețate • Analiză regională',
+        hero_title: 'Scrieri serioase despre <span class="accent">Marea Neagră</span>, conflictele sale și politica de putere care îi modelează viitorul.',
+        hero_text: 'Geopolitica Mării Negre, postură militară, conflicte înghețate, presiune energetică și risc strategic regional.',
+        featured_tag: 'În prim-plan', lead_piece: 'Articol principal',
+        featured_title: 'De ce Transnistria este supraevaluată strategic',
+        featured_text: 'Un spațiu clar pentru cel mai puternic articol al tău, fără aglomerația suplimentară a versiunii noi a paginii.',
+        scope_tag: 'Arie', focus_tag: 'Focus',
+        scope_title: 'Ce acoperă site-ul',
+        scope_text: 'Moldova, Transnistria, Rusia, teatrul Mării Negre, pârghii energetice și competiție strategică.',
+        contact_tag: 'Contact', submissions_tag: 'Submisii',
+        contact_title: 'Direct și simplu',
+        contact_text: 'Păstrează această zonă pentru email, submisii sau datele de contact ale publicației mai târziu.',
+        map_eyebrow: 'Harta regiunii', map_heading: 'Zona Mării Negre',
+        map_intro: 'O hartă simplă în contur a țărilor din jurul Mării Negre. Apasă pe o țară pentru a o evidenția și a deschide fila cu articole.',
+        country_romania: 'România', country_bulgaria: 'Bulgaria', country_turkey: 'Turcia', country_georgia: 'Georgia',
+        country_russia: 'Rusia', country_ukraine: 'Ucraina', country_moldova: 'Moldova', country_greece: 'Grecia',
+        country_armenia: 'Armenia', country_azerbaijan: 'Azerbaidjan',
+        footer_text: 'Schiță de pagină principală BlackSeaBrief.', language_button: 'Limbă',
+        popup_open_articles: 'Deschide articolele', neutral_title: 'Zona Mării Negre',
+        neutral_text: 'Apasă pe o țară pentru a o evidenția și a deschide fila cu articole.',
+        Romania: 'România', Bulgaria: 'Bulgaria', Turkey: 'Turcia', Georgia: 'Georgia', Russia: 'Rusia',
+        Ukraine: 'Ucraina', Moldova: 'Moldova', Greece: 'Grecia', Armenia: 'Armenia', Azerbaijan: 'Azerbaidjan',
+        desc_Romania: 'România se află pe coasta vestică a Mării Negre și este utilă pentru articole despre bazinul vestic, prezența NATO și chestiuni de securitate legate de Moldova.',
+        desc_Bulgaria: 'Bulgaria face parte din litoralul vestic al Mării Negre și este potrivită pentru articole despre bazinul vestic, alianțe și securitate maritimă.',
+        desc_Turkey: 'Turcia controlează strâmtorile, deci este unul dintre cele mai importante state din întregul sistem al Mării Negre.',
+        desc_Georgia: 'Georgia leagă coasta estică a Mării Negre de Caucazul de Sud și este utilă pentru articole despre vulnerabilitate regională și presiune.',
+        desc_Russia: 'Rusia este unul dintre actorii centrali care modelează Marea Neagră prin postură de forță, pârghii și fragmentare regională.',
+        desc_Ukraine: 'Ucraina este centrală pentru coasta nordică a Mării Negre, echilibrul maritim și analiza regională legată de război.',
+        desc_Moldova: 'Moldova contează prin fragilitate, expunere regională și chestiunea transnistreană.',
+        desc_Greece: 'Grecia nu este stat riveran Mării Negre, dar se încadrează în arhitectura regională mai largă prin estul Mediteranei, NATO și rutele sudice de acces.',
+        desc_Armenia: 'Armenia nu se află pe coasta Mării Negre, dar aparține imaginii de securitate regionale mai largi prin Caucazul de Sud.',
+        desc_Azerbaijan: 'Azerbaidjanul contează prin Caucazul de Sud, rutele energetice și politica coridoarelor regionale.'
+      },
+      ru: {
+        nav_recent: 'Недавнее', nav_about: 'О сайте', nav_contact: 'Контакт',
+        brand_sub: 'Геополитика и безопасность',
+        hero_eyebrow: 'Безопасность Чёрного моря • Замороженные конфликты • Региональный анализ',
+        hero_title: 'Серьёзные тексты о <span class="accent">Чёрном море</span>, его конфликтах и политике силы, формирующей его будущее.',
+        hero_text: 'Геополитика Чёрного моря, военная позиция, замороженные конфликты, энергетическое давление и региональный стратегический риск.',
+        featured_tag: 'Главное', lead_piece: 'Основной материал',
+        featured_title: 'Почему Приднестровье стратегически переоценено',
+        featured_text: 'Чистый главный блок для вашей самой сильной статьи без лишней перегруженности новой главной страницы.',
+        scope_tag: 'Охват', focus_tag: 'Фокус',
+        scope_title: 'Что охватывает сайт',
+        scope_text: 'Молдова, Приднестровье, Россия, театр Чёрного моря, энергетические рычаги и стратегическая конкуренция.',
+        contact_tag: 'Контакт', submissions_tag: 'Подача',
+        contact_title: 'Прямо и просто',
+        contact_text: 'Сохраните эту область для электронной почты, подачи материалов или контактных данных издания позже.',
+        map_eyebrow: 'Карта региона', map_heading: 'Район Чёрного моря',
+        map_intro: 'Простая контурная карта стран вокруг Чёрного моря. Нажмите на страну, чтобы выделить её и открыть вкладку со статьями.',
+        country_romania: 'Румыния', country_bulgaria: 'Болгария', country_turkey: 'Турция', country_georgia: 'Грузия',
+        country_russia: 'Россия', country_ukraine: 'Украина', country_moldova: 'Молдова', country_greece: 'Греция',
+        country_armenia: 'Армения', country_azerbaijan: 'Азербайджан',
+        footer_text: 'Черновик главной страницы BlackSeaBrief.', language_button: 'Язык',
+        popup_open_articles: 'Открыть статьи', neutral_title: 'Район Чёрного моря',
+        neutral_text: 'Нажмите на страну, чтобы выделить её и открыть вкладку со статьями.',
+        Romania: 'Румыния', Bulgaria: 'Болгария', Turkey: 'Турция', Georgia: 'Грузия', Russia: 'Россия',
+        Ukraine: 'Украина', Moldova: 'Молдова', Greece: 'Греция', Armenia: 'Армения', Azerbaijan: 'Азербайджан',
+        desc_Romania: 'Румыния расположена на западном побережье Чёрного моря и полезна для материалов о западном бассейне, присутствии НАТО и вопросах безопасности, связанных с Молдовой.',
+        desc_Bulgaria: 'Болгария является частью западного побережья Чёрного моря и подходит для материалов о западном бассейне, союзах и морской безопасности.',
+        desc_Turkey: 'Турция контролирует проливы, поэтому она является одним из важнейших государств всей черноморской системы.',
+        desc_Georgia: 'Грузия связывает восточное побережье Чёрного моря с Южным Кавказом и подходит для материалов о региональной уязвимости и давлении.',
+        desc_Russia: 'Россия — один из центральных акторов, формирующих Чёрное море через военную позицию, рычаги влияния и региональную фрагментацию.',
+        desc_Ukraine: 'Украина имеет ключевое значение для северного побережья Чёрного моря, морского баланса и регионального анализа, связанного с войной.',
+        desc_Moldova: 'Молдова важна из-за своей хрупкости, региональной уязвимости и приднестровского вопроса.',
+        desc_Greece: 'Греция не является прибрежным государством Чёрного моря, но вписывается в более широкую региональную архитектуру через восточное Средиземноморье, НАТО и южные пути доступа.',
+        desc_Armenia: 'Армения не находится на побережье Чёрного моря, но относится к более широкой региональной картине безопасности через Южный Кавказ.',
+        desc_Azerbaijan: 'Азербайджан важен через Южный Кавказ, энергетические маршруты и политику региональных коридоров.'
+      },
+      tr: {
+        nav_recent: 'Son Yazılar', nav_about: 'Hakkında', nav_contact: 'İletişim',
+        brand_sub: 'Jeopolitik ve Güvenlik',
+        hero_eyebrow: 'Karadeniz Güvenliği • Donmuş Çatışmalar • Bölgesel Analiz',
+        hero_title: '<span class="accent">Karadeniz</span>, onun çatışmaları ve geleceğini şekillendiren güç siyaseti üzerine ciddi yazılar.',
+        hero_text: 'Karadeniz jeopolitiği, askerî duruş, donmuş çatışmalar, enerji baskısı ve bölgesel stratejik risk.',
+        featured_tag: 'Öne Çıkan', lead_piece: 'Ana Yazı',
+        featured_title: 'Transdinyester Neden Stratejik Olarak Abartılıyor',
+        featured_text: 'Yeni ana sayfanın fazladan kalabalığı olmadan en güçlü yazınız için temiz bir ana alan.',
+        scope_tag: 'Kapsam', focus_tag: 'Odak',
+        scope_title: 'Sitenin kapsadığı alanlar',
+        scope_text: 'Moldova, Transdinyester, Rusya, Karadeniz sahası, enerji kaldıracı ve stratejik rekabet.',
+        contact_tag: 'İletişim', submissions_tag: 'Gönderiler',
+        contact_title: 'Doğrudan ve sade',
+        contact_text: 'Bu alanı daha sonra e-posta, yazı gönderileri veya yayın iletişim bilgileri için saklayın.',
+        map_eyebrow: 'Bölge Haritası', map_heading: 'Karadeniz bölgesi',
+        map_intro: 'Karadeniz çevresindeki ülkelerin basit bir hat haritası. Bir ülkeye tıklayarak onu vurgulayın ve yazı sekmesini açın.',
+        country_romania: 'Romanya', country_bulgaria: 'Bulgaristan', country_turkey: 'Türkiye', country_georgia: 'Gürcistan',
+        country_russia: 'Rusya', country_ukraine: 'Ukrayna', country_moldova: 'Moldova', country_greece: 'Yunanistan',
+        country_armenia: 'Ermenistan', country_azerbaijan: 'Azerbaycan',
+        footer_text: 'BlackSeaBrief ana sayfa taslağı.', language_button: 'Dil',
+        popup_open_articles: 'Yazıları aç', neutral_title: 'Karadeniz bölgesi',
+        neutral_text: 'Bir ülkeye tıklayarak onu vurgulayın ve yazı sekmesini açın.',
+        Romania: 'Romanya', Bulgaria: 'Bulgaristan', Turkey: 'Türkiye', Georgia: 'Gürcistan', Russia: 'Rusya',
+        Ukraine: 'Ukrayna', Moldova: 'Moldova', Greece: 'Yunanistan', Armenia: 'Ermenistan', Azerbaijan: 'Azerbaycan',
+        desc_Romania: 'Romanya Karadeniz’in batı kıyısında yer alır ve batı havzası, NATO varlığı ve Moldova ile ilgili güvenlik meseleleri için yararlıdır.',
+        desc_Bulgaria: 'Bulgaristan Karadeniz’in batı kıyısının bir parçasıdır ve batı havzası, ittifaklar ve deniz güvenliği yazıları için uygundur.',
+        desc_Turkey: 'Türkiye boğazları kontrol eder; bu yüzden tüm Karadeniz sistemindeki en önemli devletlerden biridir.',
+        desc_Georgia: 'Gürcistan Karadeniz’in doğu kıyısını Güney Kafkasya’ya bağlar ve bölgesel kırılganlık ile baskı yazıları için uygundur.',
+        desc_Russia: 'Rusya, güç duruşu, kaldıraç ve bölgesel parçalanma yoluyla Karadeniz’i şekillendiren temel aktörlerden biridir.',
+        desc_Ukraine: 'Ukrayna, Karadeniz’in kuzey kıyısı, deniz dengesi ve savaş bağlantılı bölgesel analiz için merkezî önemdedir.',
+        desc_Moldova: 'Moldova kırılganlık, bölgesel açıklık ve Transdinyester meselesi nedeniyle önem taşır.',
+        desc_Greece: 'Yunanistan Karadeniz’e kıyısı olan bir devlet değildir, ancak Doğu Akdeniz, NATO ve güney erişim hatları yoluyla daha geniş bölgesel mimarinin parçasıdır.',
+        desc_Armenia: 'Ermenistan Karadeniz kıyısında değildir, ancak Güney Kafkasya üzerinden daha geniş bölgesel güvenlik resmine dahildir.',
+        desc_Azerbaijan: 'Azerbaycan Güney Kafkasya, enerji güzergâhları ve bölgesel koridor siyaseti üzerinden önem taşır.'
+      }
     };
 
     const countryLinks = {
@@ -589,6 +798,23 @@
       Azerbaijan: ['#', 'Open Azerbaijan articles']
     };
 
+    function t(key) {
+      return (translations[currentLang] && translations[currentLang][key]) || (translations.en && translations.en[key]) || key;
+    }
+
+    function applyStaticTranslations() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = t(el.getAttribute('data-i18n'));
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        el.innerHTML = t(el.getAttribute('data-i18n-html'));
+      });
+      langToggle.textContent = t('language_button');
+      langOptions.forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === currentLang);
+      });
+    }
+
     function fallbackPointFromPath(path) {
       if (!svg || !path) return null;
       const bbox = path.getBBox();
@@ -601,7 +827,6 @@
 
     function positionPopupForCountry(path) {
       if (!mapPopup || !mapShell || !path) return;
-
       const shellRect = mapShell.getBoundingClientRect();
       const popupWidth = 220;
       const popupHeight = 86;
@@ -615,9 +840,7 @@
       if (left + popupWidth > shellRect.width - 8) {
         left = point.x - shellRect.left - popupWidth - 8;
       }
-      if (left < 8) {
-        left = 8;
-      }
+      if (left < 8) left = 8;
 
       if (top + popupHeight > shellRect.height - 8) {
         top = point.y - shellRect.top - popupHeight - 8;
@@ -636,9 +859,8 @@
     function showPopup(name, path) {
       const match = countryLinks[name];
       if (!match || !mapPopup || !path) return;
-
-      mapPopupTitle.textContent = name;
-      mapPopupLink.textContent = match[1];
+      mapPopupTitle.textContent = t(name);
+      mapPopupLink.textContent = t('popup_open_articles');
       mapPopupLink.href = match[0];
       positionPopupForCountry(path);
       mapPopup.classList.add('visible');
@@ -652,59 +874,74 @@
     }
 
     function setNeutralState() {
+      currentCountry = null;
       countryButtons.forEach(btn => btn.classList.remove('active'));
       countryPaths.forEach(countryPath => countryPath.classList.remove('active'));
-      mapTitle.textContent = 'Black Sea area';
-      mapText.textContent = descriptions.neutral;
+      mapTitle.textContent = t('neutral_title');
+      mapText.textContent = t('neutral_text');
       hidePopup();
     }
 
     function setActiveCountry(name) {
       const path = document.querySelector(`.country[data-name="${name}"]`);
       if (!path) return;
-
+      currentCountry = name;
       countryButtons.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.country === name);
       });
-
       countryPaths.forEach(countryPath => {
         countryPath.classList.toggle('active', countryPath.dataset.name === name);
       });
-
-      mapTitle.textContent = name;
-      mapText.textContent = descriptions[name] || descriptions.neutral;
+      mapTitle.textContent = t(name);
+      mapText.textContent = t(`desc_${name}`);
       showPopup(name, path);
     }
 
+    function refreshDynamicLanguage() {
+      if (currentCountry) setActiveCountry(currentCountry);
+      else setNeutralState();
+    }
+
     countryButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        setActiveCountry(btn.dataset.country);
-      });
+      btn.addEventListener('click', () => setActiveCountry(btn.dataset.country));
     });
 
     countryPaths.forEach(path => {
-      path.addEventListener('click', () => {
-        const name = path.dataset.name;
-        setActiveCountry(name);
-      });
+      path.addEventListener('click', () => setActiveCountry(path.dataset.name));
     });
 
     window.addEventListener('resize', () => {
-      const activeButton = document.querySelector('.map-toolbar button.active');
-      if (activeButton) {
-        setActiveCountry(activeButton.dataset.country);
-      }
+      if (currentCountry) setActiveCountry(currentCountry);
     });
 
     document.addEventListener('click', (event) => {
       const clickedInsidePopup = mapPopup && mapPopup.contains(event.target);
       const clickedCountry = event.target.closest('.country');
       const clickedToolbar = event.target.closest('.map-toolbar');
-      if (!clickedInsidePopup && !clickedCountry && !clickedToolbar) {
+      const clickedLang = event.target.closest('.lang-switcher');
+      if (!clickedInsidePopup && !clickedCountry && !clickedToolbar && !clickedLang) {
         setNeutralState();
+        langMenu.classList.remove('open');
+        langToggle.classList.remove('active');
       }
     });
 
+    langToggle.addEventListener('click', () => {
+      langMenu.classList.toggle('open');
+      langToggle.classList.toggle('active');
+    });
+
+    langOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        currentLang = option.dataset.lang;
+        applyStaticTranslations();
+        refreshDynamicLanguage();
+        langMenu.classList.remove('open');
+        langToggle.classList.remove('active');
+      });
+    });
+
+    applyStaticTranslations();
     setNeutralState();
   </script>
 </body>
