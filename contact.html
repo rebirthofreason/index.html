@@ -1,1 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | BlackSeaBrief</title>
+  <meta name="description" content="About BlackSeaBrief — a publication focused on Black Sea geopolitics, security, frozen conflicts, and regional analysis." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #040404;
+      --bg-soft: #0b0b0b;
+      --panel: #121212;
+      --line: rgba(255,255,255,0.08);
+      --text: #f5f5f5;
+      --muted: #b6b6b6;
+      --accent: #ee8a16;
+      --max: 1220px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top right, rgba(238,138,22,0.08), transparent 24%),
+        linear-gradient(180deg, #020202 0%, #080808 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 34px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header .container {
+      width: min(calc(100% - 14px), 1500px);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(4,4,4,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navbar {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand img {
+      height: 76px;
+      width: auto;
+      object-fit: contain;
+      margin-left: -6px;
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-title {
+      font-size: 1.6rem;
+    }
+
+    .brand-sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 0.97rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .lang-switcher {
+      position: relative;
+      margin-left: 10px;
+    }
+
+    .lang-toggle {
+      background: #0f0f0f;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font: inherit;
+    }
+
+    .lang-toggle:hover,
+    .lang-toggle.active {
+      border-color: rgba(238,138,22,0.24);
+      background: rgba(238,138,22,0.11);
+    }
+
+    .lang-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      min-width: 170px;
+      background: linear-gradient(180deg, #121212, #0b0b0b);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      box-shadow: 0 16px 34px rgba(0,0,0,0.30);
+      padding: 8px;
+      display: none;
+      z-index: 1001;
+    }
+
+    .lang-menu.open {
+      display: block;
+    }
+
+    .lang-option {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      color: var(--muted);
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: 0.18s ease;
+      font: inherit;
+    }
+
+    .lang-option:hover,
+    .lang-option.active {
+      background: rgba(238,138,22,0.11);
+      color: var(--text);
+    }
+
+    .page-hero {
+      padding: 74px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 0.98;
+      max-width: 900px;
+      margin-bottom: 16px;
+    }
+
+    .page-hero h1 .accent {
+      color: var(--accent);
+    }
+
+    .page-hero p {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .about-section {
+      padding: 10px 0 90px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .panel {
+      background:
+        linear-gradient(180deg, rgba(238,138,22,0.08), rgba(238,138,22,0.015)),
+        linear-gradient(180deg, #121212, #0a0a0a);
+      border: 1px solid rgba(238,138,22,0.14);
+      border-radius: 28px;
+      padding: 24px;
+    }
+
+    .panel h2 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .panel > p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .about-card {
+      background: rgba(0,0,0,0.24);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .about-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.76rem;
+    }
+
+    .card-top strong {
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .about-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 8px;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .info-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .info-box h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+
+    .info-box p,
+    .info-box li {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .info-box ul {
+      padding-left: 18px;
+    }
+
+    .info-box li {
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      padding: 26px 0 40px;
+      border-top: 1px solid var(--line);
+      color: #8f8f8f;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .navbar {
+        flex-wrap: wrap;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        gap: 18px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .brand img {
+        height: 56px;
+      }
+
+      .brand-title {
+        font-size: 1.32rem;
+      }
+
+      .page-hero {
+        padding-top: 42px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <a class="brand" href="index.html">
+        <img src="blackseabrief-logo.png" alt="BlackSeaBrief logo" />
+        <div class="brand-block">
+          <div class="brand-title">BlackSeaBrief</div>
+          <div class="brand-sub" data-i18n="brand_sub">Geopolitics &amp; Security</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="recent.html" data-i18n="nav_recent">Recent</a>
+        <a href="about.html" class="active" data-i18n="nav_about">About</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
+
+        <div class="lang-switcher">
+          <button class="lang-toggle" id="lang-toggle" type="button">Language</button>
+          <div class="lang-menu" id="lang-menu">
+            <button class="lang-option active" type="button" data-lang="en">British English</button>
+            <button class="lang-option" type="button" data-lang="ro">Română</button>
+            <button class="lang-option" type="button" data-lang="ru">Русский</button>
+            <button class="lang-option" type="button" data-lang="tr">Türkçe</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow" data-i18n="hero_eyebrow">About</span>
+        <h1 data-i18n-html="hero_title">About <span class="accent">BlackSeaBrief</span>.</h1>
+        <p data-i18n="hero_text">
+          A focused publication on Black Sea geopolitics, frozen conflicts, regional security, and strategic pressure points.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="container about-grid">
+        <div class="panel">
+          <h2 data-i18n="main_heading">What this site is</h2>
+          <p data-i18n="main_text">
+            BlackSeaBrief is designed as a clean, serious publication space for concise analysis on the Black Sea and its surrounding strategic environment.
+          </p>
+
+          <div class="about-card">
+            <div class="card-top">
+              <span data-i18n="card_focus_tag">Focus</span>
+              <strong data-i18n="card_focus_label">Coverage</strong>
+            </div>
+            <h3 data-i18n="focus_title">Regional and strategic</h3>
+            <p data-i18n="focus_text">
+              The site is built for writing on Moldova, Transnistria, Ukraine, Russia, Turkey, the western Black Sea basin, and the wider regional balance.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="card-top">
+              <span data-i18n="card_style_tag">Style</span>
+              <strong data-i18n="card_style_label">Tone</strong>
+            </div>
+            <h3 data-i18n="style_title">Clear and analytical</h3>
+            <p data-i18n="style_text">
+              The intended tone is direct, restrained, and publication-oriented: more analysis, less clutter, and no unnecessary noise.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="card-top">
+              <span data-i18n="card_purpose_tag">Purpose</span>
+              <strong data-i18n="card_purpose_label">Mission</strong>
+            </div>
+            <h3 data-i18n="purpose_title">A serious front for serious writing</h3>
+            <p data-i18n="purpose_text">
+              This page gives readers a quick sense of the publication’s direction, scope, and editorial feel before they move into the articles themselves.
+            </p>
+          </div>
+        </div>
+
+        <div class="info-stack">
+          <div class="info-box">
+            <h3 data-i18n="topics_heading">Core topics</h3>
+            <ul>
+              <li data-i18n="topics_1">Frozen conflicts and unresolved territorial disputes.</li>
+              <li data-i18n="topics_2">Military posture and regional deterrence.</li>
+              <li data-i18n="topics_3">Energy leverage, infrastructure, and strategic dependency.</li>
+              <li data-i18n="topics_4">Power politics in and around the Black Sea.</li>
+            </ul>
+          </div>
+
+          <div class="info-box">
+            <h3 data-i18n="editorial_heading">Editorial direction</h3>
+            <p data-i18n="editorial_text">
+              The visual style matches the front page so the site feels consistent: dark, minimal, formal, and built around readable analysis.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3 data-i18n="note_heading">Note</h3>
+            <p data-i18n="note_text">
+              You can later replace this text with a founder note, editorial statement, or short publication mission once the site is fully live.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span data-i18n="footer_text">BlackSeaBrief about page draft.</span>
+    </div>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('lang-toggle');
+    const langMenu = document.getElementById('lang-menu');
+    const langOptions = document.querySelectorAll('.lang-option');
+
+    let currentLang = 'en';
+
+    const translations = {
+      en: {
+        nav_recent: 'Recent',
+        nav_about: 'About',
+        nav_contact: 'Contact',
+        brand_sub: 'Geopolitics & Security',
+        hero_eyebrow: 'About',
+        hero_title: 'About <span class="accent">BlackSeaBrief</span>.',
+        hero_text: 'A focused publication on Black Sea geopolitics, frozen conflicts, regional security, and strategic pressure points.',
+        main_heading: 'What this site is',
+        main_text: 'BlackSeaBrief is designed as a clean, serious publication space for concise analysis on the Black Sea and its surrounding strategic environment.',
+        card_focus_tag: 'Focus',
+        card_focus_label: 'Coverage',
+        focus_title: 'Regional and strategic',
+        focus_text: 'The site is built for writing on Moldova, Transnistria, Ukraine, Russia, Turkey, the western Black Sea basin, and the wider regional balance.',
+        card_style_tag: 'Style',
+        card_style_label: 'Tone',
+        style_title: 'Clear and analytical',
+        style_text: 'The intended tone is direct, restrained, and publication-oriented: more analysis, less clutter, and no unnecessary noise.',
+        card_purpose_tag: 'Purpose',
+        card_purpose_label: 'Mission',
+        purpose_title: 'A serious front for serious writing',
+        purpose_text: 'This page gives readers a quick sense of the publication’s direction, scope, and editorial feel before they move into the articles themselves.',
+        topics_heading: 'Core topics',
+        topics_1: 'Frozen conflicts and unresolved territorial disputes.',
+        topics_2: 'Military posture and regional deterrence.',
+        topics_3: 'Energy leverage, infrastructure, and strategic dependency.',
+        topics_4: 'Power politics in and around the Black Sea.',
+        editorial_heading: 'Editorial direction',
+        editorial_text: 'The visual style matches the front page so the site feels consistent: dark, minimal, formal, and built around readable analysis.',
+        note_heading: 'Note',
+        note_text: 'You can later replace this text with a founder note, editorial statement, or short publication mission once the site is fully live.',
+        footer_text: 'BlackSeaBrief about page draft.',
+        language_button: 'Language'
+      },
+      ro: {
+        nav_recent: 'Recente',
+        nav_about: 'Despre',
+        nav_contact: 'Contact',
+        brand_sub: 'Geopolitică și Securitate',
+        hero_eyebrow: 'Despre',
+        hero_title: 'Despre <span class="accent">BlackSeaBrief</span>.',
+        hero_text: 'O publicație concentrată pe geopolitica Mării Negre, conflicte înghețate, securitate regională și puncte de presiune strategică.',
+        main_heading: 'Ce este acest site',
+        main_text: 'BlackSeaBrief este gândit ca un spațiu curat și serios pentru analiză concisă despre Marea Neagră și mediul ei strategic.',
+        card_focus_tag: 'Focus',
+        card_focus_label: 'Acoperire',
+        focus_title: 'Regional și strategic',
+        focus_text: 'Site-ul este construit pentru texte despre Moldova, Transnistria, Ucraina, Rusia, Turcia, bazinul vestic al Mării Negre și echilibrul regional mai larg.',
+        card_style_tag: 'Stil',
+        card_style_label: 'Ton',
+        style_title: 'Clar și analitic',
+        style_text: 'Tonul dorit este direct, sobru și orientat spre publicație: mai multă analiză, mai puțină aglomerație și fără zgomot inutil.',
+        card_purpose_tag: 'Scop',
+        card_purpose_label: 'Misiune',
+        purpose_title: 'O față serioasă pentru texte serioase',
+        purpose_text: 'Această pagină le oferă cititorilor o idee rapidă despre direcția publicației, aria ei și tonul editorial înainte de articole.',
+        topics_heading: 'Teme centrale',
+        topics_1: 'Conflicte înghețate și dispute teritoriale nerezolvate.',
+        topics_2: 'Postură militară și descurajare regională.',
+        topics_3: 'Pârghii energetice, infrastructură și dependență strategică.',
+        topics_4: 'Jocuri de putere în și în jurul Mării Negre.',
+        editorial_heading: 'Direcție editorială',
+        editorial_text: 'Stilul vizual se potrivește cu pagina principală, astfel încât site-ul să pară coerent: întunecat, minimalist, formal și construit pentru analiză lizibilă.',
+        note_heading: 'Notă',
+        note_text: 'Mai târziu poți înlocui acest text cu o notă a fondatorului, o declarație editorială sau o scurtă misiune a publicației.',
+        footer_text: 'Schiță pentru pagina Despre BlackSeaBrief.',
+        language_button: 'Limbă'
+      },
+      ru: {
+        nav_recent: 'Недавнее',
+        nav_about: 'О сайте',
+        nav_contact: 'Контакт',
+        brand_sub: 'Геополитика и безопасность',
+        hero_eyebrow: 'О сайте',
+        hero_title: 'О <span class="accent">BlackSeaBrief</span>.',
+        hero_text: 'Сфокусированное издание о геополитике Чёрного моря, замороженных конфликтах, региональной безопасности и стратегических точках давления.',
+        main_heading: 'Что это за сайт',
+        main_text: 'BlackSeaBrief задуман как чистое и серьёзное пространство для краткой аналитики о Чёрном море и окружающей его стратегической среде.',
+        card_focus_tag: 'Фокус',
+        card_focus_label: 'Охват',
+        focus_title: 'Регионально и стратегически',
+        focus_text: 'Сайт создан для текстов о Молдове, Приднестровье, Украине, России, Турции, западном бассейне Чёрного моря и более широком региональном балансе.',
+        card_style_tag: 'Стиль',
+        card_style_label: 'Тон',
+        style_title: 'Ясно и аналитично',
+        style_text: 'Предполагаемый тон — прямой, сдержанный и ориентированный на публикацию: больше анализа, меньше перегруза и никакого лишнего шума.',
+        card_purpose_tag: 'Назначение',
+        card_purpose_label: 'Миссия',
+        purpose_title: 'Серьёзная оболочка для серьёзных текстов',
+        purpose_text: 'Эта страница быстро даёт читателю понимание направления, охвата и редакционного ощущения издания перед переходом к самим статьям.',
+        topics_heading: 'Основные темы',
+        topics_1: 'Замороженные конфликты и нерешённые территориальные споры.',
+        topics_2: 'Военная позиция и региональное сдерживание.',
+        topics_3: 'Энергетические рычаги, инфраструктура и стратегическая зависимость.',
+        topics_4: 'Политика силы в и вокруг Чёрного моря.',
+        editorial_heading: 'Редакционное направление',
+        editorial_text: 'Визуальный стиль совпадает с главной страницей, чтобы сайт ощущался цельным: тёмным, минималистичным, формальным и построенным вокруг читаемой аналитики.',
+        note_heading: 'Примечание',
+        note_text: 'Позже вы сможете заменить этот текст на записку основателя, редакционное заявление или краткую миссию издания.',
+        footer_text: 'Черновик страницы About для BlackSeaBrief.',
+        language_button: 'Язык'
+      },
+      tr: {
+        nav_recent: 'Son Yazılar',
+        nav_about: 'Hakkında',
+        nav_contact: 'İletişim',
+        brand_sub: 'Jeopolitik ve Güvenlik',
+        hero_eyebrow: 'Hakkında',
+        hero_title: '<span class="accent">BlackSeaBrief</span> hakkında.',
+        hero_text: 'Karadeniz jeopolitiği, donmuş çatışmalar, bölgesel güvenlik ve stratejik baskı noktalarına odaklanan bir yayın.',
+        main_heading: 'Bu site nedir',
+        main_text: 'BlackSeaBrief, Karadeniz ve çevresindeki stratejik ortam üzerine kısa analizler için temiz ve ciddi bir yayın alanı olarak tasarlandı.',
+        card_focus_tag: 'Odak',
+        card_focus_label: 'Kapsam',
+        focus_title: 'Bölgesel ve stratejik',
+        focus_text: 'Site; Moldova, Transdinyester, Ukrayna, Rusya, Türkiye, Karadeniz’in batı havzası ve daha geniş bölgesel denge üzerine yazılar için kuruldu.',
+        card_style_tag: 'Tarz',
+        card_style_label: 'Ton',
+        style_title: 'Açık ve analitik',
+        style_text: 'Hedeflenen ton doğrudan, ölçülü ve yayın odaklıdır: daha çok analiz, daha az kalabalık ve gereksiz gürültü yok.',
+        card_purpose_tag: 'Amaç',
+        card_purpose_label: 'Misyon',
+        purpose_title: 'Ciddi yazılar için ciddi bir yüz',
+        purpose_text: 'Bu sayfa, okuyucuya makalelere geçmeden önce yayının yönü, kapsamı ve editoryal hissi hakkında hızlı bir fikir verir.',
+        topics_heading: 'Temel başlıklar',
+        topics_1: 'Donmuş çatışmalar ve çözülmemiş toprak anlaşmazlıkları.',
+        topics_2: 'Askerî duruş ve bölgesel caydırıcılık.',
+        topics_3: 'Enerji kaldıracı, altyapı ve stratejik bağımlılık.',
+        topics_4: 'Karadeniz içinde ve çevresinde güç siyaseti.',
+        editorial_heading: 'Editoryal yön',
+        editorial_text: 'Görsel tarz ana sayfayla uyumludur; böylece site karanlık, minimal, resmî ve okunabilir analiz etrafında kurulmuş tutarlı bir yapı hissi verir.',
+        note_heading: 'Not',
+        note_text: 'Daha sonra bu metni bir kurucu notu, editoryal açıklama veya kısa yayın misyonu ile değiştirebilirsiniz.',
+        footer_text: 'BlackSeaBrief hakkında sayfası taslağı.',
+        language_button: 'Dil'
+      }
+    };
+
+    function t(key) {
+      return (translations[currentLang] && translations[currentLang][key]) || (translations.en && translations.en[key]) || key;
+    }
+
+    function applyTranslations() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = t(el.getAttribute('data-i18n'));
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        el.innerHTML = t(el.getAttribute('data-i18n-html'));
+      });
+      langToggle.textContent = t('language_button');
+      langOptions.forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === currentLang);
+      });
+    }
+
+    langToggle.addEventListener('click', () => {
+      langMenu.classList.toggle('open');
+      langToggle.classList.toggle('active');
+    });
+
+    langOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        currentLang = option.dataset.lang;
+        applyTranslations();
+        langMenu.classList.remove('open');
+        langToggle.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const clickedLang = event.target.closest('.lang-switcher');
+      if (!clickedLang) {
+        langMenu.classList.remove('open');
+        langToggle.classList.remove('active');
+      }
+    });
+
+    applyTranslations();
+  </script>
+</body>
+</html>
 
