@@ -1,1 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recent | BlackSeaBrief</title>
+  <meta name="description" content="Recent articles and analysis from BlackSeaBrief, with optional country filtering." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    :root {
+      --bg: #040404;
+      --bg-soft: #0b0b0b;
+      --panel: #121212;
+      --line: rgba(255,255,255,0.08);
+      --text: #f5f5f5;
+      --muted: #b6b6b6;
+      --accent: #ee8a16;
+      --max: 1220px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top right, rgba(238,138,22,0.08), transparent 24%),
+        linear-gradient(180deg, #020202 0%, #080808 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 34px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header .container {
+      width: min(calc(100% - 14px), 1500px);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(4,4,4,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navbar {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand img {
+      height: 76px;
+      width: auto;
+      object-fit: contain;
+      margin-left: -6px;
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-title {
+      font-size: 1.6rem;
+    }
+
+    .brand-sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 0.97rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .lang-switcher {
+      position: relative;
+      margin-left: 10px;
+    }
+
+    .lang-toggle {
+      background: #0f0f0f;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font: inherit;
+    }
+
+    .lang-toggle:hover,
+    .lang-toggle.active {
+      border-color: rgba(238,138,22,0.24);
+      background: rgba(238,138,22,0.11);
+    }
+
+    .lang-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      min-width: 170px;
+      background: linear-gradient(180deg, #121212, #0b0b0b);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      box-shadow: 0 16px 34px rgba(0,0,0,0.30);
+      padding: 8px;
+      display: none;
+      z-index: 1001;
+    }
+
+    .lang-menu.open {
+      display: block;
+    }
+
+    .lang-option {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      color: var(--muted);
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: 0.18s ease;
+      font: inherit;
+    }
+
+    .lang-option:hover,
+    .lang-option.active {
+      background: rgba(238,138,22,0.11);
+      color: var(--text);
+    }
+
+    .page-hero {
+      padding: 74px 0 26px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 0.98;
+      max-width: 920px;
+      margin-bottom: 16px;
+    }
+
+    .page-hero h1 .accent {
+      color: var(--accent);
+    }
+
+    .page-hero p {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .articles-section {
+      padding: 10px 0 90px;
+    }
+
+    .articles-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .filters-panel,
+    .articles-panel {
+      background:
+        linear-gradient(180deg, rgba(238,138,22,0.08), rgba(238,138,22,0.015)),
+        linear-gradient(180deg, #121212, #0a0a0a);
+      border: 1px solid rgba(238,138,22,0.14);
+      border-radius: 28px;
+      padding: 24px;
+    }
+
+    .filters-panel h2,
+    .articles-panel h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .filters-panel > p,
+    .articles-panel > p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .filter-group {
+      margin-bottom: 18px;
+    }
+
+    .filter-label {
+      display: block;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.76rem;
+      margin-bottom: 10px;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-buttons button {
+      background: #0f0f0f;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font: inherit;
+    }
+
+    .filter-buttons button.active,
+    .filter-buttons button:hover {
+      color: var(--text);
+      border-color: rgba(238,138,22,0.24);
+      background: rgba(238,138,22,0.11);
+    }
+
+    .clear-filter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(238,138,22,0.18), rgba(238,138,22,0.10));
+      border: 1px solid rgba(238,138,22,0.28);
+      color: var(--text);
+      font-size: 0.92rem;
+      transition: 0.18s ease;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .clear-filter:hover {
+      transform: translateY(-1px);
+      background: linear-gradient(180deg, rgba(238,138,22,0.24), rgba(238,138,22,0.13));
+      border-color: rgba(255,190,114,0.45);
+    }
+
+    .results-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .results-meta p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .articles-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .article-card {
+      background: rgba(0,0,0,0.24);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 20px;
+      transition: 0.18s ease;
+    }
+
+    .article-card:hover {
+      border-color: rgba(238,138,22,0.22);
+      transform: translateY(-1px);
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.74rem;
+    }
+
+    .article-meta span.country-tag {
+      color: var(--accent);
+    }
+
+    .article-card h3 {
+      font-size: 1.26rem;
+      margin-bottom: 10px;
+      line-height: 1.15;
+    }
+
+    .article-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 14px;
+    }
+
+    .article-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(238,138,22,0.18), rgba(238,138,22,0.10));
+      border: 1px solid rgba(238,138,22,0.28);
+      color: var(--text);
+      font-size: 0.92rem;
+      transition: 0.18s ease;
+    }
+
+    .article-link:hover {
+      transform: translateY(-1px);
+      background: linear-gradient(180deg, rgba(238,138,22,0.24), rgba(238,138,22,0.13));
+      border-color: rgba(255,190,114,0.45);
+    }
+
+    .empty-state {
+      display: none;
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 26px 0 40px;
+      border-top: 1px solid var(--line);
+      color: #8f8f8f;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .articles-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .navbar {
+        flex-wrap: wrap;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        gap: 18px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .brand img {
+        height: 56px;
+      }
+
+      .brand-title {
+        font-size: 1.32rem;
+      }
+
+      .page-hero {
+        padding-top: 42px;
+      }
+
+      .results-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <a class="brand" href="index.html">
+        <img src="blackseabrief-logo.png" alt="BlackSeaBrief logo" />
+        <div class="brand-block">
+          <div class="brand-title">BlackSeaBrief</div>
+          <div class="brand-sub" data-i18n="brand_sub">Geopolitics &amp; Security</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="recent.html" class="active" data-i18n="nav_recent">Recent</a>
+        <a href="about.html" data-i18n="nav_about">About</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
+
+        <div class="lang-switcher">
+          <button class="lang-toggle" id="lang-toggle" type="button">Language</button>
+          <div class="lang-menu" id="lang-menu">
+            <button class="lang-option active" type="button" data-lang="en">British English</button>
+            <button class="lang-option" type="button" data-lang="ro">Română</button>
+            <button class="lang-option" type="button" data-lang="ru">Русский</button>
+            <button class="lang-option" type="button" data-lang="tr">Türkçe</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow" data-i18n="hero_eyebrow">Recent Analysis</span>
+        <h1 data-i18n-html="hero_title">Recent and regional <span class="accent">analysis</span>.</h1>
+        <p data-i18n="hero_text">
+          Browse all articles or narrow the page by country. When opened from the front-page map, the country filter can already be selected.
+        </p>
+      </div>
+    </section>
+
+    <section class="articles-section">
+      <div class="container articles-layout">
+        <aside class="filters-panel">
+          <h2 data-i18n="filters_heading">Filters</h2>
+          <p data-i18n="filters_text">
+            Use the country filter to narrow the article list. Opening this page from the main Recent button shows everything by default.
+          </p>
+
+          <div class="filter-group">
+            <span class="filter-label" data-i18n="country_filter_label">Country</span>
+            <div class="filter-buttons" id="country-filters">
+              <button data-country="all" class="active" data-i18n="filter_all">All</button>
+              <button data-country="Romania">Romania</button>
+              <button data-country="Bulgaria">Bulgaria</button>
+              <button data-country="Turkey">Turkey</button>
+              <button data-country="Georgia">Georgia</button>
+              <button data-country="Russia">Russia</button>
+              <button data-country="Ukraine">Ukraine</button>
+              <button data-country="Moldova">Moldova</button>
+              <button data-country="Greece">Greece</button>
+              <button data-country="Armenia">Armenia</button>
+              <button data-country="Azerbaijan">Azerbaijan</button>
+            </div>
+          </div>
+
+          <button class="clear-filter" id="clear-filter" data-i18n="clear_filter">Clear filter</button>
+        </aside>
+
+        <section class="articles-panel">
+          <h2 data-i18n="articles_heading">Articles</h2>
+          <p data-i18n="articles_text">
+            This page can serve as your main archive or recent analysis page. Replace the placeholder entries with your real articles over time.
+          </p>
+
+          <div class="results-meta">
+            <p id="results-text">Showing all articles.</p>
+            <p id="results-count">0 articles</p>
+          </div>
+
+          <div class="articles-list" id="articles-list">
+            <article class="article-card" data-country="Moldova">
+              <div class="article-meta">
+                <span class="country-tag">Moldova</span>
+                <span>Frozen Conflicts</span>
+                <span>Featured</span>
+              </div>
+              <h3>Why Transnistria Is Strategically Overestimated</h3>
+              <p>
+                A structural argument about dependence, capability limits, and why Transnistria is often perceived as more strategically potent than it really is.
+              </p>
+              <a class="article-link" href="article-transnistria.html">Open article</a>
+            </article>
+
+            <article class="article-card" data-country="Romania">
+              <div class="article-meta">
+                <span class="country-tag">Romania</span>
+                <span>Security</span>
+                <span>Regional</span>
+              </div>
+              <h3>Romania and the Western Black Sea Security Balance</h3>
+              <p>
+                A placeholder entry for future writing on Romanian posture, alliance role, and the western side of the Black Sea basin.
+              </p>
+              <a class="article-link" href="#">Open article</a>
+            </article>
+
+            <article class="article-card" data-country="Ukraine">
+              <div class="article-meta">
+                <span class="country-tag">Ukraine</span>
+                <span>War</span>
+                <span>Maritime</span>
+              </div>
+              <h3>Ukraine and the Northern Black Sea Theatre</h3>
+              <p>
+                A placeholder entry for future writing on maritime balance, coastline pressure, and the strategic role of the northern basin.
+              </p>
+              <a class="article-link" href="#">Open article</a>
+            </article>
+
+            <article class="article-card" data-country="Turkey">
+              <div class="article-meta">
+                <span class="country-tag">Turkey</span>
+                <span>Straits</span>
+                <span>Strategy</span>
+              </div>
+              <h3>Turkey’s Gatekeeping Role in the Black Sea System</h3>
+              <p>
+                A placeholder entry for future writing on the Turkish Straits, regional leverage, and Ankara’s structural importance.
+              </p>
+              <a class="article-link" href="#">Open article</a>
+            </article>
+
+            <article class="article-card" data-country="Georgia">
+              <div class="article-meta">
+                <span class="country-tag">Georgia</span>
+                <span>South Caucasus</span>
+                <span>Regional</span>
+              </div>
+              <h3>Georgia Between the Black Sea and the South Caucasus</h3>
+              <p>
+                A placeholder entry for future writing on Georgia’s exposure, geography, and the eastern edge of the wider regional system.
+              </p>
+              <a class="article-link" href="#">Open article</a>
+            </article>
+          </div>
+
+          <div class="empty-state" id="empty-state">
+            No articles match the current filter yet.
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span data-i18n="footer_text">BlackSeaBrief recent page draft.</span>
+    </div>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('lang-toggle');
+    const langMenu = document.getElementById('lang-menu');
+    const langOptions = document.querySelectorAll('.lang-option');
+    const countryFilterButtons = document.querySelectorAll('#country-filters button');
+    const clearFilterButton = document.getElementById('clear-filter');
+    const articleCards = document.querySelectorAll('.article-card');
+    const emptyState = document.getElementById('empty-state');
+    const resultsText = document.getElementById('results-text');
+    const resultsCount = document.getElementById('results-count');
+
+    let currentLang = 'en';
+    let currentCountryFilter = 'all';
+
+    const translations = {
+      en: {
+        nav_recent: 'Recent',
+        nav_about: 'About',
+        nav_contact: 'Contact',
+        brand_sub: 'Geopolitics & Security',
+        hero_eyebrow: 'Recent Analysis',
+        hero_title: 'Recent and regional <span class="accent">analysis</span>.',
+        hero_text: 'Browse all articles or narrow the page by country. When opened from the front-page map, the country filter can already be selected.',
+        filters_heading: 'Filters',
+        filters_text: 'Use the country filter to narrow the article list. Opening this page from the main Recent button shows everything by default.',
+        country_filter_label: 'Country',
+        filter_all: 'All',
+        clear_filter: 'Clear filter',
+        articles_heading: 'Articles',
+        articles_text: 'This page can serve as your main archive or recent analysis page. Replace the placeholder entries with your real articles over time.',
+        footer_text: 'BlackSeaBrief recent page draft.',
+        language_button: 'Language',
+        showing_all: 'Showing all articles.',
+        showing_country: 'Showing articles for ',
+        articles_word_singular: 'article',
+        articles_word_plural: 'articles',
+        no_articles: 'No articles match the current filter yet.',
+        Romania: 'Romania',
+        Bulgaria: 'Bulgaria',
+        Turkey: 'Turkey',
+        Georgia: 'Georgia',
+        Russia: 'Russia',
+        Ukraine: 'Ukraine',
+        Moldova: 'Moldova',
+        Greece: 'Greece',
+        Armenia: 'Armenia',
+        Azerbaijan: 'Azerbaijan'
+      },
+      ro: {
+        nav_recent: 'Recente',
+        nav_about: 'Despre',
+        nav_contact: 'Contact',
+        brand_sub: 'Geopolitică și Securitate',
+        hero_eyebrow: 'Analiză recentă',
+        hero_title: 'Analiză recentă și regională <span class="accent"></span>.',
+        hero_text: 'Răsfoiește toate articolele sau restrânge pagina după țară. Când pagina este deschisă din harta de pe prima pagină, filtrul de țară poate fi deja selectat.',
+        filters_heading: 'Filtre',
+        filters_text: 'Folosește filtrul de țară pentru a restrânge lista de articole. Dacă deschizi această pagină din butonul principal Recent, vezi totul implicit.',
+        country_filter_label: 'Țară',
+        filter_all: 'Toate',
+        clear_filter: 'Șterge filtrul',
+        articles_heading: 'Articole',
+        articles_text: 'Această pagină poate servi ca arhivă principală sau pagină de articole recente. Înlocuiește treptat intrările placeholder cu articolele tale reale.',
+        footer_text: 'Schiță pentru pagina de articole recente BlackSeaBrief.',
+        language_button: 'Limbă',
+        showing_all: 'Se afișează toate articolele.',
+        showing_country: 'Se afișează articolele pentru ',
+        articles_word_singular: 'articol',
+        articles_word_plural: 'articole',
+        no_articles: 'Niciun articol nu corespunde filtrului actual.',
+        Romania: 'România',
+        Bulgaria: 'Bulgaria',
+        Turkey: 'Turcia',
+        Georgia: 'Georgia',
+        Russia: 'Rusia',
+        Ukraine: 'Ucraina',
+        Moldova: 'Moldova',
+        Greece: 'Grecia',
+        Armenia: 'Armenia',
+        Azerbaijan: 'Azerbaidjan'
+      },
+      ru: {
+        nav_recent: 'Недавнее',
+        nav_about: 'О сайте',
+        nav_contact: 'Контакт',
+        brand_sub: 'Геополитика и безопасность',
+        hero_eyebrow: 'Недавний анализ',
+        hero_title: 'Недавний и региональный <span class="accent">анализ</span>.',
+        hero_text: 'Просматривайте все статьи или сузьте страницу по стране. При открытии со страницы карты фильтр по стране может быть уже выбран.',
+        filters_heading: 'Фильтры',
+        filters_text: 'Используйте фильтр по стране, чтобы сузить список статей. Если открыть эту страницу через основную кнопку Recent, по умолчанию показывается всё.',
+        country_filter_label: 'Страна',
+        filter_all: 'Все',
+        clear_filter: 'Сбросить фильтр',
+        articles_heading: 'Статьи',
+        articles_text: 'Эта страница может служить вашим главным архивом или страницей недавней аналитики. Со временем замените временные записи на реальные статьи.',
+        footer_text: 'Черновик страницы недавних материалов BlackSeaBrief.',
+        language_button: 'Язык',
+        showing_all: 'Показаны все статьи.',
+        showing_country: 'Показаны статьи по стране ',
+        articles_word_singular: 'статья',
+        articles_word_plural: 'статей',
+        no_articles: 'Нет статей, подходящих под текущий фильтр.',
+        Romania: 'Румыния',
+        Bulgaria: 'Болгария',
+        Turkey: 'Турция',
+        Georgia: 'Грузия',
+        Russia: 'Россия',
+        Ukraine: 'Украина',
+        Moldova: 'Молдова',
+        Greece: 'Греция',
+        Armenia: 'Армения',
+        Azerbaijan: 'Азербайджан'
+      },
+      tr: {
+        nav_recent: 'Son Yazılar',
+        nav_about: 'Hakkında',
+        nav_contact: 'İletişim',
+        brand_sub: 'Jeopolitik ve Güvenlik',
+        hero_eyebrow: 'Son Analizler',
+        hero_title: 'Güncel ve bölgesel <span class="accent">analiz</span>.',
+        hero_text: 'Tüm yazılara göz atın ya da sayfayı ülkeye göre daraltın. Ana sayfadaki haritadan açıldığında ülke filtresi zaten seçili olabilir.',
+        filters_heading: 'Filtreler',
+        filters_text: 'Yazı listesini daraltmak için ülke filtresini kullanın. Bu sayfa ana Recent düğmesinden açıldığında varsayılan olarak her şey görünür.',
+        country_filter_label: 'Ülke',
+        filter_all: 'Tümü',
+        clear_filter: 'Filtreyi temizle',
+        articles_heading: 'Yazılar',
+        articles_text: 'Bu sayfa ana arşiviniz ya da güncel analiz sayfanız olabilir. Yer tutucu girdileri zamanla gerçek yazılarınızla değiştirin.',
+        footer_text: 'BlackSeaBrief son yazılar sayfası taslağı.',
+        language_button: 'Dil',
+        showing_all: 'Tüm yazılar gösteriliyor.',
+        showing_country: 'Şu ülke için yazılar gösteriliyor: ',
+        articles_word_singular: 'yazı',
+        articles_word_plural: 'yazı',
+        no_articles: 'Geçerli filtreyle eşleşen yazı yok.',
+        Romania: 'Romanya',
+        Bulgaria: 'Bulgaristan',
+        Turkey: 'Türkiye',
+        Georgia: 'Gürcistan',
+        Russia: 'Rusya',
+        Ukraine: 'Ukrayna',
+        Moldova: 'Moldova',
+        Greece: 'Yunanistan',
+        Armenia: 'Ermenistan',
+        Azerbaijan: 'Azerbaycan'
+      }
+    };
+
+    function t(key) {
+      return (translations[currentLang] && translations[currentLang][key]) || (translations.en && translations.en[key]) || key;
+    }
+
+    function applyTranslations() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = t(el.getAttribute('data-i18n'));
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        el.innerHTML = t(el.getAttribute('data-i18n-html'));
+      });
+      langToggle.textContent = t('language_button');
+      langOptions.forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === currentLang);
+      });
+      updateResultsText();
+    }
+
+    function updateResultsText() {
+      const visibleCards = [...articleCards].filter(card => card.style.display !== 'none').length;
+      if (currentCountryFilter === 'all') {
+        resultsText.textContent = t('showing_all');
+      } else {
+        resultsText.textContent = t('showing_country') + t(currentCountryFilter) + '.';
+      }
+      resultsCount.textContent = visibleCards + ' ' + (visibleCards === 1 ? t('articles_word_singular') : t('articles_word_plural'));
+      emptyState.textContent = t('no_articles');
+    }
+
+    function updateUrl(country) {
+      const url = new URL(window.location.href);
+      if (country === 'all') {
+        url.searchParams.delete('country');
+      } else {
+        url.searchParams.set('country', country);
+      }
+      window.history.replaceState({}, '', url);
+    }
+
+    function applyCountryFilter(country) {
+      currentCountryFilter = country;
+
+      countryFilterButtons.forEach(button => {
+        button.classList.toggle('active', button.dataset.country === country);
+      });
+
+      let visibleCount = 0;
+
+      articleCards.forEach(card => {
+        const matches = country === 'all' || card.dataset.country === country;
+        card.style.display = matches ? 'block' : 'none';
+        if (matches) visibleCount++;
+      });
+
+      emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      updateResultsText();
+      updateUrl(country);
+    }
+
+    function initFilterFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const countryParam = params.get('country');
+      const validCountries = [...countryFilterButtons].map(button => button.dataset.country);
+
+      if (countryParam && validCountries.includes(countryParam)) {
+        applyCountryFilter(countryParam);
+      } else {
+        applyCountryFilter('all');
+      }
+    }
+
+    langToggle.addEventListener('click', () => {
+      langMenu.classList.toggle('open');
+      langToggle.classList.toggle('active');
+    });
+
+    langOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        currentLang = option.dataset.lang;
+        applyTranslations();
+        langMenu.classList.remove('open');
+        langToggle.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const clickedLang = event.target.closest('.lang-switcher');
+      if (!clickedLang) {
+        langMenu.classList.remove('open');
+        langToggle.classList.remove('active');
+      }
+    });
+
+    countryFilterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        applyCountryFilter(button.dataset.country);
+      });
+    });
+
+    clearFilterButton.addEventListener('click', () => {
+      applyCountryFilter('all');
+    });
+
+    applyTranslations();
+    initFilterFromUrl();
+  </script>
+</body>
+</html>
